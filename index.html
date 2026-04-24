@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000000;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Yolana | Poetry, Music & Cinematic Clips</title>
+    <meta name="description" content="The cozy digital home of Yolana. Poetry, music, and cinematic clips." />
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="data.js"></script>
+
+    <style>
+        :root {
+            --text-main: #ffffff;
+            --text-dim: #c5c5d8;
+            --accent-purple: #b18fff;
+            --accent-blue: #a3b5ff;
+            --accent-white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        html, body { 
+            background-color: #000000; 
+            color: var(--text-main); 
+            font-family: 'Nunito', sans-serif; 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+        }
+
+        h1, h2, h3, .poetic-text {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Shadow to keep text readable against bright floral background */
+        .readable-text { text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.6); }
+
+        #violet-constellations, #watermark { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; }
+        #violet-constellations { z-index: 0; } #watermark { z-index: 1; }
+
+        /* --- LAYOUT --- */
+        .top-bar {
+            position: fixed; top: 0; left: 0; width: 100%; padding: 20px 30px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 100;
+            transition: opacity 0.5s ease;
+        }
+
+        .brand-logo {
+            display: flex; align-items: center; justify-content: center; width: 50px; height: 50px;
+            cursor: pointer; text-decoration: none; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .brand-logo:hover { transform: rotate(180deg) scale(1.1); }
+        .brand-logo svg { width: 100%; height: 100%; drop-shadow: 0 0 10px var(--accent-purple); }
+
+        .top-controls { display: flex; gap: 15px; align-items: center; }
+
+        .bottom-controls {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 20px; z-index: 100;
+            transition: opacity 0.5s ease;
+            background: transparent; border: none; box-shadow: none;
+        }
+
+        /* --- SOCIAL BUTTONS REPOSITIONED --- */
+        .social-controls {
+            position: fixed; top: 80px; right: 30px; 
+            display: flex; flex-direction: column; gap: 15px; z-index: 100; transition: opacity 0.5s ease;
+        }
+        .social-controls a { text-decoration: none !important; }
+
+        .action-circle-btn {
+            background: transparent; border: none; color: var(--accent-white);
+            font-size: 1.4rem; cursor: pointer; transition: all 0.3s ease; outline: none;
+            display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+            text-shadow: 0 0 15px var(--accent-purple), 0 2px 5px rgba(0,0,0,0.8);
+        }
+        .action-circle-btn:hover { transform: scale(1.15); text-shadow: 0 0 25px #fff; }
+
+        .lang-select { background: transparent; border: none; color: var(--accent-white); font-family: 'Nunito', sans-serif; font-size: 1rem; cursor: pointer; outline: none; appearance: none; padding-right: 15px; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .lang-select option { background: #111; color: #fff; }
+        
+        .container { 
+            max-width: 800px; margin: 100px auto 50px auto; padding: 40px; 
+            position: relative; z-index: 10; transition: opacity 1s ease;
+            background: transparent; border: none; box-shadow: none; backdrop-filter: none;
+        }
+        .container.zen-mode { opacity: 0; pointer-events: none; }
+
+        /* --- HEADER & AVATAR --- */
+        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; text-align: center; }
+        .profile-avatar {
+            width: 140px; height: 140px; border-radius: 50%; margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3); object-fit: cover;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); transition: all 0.5s ease;
+        }
+        .profile-avatar:hover { border-color: var(--accent-white); box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+        
+        .user-title { font-size: 3rem; font-weight: 400; letter-spacing: 4px; color: var(--accent-white); margin-bottom: 5px; text-transform: uppercase; }
+        .user-subtitle { font-size: 1.1rem; color: var(--accent-blue); font-weight: 300; letter-spacing: 2px; text-transform: lowercase; margin-bottom: 30px; }
+
+        /* --- NAVIGATION --- */
+        nav { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; padding-bottom: 25px; width: 100%; }
+        nav a { 
+            color: var(--text-dim); text-decoration: none; font-size: 1.1rem; 
+            transition: all 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 2px;
+            position: relative; padding-bottom: 5px; text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+        nav a::after {
+            content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 50%;
+            background-color: var(--accent-white); transition: all 0.3s ease; transform: translateX(-50%);
+            box-shadow: 0 0 10px #fff;
+        }
+        nav a:hover, nav a.active { color: var(--accent-white); text-shadow: 0 0 15px rgba(255,255,255,0.5), 0 2px 8px rgba(0,0,0,0.8); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+
+        .intro { font-size: 1.2rem; color: var(--accent-white); margin: 40px 0; text-align: center; font-style: italic; }
+
+        /* --- POSTS (COMPLETELY TRANSPARENT) --- */
+        .post { 
+            background: transparent; border: none; padding: 20px 0; 
+            margin-bottom: 50px; transition: transform 0.3s ease;
+        }
+        .post-meta { font-size: 0.9rem; color: var(--accent-blue); margin-bottom: 15px; display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 10px; }
+        .post-content { font-size: 1.15rem; white-space: pre-wrap; color: var(--text-main); line-height: 1.8; }
+        .post-content img, .post-content video, .post-content audio { max-width: 100%; border-radius: 10px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .post-content audio { width: 100%; outline: none; border-radius: 30px; }
+
+        /* --- FOLDERS/THEMES --- */
+        .theme-card { 
+            background: transparent; border: none; padding: 20px 0; margin-bottom: 10px; 
+            cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .theme-card:hover { transform: translateX(10px); border-bottom-color: rgba(255,255,255,0.5); }
+        .theme-name { font-size: 1.6rem; font-family: 'Cormorant Garamond', serif; color: var(--accent-white); text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .theme-meta { font-size: 0.9rem; color: var(--accent-blue); text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+
+        /* --- COMMENTS --- */
+        .comments-toggle { background: none; border: none; color: var(--accent-blue); font-family: 'Nunito', sans-serif; font-size: 0.95rem; margin-top: 25px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color 0.3s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .comments-toggle:hover { color: var(--accent-white); }
+        .comments-section { display: none; margin-top: 20px; padding-top: 20px; }
+        .comments-section.open { display: block; }
+        
+        .comments-list { margin-bottom: 20px; display: flex; flex-direction: column; gap: 15px; }
+        .comment-item { font-size: 1rem; color: var(--accent-white); display: flex; flex-direction: column; background: transparent; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        .c-author { color: var(--accent-blue); font-weight: 600; font-size: 0.95rem; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .c-time { font-size: 0.8rem; opacity: 0.8; }
+        .c-text { color: var(--text-main); }
+        .delete-comment-btn { background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 0.9rem; opacity: 0.7; transition: opacity 0.3s; }
+        .delete-comment-btn:hover { opacity: 1; text-shadow: 0 0 10px #ff6b6b; }
+
+        .comment-controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .comment-input { flex: 1; min-width: 200px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); color: var(--text-main); padding: 12px 18px; border-radius: 20px; font-family: inherit; font-size: 0.95rem; outline: none; transition: all 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .comment-input:focus { border-color: var(--accent-white); box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+        
+        .btn-elegant { 
+            background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.3); color: var(--accent-white); 
+            padding: 10px 20px; border-radius: 20px; cursor: pointer; font-family: inherit; font-size: 0.9rem; 
+            transition: all 0.3s; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .btn-elegant:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+
+        #global-user-status { margin-bottom: 40px; text-align: center; font-size: 0.9rem; color: var(--accent-white); display: flex; justify-content: center; gap: 15px; align-items: center; flex-wrap: wrap; background: transparent; padding: 10px; }
+        .auth-link { color: var(--accent-blue); cursor: pointer; text-decoration: none; transition: color 0.3s; background: none; border: none; font-family: inherit; font-size: inherit; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .auth-link:hover { color: var(--accent-white); text-shadow: 0 0 10px #fff; }
+
+        .view-section { display: none; animation: fadeUp 0.8s ease; }
+        .view-section.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .header-action { display: flex; align-items: center; gap: 20px; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .back-btn { background: none; border: none; color: var(--accent-blue); font-family: inherit; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; transition: all 0.3s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .back-btn:hover { color: var(--accent-white); transform: translateX(-5px); text-shadow: 0 0 10px #fff; }
+
+        footer { margin-top: 80px; text-align: center; font-size: 0.9rem; color: var(--text-dim); padding-top: 30px; line-height: 2; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .empty-msg { color: var(--accent-white); text-align: center; font-style: italic; padding: 40px 0; font-size: 1.1rem; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+
+        /* --- POPUP (Keeping glass here for readability of the form) --- */
+        .sub-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; backdrop-filter: blur(10px); }
+        .sub-popup-overlay.show { opacity: 1; pointer-events: auto; }
+        .sub-popup-box { background: rgba(20,20,30,0.6); border: 1px solid rgba(255,255,255,0.2); padding: 50px 40px; text-align: center; max-width: 450px; width: 90%; position: relative; border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); transform: scale(0.9); transition: transform 0.5s ease; }
+        .sub-popup-overlay.show .sub-popup-box { transform: scale(1); }
+        .sub-popup-close { position: absolute; top: 20px; right: 25px; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; transition: all 0.3s; }
+        .sub-popup-close:hover { transform: scale(1.2); text-shadow: 0 0 10px #fff; }
+        .sub-popup-title { font-family: 'Cormorant Garamond', serif; color: var(--accent-white); font-size: 2.2rem; margin-bottom: 15px; }
+        .sub-popup-text { color: var(--text-dim); font-size: 1rem; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+    <canvas id="violet-constellations"></canvas>
+    
+    <div id="watermark"></div>
+    
+    <audio id="bg-music" loop></audio>
+
+    <div class="top-bar" id="ui-top">
+        <div class="brand-logo" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <radialGradient id="flowerGlow" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+                        <stop offset="50%" stop-color="#d4b3ff" stop-opacity="0.8" />
+                        <stop offset="100%" stop-color="#8fa1ff" stop-opacity="0" />
+                    </radialGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                </defs>
+                <path d="M50,10 C60,30 75,35 88,50 C75,65 60,70 50,90 C40,70 25,65 12,50 C25,35 40,30 50,10 Z" fill="none" stroke="url(#flowerGlow)" stroke-width="2" filter="url(#glow)" opacity="0.6"/>
+                <path d="M50,22 C55,35 65,42 75,50 C65,58 55,65 50,78 C45,65 35,58 25,50 C35,42 45,35 50,22 Z" fill="url(#flowerGlow)" opacity="0.4"/>
+                <text x="50" y="58" font-family="'Cormorant Garamond', serif" font-size="32" fill="#ffffff" text-anchor="middle" font-weight="600" letter-spacing="2" filter="url(#glow)">SY</text>
+            </svg>
+        </div>
+        
+        <div class="top-controls">
+            <select id="lang-select" class="lang-select">
+                <option value="en" selected>EN</option>
+                <option value="es">ES</option>
+                <option value="ru">RU</option>
+                <option value="sr">SR</option>
+                <option value="zh">ZH</option>
+            </select>
+            <button onclick="appSubscribe()" class="action-circle-btn" id="sub-btn" title="Subscribe"><i class="fa-regular fa-envelope"></i></button>
+        </div>
+    </div>
+
+    <div class="social-controls" id="ui-socials">
+        <a href="https://t.me/YOUR_TELEGRAM" target="_blank" class="action-circle-btn" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" class="action-circle-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://youtube.com/YOUR_YOUTUBE" target="_blank" class="action-circle-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+
+    <div class="bottom-controls" id="ui-bottom">
+        <button id="zen-btn" class="action-circle-btn" title="Zen Mode"><i class="fa-solid fa-seedling"></i></button>
+        <button id="music-btn" class="action-circle-btn" title="Music"><i class="fa-solid fa-play"></i></button>
+        <button id="fullscreen-btn" class="action-circle-btn" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+    </div>
+
+    <div class="sub-popup-overlay" id="subscribe-popup">
+        <div class="sub-popup-box">
+            <button class="sub-popup-close" onclick="closeSubPopup()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="sub-popup-title" id="pop_title">Keep in Touch</h3>
+            <p class="sub-popup-text" id="pop_text">Leave your email to receive my latest poetry and clips.</p>
+            <div style="display:flex; gap:15px; flex-direction:column;">
+                <input type="email" id="pop_email_input" class="comment-input" placeholder="Your email" style="width:100%;">
+                <button class="btn-elegant" onclick="submitPopupSub()" id="pop_btn" style="width:100%;">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="main-container">
+        <header>
+            <img src="https://via.placeholder.com/150/000000/ffffff?text=Yolana" alt="Yolana" class="profile-avatar">
+            <h1 class="user-title readable-text">Yolana</h1>
+            <h2 class="user-subtitle readable-text">Poetry. Music. Cinematic Clips.</h2>
+            
+            <nav id="main-nav">
+                <a data-tab="feed" class="active" id="nav_feed">Feed</a>
+                <a data-tab="themes" id="nav_themes">Themes</a>
+                <a data-tab="friends" id="nav_friends">For Friends</a>
+            </nav>
+        </header>
+
+        <div id="global-user-status" class="readable-text"></div>
+
+        <section class="intro" id="intro-text">
+            <p id="ui_intro" class="readable-text">Welcome to my space. Here I share pieces of my soul, wrapped in poetry, sound, and visual stories. Stay a while, get cozy.</p>
+        </section>
+
+        <div id="view-feed" class="view-section active">
+            <div id="feed-container"></div>
+        </div>
+
+        <div id="view-directories" class="view-section">
+            <div id="directory-list-container"></div>
+        </div>
+
+        <div id="view-theme-content" class="view-section">
+            <div class="header-action">
+                <button id="back-to-dir" class="back-btn"><i class="fa-solid fa-arrow-left-long"></i> <span id="ui_back">Back</span></button>
+                <h2 id="current-theme-title" class="poetic-text readable-text" style="color: var(--accent-white); font-size: 2.2rem; margin: 0;"></h2>
+            </div>
+            <div id="theme-posts-container"></div>
+        </div>
+
+        <footer>
+            <p id="ui_footer" class="readable-text">All audio, visuals, and video are created with the help of AI and editing. All ideas belong to me or my friends (credited).<br>© 2026 Yolana. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // ================= FIREBASE ================= //
+        const firebaseConfig = {
+            apiKey: "AIzaSyAQTKVxsbLSJwAnoJQB43R6SFdkY35WfDw",
+            authDomain: "atat-1668c.firebaseapp.com",
+            projectId: "atat-1668c",
+            storageBucket: "atat-1668c.firebasestorage.app",
+            messagingSenderId: "1028991113806",
+            appId: "1:1028991113806:web:3adee7f66a38f2b19fc11f",
+            measurementId: "G-EL4Y3ZNBH9"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        let currentUser = null;
+
+        auth.onAuthStateChanged(user => {
+            currentUser = user;
+            updateGlobalStatus();
+            if (currentTab === 'feed') renderFeed();
+            else if (document.getElementById('view-theme-content').classList.contains('active')) renderThemeContent();
+        });
+
+        function updateGlobalStatus() {
+            const statusDiv = document.getElementById('global-user-status');
+            if (currentUser) {
+                const t = i18n[currentLang];
+                const name = currentUser.displayName || currentUser.email.split('@')[0];
+                statusDiv.innerHTML = `
+                    <span>Hello, <strong style="color:var(--accent-white)">${name}</strong></span>
+                    <button class="auth-link" onclick="appLogout()">${t.logout}</button>
+                `;
+            } else {
+                statusDiv.innerHTML = '';
+            }
+        }
+
+        function appLoginGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).catch(err => alert("Error: " + err.message));
+        }
+
+        function appLogout() { auth.signOut(); }
+
+        function processSubscription(email) {
+            if(email && email.includes('@')) {
+                db.collection("subscribers").add({ email: email, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+                .then(() => { alert(i18n[currentLang].sub_success); closeSubPopup(); })
+                .catch(err => { alert("Error: " + err.message); });
+            }
+        }
+
+        function appSubscribe() { document.getElementById('subscribe-popup').classList.add('show'); }
+        function closeSubPopup() { document.getElementById('subscribe-popup').classList.remove('show'); }
+        function submitPopupSub() { processSubscription(document.getElementById('pop_email_input').value); }
+
+        // ================= 5-LANGUAGE DICTIONARY ================= //
+        const i18n = {
+            en: {
+                nav_feed: "Feed", nav_themes: "Themes", nav_friends: "For Friends",
+                intro: "Welcome to my space. Here I share pieces of my soul, wrapped in poetry, sound, and visual stories. Stay a while, get cozy.",
+                footer: "All audio, visuals, and video are created with the help of AI and editing. All ideas belong to me or my friends (credited).<br>© 2026 Yolana. All rights reserved.",
+                empty_feed: "The feed is quietly waiting for new stories.", empty_dir: "No folders here yet.", empty_posts: "It's empty here.",
+                back: "Back", pass_prompt: "This space is protected. Password:", pass_wrong: "Access denied.", open: "Open space",
+                show_comments: "Read whispers", hide_comments: "Hide whispers", leave_trace: "Leave a whisper...", send: "Send",
+                auth_req: "Sign in to leave a whisper:", logout: "Sign Out",
+                sub_success: "Thank you for connecting with me.", spam_alert: "Please breathe for a minute before writing again.", confirm_delete: "Erase this whisper?",
+                pop_title: "Stay Connected", pop_text: "Leave your email to receive my latest poetry and clips directly.", pop_placeholder: "Your email", pop_btn: "Subscribe"
+            },
+            ru: {
+                nav_feed: "Лента", nav_themes: "Темы", nav_friends: "Для друзей",
+                intro: "Добро пожаловать в мое пространство. Здесь я делюсь частичками души, облеченными в стихи, звуки и визуальные истории. Устраивайся поудобнее.",
+                footer: "Весь визуал, аудио и видео созданы с помощью ИИ и монтажа. Все идеи принадлежат мне или моим друзьям (с указанием автора).<br>© 2026 Йолана. Все права защищены.",
+                empty_feed: "Лента тихо ждет новых историй.", empty_dir: "Здесь пока нет папок.", empty_posts: "Здесь пока пусто.",
+                back: "Назад", pass_prompt: "Это пространство защищено. Пароль:", pass_wrong: "Доступ закрыт.", open: "Открыто",
+                show_comments: "Читать шепот", hide_comments: "Скрыть шепот", leave_trace: "Оставить шепот...", send: "Отправить",
+                auth_req: "Войди, чтобы оставить шепот:", logout: "Выйти",
+                sub_success: "Спасибо, что остаешься на связи со мной.", spam_alert: "Подожди минутку перед следующим сообщением.", confirm_delete: "Стереть этот шепот?",
+                pop_title: "Останемся на связи", pop_text: "Оставь свой email, чтобы первой получать мои новые стихи и клипы.", pop_placeholder: "Твой email", pop_btn: "Подписаться"
+            },
+            es: { /* ... other languages identical ... */
+                nav_feed: "Inicio", nav_themes: "Temas", nav_friends: "Para Amigos",
+                intro: "Bienvenido a mi espacio. Aquí comparto pedazos de mi alma, envueltos en poesía, sonido e historias visuales. Ponte cómodo.",
+                footer: "Todo el audio, visuales y videos son creados con ayuda de IA y edición. Todas las ideas me pertenecen a mí o a mis amigos (acreditados).<br>© 2026 Yolana. Todos los derechos reservados.",
+                empty_feed: "El inicio espera en silencio nuevas historias.", empty_dir: "Aún no hay carpetas aquí.", empty_posts: "Está vacío aquí.",
+                back: "Volver", pass_prompt: "Espacio protegido. Contraseña:", pass_wrong: "Acceso denegado.", open: "Espacio abierto",
+                show_comments: "Leer susurros", hide_comments: "Ocultar susurros", leave_trace: "Deja un susurro...", send: "Enviar",
+                auth_req: "Inicia sesión para dejar un susurro:", logout: "Salir",
+                sub_success: "Gracias por conectar conmigo.", spam_alert: "Respira un minuto antes de volver a escribir.", confirm_delete: "¿Borrar este susurro?",
+                pop_title: "Mantente Conectado", pop_text: "Deja tu correo para recibir mi poesía y clips más recientes.", pop_placeholder: "Tu correo", pop_btn: "Suscribirse"
+            },
+            sr: {
+                nav_feed: "Фид", nav_themes: "Теме", nav_friends: "За пријатеље",
+                intro: "Добродошли у мој простор. Овде делим делиће своје душе, умотане у поезију, звук и визуелне приче. Сместите се удобно.",
+                footer: "Сви аудио, визуелни и видео материјали креирани су уз помоћ АИ и монтаже. Све идеје припадају мени или мојим пријатељима (уз навођење аутора).<br>© 2026 Јолана. Сва права задржана.",
+                empty_feed: "Фид тихо чека нове приче.", empty_dir: "Овде још нема фасцикли.", empty_posts: "Овде је празно.",
+                back: "Назад", pass_prompt: "Овај простор је заштићен. Лозинка:", pass_wrong: "Приступ одбијен.", open: "Отворен простор",
+                show_comments: "Читај шапате", hide_comments: "Сакриј шапате", leave_trace: "Остави шапат...", send: "Пошаљи",
+                auth_req: "Пријави се да оставиш шапат:", logout: "Одјави се",
+                sub_success: "Хвала вам што сте повезани са мном.", spam_alert: "Сачекајте минут пре него што поново пишете.", confirm_delete: "Обрисати овај шапат?",
+                pop_title: "Останите Повезани", pop_text: "Оставите свој имејл да бисте директно примали моје најновије песме и клипове.", pop_placeholder: "Ваш имејл", pop_btn: "Претплати се"
+            },
+            zh: {
+                nav_feed: "动态", nav_themes: "主题", nav_friends: "给朋友",
+                intro: "欢迎来到我的空间。在这里我分享灵魂的碎片，用诗歌、声音和视觉故事包裹。待一会儿，享受这份舒适吧。",
+                footer: "所有的音频、视觉和视频均借助 AI 和剪辑完成。所有想法都属于我或我的朋友（已注明作者）。<br>© 2026 Yolana. 保留所有权利。",
+                empty_feed: "动态正在静静等待新的故事。", empty_dir: "这里还没有文件夹。", empty_posts: "这里还是空的。",
+                back: "返回", pass_prompt: "此空间受保护。密码：", pass_wrong: "访问被拒绝。", open: "开放空间",
+                show_comments: "阅读低语", hide_comments: "隐藏低语", leave_trace: "留下低语...", send: "发送",
+                auth_req: "登录以留下低语:", logout: "登出",
+                sub_success: "感谢您与我联系。", spam_alert: "请稍等一分钟再写。", confirm_delete: "删除这条低语？",
+                pop_title: "保持联系", pop_text: "留下您的邮箱，以直接接收我最新的诗歌和剪辑。", pop_placeholder: "您的邮箱", pop_btn: "订阅"
+            }
+        };
+
+        let currentLang = 'en'; // Strict English Default per your request
+
+        function updateUITranslations() {
+            const t = i18n[currentLang];
+            document.getElementById('nav_feed').innerText = t.nav_feed;
+            document.getElementById('nav_themes').innerText = t.nav_themes;
+            document.getElementById('nav_friends').innerText = t.nav_friends;
+            document.getElementById('ui_intro').innerText = t.intro;
+            document.getElementById('ui_footer').innerHTML = t.footer;
+            document.getElementById('ui_back').innerText = t.back;
+            
+            document.getElementById('pop_title').innerText = t.pop_title;
+            document.getElementById('pop_text').innerText = t.pop_text;
+            document.getElementById('pop_email_input').placeholder = t.pop_placeholder;
+            document.getElementById('pop_btn').innerText = t.pop_btn;
+            updateGlobalStatus();
+        }
+
+        document.getElementById('lang-select').addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            updateUITranslations();
+            if (currentTab === 'feed') renderFeed();
+            else if (document.getElementById('view-directories').classList.contains('active')) renderDirectories();
+            else if (document.getElementById('view-theme-content').classList.contains('active')) renderThemeContent(); 
+        });
+
+        function getTranslatedText(obj) {
+            if (!obj) return "";
+            if (typeof obj === 'string') return obj; 
+            if (obj[currentLang]) return obj[currentLang]; 
+            if (obj['en']) return obj['en']; 
+            return Object.values(obj)[0] || ""; 
+        }
+
+        // --- ZEN MODE TOGGLE ---
+        const zenBtn = document.getElementById('zen-btn');
+        const container = document.getElementById('main-container');
+        const uiTop = document.getElementById('ui-top');
+        const uiSocials = document.getElementById('ui-socials');
+        let isZen = false;
+        
+        zenBtn.addEventListener('click', () => {
+            isZen = !isZen;
+            container.classList.toggle('zen-mode');
+            uiTop.style.opacity = isZen ? '0' : '1';
+            uiTop.style.pointerEvents = isZen ? 'none' : 'auto';
+            uiSocials.style.opacity = isZen ? '0' : '1';
+            uiSocials.style.pointerEvents = isZen ? 'none' : 'auto';
+            zenBtn.style.color = isZen ? 'var(--accent-white)' : 'var(--accent-purple)';
+        });
+
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); fullscreenBtn.querySelector('i').classList.replace('fa-expand', 'fa-compress'); } 
+            else { document.exitFullscreen(); fullscreenBtn.querySelector('i').classList.replace('fa-compress', 'fa-expand'); }
+        });
+
+        const musicBtn = document.getElementById('music-btn');
+        const audio = document.getElementById('bg-music');
+        let isPlaying = false;
+        if (typeof ARTANAT_DB !== 'undefined' && ARTANAT_DB.music && ARTANAT_DB.music.length > 0) {
+            audio.src = ARTANAT_DB.music[Math.floor(Math.random() * ARTANAT_DB.music.length)];
+        }
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) { audio.pause(); musicBtn.querySelector('i').classList.replace('fa-pause', 'fa-play'); } 
+            else { audio.play(); musicBtn.querySelector('i').classList.replace('fa-play', 'fa-pause'); }
+            isPlaying = !isPlaying;
+            musicBtn.style.color = isPlaying ? 'var(--accent-white)' : 'var(--accent-purple)';
+        });
+
+        const views = { feed: document.getElementById('view-feed'), dirs: document.getElementById('view-directories'), content: document.getElementById('view-theme-content') };
+        let currentTab = 'feed';
+        let activeTheme = null;
+
+        function switchView(viewName) {
+            Object.values(views).forEach(v => v.classList.remove('active'));
+            views[viewName].classList.add('active');
+            document.getElementById('intro-text').style.display = (viewName === 'feed') ? 'block' : 'none';
+        }
+
+        const navLinks = document.querySelectorAll('#main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                currentTab = link.getAttribute('data-tab');
+                if (currentTab === 'feed') { switchView('feed'); renderFeed(); } 
+                else { switchView('dirs'); renderDirectories(); }
+            });
+        });
+
+        document.getElementById('back-to-dir').addEventListener('click', () => { switchView('dirs'); renderDirectories(); });
+
+        window.toggleComments = function(postId) {
+            const sec = document.getElementById(`comments-sec-${postId}`);
+            const btnIcon = document.querySelector(`#toggle-btn-${postId} i`);
+            const btnText = document.querySelector(`#toggle-btn-${postId} span`);
+            if (sec.classList.contains('open')) { sec.classList.remove('open'); btnIcon.classList.replace('fa-eye-slash', 'fa-eye'); btnText.innerText = i18n[currentLang].show_comments; } 
+            else { sec.classList.add('open'); btnIcon.classList.replace('fa-eye', 'fa-eye-slash'); btnText.innerText = i18n[currentLang].hide_comments; }
+        };
+
+        window.deleteComment = function(docId) { if(confirm(i18n[currentLang].confirm_delete)) { db.collection("comments").doc(docId).delete(); } };
+
+        function loadComments(postId) {
+            if (!postId) return;
+            db.collection("comments").where("postId", "==", postId).orderBy("timestamp", "asc")
+                .onSnapshot((snapshot) => {
+                    const listDiv = document.getElementById(`comments-list-${postId}`);
+                    if(!listDiv) return;
+                    listDiv.innerHTML = '';
+                    if (snapshot.empty) { listDiv.innerHTML = `<div style="font-size: 0.9rem; font-style: italic; color: var(--text-dim); text-shadow: 0 1px 3px #000;">...</div>`; return; }
+                    
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        const time = data.timestamp ? new Date(data.timestamp.toDate()).toLocaleDateString() : '';
+                        const isMine = currentUser && data.uid === currentUser.uid;
+                        const delBtn = isMine ? `<button class="delete-comment-btn" onclick="deleteComment('${doc.id}')"><i class="fa-solid fa-xmark"></i></button>` : '';
+
+                        listDiv.innerHTML += `
+                            <div class="comment-item readable-text">
+                                <div class="comment-header">
+                                    <span class="c-author">${data.authorName}</span>
+                                    <div><span class="c-time">${time}</span> ${delBtn}</div>
+                                </div>
+                                <span class="c-text">${data.text}</span>
+                            </div>
+                        `;
+                    });
+                });
+        }
+
+        window.sendComment = function(postId) {
+            if (!currentUser) return;
+            const now = Date.now();
+            const lastTime = localStorage.getItem('lastCommentTime_' + currentUser.uid);
+            if (lastTime && (now - parseInt(lastTime) < 60000)) { alert(i18n[currentLang].spam_alert); return; }
+
+            const input = document.getElementById(`input-${postId}`);
+            const text = input.value.trim();
+            if (!text) return;
+            
+            const authorName = currentUser.displayName || currentUser.email.split('@')[0];
+            db.collection("comments").add({ postId: postId, uid: currentUser.uid, authorName: authorName, text: text, timestamp: firebase.firestore.FieldValue.serverTimestamp() })
+            .then(() => { input.value = ''; localStorage.setItem('lastCommentTime_' + currentUser.uid, now.toString()); });
+        };
+
+        function formatPost(post) {
+            let mediaHTML = '';
+            if (post.mediaUrl) {
+                if (post.mediaType === 'image') mediaHTML = `<img src="${post.mediaUrl}">`;
+                else if (post.mediaType === 'video') mediaHTML = `<video controls autoplay loop muted playsinline src="${post.mediaUrl}"></video>`;
+                else if (post.mediaType === 'audio') mediaHTML = `<audio controls src="${post.mediaUrl}"></audio>`;
+            }
+            
+            const postText = getTranslatedText(post.text);
+            const t = i18n[currentLang];
+            
+            let commentsHTML = '';
+            if (post.id) {
+                commentsHTML += `
+                    <button class="comments-toggle" onclick="toggleComments('${post.id}')" id="toggle-btn-${post.id}">
+                        <i class="fa-regular fa-eye"></i> <span>${t.show_comments}</span>
+                    </button>
+                    <div class="comments-section" id="comments-sec-${post.id}">
+                        <div class="comments-list" id="comments-list-${post.id}"></div>
+                        <div class="comment-controls">
+                `;
+                
+                if (currentUser) {
+                    commentsHTML += `
+                        <input type="text" id="input-${post.id}" class="comment-input" placeholder="${t.leave_trace}">
+                        <button class="btn-elegant" onclick="sendComment('${post.id}')">${t.send}</button>
+                    `;
+                } else {
+                    commentsHTML += `
+                        <span style="font-size:0.95rem; color:var(--text-white); margin-right:10px; text-shadow: 0 2px 5px #000;">${t.auth_req}</span>
+                        <button class="btn-elegant" onclick="appLoginGoogle()"><i class="fa-brands fa-google"></i> Google</button>
+                    `;
+                }
+                commentsHTML += `</div></div>`;
+            }
+
+            return `
+                <div class="post-meta readable-text">
+                    <span>by <strong style="color:var(--accent-blue);">${post.author}</strong></span>
+                    <span>${post.date}</span>
+                </div>
+                <div class="post-content readable-text">${postText}${mediaHTML}</div>
+                ${commentsHTML}
+            `;
+        }
+
+        function renderFeed() {
+            const container = document.getElementById('feed-container');
+            container.innerHTML = '';
+            if (typeof ARTANAT_DB === 'undefined') return;
+
+            const feedPosts = ARTANAT_DB.posts.filter(p => {
+                if (!p.branchId || p.branchId === "") return true; 
+                const branch = ARTANAT_DB.branches.find(b => b.id === p.branchId);
+                return branch && branch.password === ""; 
+            });
+
+            if (feedPosts.length === 0) { container.innerHTML = `<p class="empty-msg">${i18n[currentLang].empty_feed}</p>`; return; }
+
+            feedPosts.forEach(post => {
+                const div = document.createElement('article');
+                div.className = 'post';
+                div.innerHTML = formatPost(post);
+                container.appendChild(div);
+                if (post.id) loadComments(post.id); 
+            });
+        }
+
+        function renderDirectories() {
+            const container = document.getElementById('directory-list-container');
+            container.innerHTML = '';
+            if (typeof ARTANAT_DB === 'undefined') return;
+            
+            const dbTabMatch = currentTab === 'themes' ? 'arterrii' : currentTab; 
+            const currentDirs = ARTANAT_DB.branches.filter(b => b.tab === dbTabMatch || b.tab === currentTab);
+            
+            if (currentDirs.length === 0) { container.innerHTML = `<p class="empty-msg">${i18n[currentLang].empty_dir}</p>`; return; }
+
+            currentDirs.forEach(dir => {
+                const div = document.createElement('div');
+                div.className = 'theme-card';
+                const dirName = getTranslatedText(dir.name);
+                div.innerHTML = `
+                    <div class="theme-name">
+                        ${dir.password !== "" ? '<i class="fa-solid fa-lock" style="font-size:0.6em; vertical-align:middle; margin-right:8px; color:var(--accent-blue);"></i>' : ''}
+                        ${dirName}
+                    </div>
+                    <div class="theme-meta">${i18n[currentLang].open}</div>
+                `;
+                div.addEventListener('click', () => openDirectory(dir));
+                container.appendChild(div);
+            });
+        }
+
+        function openDirectory(dir) {
+            if (dir.password !== "") {
+                const pass = prompt(i18n[currentLang].pass_prompt);
+                if (pass !== dir.password) return alert(i18n[currentLang].pass_wrong);
+            }
+            activeTheme = dir;
+            renderThemeContent();
+            switchView('content');
+        }
+
+        function renderThemeContent() {
+            if(!activeTheme) return;
+            document.getElementById('current-theme-title').innerText = getTranslatedText(activeTheme.name);
+            const container = document.getElementById('theme-posts-container');
+            container.innerHTML = '';
+
+            const branchPosts = ARTANAT_DB.posts.filter(p => p.branchId === activeTheme.id);
+            
+            if (branchPosts.length === 0) {
+                container.innerHTML = `<p class="empty-msg">${i18n[currentLang].empty_posts}</p>`;
+            } else {
+                branchPosts.forEach(post => {
+                    const div = document.createElement('article');
+                    div.className = 'post';
+                    div.innerHTML = formatPost(post);
+                    container.appendChild(div);
+                    if (post.id) loadComments(post.id); 
+                });
+            }
+        }
+
+        updateUITranslations();
+        renderFeed();
+
+        // ================= INFINITE COSMIC FLOWER FIELD (WEBGL) ================= //
+        // This replaces the old constellations with a stunning multi-colored flying effect
+        const canvas = document.getElementById('violet-constellations');
+        const gl = canvas.getContext('webgl', { preserveDrawingBuffer: false, alpha: false });
+
+        if (gl) {
+            // Vertex Shader: moves particles toward camera (Z-axis) to create "flying" illusion
+            const vertexShader = `
+                attribute vec3 aPosition;
+                attribute float aSize;
+                attribute float aAlpha;
+                attribute vec3 aColor;
+                attribute float aType; // 0: Flower, 1: Dust, 2: Butterfly, 3: Petal
+                
+                uniform mat4 uProjection;
+                uniform mat4 uModelView;
+                uniform float uTime;
+                
+                varying float vAlpha;
+                varying vec3 vColor;
+                varying float vType;
+                
+                void main() {
+                    vec3 pos = aPosition;
+                    
+                    // Fly towards camera
+                    pos.z += uTime * 0.2; 
+                    
+                    // Wrap around infinitely
+                    float rangeZ = 2000.0;
+                    pos.z = mod(pos.z + rangeZ/2.0, rangeZ) - rangeZ/2.0;
+                    
+                    // Organic sway for butterflies and petals
+                    if(aType > 1.5) {
+                        pos.x += sin(uTime * 0.001 + pos.y * 0.05) * 15.0;
+                        pos.y += cos(uTime * 0.0015 + pos.x * 0.05) * 15.0;
+                    }
+                    
+                    vec4 mvPosition = uModelView * vec4(pos, 1.0);
+                    gl_Position = uProjection * mvPosition;
+                    
+                    // Perspective size scaling
+                    gl_PointSize = aSize * (800.0 / -mvPosition.z);
+                    
+                    vAlpha = aAlpha;
+                    vColor = aColor;
+                    vType = aType;
+                }
+            `;
+
+            // Fragment Shader: Draws the specific shapes (Flowers matching your logo, dust, butterflies)
+            const fragmentShader = `
+                precision highp float;
+                varying float vAlpha;
+                varying vec3 vColor;
+                varying float vType;
+                
+                void main() {
+                    vec2 uv = gl_PointCoord * 2.0 - 1.0;
+                    float r = length(uv);
+                    float a = atan(uv.y, uv.x);
+                    float alpha = 0.0;
+                    
+                    if (vType < 0.5) {
+                        // 0: 5-Petal Flower (Matches Logo)
+                        float petal = 0.3 + 0.7 * abs(cos(a * 2.5)); 
+                        if (r < petal) {
+                            alpha = smoothstep(petal, petal - 0.15, r);
+                            alpha += smoothstep(0.2, 0.0, r); // Glowing center
+                        }
+                    } else if (vType < 1.5) {
+                        // 1: Cosmic Dust / Particle
+                        alpha = smoothstep(1.0, 0.0, r);
+                    } else if (vType < 2.5) {
+                        // 2: Flying Butterfly shape
+                        float wings = abs(sin(a * 2.0)) * (1.0 - abs(cos(a)));
+                        if (r < wings) {
+                            alpha = smoothstep(wings, wings - 0.1, r);
+                        }
+                    } else {
+                        // 3: Single falling petal
+                        float petalShape = abs(sin(a)) * smoothstep(1.0, 0.0, abs(uv.x));
+                        if (r < petalShape) {
+                            alpha = smoothstep(petalShape, petalShape - 0.1, r);
+                        }
+                    }
+                    
+                    if (alpha <= 0.02) discard;
+                    gl_FragColor = vec4(vColor, vAlpha * alpha);
+                }
+            `;
+
+            function compileShader(gl, source, type) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            const program = gl.createProgram();
+            gl.attachShader(program, compileShader(gl, vertexShader, gl.VERTEX_SHADER));
+            gl.attachShader(program, compileShader(gl, fragmentShader, gl.FRAGMENT_SHADER));
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            // Generate particles
+            const PARTICLE_COUNT = 3500;
+            const positions = new Float32Array(PARTICLE_COUNT * 3);
+            const sizes = new Float32Array(PARTICLE_COUNT);
+            const alphas = new Float32Array(PARTICLE_COUNT);
+            const colors = new Float32Array(PARTICLE_COUNT * 3);
+            const types = new Float32Array(PARTICLE_COUNT);
+
+            // Helper for vibrant full spectrum HSL to RGB
+            function hslToRgb(h, s, l){
+                let r, g, b;
+                if(s == 0){ r = g = b = l; }
+                else{
+                    const hue2rgb = (p, q, t) => {
+                        if(t < 0) t += 1; if(t > 1) t -= 1;
+                        if(t < 1/6) return p + (q - p) * 6 * t;
+                        if(t < 1/2) return q;
+                        if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+                        return p;
+                    }
+                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                    const p = 2 * l - q;
+                    r = hue2rgb(p, q, h + 1/3);
+                    g = hue2rgb(p, q, h);
+                    b = hue2rgb(p, q, h - 1/3);
+                }
+                return [r, g, b];
+            }
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                // Wide spread for an infinite field feel
+                positions[i*3] = (Math.random() - 0.5) * 3000;
+                positions[i*3+1] = (Math.random() - 0.5) * 2000;
+                positions[i*3+2] = (Math.random() - 0.5) * 2000;
+                
+                // Determine type (Mostly dust, some flowers, some butterflies/petals)
+                let rType = Math.random();
+                if(rType < 0.2) types[i] = 0.0; // Flower
+                else if(rType < 0.8) types[i] = 1.0; // Dust
+                else if(rType < 0.9) types[i] = 2.0; // Butterfly
+                else types[i] = 3.0; // Petal
+
+                // Base size logic based on type
+                if(types[i] === 0.0) sizes[i] = 15.0 + Math.random() * 25.0; // Big flowers
+                else if(types[i] === 1.0) sizes[i] = 2.0 + Math.random() * 6.0; // Small dust
+                else sizes[i] = 10.0 + Math.random() * 15.0; // Medium butterflies/petals
+
+                alphas[i] = 0.3 + Math.random() * 0.7;
+                
+                // Full vivid spectrum (random hue, high saturation & lightness)
+                let c = hslToRgb(Math.random(), 0.8 + Math.random()*0.2, 0.5 + Math.random()*0.3);
+                colors[i*3] = c[0]; colors[i*3+1] = c[1]; colors[i*3+2] = c[2];
+            }
+
+            const bindBuffer = (data, name, size) => {
+                const buf = gl.createBuffer();
+                gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+                gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW);
+                const loc = gl.getAttribLocation(program, name);
+                gl.enableVertexAttribArray(loc);
+                gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0);
+            };
+
+            bindBuffer(positions, 'aPosition', 3);
+            bindBuffer(sizes, 'aSize', 1);
+            bindBuffer(alphas, 'aAlpha', 1);
+            bindBuffer(colors, 'aColor', 3);
+            bindBuffer(types, 'aType', 1);
+
+            const uProjection = gl.getUniformLocation(program, 'uProjection');
+            const uModelView = gl.getUniformLocation(program, 'uModelView');
+            const uTime = gl.getUniformLocation(program, 'uTime');
+
+            const projection = new Float32Array(16);
+            const modelView = new Float32Array(16);
+
+            function updateMatrix() {
+                const aspect = window.innerWidth / window.innerHeight;
+                const f = 1.0 / Math.tan(75 * Math.PI / 360);
+                projection.fill(0);
+                projection[0] = f / aspect; projection[5] = f; projection[10] = -1.0002; projection[11] = -1; projection[14] = -0.20002;
+                modelView.fill(0); modelView[0] = modelView[5] = modelView[10] = modelView[15] = 1; modelView[14] = -1000;
+            }
+
+            gl.enable(gl.BLEND);
+            gl.blendFunc(gl.SRC_ALPHA, gl.ONE); // Additive neon glow
+
+            let time = 0;
+            function renderStars() {
+                time += 16;
+                gl.viewport(0, 0, canvas.width, canvas.height);
+                gl.clearColor(0.02, 0.0, 0.05, 1); // Deep cosmic dark backdrop
+                gl.clear(gl.COLOR_BUFFER_BIT);
+                
+                // Extremely slow and elegant camera rotation
+                const s = 0.0005;
+                modelView[0] = Math.cos(time * s); modelView[2] = Math.sin(time * s);
+                modelView[8] = -Math.sin(time * s); modelView[10] = Math.cos(time * s);
+                
+                gl.uniformMatrix4fv(uProjection, false, projection);
+                gl.uniformMatrix4fv(uModelView, false, modelView);
+                gl.uniform1f(uTime, time);
+                
+                gl.drawArrays(gl.POINTS, 0, PARTICLE_COUNT);
+                requestAnimationFrame(renderStars);
+            }
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+                updateMatrix();
+            });
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            updateMatrix(); renderStars();
+        }
+
+        // ================= PERFECT WATERMARKS (syolana) ================= //
+        // Now much larger, more elegant, and moving in STRICT mathematical lanes to never collide.
+        const wmScene = new THREE.Scene();
+        const wmCamera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        wmCamera.position.z = 40;
+
+        const wmRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        wmRenderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('watermark').appendChild(wmRenderer.domElement);
+
+        class StylishWatermark {
+            constructor(font) { this.font = font; this.meshes = []; this.init(); }
+            init() {
+                const texts = ['syolana', 'Yolana', 'Dante', 'Artanat'];
+                // Soft elegant pastel tones to match the background
+                const colors = [0xffffff, 0xd4b3ff, 0xa3b5ff, 0xffb3c6, 0x99ffeb]; 
+                
+                // Strict Grid System to prevent ANY overlap
+                const columns = 6; 
+                const rows = 4;
+                const spacingX = 25; // Strict horizontal lanes
+                const spacingZ = 15; // Strict depth separation
+                
+                for(let i=0; i<columns; i++) {
+                    for(let j=0; j<rows; j++) {
+                        // Skip some grid points randomly so it doesn't look like a solid wall
+                        if(Math.random() > 0.6) continue;
+
+                        const text = texts[Math.floor(Math.random() * texts.length)];
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        
+                        // MUCH larger sizes as requested (1.5 to 3.5 instead of 0.5)
+                        const size = 1.5 + Math.random() * 2.0; 
+                        
+                        const geo = new THREE.TextGeometry(text, { font: this.font, size: size, height: 0.01, curveSegments: 4 });
+                        const mat = new THREE.MeshBasicMaterial({ color: color, transparent: true, opacity: 0.03 + Math.random()*0.04 });
+                        const mesh = new THREE.Mesh(geo, mat);
+                        
+                        // Calculate strict, non-overlapping lane position
+                        const laneX = (i - columns/2) * spacingX + (Math.random()*5); // slight variance within lane
+                        const laneZ = (j - rows/2) * spacingZ - 5;
+                        const startY = (Math.random() - 0.5) * 120;
+                        
+                        mesh.position.set(laneX, startY, laneZ);
+                        
+                        // Only move along Y axis, ensuring they stay in their X/Z lanes forever
+                        mesh.userData = { speedY: 0.015 + Math.random()*0.02 };
+                        wmScene.add(mesh); this.meshes.push(mesh);
+                    }
+                }
+            }
+            update(time) {
+                this.meshes.forEach(mesh => {
+                    mesh.position.y += mesh.userData.speedY;
+                    // Infinite seamless loop from bottom to top
+                    if(mesh.position.y > 60) { mesh.position.y = -60; }
+                });
+            }
+        }
+
+        new THREE.FontLoader().load('https://cdn.jsdelivr.net/npm/three@0.132.2/examples/fonts/helvetiker_regular.typeface.json', (font) => {
+            const wmSys = new StylishWatermark(font);
+            function animateWM(t) { requestAnimationFrame(animateWM); wmSys.update(t); wmRenderer.render(wmScene, wmCamera); }
+            animateWM(0);
+        });
+
+        window.addEventListener('resize', () => { wmCamera.aspect = window.innerWidth / window.innerHeight; wmCamera.updateProjectionMatrix(); wmRenderer.setSize(window.innerWidth, window.innerHeight); });
+    </script>
+</body>
+</html>
