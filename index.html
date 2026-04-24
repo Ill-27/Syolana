@@ -856,7 +856,7 @@
 
             // Set Particle Count (thousands as requested, volumetric spread)
             const FLOWER_COUNT = 2500;
-            const DUST_COUNT = 2500;
+            const DUST_COUNT = 5000;
             const PARTICLE_COUNT = FLOWER_COUNT + DUST_COUNT;
             
             const positions = new Float32Array(PARTICLE_COUNT * 3);
@@ -886,8 +886,8 @@
             }
 
             // Fill volumetric space randomly (no more rows)
-            const spreadX = 2500;
-            const spreadY = 1500;
+            const spreadX = 1500;
+            const spreadY = 2500;
             const spreadZ = 3000;
 
             for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -948,13 +948,13 @@
 
             let time = 0;
             function renderStars() {
-                time += 16;
+                time += 6;
                 gl.viewport(0, 0, canvas.width, canvas.height);
                 gl.clearColor(0.015, 0.0, 0.03, 1); // Very Deep dark backdrop
                 gl.clear(gl.COLOR_BUFFER_BIT);
                 
                 // Slow ambient rotation of field
-                const rotationS = 0.0005;
+                const rotationS = 0.002;
                 modelView[0] = Math.cos(time * rotationS); modelView[2] = Math.sin(time * rotationS);
                 modelView[8] = -Math.sin(time * rotationS); modelView[10] = Math.cos(time * rotationS);
                 
