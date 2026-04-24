@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #030008;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Yolana | Poetry & Cinematic Clips</title>
+    <meta name="description" content="Digital home of Yolana: Poetry, Music, Cinematic Clips." />
+
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    
+    <script src="data.js"></script>
+
+    <style>
+        :root {
+            --text-main: #f0f0f5;
+            --text-dim: #b3b3cc;
+            --accent-light: #e6f2ff;
+            --accent-blue: #66b3ff;
+            --accent-purple: #b266ff;
+            --glass-bg: rgba(15, 10, 25, 0.4);
+            --glass-border: rgba(178, 102, 255, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        html, body { background-color: #030008; color: var(--text-main); font-family: 'Montserrat', sans-serif; line-height: 1.7; overflow-x: hidden; }
+
+        /* Background Canvases */
+        #bg-canvas, #watermark-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; }
+        #bg-canvas { z-index: 0; } 
+        #watermark-canvas { z-index: 1; opacity: 0.6; }
+
+        /* Elegant Top Left Logo */
+        .top-logo { position: fixed; top: 25px; left: 25px; z-index: 100; width: 45px; height: 45px; transition: opacity 0.5s ease; }
+        .top-logo svg { width: 100%; height: 100%; filter: drop-shadow(0 0 8px var(--accent-purple)); }
+
+        /* Controls */
+        .controls-right { position: fixed; top: 20px; right: 20px; display: flex; gap: 15px; z-index: 100; transition: opacity 0.5s ease;}
+        .controls-left-bottom { position: fixed; bottom: 20px; left: 20px; display: flex; gap: 15px; z-index: 100; transition: opacity 0.5s ease;}
+        .controls-social { position: fixed; top: 50%; transform: translateY(-50%); right: 20px; display: flex; flex-direction: column; gap: 15px; z-index: 100; align-items: flex-end; transition: opacity 0.5s ease; }
+        .controls-bottom-right { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 15px; z-index: 100; align-items: flex-end; transition: opacity 0.5s ease; }
+        
+        .icon-btn { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); color: var(--accent-purple); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.4s ease; backdrop-filter: blur(8px); outline: none; text-decoration: none; }
+        .icon-btn:hover { background: rgba(178, 102, 255, 0.15); box-shadow: 0 0 15px var(--accent-purple); color: var(--accent-light); transform: translateY(-3px); }
+
+        #scroll-to-top { opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.4s ease; }
+        .lang-wrapper { position: relative; display: flex; align-items: center; justify-content: center; }
+        .lang-select { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+
+        /* Main Container & Glassmorphism */
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; position: relative; z-index: 10; transition: opacity 0.8s ease; }
+        .container.hidden-ui { opacity: 0; pointer-events: none; }
+
+        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 50px; text-align: center; }
+        
+        .profile-pic-container { width: 120px; height: 120px; border-radius: 50%; padding: 4px; background: linear-gradient(45deg, var(--accent-blue), var(--accent-purple)); margin-bottom: 20px; box-shadow: 0 0 25px rgba(178, 102, 255, 0.4); }
+        .profile-pic { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background-color: #111; border: 2px solid #000; }
+        
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 600; letter-spacing: 2px; margin-bottom: 10px; color: var(--accent-light); text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .subtitle { font-size: 0.9rem; color: var(--accent-purple); font-weight: 300; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px; }
+
+        nav { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; width: 100%; margin-bottom: 10px; }
+        nav a { color: var(--text-dim); text-decoration: none; font-size: 1rem; font-weight: 400; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; padding-bottom: 5px; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: 0; left: 50%; background-color: var(--accent-purple); transition: all 0.3s ease; transform: translateX(-50%); box-shadow: 0 0 8px var(--accent-purple); }
+        nav a:hover, nav a.active { color: var(--accent-light); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+
+        /* Content Areas */
+        .intro { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--text-dim); margin-bottom: 50px; text-align: center; font-style: italic; line-height: 1.8; }
+        .intro strong { color: var(--accent-light); font-weight: 400;}
+
+        .branch-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 12px; padding: 20px 25px; margin-bottom: 20px; cursor: pointer; transition: all 0.4s ease; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
+        .branch-card:hover { background: rgba(178, 102, 255, 0.1); transform: translateY(-2px); box-shadow: 0 5px 20px rgba(178, 102, 255, 0.15); border-color: var(--accent-purple); }
+        .branch-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; color: var(--accent-light); }
+        .branch-meta { font-size: 0.85rem; color: var(--accent-blue); font-weight: 300; }
+
+        .post { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 15px; padding: 30px; margin-bottom: 40px; animation: fadeIn 0.6s ease; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .post-meta { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 20px; display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px; }
+        .post-author { color: var(--accent-blue); font-weight: 500; }
+        .post-content { font-size: 1.05rem; font-weight: 300; word-wrap: break-word; white-space: pre-wrap; color: var(--text-main); }
+        .post-content img, .post-content video, .post-content audio { max-width: 100%; border-radius: 8px; margin-top: 20px; border: 1px solid var(--glass-border); outline: none; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        
+        /* Comments */
+        .comments-toggle { background: none; border: none; color: var(--text-dim); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; margin-top: 25px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        .comments-toggle:hover { color: var(--accent-purple); }
+        .comments-section { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+        .comments-section.open { display: block; animation: fadeIn 0.4s ease; }
+        
+        .comments-list { margin-bottom: 20px; display: flex; flex-direction: column; gap: 12px; }
+        .comment-item { font-size: 0.95rem; font-weight: 300; color: var(--text-dim); word-wrap: break-word; background: rgba(0,0,0,0.3); padding: 10px 15px; border-radius: 8px; border-left: 2px solid var(--accent-blue); }
+        .comment-item .c-author { color: var(--accent-light); font-weight: 500; margin-right: 5px; }
+        .comment-item .c-time { font-size: 0.75rem; opacity: 0.6; margin-left: 8px; font-weight: 300; }
+        .delete-comment-btn { background: none; border: none; color: #ff6666; float: right; cursor: pointer; font-size: 0.9rem; opacity: 0.5; transition: opacity 0.3s; }
+        .delete-comment-btn:hover { opacity: 1; }
+        
+        .comment-controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .comment-input { flex: 1; min-width: 200px; background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); border-radius: 20px; color: var(--text-main); padding: 10px 18px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; outline: none; transition: all 0.3s; }
+        .comment-input:focus { border-color: var(--accent-purple); box-shadow: 0 0 10px rgba(178, 102, 255, 0.2); }
+        .btn-action { background: rgba(178, 102, 255, 0.1); border: 1px solid var(--glass-border); color: var(--accent-light); padding: 10px 20px; border-radius: 20px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; transition: 0.3s; }
+        .btn-action:hover { background: rgba(178, 102, 255, 0.3); box-shadow: 0 0 15px rgba(178, 102, 255, 0.4); }
+        
+        .auth-prompt { font-size: 0.85rem; color: var(--text-dim); margin-right: 10px; }
+        #global-user-status { margin-bottom: 40px; text-align: center; font-size: 0.85rem; color: var(--text-dim); display: flex; justify-content: center; gap: 15px; align-items: center; flex-wrap: wrap;}
+        .logout-btn { background: none; border: none; color: var(--accent-purple); cursor: pointer; font-family: 'Montserrat', sans-serif; transition: color 0.3s; }
+        .logout-btn:hover { color: var(--accent-light); text-decoration: underline; }
+
+        .view-section { display: none; }
+        .view-section.active { display: block; }
+        .header-action { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
+        .action-btn { background: transparent; border: none; color: var(--text-dim); font-family: 'Montserrat', sans-serif; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
+        .action-btn:hover { color: var(--accent-light); }
+        #current-branch-title { font-family: 'Playfair Display', serif; font-weight: 400; color: var(--accent-purple); font-size: 1.5rem; }
+
+        footer { margin-top: 80px; text-align: center; font-size: 0.85rem; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 30px; padding-bottom: 40px; font-weight: 300; line-height: 1.8; }
+        .empty-msg { color: var(--text-dim); text-align: center; font-style: italic; font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-top: 40px; }
+        
+        .privacy-content { text-align: left; font-size: 0.95rem; font-weight: 300; color: var(--text-dim); line-height: 1.8; background: var(--glass-bg); padding: 30px; border-radius: 15px; border: 1px solid var(--glass-border); }
+        .privacy-link { cursor: pointer; color: var(--text-dim); transition: color 0.3s; user-select: none; }
+        .privacy-link:hover { color: var(--accent-purple); }
+
+        /* Subscribe Popup */
+        .sub-popup-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(3, 0, 8, 0.85); z-index: 1000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; backdrop-filter: blur(12px); }
+        .sub-popup-overlay.show { opacity: 1; pointer-events: auto; }
+        .sub-popup-box { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 50px 40px; text-align: center; max-width: 450px; width: 90%; position: relative; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); border-radius: 20px; animation: popSlide 0.5s ease-out; }
+        @keyframes popSlide { from { transform: translateY(30px) scale(0.95); opacity: 0;} to { transform: translateY(0) scale(1); opacity: 1; } }
+        .sub-popup-close { position: absolute; top: 20px; right: 25px; background: none; border: none; color: var(--text-dim); font-size: 1.5rem; cursor: pointer; transition: color 0.3s; }
+        .sub-popup-close:hover { color: var(--accent-light); }
+        .sub-popup-title { font-family: 'Playfair Display', serif; color: var(--accent-light); font-size: 1.8rem; margin: 0 0 15px 0; font-weight: 400; }
+        .sub-popup-text { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 30px; line-height: 1.6; font-weight: 300; }
+        .sub-popup-form { display: flex; flex-direction: column; gap: 15px; }
+        .sub-popup-input { background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); border-radius: 25px; color: var(--text-main); padding: 12px 20px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.3s; text-align: center; }
+        .sub-popup-input:focus { border-color: var(--accent-purple); box-shadow: 0 0 15px rgba(178, 102, 255, 0.3); }
+        .sub-popup-box .btn-action { padding: 12px; font-weight: 500; font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="watermark-canvas"></canvas>
+    <audio id="bg-music" loop></audio>
+
+    <div class="top-logo" id="ui_top_logo">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40,20 C60,20 70,35 60,50 C50,65 30,70 30,50 C30,35 45,30 60,40" fill="none" stroke="var(--accent-purple)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M50,40 L65,80 M50,40 L35,20" fill="none" stroke="var(--accent-blue)" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="50" cy="40" r="4" fill="#fff" />
+        </svg>
+    </div>
+
+    <div class="sub-popup-overlay" id="subscribe-popup">
+        <div class="sub-popup-box">
+            <button class="sub-popup-close" onclick="closeSubPopup()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="sub-popup-title" id="pop_title">Stay Connected</h3>
+            <p class="sub-popup-text" id="pop_text">Join Yolana's journey. Subscribe to receive updates directly to your inbox.</p>
+            <div class="sub-popup-form">
+                <input type="email" id="pop_email_input" class="sub-popup-input" placeholder="Your email">
+                <button class="btn-action" onclick="submitPopupSub()" id="pop_btn">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls-left-bottom">
+        <button id="hide-btn" class="icon-btn" title="Zen Mode"><i class="fa-solid fa-eye-slash"></i></button>
+        <button onclick="appSubscribe()" class="icon-btn" id="sub-btn" title="Subscribe"><i class="fa-solid fa-envelope-open-text"></i></button>
+    </div>
+
+    <div class="controls-right">
+        <button id="music-btn" class="icon-btn" title="Play music"><i class="fa-solid fa-play"></i></button>
+        <button id="fullscreen-btn" class="icon-btn" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+    </div>
+
+    <div class="controls-social">
+        <a href="https://t.me/syolana" target="_blank" class="icon-btn" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a href="https://instagram.com/syolana" target="_blank" class="icon-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://youtube.com/@syolana" target="_blank" class="icon-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    </div>
+
+    <div class="controls-bottom-right">
+        <button id="scroll-to-top" class="icon-btn" title="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+        <div class="lang-wrapper">
+            <button class="icon-btn" title="Language selection"><i class="fa-solid fa-globe"></i></button>
+            <select id="lang-select" class="lang-select">
+                <option value="en" selected>English (EN)</option>
+                <option value="es">Español (ES)</option>
+                <option value="ru">Русский (RU)</option>
+                <option value="sr">Српски (SR)</option>
+                <option value="zh">中文 (ZH)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="container" id="main-container">
+        <header>
+            <div class="profile-pic-container">
+                <img src="https://via.placeholder.com/150/111/b266ff?text=Y" alt="Yolana" class="profile-pic">
+            </div>
+            <h1>Yolana</h1>
+            <div class="subtitle">Poetry • Music • Cinematic Clips</div>
+            <nav id="main-nav">
+                <a data-tab="feed" class="active" id="nav_feed">Feed</a>
+                <a data-tab="themes" id="nav_themes">Themes</a>
+                <a data-tab="friends" id="nav_friends">For Friends</a>
+            </nav>
+        </header>
+
+        <div id="global-user-status"></div>
+
+        <section class="intro" id="intro-text">
+            <p id="ui_intro">Welcome to my digital home. Here I share my poetry, songs, cinematic clips, and visual stories. Feel free to explore, listen, and leave a trace.</p>
+        </section>
+
+        <div id="view-feed" class="view-section active">
+            <div id="feed-container"></div>
+        </div>
+
+        <div id="view-branches" class="view-section">
+            <div id="branches-list-container"></div>
+        </div>
+
+        <div id="view-branch-content" class="view-section">
+            <div class="header-action">
+                <button id="back-to-branches" class="action-btn"><i class="fa-solid fa-arrow-left"></i> <span id="ui_back">Back</span></button>
+                <h2 id="current-branch-title"></h2>
+            </div>
+            <div id="branch-posts-container"></div>
+        </div>
+
+        <div id="view-privacy" class="view-section">
+            <div class="privacy-content" id="ui_privacy_text">
+                This website uses Google to handle authentication, securely store your comments, and manage email subscriptions. We collect only the minimum data necessary (email and display name). Your data is never sold or shared with third parties. By logging in or subscribing, you consent to this minimal data processing.
+            </div>
+        </div>
+
+        <footer>
+            <p id="ui_footer">© 2026 Yolana. All rights reserved. All audio, visuals, and video are created with the help of AI and editing. All ideas belong to me or my friends (with author attribution).</p>
+            <p style="margin-top: 15px;"><span class="privacy-link" id="ui_privacy_link" onclick="togglePrivacyPolicy()">Privacy Policy</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // ================= FIREBASE INITIALIZATION ================= //
+        const firebaseConfig = {
+            apiKey: "AIzaSyAQTKVxsbLSJwAnoJQB43R6SFdkY35WfDw",
+            authDomain: "atat-1668c.firebaseapp.com",
+            projectId: "atat-1668c",
+            storageBucket: "atat-1668c.firebasestorage.app",
+            messagingSenderId: "1028991113806",
+            appId: "1:1028991113806:web:3adee7f66a38f2b19fc11f",
+            measurementId: "G-EL4Y3ZNBH9"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        let currentUser = null;
+
+        auth.onAuthStateChanged(user => {
+            currentUser = user;
+            updateGlobalStatus();
+            if (currentTab === 'feed') renderFeed();
+            else if (document.getElementById('view-branch-content').classList.contains('active')) renderBranchContent();
+        });
+
+        function updateGlobalStatus() {
+            const statusDiv = document.getElementById('global-user-status');
+            if (currentUser) {
+                const t = i18n[currentLang];
+                const name = currentUser.displayName || currentUser.email.split('@')[0];
+                statusDiv.innerHTML = `<span>${t.auth_status}: <span style="color:var(--accent-light); font-weight:500;">${name}</span></span>
+                <button class="logout-btn" onclick="appChangeName()">${t.change_name}</button>
+                <button class="logout-btn" onclick="appChangeEmail()">${t.change_email}</button>
+                <button class="logout-btn" onclick="appChangePassword()">${t.change_pass}</button>
+                <button class="logout-btn" onclick="appLogout()">${t.logout}</button>`;
+            } else {
+                statusDiv.innerHTML = '';
+            }
+        }
+
+        function appLoginGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).catch(err => alert("Error: " + err.message));
+        }
+
+        function appLoginEmail() {
+            const email = prompt(i18n[currentLang].email_prompt);
+            if (!email) return;
+            const password = prompt(i18n[currentLang].pass_prompt_auth);
+            
+            if (!password) {
+                auth.sendPasswordResetEmail(email)
+                    .then(() => alert(i18n[currentLang].pass_reset_sent))
+                    .catch(e => alert(e.message));
+                return;
+            }
+
+            auth.signInWithEmailAndPassword(email, password)
+                .catch(error => {
+                    if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
+                        const nickname = prompt(i18n[currentLang].nickname_prompt);
+                        if (!nickname) { alert(i18n[currentLang].nick_error); return; }
+
+                        auth.createUserWithEmailAndPassword(email, password)
+                            .then((userCred) => {
+                                userCred.user.updateProfile({ displayName: nickname }).then(() => {
+                                    currentUser = auth.currentUser;
+                                    updateGlobalStatus();
+                                    updateUITranslations();
+                                });
+                                userCred.user.sendEmailVerification();
+                                alert(i18n[currentLang].reg_success);
+                            })
+                            .catch(err => alert("Registration error: " + err.message));
+                    } else {
+                        alert("Login error: " + error.message);
+                    }
+                });
+        }
+
+        function appChangePassword() {
+            if (currentUser && currentUser.email) {
+                auth.sendPasswordResetEmail(currentUser.email)
+                    .then(() => alert(i18n[currentLang].pass_reset_sent))
+                    .catch(e => alert("Error: " + e.message));
+            }
+        }
+
+        function appChangeName() {
+            if (!currentUser) return;
+            const t = i18n[currentLang];
+            const newName = prompt(t.prompt_name, currentUser.displayName || "");
+            if (newName && newName.trim() !== "") {
+                currentUser.updateProfile({ displayName: newName.trim() })
+                .then(() => { alert(t.success_update); updateGlobalStatus(); })
+                .catch(err => alert("Error: " + err.message));
+            }
+        }
+
+        function appChangeEmail() {
+            if (!currentUser) return;
+            const t = i18n[currentLang];
+            const newEmail = prompt(t.prompt_email, currentUser.email || "");
+            if (newEmail && newEmail.trim() !== "") {
+                currentUser.updateEmail(newEmail.trim())
+                .then(() => { alert(t.success_update); updateGlobalStatus(); })
+                .catch(err => {
+                    if (err.code === 'auth/requires-recent-login') alert(t.error_reauth);
+                    else alert("Error: " + err.message);
+                });
+            }
+        }
+
+        function appLogout() { auth.signOut(); }
+
+        function processSubscription(email) {
+            if(email && email.includes('@')) {
+                db.collection("subscribers").add({
+                    email: email, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                }).then(() => { alert(i18n[currentLang].sub_success); closeSubPopup(); })
+                .catch(err => { alert("Error: " + err.message); });
+            }
+        }
+
+        function appSubscribe() { document.getElementById('subscribe-popup').classList.add('show'); }
+        setTimeout(() => { if(!currentUser) document.getElementById('subscribe-popup').classList.add('show'); }, 15000);
+        function closeSubPopup() { document.getElementById('subscribe-popup').classList.remove('show'); }
+        function submitPopupSub() { const email = document.getElementById('pop_email_input').value; processSubscription(email); }
+
+        // ================= 5-LANGUAGE UI DICTIONARY ================= //
+        const i18n = {
+            en: {
+                nav_feed: "Feed", nav_themes: "Themes", nav_friends: "For Friends",
+                intro: "Welcome to my digital home. Here I share my poetry, songs, cinematic clips, and visual stories. Feel free to explore, listen, and leave a trace.",
+                footer: "© 2026 Yolana. All rights reserved. All audio, visuals, and video are created with the help of AI and editing. All ideas belong to me or my friends (with author attribution).",
+                empty_feed: "The feed is currently empty.", empty_branch: "No collections here yet.", empty_posts: "It's quiet in here.",
+                back: "Back", pass_prompt: "This section is private. Enter password:", pass_wrong: "Access denied.", open: "Open Collection", scroll_top: "Scroll to top",
+                
+                show_comments: "Show comments", hide_comments: "Hide comments", leave_trace: "Write a comment...", send: "Send",
+                auth_req: "Sign in to comment:", auth_status: "Signed in as", logout: "[Logout]", change_pass: "[Password]", change_name: "[Name]", change_email: "[Email]",
+                prompt_name: "New display name:", prompt_email: "New email:", success_update: "Profile updated!", error_reauth: "Please log out and log back in to change your email.",
+                email_prompt: "Enter your email:", pass_prompt_auth: "Enter password (leave empty to reset):", nickname_prompt: "Choose a display name:", nick_error: "Name is required.",
+                pass_reset_sent: "Password reset link sent.", reg_success: "Account created! Please verify your email.",
+                sub_prompt: "Subscribe to updates:", sub_success: "Subscribed successfully.", spam_alert: "Please wait before commenting again.", confirm_delete: "Delete this comment?",
+                privacy_link: "Privacy Policy", privacy_title: "Privacy & Terms",
+                privacy_text: "This website uses Google to handle authentication, securely store your comments, and manage email subscriptions. We collect only the minimum data necessary (email and display name). Your data is never sold or shared with third parties. By logging in or subscribing, you consent to this minimal data processing.",
+                
+                pop_title: "Stay Connected", pop_text: "Join my creative journey. Subscribe to receive updates on new poetry and clips directly to your inbox.", pop_placeholder: "Your email", pop_btn: "Subscribe"
+            },
+            es: {
+                nav_feed: "Inicio", nav_themes: "Temas", nav_friends: "Para Amigos",
+                intro: "Bienvenido a mi hogar digital. Aquí comparto mi poesía, canciones, clips cinematográficos e historias visuales. Siéntete libre de explorar, escuchar y dejar tu huella.",
+                footer: "© 2026 Yolana. Todos los derechos reservados. Todos los audios, visuales y videos se crean con la ayuda de IA y edición. Todas las ideas me pertenecen a mí o a mis amigos (con atribución de autor).",
+                empty_feed: "El inicio está vacío.", empty_branch: "Aún no hay colecciones aquí.", empty_posts: "Está tranquilo aquí.",
+                back: "Volver", pass_prompt: "Esta sección es privada. Contraseña:", pass_wrong: "Acceso denegado.", open: "Colección abierta", scroll_top: "Volver arriba",
+                show_comments: "Mostrar comentarios", hide_comments: "Ocultar comentarios", leave_trace: "Escribe un comentario...", send: "Enviar",
+                auth_req: "Inicia sesión para comentar:", auth_status: "Conectado como", logout: "[Salir]", change_pass: "[Contraseña]", change_name: "[Nombre]", change_email: "[Correo]",
+                prompt_name: "Nuevo nombre:", prompt_email: "Nuevo correo:", success_update: "¡Perfil actualizado!", error_reauth: "Cierra sesión y vuelve a entrar para cambiar tu correo.",
+                email_prompt: "Introduce tu correo:", pass_prompt_auth: "Contraseña (déjala en blanco para restablecer):", nickname_prompt: "Elige un nombre:", nick_error: "Se requiere un nombre.",
+                pass_reset_sent: "Enlace enviado.", reg_success: "¡Cuenta creada! Verifica tu correo.", sub_prompt: "Suscríbete a las actualizaciones:", sub_success: "Suscrito con éxito.",
+                spam_alert: "Espera antes de comentar de nuevo.", confirm_delete: "¿Eliminar este comentario?", privacy_link: "Política de Privacidad", privacy_title: "Privacidad y Términos",
+                privacy_text: "Este sitio web utiliza Google para la autenticación y gestionar suscripciones. Recopilamos los datos mínimos necesarios (correo y nombre). Tus datos nunca se venden.",
+                pop_title: "Mantente conectado", pop_text: "Únete a mi viaje creativo. Suscríbete para recibir nuevas poesías y clips en tu correo.", pop_placeholder: "Tu correo", pop_btn: "Suscribirse"
+            },
+            ru: {
+                nav_feed: "Лента", nav_themes: "Темы", nav_friends: "Для друзей",
+                intro: "Добро пожаловать в мой цифровой дом. Здесь я делюсь своими стихами, песнями, кинематографичными клипами и визуальными историями. Исследуй, слушай и оставляй свой след.",
+                footer: "© 2026 Yolana. Все права защищены. Все аудио, визуал и видео созданы с помощью ИИ и монтажа. Все идеи принадлежат мне или моим друзьям (с указанием автора).",
+                empty_feed: "Лента пока пуста.", empty_branch: "Здесь пока нет коллекций.", empty_posts: "Здесь пока тихо.",
+                back: "Назад", pass_prompt: "Этот раздел защищен. Введите пароль:", pass_wrong: "Доступ закрыт.", open: "Открытая коллекция", scroll_top: "Наверх",
+                show_comments: "Показать комментарии", hide_comments: "Скрыть комментарии", leave_trace: "Написать комментарий...", send: "Отправить",
+                auth_req: "Войдите, чтобы комментировать:", auth_status: "Вы вошли как", logout: "[Выйти]", change_pass: "[Пароль]", change_name: "[Имя]", change_email: "[Email]",
+                prompt_name: "Новое имя:", prompt_email: "Новый email:", success_update: "Профиль обновлен!", error_reauth: "Пожалуйста, перезайдите в аккаунт для смены email.",
+                email_prompt: "Ваш email:", pass_prompt_auth: "Пароль (пусто для сброса):", nickname_prompt: "Выберите имя пользователя:", nick_error: "Имя обязательно.",
+                pass_reset_sent: "Ссылка отправлена.", reg_success: "Аккаунт создан! Проверьте почту.", sub_prompt: "Подписаться на обновления:", sub_success: "Успешная подписка.",
+                spam_alert: "Подождите перед новой отправкой.", confirm_delete: "Удалить комментарий?", privacy_link: "Политика конфиденциальности", privacy_title: "Конфиденциальность",
+                privacy_text: "Этот сайт использует Google для авторизации. Мы собираем только минимум данных (email и имя). Ваши данные не передаются третьим лицам.",
+                pop_title: "Оставайтесь на связи", pop_text: "Присоединяйтесь к моему творческому пути. Подпишитесь, чтобы получать новые стихи и клипы на почту.", pop_placeholder: "Ваш email", pop_btn: "Подписаться"
+            },
+            sr: {
+                nav_feed: "Фид", nav_themes: "Теме", nav_friends: "За пријатеље",
+                intro: "Добродошли у мој дигитални дом. Овде делим своју поезију, песме, биоскопске клипове и визуелне приче. Истражујте, слушајте и оставите траг.",
+                footer: "© 2026 Yolana. Сва права задржана. Сав аудио, визуелни и видео материјал креиран је уз помоћ АИ и монтаже. Све идеје су моје или мојих пријатеља (уз навођење аутора).",
+                empty_feed: "Фид је празан.", empty_branch: "Овде још нема колекција.", empty_posts: "Овде је тихо.",
+                back: "Назад", pass_prompt: "Ова секција је приватна. Лозинка:", pass_wrong: "Приступ одбијен.", open: "Отворена колекција", scroll_top: "На врх",
+                show_comments: "Прикажи коментаре", hide_comments: "Сакриј коментаре", leave_trace: "Напиши коментар...", send: "Пошаљи",
+                auth_req: "Пријавите се за коментарисање:", auth_status: "Пријављени сте као", logout: "[Одјави се]", change_pass: "[Лозинка]", change_name: "[Име]", change_email: "[Емаил]",
+                prompt_name: "Ново име:", prompt_email: "Нови емаил:", success_update: "Профил ажуриран!", error_reauth: "Одјавите се и поново пријавите за промену емаила.",
+                email_prompt: "Ваш емаил:", pass_prompt_auth: "Лозинка (оставите празно за ресетовање):", nickname_prompt: "Изаберите име:", nick_error: "Име је обавезно.",
+                pass_reset_sent: "Линк је послат.", reg_success: "Налог креиран! Проверите емаил.", sub_prompt: "Претплатите се:", sub_success: "Успешна претплата.",
+                spam_alert: "Сачекајте пре новог коментара.", confirm_delete: "Обрисати коментар?", privacy_link: "Политика приватности", privacy_title: "Приватност",
+                privacy_text: "Овај сајт користи Google за пријаву. Прикупљамо само основне податке (емаил и име). Ваши подаци се не продају.",
+                pop_title: "Останите повезани", pop_text: "Придружите се мом путовању. Претплатите се за нове песме и клипове.", pop_placeholder: "Ваш емаил", pop_btn: "Претплати се"
+            },
+            zh: {
+                nav_feed: "动态", nav_themes: "主题", nav_friends: "给朋友",
+                intro: "欢迎来到我的数字家园。在这里，我分享我的诗歌、歌曲、电影片段和视觉故事。请随意探索、聆听并留下您的足迹。",
+                footer: "© 2026 Yolana. 保留所有权利。所有音频、视觉和视频均在 AI 和编辑的帮助下创建。所有想法均属于我或我的朋友（带有作者署名）。",
+                empty_feed: "动态为空。", empty_branch: "这里还没有收藏。", empty_posts: "这里很安静。",
+                back: "返回", pass_prompt: "此部分是私密的。请输入密码：", pass_wrong: "访问被拒绝。", open: "公开收藏", scroll_top: "回到顶部",
+                show_comments: "显示评论", hide_comments: "隐藏评论", leave_trace: "写下评论...", send: "发送",
+                auth_req: "请登录以评论：", auth_status: "登录为", logout: "[注销]", change_pass: "[密码]", change_name: "[名称]", change_email: "[邮箱]",
+                prompt_name: "新名称：", prompt_email: "新邮箱：", success_update: "个人资料已更新！", error_reauth: "请注销并重新登录以更改您的邮箱。",
+                email_prompt: "请输入邮箱：", pass_prompt_auth: "密码（留空重置）：", nickname_prompt: "选择显示名称：", nick_error: "需要名称。",
+                pass_reset_sent: "重置链接已发送。", reg_success: "帐户已创建！请验证邮箱。", sub_prompt: "订阅更新：", sub_success: "订阅成功。",
+                spam_alert: "请等待再发表评论。", confirm_delete: "删除此评论？", privacy_link: "隐私政策", privacy_title: "隐私",
+                privacy_text: "本网站使用 Google 进行身份验证。我们仅收集必要的最低数据（电子邮件和名称）。您的数据绝不会被出售。",
+                pop_title: "保持联系", pop_text: "加入我的创作之旅。订阅以在收件箱中接收新诗歌和片段。", pop_placeholder: "您的邮箱", pop_btn: "订阅"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function updateUITranslations() {
+            const t = i18n[currentLang];
+            document.getElementById('nav_feed').innerText = t.nav_feed;
+            document.getElementById('nav_themes').innerText = t.nav_themes;
+            document.getElementById('nav_friends').innerText = t.nav_friends;
+            document.getElementById('ui_intro').innerHTML = t.intro;
+            document.getElementById('ui_footer').innerText = t.footer;
+            document.getElementById('ui_back').innerText = t.back;
+            document.getElementById('scroll-to-top').title = t.scroll_top;
+            document.getElementById('sub-btn').title = t.sub_prompt;
+            document.getElementById('ui_privacy_link').innerText = t.privacy_link;
+            document.getElementById('ui_privacy_text').innerText = t.privacy_text;
+            
+            document.getElementById('pop_title').innerText = t.pop_title;
+            document.getElementById('pop_text').innerText = t.pop_text;
+            document.getElementById('pop_email_input').placeholder = t.pop_placeholder;
+            document.getElementById('pop_btn').innerText = t.pop_btn;
+            
+            updateGlobalStatus();
+        }
+
+        document.getElementById('lang-select').addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            updateUITranslations();
+            if (currentTab === 'feed') renderFeed();
+            else if (document.getElementById('view-branches').classList.contains('active')) renderBranches();
+            else if (document.getElementById('view-branch-content').classList.contains('active')) renderBranchContent(); 
+        });
+
+        function getTranslatedText(obj) {
+            if (!obj) return "";
+            if (typeof obj === 'string') return obj; 
+            if (obj[currentLang]) return obj[currentLang]; 
+            if (obj['en']) return obj['en']; 
+            return Object.values(obj)[0] || ""; 
+        }
+
+        const hideBtn = document.getElementById('hide-btn');
+        const container = document.getElementById('main-container');
+        const topLogo = document.getElementById('ui_top_logo');
+        let isHidden = false;
+        
+        hideBtn.addEventListener('click', () => {
+            isHidden = !isHidden;
+            container.classList.toggle('hidden-ui');
+            hideBtn.querySelector('i').classList.toggle('fa-eye-slash');
+            hideBtn.querySelector('i').classList.toggle('fa-eye');
+            
+            const opacityVal = isHidden ? '0' : '1';
+            const pointerVal = isHidden ? 'none' : 'auto';
+            document.querySelector('.controls-social').style.opacity = opacityVal;
+            document.querySelector('.controls-social').style.pointerEvents = pointerVal;
+            document.querySelector('.controls-bottom-right').style.opacity = opacityVal;
+            document.querySelector('.controls-bottom-right').style.pointerEvents = pointerVal;
+            document.querySelector('.controls-right').style.opacity = opacityVal;
+            document.querySelector('.controls-right').style.pointerEvents = pointerVal;
+            document.getElementById('sub-btn').style.opacity = opacityVal;
+            document.getElementById('sub-btn').style.pointerEvents = pointerVal;
+            topLogo.style.opacity = opacityVal;
+        });
+
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); fullscreenBtn.querySelector('i').classList.replace('fa-expand', 'fa-compress'); } 
+            else { document.exitFullscreen(); fullscreenBtn.querySelector('i').classList.replace('fa-compress', 'fa-expand'); }
+        });
+
+        const scrollTopBtn = document.getElementById('scroll-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { scrollTopBtn.style.opacity = '1'; scrollTopBtn.style.pointerEvents = 'auto'; scrollTopBtn.style.transform = 'translateY(0)'; } 
+            else { scrollTopBtn.style.opacity = '0'; scrollTopBtn.style.pointerEvents = 'none'; scrollTopBtn.style.transform = 'translateY(20px)'; }
+        });
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        const musicBtn = document.getElementById('music-btn');
+        const audio = document.getElementById('bg-music');
+        let isPlaying = false;
+        if (typeof ARTANAT_DB !== 'undefined' && ARTANAT_DB.music && ARTANAT_DB.music.length > 0) {
+            audio.src = ARTANAT_DB.music[Math.floor(Math.random() * ARTANAT_DB.music.length)];
+        }
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) { audio.pause(); musicBtn.querySelector('i').classList.replace('fa-pause', 'fa-play'); } 
+            else { audio.play(); musicBtn.querySelector('i').classList.replace('fa-play', 'fa-pause'); }
+            isPlaying = !isPlaying;
+        });
+
+        const views = { feed: document.getElementById('view-feed'), branches: document.getElementById('view-branches'), content: document.getElementById('view-branch-content'), privacy: document.getElementById('view-privacy') };
+        let currentTab = 'feed';
+        let activeBranch = null;
+        let previousView = 'feed';
+
+        function switchView(viewName) {
+            if(viewName !== 'privacy') previousView = viewName;
+            Object.values(views).forEach(v => v.classList.remove('active'));
+            views[viewName].classList.add('active');
+            document.getElementById('intro-text').style.display = (viewName === 'feed' || viewName === 'privacy') ? 'block' : 'none';
+        }
+
+        function togglePrivacyPolicy() {
+            if (document.getElementById('view-privacy').classList.contains('active')) switchView(previousView);
+            else switchView('privacy');
+        }
+
+        const navLinks = document.querySelectorAll('#main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                currentTab = link.getAttribute('data-tab');
+                if (currentTab === 'feed') { switchView('feed'); renderFeed(); } 
+                else { switchView('branches'); renderBranches(); }
+            });
+        });
+
+        document.getElementById('back-to-branches').addEventListener('click', () => { switchView('branches'); renderBranches(); });
+
+        window.toggleComments = function(postId) {
+            const sec = document.getElementById(`comments-sec-${postId}`);
+            const btnIcon = document.querySelector(`#toggle-btn-${postId} i`);
+            const btnText = document.querySelector(`#toggle-btn-${postId} span`);
+            
+            if (sec.classList.contains('open')) {
+                sec.classList.remove('open');
+                btnIcon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+                btnText.innerText = i18n[currentLang].show_comments;
+            } else {
+                sec.classList.add('open');
+                btnIcon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                btnText.innerText = i18n[currentLang].hide_comments;
+            }
+        };
+
+        window.deleteComment = function(docId) {
+            if(confirm(i18n[currentLang].confirm_delete)) {
+                db.collection("comments").doc(docId).delete().catch(err => alert("Error: " + err.message));
+            }
+        };
+
+        function loadComments(postId) {
+            if (!postId) return;
+            db.collection("comments").where("postId", "==", postId).orderBy("timestamp", "asc")
+                .onSnapshot((snapshot) => {
+                    const listDiv = document.getElementById(`comments-list-${postId}`);
+                    if(!listDiv) return;
+                    listDiv.innerHTML = '';
+                    
+                    if (snapshot.empty) { listDiv.innerHTML = `<div style="font-size: 0.85rem; color: var(--text-dim); font-style: italic;">...</div>`; return; }
+                    
+                    snapshot.forEach((doc) => {
+                        const data = doc.data();
+                        const time = data.timestamp ? new Date(data.timestamp.toDate()).toLocaleDateString() : '';
+                        const isMine = currentUser && data.uid === currentUser.uid;
+                        const delBtn = isMine ? `<button class="delete-comment-btn" onclick="deleteComment('${doc.id}')" title="Delete"><i class="fa-solid fa-xmark"></i></button>` : '';
+
+                        listDiv.innerHTML += `
+                            <div class="comment-item">
+                                <span class="c-author">${data.authorName}</span> 
+                                <span style="margin: 0 5px; opacity:0.5;">•</span>
+                                <span>${data.text}</span>
+                                <span class="c-time">${time}</span>
+                                ${delBtn}
+                            </div>
+                        `;
+                    });
+                });
+        }
+
+        window.sendComment = function(postId) {
+            if (!currentUser) return;
+            const now = Date.now();
+            const lastTime = localStorage.getItem('lastCommentTime_' + currentUser.uid);
+            if (lastTime && (now - parseInt(lastTime) < 60000)) { alert(i18n[currentLang].spam_alert); return; }
+
+            const input = document.getElementById(`input-${postId}`);
+            const text = input.value.trim();
+            if (!text) return;
+            
+            const authorName = currentUser.displayName || currentUser.email.split('@')[0];
+            
+            db.collection("comments").add({
+                postId: postId, uid: currentUser.uid, authorName: authorName, text: text, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                input.value = ''; localStorage.setItem('lastCommentTime_' + currentUser.uid, now.toString());
+            }).catch(error => { alert("Error: " + error.message); });
+        };
+
+        function formatPost(post) {
+            let mediaHTML = '';
+            if (post.mediaUrl) {
+                if (post.mediaType === 'image') mediaHTML = `<img src="${post.mediaUrl}">`;
+                else if (post.mediaType === 'video') mediaHTML = `<video controls autoplay loop muted playsinline src="${post.mediaUrl}"></video>`;
+                else if (post.mediaType === 'audio') mediaHTML = `<audio controls src="${post.mediaUrl}"></audio>`;
+            }
+            
+            const postText = getTranslatedText(post.text);
+            const t = i18n[currentLang];
+            
+            let commentsHTML = '';
+            if (post.id) {
+                commentsHTML += `
+                    <button class="comments-toggle" onclick="toggleComments('${post.id}')" id="toggle-btn-${post.id}">
+                        <i class="fa-solid fa-chevron-down"></i> <span>${t.show_comments}</span>
+                    </button>
+                    <div class="comments-section" id="comments-sec-${post.id}">
+                        <div class="comments-list" id="comments-list-${post.id}">
+                            <div style="font-size: 0.85rem; color: var(--text-dim);">Loading...</div>
+                        </div>
+                        <div class="comment-controls">
+                `;
+                
+                if (currentUser) {
+                    commentsHTML += `
+                        <input type="text" id="input-${post.id}" class="comment-input" placeholder="${t.leave_trace}">
+                        <button class="btn-action" onclick="sendComment('${post.id}')">${t.send}</button>
+                    `;
+                } else {
+                    commentsHTML += `
+                        <span class="auth-prompt">${t.auth_req}</span>
+                        <button class="btn-action" onclick="appLoginGoogle()"><i class="fa-brands fa-google"></i> Google</button>
+                        <button class="btn-action" onclick="appLoginEmail()"><i class="fa-solid fa-envelope"></i> Email</button>
+                    `;
+                }
+                commentsHTML += `</div></div>`;
+            }
+
+            return `
+                <div class="post-meta">
+                    <span class="post-author">${post.author}</span>
+                    <span>${post.date}</span>
+                </div>
+                <div class="post-content">${postText}${mediaHTML}</div>
+                ${commentsHTML}
+            `;
+        }
+
+        function renderFeed() {
+            const container = document.getElementById('feed-container');
+            container.innerHTML = '';
+            if (typeof ARTANAT_DB === 'undefined') { container.innerHTML = `<p class="empty-msg" style="color: #ff6666;">Error: data.js not found!</p>`; return; }
+
+            const feedPosts = ARTANAT_DB.posts.filter(p => {
+                if (!p.branchId || p.branchId === "") return true; 
+                const branch = ARTANAT_DB.branches.find(b => b.id === p.branchId);
+                return branch && branch.password === ""; 
+            });
+
+            if (feedPosts.length === 0) { container.innerHTML = `<p class="empty-msg">${i18n[currentLang].empty_feed}</p>`; return; }
+
+            feedPosts.forEach(post => {
+                const div = document.createElement('article');
+                div.className = 'post';
+                div.innerHTML = formatPost(post);
+                container.appendChild(div);
+                if (post.id) loadComments(post.id); 
+            });
+        }
+
+        function renderBranches() {
+            const container = document.getElementById('branches-list-container');
+            container.innerHTML = '';
+            if (typeof ARTANAT_DB === 'undefined') return;
+            // UPDATE: Filters based on 'themes' or 'friends'
+            const currentBranches = ARTANAT_DB.branches.filter(b => b.tab === currentTab);
+            
+            if (currentBranches.length === 0) { container.innerHTML = `<p class="empty-msg">${i18n[currentLang].empty_branch}</p>`; return; }
+
+            currentBranches.forEach(branch => {
+                const div = document.createElement('div');
+                div.className = 'branch-card';
+                const branchName = getTranslatedText(branch.name);
+                div.innerHTML = `
+                    <div>
+                        <div class="branch-name">
+                            ${branch.password !== "" ? '<i class="fa-solid fa-lock" style="font-size:0.8em; margin-right:8px; color:var(--text-dim);"></i>' : ''}
+                            ${branchName}
+                        </div>
+                        <div class="branch-meta">${i18n[currentLang].open}</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-right" style="color: var(--glass-border);"></i>
+                `;
+                div.addEventListener('click', () => openBranch(branch));
+                container.appendChild(div);
+            });
+        }
+
+        function openBranch(branch) {
+            if (branch.password !== "") {
+                const pass = prompt(i18n[currentLang].pass_prompt);
+                if (pass !== branch.password) return alert(i18n[currentLang].pass_wrong);
+            }
+            activeBranch = branch;
+            renderBranchContent();
+            switchView('content');
+        }
+
+        function renderBranchContent() {
+            if(!activeBranch) return;
+            document.getElementById('current-branch-title').innerText = getTranslatedText(activeBranch.name);
+            const container = document.getElementById('branch-posts-container');
+            container.innerHTML = '';
+
+            const branchPosts = ARTANAT_DB.posts.filter(p => p.branchId === activeBranch.id);
+            
+            if (branchPosts.length === 0) {
+                container.innerHTML = `<p class="empty-msg">${i18n[currentLang].empty_posts}</p>`;
+            } else {
+                branchPosts.forEach(post => {
+                    const div = document.createElement('article');
+                    div.className = 'post';
+                    div.innerHTML = formatPost(post);
+                    container.appendChild(div);
+                    if (post.id) loadComments(post.id); 
+                });
+            }
+        }
+
+        // Apply default language on load
+        currentLang = 'en';
+        document.getElementById('lang-select').value = 'en';
+        updateUITranslations();
+        renderFeed();
+
+        // ================= VIOLETS BACKGROUND ANIMATION (CANVAS 2D) ================= //
+        const bgCanvas = document.getElementById('bg-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        
+        let width, height;
+        let violets = [];
+
+        const violetColors = [
+            { r: 255, g: 255, b: 255 }, // White
+            { r: 178, g: 102, b: 255 }, // Purple
+            { r: 102, g: 178, b: 255 }, // Blue
+            { r: 230, g: 230, b: 250 }  // Lavender
+        ];
+
+        function resizeBg() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            bgCanvas.width = width;
+            bgCanvas.height = height;
+            initViolets();
+        }
+
+        function initViolets() {
+            violets = [];
+            const count = Math.floor((width * height) / 18000); // Density of flowers
+            for(let i = 0; i < count; i++) {
+                violets.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 8 + 3,
+                    color: violetColors[Math.floor(Math.random() * violetColors.length)],
+                    phase: Math.random() * Math.PI * 2,
+                    speed: Math.random() * 0.02 + 0.005,
+                    driftX: (Math.random() - 0.5) * 0.2,
+                    driftY: (Math.random() - 0.5) * 0.2,
+                    rotation: Math.random() * Math.PI * 2,
+                    rotSpeed: (Math.random() - 0.5) * 0.01
+                });
+            }
+        }
+
+        function drawViolet(ctx, v, alpha) {
+            ctx.save();
+            ctx.translate(v.x, v.y);
+            ctx.rotate(v.rotation);
+            ctx.globalAlpha = alpha;
+            
+            const fillStyle = `rgb(${v.color.r}, ${v.color.g}, ${v.color.b})`;
+            ctx.fillStyle = fillStyle;
+            ctx.shadowBlur = v.size * 2;
+            ctx.shadowColor = fillStyle;
+
+            // Draw 5 petals
+            for(let i = 0; i < 5; i++) {
+                ctx.beginPath();
+                ctx.ellipse(0, -v.size * 0.7, v.size * 0.4, v.size * 0.8, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.rotate((Math.PI * 2) / 5);
+            }
+            
+            // Glowing center
+            ctx.fillStyle = '#fff';
+            ctx.shadowBlur = 5;
+            ctx.beginPath();
+            ctx.arc(0, 0, v.size * 0.25, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.restore();
+        }
+
+        function animateBg() {
+            bgCtx.clearRect(0, 0, width, height);
+            
+            violets.forEach(v => {
+                v.phase += v.speed;
+                v.x += v.driftX;
+                v.y += v.driftY;
+                v.rotation += v.rotSpeed;
+
+                if(v.x < -20) v.x = width + 20;
+                if(v.x > width + 20) v.x = -20;
+                if(v.y < -20) v.y = height + 20;
+                if(v.y > height + 20) v.y = -20;
+
+                // Shimmering effect
+                const alpha = (Math.sin(v.phase) + 1) / 2 * 0.6 + 0.1; // Alpha between 0.1 and 0.7
+                drawViolet(bgCtx, v, alpha);
+            });
+
+            requestAnimationFrame(animateBg);
+        }
+
+        window.addEventListener('resize', resizeBg);
+        resizeBg();
+        animateBg();
+
+        // ================= ELEGANT WATERMARKS ANIMATION ================= //
+        const wmCanvas = document.getElementById('watermark-canvas');
+        const wmCtx = wmCanvas.getContext('2d');
+        let wmWidth, wmHeight;
+        let watermarks = [];
+        
+        const wmTexts = ['syolana', 'syolana.com', 'Yolana'];
+
+        function resizeWm() {
+            wmWidth = window.innerWidth;
+            wmHeight = window.innerHeight;
+            wmCanvas.width = wmWidth;
+            wmCanvas.height = wmHeight;
+            initWatermarks();
+        }
+
+        function initWatermarks() {
+            watermarks = [];
+            const count = Math.floor((wmWidth * wmHeight) / 50000); 
+            for(let i = 0; i < count; i++) {
+                watermarks.push({
+                    text: wmTexts[Math.floor(Math.random() * wmTexts.length)],
+                    x: Math.random() * wmWidth,
+                    y: Math.random() * wmHeight,
+                    fontSize: Math.random() * 20 + 14,
+                    phase: Math.random() * Math.PI * 2,
+                    speed: Math.random() * 0.01 + 0.005,
+                    driftY: - (Math.random() * 0.3 + 0.1),
+                    driftX: Math.sin(Math.random() * Math.PI) * 0.2
+                });
+            }
+        }
+
+        function animateWm() {
+            wmCtx.clearRect(0, 0, wmWidth, wmHeight);
+            
+            watermarks.forEach(w => {
+                w.phase += w.speed;
+                w.y += w.driftY;
+                w.x += Math.sin(w.phase) * 0.3; // Gentle sway
+
+                if(w.y < -50) {
+                    w.y = wmHeight + 50;
+                    w.x = Math.random() * wmWidth;
+                }
+
+                const alpha = (Math.sin(w.phase) + 1) / 2 * 0.15 + 0.05; 
+                
+                wmCtx.save();
+                wmCtx.font = `300 italic ${w.fontSize}px 'Playfair Display', serif`;
+                wmCtx.fillStyle = `rgba(178, 102, 255, ${alpha})`;
+                wmCtx.textAlign = 'center';
+                wmCtx.fillText(w.text, w.x, w.y);
+                wmCtx.restore();
+            });
+
+            requestAnimationFrame(animateWm);
+        }
+
+        window.addEventListener('resize', resizeWm);
+        resizeWm();
+        animateWm();
+
+    </script>
+</body>
+  </html>
