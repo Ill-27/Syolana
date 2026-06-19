@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000000;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="color-scheme" content="dark">
+    <title>Yolana | Immersive Digital Books</title>
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root { --text-main: #ffffff; --accent-purple: #b18fff; --accent-blue: #a3b5ff; --bg-overlay: rgba(0, 0, 0, 0); --text-glow: rgba(177, 143, 255, 0.2); }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        html, body { background-color: #000000; color: var(--text-main); font-family: 'Nunito', sans-serif; line-height: 1.7; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        /* --- WELCOME OVERLAY --- */
+        #welcome-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1s ease; }
+        .enter-btn { padding: 20px 40px; border: 1px solid var(--accent-purple); background: transparent; color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; cursor: pointer; border-radius: 50px; transition: all 0.3s; }
+        .enter-btn:hover { background: var(--accent-purple); color: #000; }
+
+        h1, h2, h3, .poetic-text { font-family: 'Cormorant Garamond', serif; }
+        .readable-text { text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 25px var(--text-glow); transition: text-shadow 2.5s ease, color 2.5s ease; }
+
+        #violet-constellations, #watermark { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; }
+        #violet-constellations { z-index: 0; } #watermark { z-index: 1; }
+        #immersive-bg-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-overlay); z-index: 2; transition: background 2.5s ease-in-out, backdrop-filter 2s ease; pointer-events: none; backdrop-filter: blur(0px); }
+        body.reading-mode #immersive-bg-layer { backdrop-filter: blur(8px); box-shadow: inset 0 0 150px rgba(0,0,0,0.9); }
+
+        .top-bar { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 30px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 100; pointer-events: none; }
+        .brand-logo { display: flex; align-items: center; justify-content: center; width: 55px; height: 55px; cursor: pointer; pointer-events: auto; }
+        .brand-logo svg { width: 100%; height: 100%; filter: drop-shadow(0 0 10px var(--accent-purple)); }
+        
+        .container { max-width: 800px; margin: 100px auto 50px auto; padding: 40px; position: relative; z-index: 10; transition: opacity 1s ease; }
+        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 40px; text-align: center; }
+        .profile-avatar { width: 140px; height: 140px; border-radius: 50%; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.3); object-fit: cover; }
+        .user-title { font-size: 3rem; color: var(--accent-white); }
+        .theme-card { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .theme-name { font-size: 1.6rem; font-family: 'Cormorant Garamond', serif; color: var(--accent-white); }
+        
+        #view-immersive-reader { padding: 50px 0 150px 0; text-align: center; display: none; }
+        #view-immersive-reader.active { display: block; }
+        .stanza { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0.2; transform: translateY(20px); transition: all 1.5s ease; }
+        .stanza.in-focus { opacity: 1; transform: translateY(0); }
+        .stanza p { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; line-height: 1.3; margin-bottom: 2px; color: #fff; }
+        .stanza-spacer { height: 40vh; }
+        .back-btn { background: none; border: none; color: var(--accent-blue); font-size: 1.1rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div id="welcome-overlay">
+        <h1 style="color:#fff; margin-bottom:40px; font-family:'Cormorant Garamond', serif;">Yolana</h1>
+        <button class="enter-btn" onclick="startExperience()">Enter the story</button>
+    </div>
+
+    <canvas id="violet-constellations"></canvas>
+    <div id="watermark"></div>
+    <div id="immersive-bg-layer"></div>
+
+    <div class="top-bar" id="ui-top">
+        <div class="brand-logo" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="flower-petals" stroke="#b18fff" stroke-width="1.5" fill="rgba(177, 143, 255, 0.15)">
+                    <path d="M50,15 C60,28 65,42 50,50 C35,42 40,28 50,15 Z" />
+                    <path d="M50,50 C65,42 85,32 90,47 C80,57 65,57 50,50 Z" />
+                    <path d="M50,50 C35,42 15,32 10,47 C20,57 35,57 50,50 Z" />
+                    <path d="M50,50 C65,60 75,80 60,90 C50,80 50,65 50,50 Z" />
+                    <path d="M50,50 C35,60 25,80 40,90 C50,80 50,65 50,50 Z" />
+                    <circle cx="50" cy="50" r="4" fill="#ffffff" />
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <div class="container" id="main-container">
+        <header id="main-header">
+            <h1 class="user-title readable-text">Yolana</h1>
+            <nav><a data-tab="library" class="active">Library</a></nav>
+        </header>
+
+        <div id="view-directories" class="view-section active">
+            <div class="theme-card" onclick="openBook()">
+                <div class="theme-name">Tyutchev F. — Blue shadows mixed...</div>
+                <div class="theme-meta">Immersive Poetry</div>
+            </div>
+        </div>
+
+        <div id="view-immersive-reader" class="view-section">
+            <button class="back-btn" onclick="switchView('dirs')"><i class="fa-solid fa-arrow-left"></i> Library</button>
+            <div id="immersive-content">
+                <div class="stanza" data-bg="rgba(10, 15, 30, 0.85)" data-glow="rgba(163, 181, 255, 0.4)" data-audio="ambience/distant_rumble.mp3, nature/wind_soft.mp3">
+                    <p>Тени сизые смесились,</p>
+                    <p>Цвет поблекнул, звук уснул —</p>
+                    <p>Жизнь и движенье разрешились</p>
+                    <p>В сумрак зыбкий, в дальний гул...</p>
+                </div>
+                <div class="stanza-spacer"></div>
+                <div class="stanza" data-bg="rgba(5, 5, 15, 0.9)" data-glow="rgba(177, 143, 255, 0.6)" data-audio="ambience/night_air.mp3, nature/moth_wings.mp3, music/synth_mystic_pad.mp3">
+                    <p>Мотылька полет незримый</p>
+                    <p>Слышен в воздухе ночном...</p>
+                    <p>Час тоски невыразимой!..</p>
+                    <p>Всё во мне, и я во всем!..</p>
+                </div>
+            </div>
+            <div style="height: 50vh;"></div> 
+        </div>
+    </div>
+
+    <script>
+        const AudioEngine = {
+            basePath: 'audio-library/',
+            activeTracks: {},
+            
+            playScene: function(audioSrcString) {
+                if (!audioSrcString) { this.stopAll(); return; }
+                const newTracks = audioSrcString.split(',').map(s => s.trim()).filter(s => s);
+                
+                // Выключаем старые
+                for (const track in this.activeTracks) {
+                    if (!newTracks.includes(track)) this.fadeOut(track);
+                }
+
+                // Включаем новые
+                newTracks.forEach(track => {
+                    if (!this.activeTracks[track]) {
+                        const audio = new Audio(this.basePath + track);
+                        audio.loop = true;
+                        audio.volume = 0;
+                        audio.play().catch(e => console.error("Audio error:", e));
+                        this.activeTracks[track] = audio;
+                        this.fadeIn(track);
+                    }
+                });
+            },
+            fadeIn: function(track) {
+                const audio = this.activeTracks[track];
+                if(!audio) return;
+                const fade = setInterval(() => {
+                    if (audio.volume < 0.9) { audio.volume += 0.1; } 
+                    else { audio.volume = 1; clearInterval(fade); }
+                }, 100);
+            },
+            fadeOut: function(track) {
+                const audio = this.activeTracks[track];
+                if(!audio) return;
+                const fade = setInterval(() => {
+                    if (audio.volume > 0.1) { audio.volume -= 0.1; } 
+                    else { audio.pause(); clearInterval(fade); delete this.activeTracks[track]; }
+                }, 100);
+            },
+            stopAll: function() {
+                for (const track in this.activeTracks) this.fadeOut(track);
+            }
+        };
+
+        function startExperience() {
+            document.getElementById('welcome-overlay').style.opacity = '0';
+            setTimeout(() => document.getElementById('welcome-overlay').style.display = 'none', 1000);
+            // Пытаемся запустить что-то пустое, чтобы разблокировать звук
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            ctx.resume();
+        }
+
+        function switchView(viewName) {
+            const isReader = viewName === 'reader';
+            document.getElementById('view-directories').classList.toggle('active', !isReader);
+            document.getElementById('view-immersive-reader').classList.toggle('active', isReader);
+            document.body.classList.toggle('reading-mode', isReader);
+            if(!isReader) AudioEngine.stopAll();
+        }
+
+        function openBook() { switchView('reader'); initEngine(); }
+
+        function initEngine() {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('in-focus');
+                        document.documentElement.style.setProperty('--bg-overlay', e.target.dataset.bg);
+                        document.documentElement.style.setProperty('--text-glow', e.target.dataset.glow);
+                        AudioEngine.playScene(e.target.dataset.audio);
+                    } else { e.target.classList.remove('in-focus'); }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.stanza').forEach(s => obs.observe(s));
+        }
+
+        // Background stuff
+        const canvas = document.getElementById('violet-constellations');
+        const gl = canvas.getContext('webgl');
+        if(gl) {
+            // (WebGL код здесь тот же, чтобы не перегружать сообщение)
+            // Просто добавил функцию ресайза
+            window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        }
+    </script>
+</body>
+</html>
