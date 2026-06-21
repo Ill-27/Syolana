@@ -12,5 +12,12 @@
         "author_ru": "Фёдор Тютчев",
         "title_en": "Blue shadows mixed...",
         "author_en": "Fyodor Tyutchev"
+    },
+    {
+        "id": "chekhov_toska",
+        "title_ru": "Тоска",
+        "author_ru": "Антон Чехов",
+        "title_en": "Misery",
+        "author_en": "Anton Chekhov"
     }
 ]
