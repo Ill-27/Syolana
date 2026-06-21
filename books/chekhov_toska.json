@@ -3,7 +3,7 @@
     "blocks": [
         {
             "type": "stanza",
-            "ru": ["Вечерние сумерки. Крупный мокрый снег лениво кружится около только что зажженных фонарей и тонким мягким пластом ложится на крыши, лошадиные спины, плечи, шапки.", "Извозчик Иона Потапов весь бел, как привидение. Он согнулся, насколько только возможно согнуться живому телу, сидит на козлах и не шевельнется."],
+            "ru": ["Вечерние сумерки. Крупный мокрый снег лениво кружится около только что зажжённых фонарей и тонким мягким пластом ложится на крыши, лошадиные спины, плечи, шапки.", "Извозчик Иона Потапов весь бел, как привидение. Он согнулся, насколько только возможно согнуться живому телу, сидит на козлах и не шевельнётся."],
             "en": ["Evening twilight. Large flakes of wet snow are spinning lazily around the street lamps, which have just been lit, and lying in a thin soft layer on roofs, horses' backs, shoulders, caps.", "The cab-driver Iona Potapov is quite white, and looks like a phantom. He is bent double as far as a human body can bend double; he is seated on his box and never makes a move."],
             "bg": "rgba(10, 15, 25, 0.9)", "glow": "rgba(200, 220, 255, 0.2)", "color": "#e0e8ff",
             "audio": "nature/winter_blizzard.ogg, ambience/night_air.ogg"
@@ -11,7 +11,7 @@
         { "type": "spacer" },
         {
             "type": "stanza",
-            "ru": ["Его лошаденка тоже бела и неподвижна. Своею неподвижностью, угловатостью форм и палкообразной прямизной ног она даже вблизи похожа на копеечную пряничную лошадку.", "Она, по всей вероятности, погружена в мысль. Кого оторвали от плуга, от привычных серых картин и бросили сюда, в этот омут, полный чудовищных огней, неугомонного треска и бегущих людей, тому нельзя не думать."],
+            "ru": ["Его лошадёнка тоже бела и неподвижна. Своею неподвижностью, угловатостью форм и палкообразной прямизной ног она даже вблизи похожа на копеечную пряничную лошадку.", "Она, по всей вероятности, погружена в мысль. Кого оторвали от плуга, от привычных серых картин и бросили сюда, в этот омут, полный чудовищных огней, неугомонного треска и бегущих людей, тому нельзя не думать."],
             "en": ["His little horse is also quite white, and remains motionless. Its immobility, its angularity, and its straight wooden-looking legs, even close by give it the appearance of a penny gingerbread horse.", "It is, no doubt, plunged in deep thought. If you were snatched from the plough, from your usual gray surroundings, and were thrown into this slough full of monstrous lights, unceasing noise and hurrying people, you too would find it difficult not to think."],
             "bg": "rgba(5, 10, 20, 0.95)", "glow": "rgba(150, 180, 255, 0.1)", "color": "#d0d8eb",
             "audio": "nature/winter_blizzard.ogg, music/cello_drone_low.ogg"
@@ -27,7 +27,7 @@
         { "type": "spacer" },
         {
             "type": "stanza",
-            "ru": ["В знак согласия Иона дергает вожжи, отчего со спины лошади и с его плеч сыплются пласты снега... Военный садится в сани. Извозчик чмокает губами, вытягивает по-лебединому шею, приподнимается и больше по привычке, чем по нужде, взмахивает кнутом.", "Лошаденка тоже вытягивает шею, кривит палкообразные ноги и нерешительно двигается с места..."],
+            "ru": ["В знак согласия Иона дёргает вожжи, отчего со спины лошади и с его плеч сыплются пласты снега... Военный садится в сани. Извозчик чмокает губами, вытягивает по-лебединому шею, приподнимается и больше по привычке, чем по нужде, взмахивает кнутом.", "Лошадёнка тоже вытягивает шею, кривит палкообразные ноги и нерешительно двигается с места..."],
             "en": ["In token of assent Iona gives a tug at the reins, in consequence of which layers of snow slip off the horse's back and his own shoulders... The officer seats himself in the sleigh. The cab-driver smacks his lips, stretches out his neck like a swan, sits up, and more from habit than necessity brandishes his whip.", "The little horse also stretches its neck, bends its wooden-looking legs, and makes a move hesitatingly..."],
             "bg": "rgba(15, 20, 25, 0.9)", "glow": "rgba(255, 150, 100, 0.3)", "color": "#ffeedd",
             "audio": "city/city_muffled_cold.ogg, city/sleigh_bells.ogg, city/snow_crunch.ogg, music/tension_pad.ogg"
@@ -35,7 +35,7 @@
         { "type": "break" },
         {
             "type": "stanza",
-            "ru": ["Опять он одинок, и опять наступает для него тишина... Утихшая ненадолго тоска появляется вновь и распирает грудь еще с большей силой.", "Глаза Ионы тревожно и мученически бегают по толпам, снующим по обе стороны улицы: не найдется ли из этих тысяч тысяч хоть один, который выслушал бы его?", "Но толпы бегут, не замечая ни его, ни тоски... Тоска громадная, не знающая границ. Лопни грудь Ионы и вылейся из нее тоска, так она бы, кажется, весь свет залила."],
+            "ru": ["Опять он одинок, и опять наступает для него тишина... Утихшая ненадолго тоска появляется вновь и распирает грудь ещё с большей силой.", "Глаза Ионы тревожно и мученически бегают по толпам, снующим по обе стороны улицы: не найдётся ли из этих тысяч тысяч хоть один, который выслушал бы его?", "Но толпы бегут, не замечая ни его, ни тоски... Тоска громадная, не знающая границ. Лопни грудь Ионы и вылейся из неё тоска, так она бы, кажется, весь свет залила."],
             "en": ["Again he is alone, and again silence falls upon him... His misery, which has rested for a short while, comes upon him again, tearing his heart more cruelly than ever.", "Iona's eyes wander anxiously and martyrlike among the crowds moving to and fro on both sides of the street: can he not find among those thousands someone who will listen to him?", "But the crowds flit by, not noticing him or his misery... His misery is immense, beyond all bounds. If Iona's heart were to burst, and his misery to flow out, it would flood the whole world, it seems."],
             "bg": "rgba(5, 5, 10, 0.95)", "glow": "rgba(100, 100, 255, 0.4)", "color": "#cceeff",
             "audio": "nature/winter_blizzard.ogg, music/anxiety_drone.ogg"
@@ -51,7 +51,7 @@
         { "type": "spacer" },
         {
             "type": "stanza",
-            "ru": ["— Жуешь? — спрашивает Иона свою лошадь, видя ее блестящие глаза. — Ну, жуй, жуй... Коли на овес не выездили, сено есть будем...", "Лошадь жует, слушает и дышит на руки своего хозяина... Иона увлекается и рассказывает ей всё.", "— Такия-то дела, брат кобылочка... Нету Кузьмы Ионыча... Приказал долго жить... Взял и помер зря... А, скажем, у тебя жеребеночек, и ты этому жеребеночку родная мать... И вдруг, скажем, этот самый жеребеночек помер... Ведь жалко?"],
+            "ru": ["— Жуёшь? — спрашивает Иона свою лошадь, видя её блестящие глаза. — Ну, жуй, жуй... Коли на овёс не выездили, сено есть будем...", "Лошадь жуёт, слушает и дышит на руки своего хозяина... Иона увлекается и рассказывает ей всё.", "— Такия-то дела, брат кобылочка... Нету Кузьмы Ионыча... Приказал долго жить... Взял и помер зря... А, скажем, у тебя жеребёночек, и ты этому жеребёночку родная мать... И вдруг, скажем, этот самый жеребёночек помер... Ведь жалко?"],
             "en": ["'Are you munching?' Iona asks his horse, seeing its shining eyes. 'Well, munch, munch... Since we haven't earned enough for oats, we will eat hay...'", "The little horse munches, listens, and breathes over its master's hand... Iona's feelings are too much for him, and he tells the little animal the whole story.", "'That's how it is, old girl... Kuzma Ionitch is no more... He said goodbye to me... He went and died for no reason... Now, suppose you had a little colt, and you were own mother to that colt... And suddenly, let's say, that same little colt departed this life... You'd be sorry, wouldn't you?'"],
             "bg": "rgba(10, 8, 5, 0.98)", "glow": "rgba(255, 180, 80, 0.15)", "color": "#ffffff",
             "audio": "city/stable_quiet.ogg, nature/horse_breath.ogg, music/grief_cello.ogg"
@@ -59,7 +59,7 @@
         { "type": "spacer" },
         {
             "type": "stanza",
-            "ru": ["Лошаденка жует, слушает и дышит на руки своего хозяина...", "Иона увлекается и рассказывает ей всё."],
+            "ru": ["Лошадёнка жуёт, слушает и дышит на руки своего хозяина...", "Иона увлекается и рассказывает ей всё."],
             "en": ["The little horse munches, listens, and breathes over its master's hand...", "Iona's feelings are too much for him, and he tells her the whole story."],
             "bg": "rgba(0, 0, 0, 1)", "glow": "rgba(0, 0, 0, 0)", "color": "#888888",
             "audio": "nature/horse_breath.ogg, music/grief_cello.ogg"
