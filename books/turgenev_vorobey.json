@@ -4,7 +4,7 @@
         {
             "type": "stanza",
             "ru": ["Я возвращался с охоты и шёл по аллее сада. Собака бежала впереди меня.", "Вдруг она уменьшила свои шаги и начала красться, как бы зачуяв перед собою дичь."],
-            "en": ["I was returning from hunting and walking along the garden avenue. My dog was running ahead of me.", "Suddenly she reduced her pace and began to creep, as if sensing game ahead."],
+            "en": ["I was returning from hunting and walking along the garden avenue. My dog was running ahead of me.", "Suddenly it reduced its pace and began to creep, as if sensing game ahead."],
             "bg": "rgba(10, 15, 20, 0.85)", "glow": "rgba(163, 181, 255, 0.2)", "color": "#e0e0e0",
             "audio": "ambience/park_path.ogg, nature/wind_soft.ogg"
         },
