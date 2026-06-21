@@ -1,0 +1,16 @@
+[
+    {
+        "id": "turgenev_vorobey",
+        "title_ru": "Воробей",
+        "author_ru": "Иван Тургенев",
+        "title_en": "The Sparrow",
+        "author_en": "Ivan Turgenev"
+    },
+    {
+        "id": "tyutchev_teni",
+        "title_ru": "Тени сизые смесились...",
+        "author_ru": "Фёдор Тютчев",
+        "title_en": "Blue shadows mixed...",
+        "author_en": "Fyodor Tyutchev"
+    }
+]
