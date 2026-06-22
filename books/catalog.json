@@ -14,17 +14,18 @@
         "author_en": "Fyodor Tyutchev"
     },
     {
-        "id": "chekhov_toska",
-        "title_ru": "Тоска",
-        "author_ru": "Антон Чехов",
-        "title_en": "Misery",
-        "author_en": "Anton Chekhov"
-    },
-    {
         "id": "pushkin_dama/1",
         "title_ru": "Пиковая дама",
         "author_ru": "Александр Пушкин",
         "title_en": "The Queen of Spades",
-        "author_en": "Alexander Pushkin"
+        "author_en": "Alexander Pushkin",
+        "chapters": [
+            { "id": "pushkin_dama/1", "title_ru": "Глава 1", "title_en": "Chapter 1" },
+            { "id": "pushkin_dama/2", "title_ru": "Глава 2", "title_en": "Chapter 2" },
+            { "id": "pushkin_dama/3", "title_ru": "Глава 3", "title_en": "Chapter 3" },
+            { "id": "pushkin_dama/4", "title_ru": "Глава 4", "title_en": "Chapter 4" },
+            { "id": "pushkin_dama/5", "title_ru": "Глава 5", "title_en": "Chapter 5" },
+            { "id": "pushkin_dama/6", "title_ru": "Глава 6 (Финал)", "title_en": "Chapter 6 (Finale)" }
+        ]
     }
 ]
