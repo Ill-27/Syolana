@@ -1,1 +1,136 @@
-
+{
+    "type": "prose",
+    "prev_chapter": "pushkin_dama/3"
+    "next_chapter": "pushkin_dama/5",
+    "blocks": [
+        {
+            "type": "stanza",
+            "ru": [
+                "Германн не находил покоя. Он пошёл по тёмному коридору, нащупал узкую витую лестницу и стал подниматься в комнату Лизаветы Ивановны.",
+                "Она сидела в своей комнате, ещё в бальном платье, глубоко задумавшись. Шаги Германна вывели её из оцепенения."
+            ],
+            "en": [
+                "Hermann found no peace. He went down the dark corridor, groped for the narrow winding staircase, and began to ascend to Lizaveta Ivanovna's room.",
+                "She was sitting in her room, still in her ball gown, deep in thought. Hermann's footsteps roused her from her stupor."
+            ],
+            "bg": "rgba(10, 10, 15, 0.95)",
+            "glow": "rgba(150, 150, 255, 0.2)",
+            "color": "#e6e6fa",
+            "audio": "sfx/slow_footsteps_stairs.ogg, ambience/tense_room_quiet.ogg"
+        },
+        {
+            "type": "spacer"
+        },
+        {
+            "type": "stanza",
+            "ru": [
+                "Германн вошёл к ней. Она вздрогнула.",
+                "— Где вы были? — спросила она испуганно.",
+                "— В спальне у старой графини, — отвечал Германн. — Я сейчас от неё. Графиня умерла."
+            ],
+            "en": [
+                "Hermann entered. She started.",
+                "“Where have you been?” she asked in fright.",
+                "“In the old Countess's bedroom,” replied Hermann. “I have just left her. The Countess is dead.”"
+            ],
+            "bg": "rgba(15, 10, 15, 0.95)",
+            "glow": "rgba(200, 100, 100, 0.2)",
+            "color": "#ffffff",
+            "audio": "ambience/tense_room_quiet.ogg, winter/wind_howl_window.ogg"
+        },
+        {
+            "type": "break"
+        },
+        {
+            "type": "stanza",
+            "ru": [
+                "— Боже мой!.. Что вы говорите?",
+                "— И кажется, — продолжал Германн, — я причиною её смерти.",
+                "Лизавета Ивановна взглянула на него, и слова Томского: «На его совести по крайней мере три злодейства», — отдались в её душе."
+            ],
+            "en": [
+                "“My God!.. What are you saying?”",
+                "“And it seems,” continued Hermann, “that I am the cause of her death.”",
+                "Lizaveta Ivanovna looked at him, and Tomsky's words, 'He has at least three crimes on his conscience,' echoed in her soul."
+            ],
+            "bg": "rgba(20, 5, 5, 0.95)",
+            "glow": "rgba(255, 50, 50, 0.3)",
+            "color": "#ffdddd",
+            "audio": "music/tragic_revelation.ogg"
+        },
+        {
+            "type": "spacer"
+        },
+        {
+            "type": "stanza",
+            "ru": [
+                "Германн сел на окошко подле неё и всё рассказал.",
+                "Лизавета Ивановна выслушала его с ужасом. Итак, эти страстные письма, эти пламенные требования, это дерзкое упорство — не были любовью! Деньги — вот чего алкала его душа!"
+            ],
+            "en": [
+                "Hermann sat on the window sill beside her and told her everything.",
+                "Lizaveta Ivanovna listened to him in horror. So, those passionate letters, those ardent demands, that bold persistence—it was not love! Money—that was what his soul craved!"
+            ],
+            "bg": "rgba(10, 10, 20, 0.95)",
+            "glow": "rgba(100, 150, 255, 0.2)",
+            "color": "#e0e8ff",
+            "audio": "music/tragic_revelation.ogg, winter/wind_howl_window.ogg"
+        },
+        {
+            "type": "break"
+        },
+        {
+            "type": "stanza",
+            "ru": [
+                "Она не могла утолить его желаний и осчастливить его! Бедная девушка была только слепым помощником разбойника, убийцы её старой благодетельницы!..",
+                "Она горько заплакала. Германн смотрел на неё молча. Ему также было тяжело; но ни слёзы бедной девушки, ни удивительная прелесть её горести не тревожили суровой души его."
+            ],
+            "en": [
+                "She could not satisfy his desires and make him happy! The poor girl had been nothing but the blind accomplice of a robber, the murderer of her old benefactress!..",
+                "She wept bitterly. Hermann watched her in silence. He too was heavy-hearted; but neither the poor girl's tears, nor the surprising charm of her grief, troubled his stern soul."
+            ],
+            "bg": "rgba(5, 5, 10, 0.98)",
+            "glow": "rgba(100, 100, 200, 0.1)",
+            "color": "#cccccc",
+            "audio": "music/tragic_revelation.ogg"
+        },
+        {
+            "type": "spacer"
+        },
+        {
+            "type": "stanza",
+            "ru": [
+                "— Вы чудовище! — сказала наконец Лизавета Ивановна.",
+                "— Я не хотел её смерти, — отвечал Германн, — пистолет мой не заряжен.",
+                "Они замолчали."
+            ],
+            "en": [
+                "“You are a monster!” said Lizaveta Ivanovna at last.",
+                "“I did not wish her death,” answered Hermann, “my pistol was not loaded.”",
+                "They fell silent."
+            ],
+            "bg": "rgba(15, 0, 0, 0.95)",
+            "glow": "rgba(200, 0, 0, 0.2)",
+            "color": "#ffcccc",
+            "audio": "ambience/tense_room_quiet.ogg"
+        },
+        {
+            "type": "break"
+        },
+        {
+            "type": "stanza",
+            "ru": [
+                "Утро наступало. Лизавета Ивановна погасила догоравшую свечу: бледный свет озарил её комнату.",
+                "Германн вышел на улицу. Снег лежал толстой пеленой; утренние сумерки только что начинали рассеиваться."
+            ],
+            "en": [
+                "Morning was breaking. Lizaveta Ivanovna extinguished the dying candle: a pale light illuminated her room.",
+                "Hermann went out into the street. The snow lay in a thick shroud; the morning twilight was just beginning to disperse."
+            ],
+            "bg": "rgba(20, 25, 30, 0.98)",
+            "glow": "rgba(150, 200, 255, 0.2)",
+            "color": "#ffffff",
+            "audio": "winter/wind_howl_window.ogg, sfx/slow_footsteps_stairs.ogg"
+        }
+    ]
+}
