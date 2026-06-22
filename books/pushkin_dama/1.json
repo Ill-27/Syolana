@@ -113,5 +113,9 @@
             "audio": "sfx/clock_chime.ogg, winter/winter_wind_outside.ogg"
         }
     ]
-    "next_chapter": "pushkin_dama/2"
+    {
+    "type": "prose",
+    "next_chapter": "pushkin_dama/2",
+    "blocks": [
+       ...
         }
