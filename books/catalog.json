@@ -14,6 +14,13 @@
         "author_en": "Fyodor Tyutchev"
     },
     {
+        "id": "chekhov_toska",
+        "title_ru": "Тоска",
+        "author_ru": "Антон Чехов",
+        "title_en": "Misery",
+        "author_en": "Anton Chekhov"
+    },
+    {
         "id": "pushkin_dama/1",
         "title_ru": "Пиковая дама",
         "author_ru": "Александр Пушкин",
