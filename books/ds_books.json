@@ -1,1 +1,12 @@
-1
+[
+  {
+    "id": "book_from_partner",
+    "title_en": "Breaking sunset",
+    "author_en": "Dante Sogliano",
+    "external_url": "http://artanat.com/books",
+    "chapters": [
+            { "id": "book_from_partner/1", "title_en": "Chapter 1" },
+            { "id": "book_from_partner/2", "title_en": "Chapter 2" }
+    ]
+}
+]
