@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #000000;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="color-scheme" content="dark">
+    <title>Syolana | The Immersive Book Platform</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        :root {
+            --text-main: #ffffff; --text-dim: #c5c5d8;
+            --accent-purple: #b18fff; --accent-blue: #a3b5ff; --accent-white: #ffffff;
+            --bg-overlay: rgba(0, 0, 0, 0); --text-glow: rgba(177, 143, 255, 0.2);
+            --prose-color: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        html, body { background-color: #000000; color: var(--text-main); font-family: 'Nunito', sans-serif; line-height: 1.7; overflow-x: hidden; scroll-behavior: smooth; }
+        h1, h2, h3, .poetic-text { font-family: 'Cormorant Garamond', serif; }
+        .unselectable { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+        .readable-text { text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 25px var(--text-glow); transition: text-shadow 2.5s ease, color 2.5s ease; }
+
+        #violet-constellations { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; }
+        #immersive-bg-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-overlay); z-index: 2; transition: background 2.5s ease-in-out, backdrop-filter 2s ease; pointer-events: none; backdrop-filter: blur(0px); }
+        body.reading-mode #immersive-bg-layer { backdrop-filter: blur(18px); background: rgba(0,0,0,0.85); box-shadow: inset 0 0 200px rgba(0,0,0,1); }
+
+        .top-bar { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 30px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 100; transition: opacity 0.5s ease; pointer-events: none; }
+        .brand-logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; pointer-events: auto; transition: transform 0.3s ease; text-decoration: none; }
+        .brand-logo-container:hover { transform: scale(1.05); }
+        .brand-logo { width: 55px; height: 55px; }
+        .brand-logo svg { width: 100%; height: 100%; filter: drop-shadow(0 0 10px var(--accent-purple)); }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-text-title { color: var(--accent-white); font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; line-height: 1; text-shadow: 0 0 10px var(--accent-purple); }
+        .brand-text-sub { color: var(--accent-purple); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+
+        .right-controls { display: flex; flex-direction: column; gap: 15px; align-items: center; pointer-events: auto; }
+        .action-circle-btn { background: transparent; border: none; color: var(--accent-white); font-size: 1.4rem; cursor: pointer; transition: all 0.3s ease; outline: none; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; text-shadow: 0 0 15px var(--accent-purple), 0 2px 5px rgba(0,0,0,0.8); font-family: 'Nunito', sans-serif; font-weight: 700; }
+        .action-circle-btn:hover { transform: scale(1.15); text-shadow: 0 0 25px #fff; color: #fff; }
+        .lang-btn { font-size: 1rem; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; background: rgba(0,0,0,0.3); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        
+        /* SYOLANA RADIO UI */
+        .radio-player { position: fixed; bottom: 30px; left: 30px; background: rgba(15, 10, 25, 0.85); border: 1px solid rgba(177, 143, 255, 0.3); border-radius: 40px; padding: 10px 20px; display: flex; align-items: center; gap: 15px; z-index: 100; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.8); transition: all 0.5s ease; pointer-events: auto; }
+        .radio-player.hidden { opacity: 0; pointer-events: none; transform: translateY(20px); }
+        .radio-btn { background: none; border: none; color: var(--accent-white); font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
+        .radio-btn:hover { color: var(--accent-purple); transform: scale(1.1); }
+        .radio-info { display: flex; flex-direction: column; max-width: 200px; }
+        .radio-title { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--accent-white); }
+        .radio-author { font-size: 0.75rem; color: var(--accent-blue); }
+        .radio-book-link { color: var(--accent-purple); font-size: 0.75rem; text-decoration: none; margin-top: 2px; display: flex; align-items: center; gap: 5px; }
+        .radio-book-link:hover { text-decoration: underline; }
+        .music-bars { display: flex; gap: 2px; height: 15px; align-items: flex-end; }
+        .music-bars span { width: 3px; background: var(--accent-purple); animation: bounce 1s infinite alternate; }
+        .music-bars span:nth-child(2) { animation-delay: 0.2s; } .music-bars span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce { 0% { height: 3px; } 100% { height: 15px; } }
+        .radio-player.paused .music-bars span { animation: none; height: 3px; }
+
+        .bottom-controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; transition: opacity 0.5s ease; pointer-events: auto; }
+        .container { max-width: 900px; margin: 100px auto 50px auto; padding: 40px; position: relative; z-index: 10; transition: opacity 1s ease; }
+        
+        body.zen-active .top-bar, body.zen-active .container, body.zen-active .site-footer, body.zen-active .radio-player { opacity: 0; pointer-events: none; }
+        body.zen-active.reading-mode .header-action { opacity: 0; pointer-events: none; }
+        body.zen-active.reading-mode .container { opacity: 1; pointer-events: auto; }
+
+        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; text-align: center; }
+        .profile-avatar { width: 140px; height: 140px; border-radius: 50%; margin-bottom: 25px; border: 2px solid rgba(255, 255, 255, 0.3); object-fit: cover; box-shadow: 0 0 40px rgba(255, 255, 255, 0.2); }
+        .user-title { font-size: 3rem; font-weight: 400; letter-spacing: 4px; color: var(--accent-white); margin-bottom: 5px; text-transform: uppercase; font-family: 'Cormorant Garamond', serif; }
+        
+        /* НАВИГАЦИЯ */
+        nav { display: flex; gap: 40px; justify-content: center; padding-bottom: 20px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; }
+        nav a { color: var(--text-dim); text-decoration: none; font-size: 1.1rem; transition: all 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; position: relative; padding-bottom: 10px; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -1px; left: 50%; background-color: var(--accent-purple); transition: all 0.3s; transform: translateX(-50%); box-shadow: 0 0 10px var(--accent-purple); }
+        nav a:hover, nav a.active { color: var(--accent-white); text-shadow: 0 0 15px rgba(255,255,255,0.5); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+
+        .tab-content { display: none; animation: fadeUp 0.5s ease; }
+        .tab-content.active { display: block; }
+
+        .search-container { width: 100%; max-width: 500px; margin: 0 auto 40px auto; position: relative; }
+        .search-input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 15px 25px 15px 50px; color: var(--text-main); font-family: 'Nunito', sans-serif; font-size: 1rem; outline: none; transition: all 0.4s ease; backdrop-filter: blur(5px); }
+        .search-input:focus { background: rgba(255,255,255,0.1); border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(177, 143, 255, 0.2); }
+        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-dim); pointer-events: none; }
+
+        .intro { font-size: 1.2rem; color: var(--accent-white); margin: 20px 0 50px 0; text-align: center; font-style: italic; opacity: 0.9; }
+        .view-section { display: none; animation: fadeUp 0.8s ease; }
+        .view-section.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* КАРТОЧКИ КНИГ И АВТОРОВ */
+        .theme-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 15px; padding: 25px; margin-bottom: 15px; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: space-between; align-items: center; text-align: left; width: 100%; backdrop-filter: blur(5px); }
+        .theme-card:hover { transform: translateX(10px); background: rgba(177, 143, 255, 0.1); border-color: rgba(177, 143, 255, 0.4); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .theme-card.pinned { border-left: 4px solid var(--accent-purple); }
+        .theme-name { font-size: 1.6rem; font-family: 'Cormorant Garamond', serif; color: var(--accent-white); text-shadow: 0 2px 10px rgba(0,0,0,0.8); display: flex; align-items: center; gap: 10px; }
+        .theme-meta { font-size: 0.9rem; color: var(--accent-blue); margin-top: 5px; display: flex; gap: 15px; align-items: center; }
+        .theme-stats { font-size: 0.85rem; color: var(--text-dim); display: flex; gap: 5px; align-items: center; }
+        .pin-icon { color: var(--accent-purple); font-size: 0.9rem; }
+        .genre-tag { background: rgba(255,255,255,0.1); padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; color: #fff; }
+
+        .genre-group-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--accent-white); margin: 40px 0 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+
+        /* ПРОМО БЛОК SYOLANA */
+        .syolana-promo-card { margin-top: 80px; background: rgba(20, 10, 40, 0.5); border: 1px solid rgba(177, 143, 255, 0.4); border-radius: 20px; padding: 40px; text-align: center; backdrop-filter: blur(10px); box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 30px rgba(177, 143, 255, 0.1); }
+        .promo-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--accent-white); margin-bottom: 15px; text-shadow: 0 0 20px var(--accent-purple); }
+        .promo-text { font-size: 1.05rem; color: var(--text-dim); margin-bottom: 15px; line-height: 1.6; }
+        .promo-btn { margin-top: 20px; background: linear-gradient(45deg, #7b2cbf, #b18fff); color: #fff; border: none; padding: 12px 35px; border-radius: 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 20px rgba(177, 143, 255, 0.4); font-family: 'Nunito', sans-serif; }
+        .promo-btn:hover { transform: scale(1.05); box-shadow: 0 5px 30px rgba(177, 143, 255, 0.7); }
+
+        /* ПЕЙВОЛ (PAYWALL) */
+        .paywall-container { text-align: center; padding: 80px 20px; background: rgba(10, 5, 15, 0.8); border: 1px solid var(--accent-purple); border-radius: 20px; margin-top: 50px; box-shadow: 0 10px 50px rgba(0,0,0,0.9); backdrop-filter: blur(15px); }
+        .paywall-icon { font-size: 4rem; color: var(--accent-purple); margin-bottom: 20px; text-shadow: 0 0 20px rgba(177, 143, 255, 0.5); }
+        .paywall-input { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); padding: 15px 25px; border-radius: 30px; color: #fff; font-size: 1.1rem; outline: none; margin: 20px 0; text-align: center; width: 100%; max-width: 300px; }
+        .paywall-input:focus { border-color: var(--accent-purple); box-shadow: 0 0 15px rgba(177, 143, 255, 0.3); }
+
+        #view-immersive-reader { padding: 20px 0 150px 0; }
+        .book-header { margin-bottom: 80px; text-align: center; }
+        .book-title { font-size: 3.5rem; color: var(--accent-white); margin-bottom: 10px; text-shadow: 0 0 30px rgba(255,255,255,0.3); }
+        .book-author { font-size: 1.2rem; color: var(--accent-blue); letter-spacing: 3px; text-transform: uppercase; }
+        
+        .stanza { min-height: 40vh; display: flex; flex-direction: column; justify-content: center; opacity: 0.2; transform: translateY(15px); transition: all 2.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .stanza.in-focus { opacity: 1; transform: translateY(0); }
+        .content-prose p { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; line-height: 1.6; margin-bottom: 0; text-indent: 2em; color: var(--prose-color); text-align: justify; }
+        .content-poetry p { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; line-height: 1.3; margin-bottom: 2px; color: var(--prose-color); text-align: center; }
+        
+        .stanza-spacer { height: 20vh; }
+        .chapter-break { text-align: center; margin: 60px 0; opacity: 0.5; }
+        .chapter-break i { color: var(--accent-purple); font-size: 0.8rem; letter-spacing: 20px; }
+
+        .header-action { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; transition: opacity 0.5s ease; }
+        .back-btn { background: none; border: none; color: var(--accent-blue); font-family: inherit; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; transition: all 0.3s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); outline: none; }
+        .back-btn:hover { color: var(--accent-white); transform: translateY(-2px); }
+
+        .audio-wrapper { position: fixed; bottom: 40px; right: 30px; z-index: 200; display: block; }
+        #global-audio-toggle { width: 55px; height: 55px; background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255,255,255,0.2); color: var(--accent-white); border-radius: 50%; font-size: 1.4rem; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.8); backdrop-filter: blur(5px); transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; outline: none; }
+        #global-audio-toggle:hover, #global-audio-toggle.active { border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(177, 143, 255, 0.6); color: var(--accent-purple); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); backdrop-filter: blur(15px); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { position: relative; background: rgba(15, 10, 20, 0.85); border: 1px solid rgba(177, 143, 255, 0.3); border-radius: 20px; padding: 40px 30px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; text-align: center; box-shadow: 0 10px 50px rgba(0,0,0,0.9); }
+        .modal-close { position: absolute; top: 20px; right: 25px; background: none; border: none; color: var(--text-dim); font-size: 1.5rem; cursor: pointer; transition: color 0.3s; }
+        .modal-close:hover { color: var(--accent-white); transform: scale(1.1); }
+        .toc-title { font-size: 2rem; color: var(--accent-white); margin-bottom: 25px; font-family: 'Cormorant Garamond', serif; letter-spacing: 2px; }
+        .toc-item { display: block; width: 100%; padding: 15px; margin-bottom: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: var(--text-main); font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; cursor: pointer; transition: all 0.3s; text-align: left; }
+        .toc-item:hover { background: rgba(177, 143, 255, 0.2); border-color: var(--accent-purple); padding-left: 25px; }
+
+        .site-footer { text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 50px; font-size: 0.85rem; color: var(--text-dim); }
+        .site-footer a { color: var(--accent-blue); text-decoration: none; }
+        #loading-indicator { display: none; text-align: center; color: var(--accent-purple); padding: 50px; font-size: 1.2rem; }
+
+        @media (max-width: 600px) {
+            .book-title { font-size: 2.5rem; } .content-prose p { font-size: 1.3rem; } .content-poetry p { font-size: 1.7rem; }
+            .container { padding: 20px; margin-top: 80px; } .audio-wrapper { bottom: 30px; right: 20px; }
+            #global-audio-toggle { width: 50px; height: 50px; font-size: 1.2rem; } 
+            .radio-player { bottom: 90px; left: 20px; right: 20px; justify-content: space-between; }
+            nav { gap: 15px; } nav a { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body class="unselectable">
+
+    <canvas id="violet-constellations"></canvas>
+    <div id="immersive-bg-layer"></div>
+
+    <div class="top-bar" id="ui-top">
+        <a href="#" class="brand-logo-container" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
+            <div class="brand-logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs><filter id="logoGlow"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                    <g stroke="#b18fff" stroke-width="1.5" fill="rgba(177, 143, 255, 0.15)" filter="url(#logoGlow)">
+                        <path d="M50,15 C60,28 65,42 50,50 C35,42 40,28 50,15 Z" />
+                        <path d="M50,50 C65,42 85,32 90,47 C80,57 65,57 50,50 Z" />
+                        <path d="M50,50 C35,42 15,32 10,47 C20,57 35,57 50,50 Z" />
+                        <path d="M50,50 C65,60 75,80 60,90 C50,80 50,65 50,50 Z" />
+                        <path d="M50,50 C35,60 25,80 40,90 C50,80 50,65 50,50 Z" />
+                        <circle cx="50" cy="50" r="4" fill="#ffffff" stroke="none" opacity="0.8"/>
+                    </g>
+                    <text x="50" y="58" font-family="'Cormorant Garamond', serif" font-size="28" fill="#ffffff" text-anchor="middle" font-weight="600" letter-spacing="1">SY</text>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-text-title">Syolana</span>
+                <span class="brand-text-sub" id="ui_logo_sub">Ecosystem</span>
+            </div>
+        </a>
+        <div class="right-controls"><button id="lang-btn" class="action-circle-btn lang-btn">EN</button></div>
+    </div>
+
+    <div id="radio-player" class="radio-player hidden paused">
+        <button class="radio-btn" id="radio-play-btn"><i class="fa-solid fa-play"></i></button>
+        <div class="music-bars"><span></span><span></span><span></span></div>
+        <div class="radio-info">
+            <span class="radio-title" id="radio-title">Loading...</span>
+            <span class="radio-author" id="radio-author">Syolana Radio</span>
+            <a href="#" class="radio-book-link" id="radio-link"><i class="fa-solid fa-book-open"></i> <span id="ui_radio_read">Read</span></a>
+        </div>
+        <button class="radio-btn" id="radio-next-btn"><i class="fa-solid fa-forward-step"></i></button>
+    </div>
+
+    <div class="bottom-controls" id="ui-bottom">
+        <button id="zen-btn" class="action-circle-btn"><i class="fa-solid fa-seedling"></i></button>
+        <button id="fullscreen-btn" class="action-circle-btn"><i class="fa-solid fa-expand"></i></button>
+    </div>
+
+    <div class="audio-wrapper" id="audio-ui">
+        <button id="global-audio-toggle" onclick="AudioEngine.toggleAudio()"><i class="fa-solid fa-volume-xmark"></i></button>
+    </div>
+
+    <div class="container" id="main-container">
+        
+        <div id="view-directories" class="view-section active">
+            <header id="main-header">
+                <img src="https://via.placeholder.com/150/000000/ffffff?text=Syolana" class="profile-avatar" alt="Syolana Avatar">
+                <h1 class="user-title readable-text">Syolana</h1>
+            </header>
+            
+            <section class="intro" id="intro-text">
+                <p id="ui_intro" class="readable-text">Books come alive here. Step inside the story...</p>
+            </section>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Search by author, title...">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+
+            <nav id="main-nav">
+                <a class="active" data-tab="tab-books" id="nav_books">Books</a>
+                <a data-tab="tab-authors" id="nav_authors">Authors</a>
+                <a data-tab="tab-genres" id="nav_genres">Genres</a>
+            </nav>
+
+            <div id="loading-indicator"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading library...</div>
+            
+            <div id="tab-books" class="tab-content active"></div>
+            <div id="tab-authors" class="tab-content"></div>
+            <div id="tab-genres" class="tab-content"></div>
+
+            <div class="syolana-promo-card">
+                <h3 class="promo-title" id="ui_promo_title">Welcome to Syolana Ecosystem</h3>
+                <p class="promo-text" id="ui_promo_readers">Unlock the <span style="color:#fff;font-weight:bold;">Ultimate Immersive Library</span>. One subscription across all our partner authors. Infinite worlds with full atmospheric audio.</p>
+                <p class="promo-text" id="ui_promo_authors" style="margin-top: 20px; font-style: italic;">Are you a writer? Transform your books into immersive experiences and join our network today.</p>
+                <button class="promo-btn" id="ui_promo_btn" onclick="alert('Subscription integration pending Backend.')">Get Premium Access</button>
+            </div>
+            
+            <footer class="site-footer">
+                <p>&copy; 2026 Syolana. <span id="ui_rights">All rights reserved.</span></p>
+                <p id="ui_legal" style="margin-top: 10px; opacity: 0.7;">All works hosted here are in the public domain or used with the permission of the copyright holders.</p>
+                <p style="margin-top: 10px; opacity: 0.7;"><span id="ui_contact">For collaboration:</span> <a href="mailto:sy@syolana.com">sy@syolana.com</a></p>
+            </footer>
+        </div>
+
+        <div id="view-immersive-reader" class="view-section">
+            <div class="header-action" style="position: sticky; top: 10px; z-index: 10;">
+                <button id="back-to-library" class="back-btn"><i class="fa-solid fa-arrow-left-long"></i> <span id="ui_back">Library</span></button>
+                <button id="btn-toc" class="back-btn" style="display: none;"><i class="fa-solid fa-list"></i> <span id="ui_toc_btn">Contents</span></button>
+            </div>
+            <div class="book-header">
+                <h2 class="book-title readable-text" id="read-title"></h2>
+                <div class="book-author readable-text" id="read-author"></div>
+            </div>
+            <div id="immersive-content"></div>
+            <div style="height: 50vh;"></div> 
+        </div>
+    </div>
+
+    <div id="toc-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeTOC()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="toc-title" id="ui_toc_title">Contents</h3>
+            <div id="toc-list"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('copy', e => e.preventDefault());
+
+        const i18n = {
+            en: { nav_books: "Books", nav_authors: "Authors", nav_genres: "Genres", intro: "Books come alive here. Step inside the story...", back: "Library", search: "Search...", rights: "All rights reserved.", logo_sub: "Ecosystem", radio_read: "Read Book", paywall_title: "Premium Chapter", paywall_desc: "This chapter requires a subscription. Enter your access key to unlock the rest of the book.", paywall_btn: "Unlock", toc: "Contents", prev: "Previous", next: "Next",
+                promo_title: "Welcome to Syolana Ecosystem", promo_readers: "Unlock the Ultimate Immersive Library. One subscription across all our partner authors. Infinite worlds with full atmospheric audio.", promo_authors: "Are you a writer? Transform your books into immersive experiences and join our network.", promo_btn: "Get Premium Access" },
+            ru: { nav_books: "Книги", nav_authors: "Авторы", nav_genres: "Жанры", intro: "Здесь оживают книги. Шагните внутрь истории...", back: "Библиотека", search: "Поиск...", rights: "Все права защищены.", logo_sub: "Экосистема", radio_read: "Читать", paywall_title: "Премиум Глава", paywall_desc: "Эта глава требует подписки. Введите ключ доступа для продолжения чтения.", paywall_btn: "Разблокировать", toc: "Оглавление", prev: "Назад", next: "Вперёд",
+                promo_title: "Добро пожаловать в Syolana", promo_readers: "Единая подписка на всех авторов-партнёров. Читайте сотни книг с полным аудио-погружением.", promo_authors: "Вы писатель? Превратите свои книги в живые миры и станьте нашим партнёром.", promo_btn: "Купить подписку" },
+            es: { nav_books: "Libros", nav_authors: "Autores", nav_genres: "Géneros", intro: "Aquí los libros cobran vida...", back: "Biblioteca", search: "Buscar...", rights: "Todos los derechos reservados.", logo_sub: "Ecosistema", radio_read: "Leer", paywall_title: "Capítulo Premium", paywall_desc: "Este capítulo requiere suscripción. Ingresa tu clave para desbloquear.", paywall_btn: "Desbloquear", toc: "Índice", prev: "Anterior", next: "Siguiente",
+                promo_title: "Bienvenido a Syolana", promo_readers: "Una suscripción para todos los autores. Mundos infinitos con audio envolvente.", promo_authors: "¿Eres escritor? Únete a nuestra red.", promo_btn: "Obtener Premium" },
+            fr: { nav_books: "Livres", nav_authors: "Auteurs", nav_genres: "Genres", intro: "Ici, les livres prennent vie...", back: "Bibliothèque", search: "Recherche...", rights: "Tous droits réservés.", logo_sub: "Écosystème", radio_read: "Lire", paywall_title: "Chapitre Premium", paywall_desc: "Ce chapitre nécessite un abonnement. Entrez votre clé pour débloquer.", paywall_btn: "Débloquer", toc: "Sommaire", prev: "Précédent", next: "Suivant",
+                promo_title: "Bienvenue sur Syolana", promo_readers: "Un abonnement pour tous les auteurs partenaires. Des mondes infinis avec audio immersif.", promo_authors: "Vous êtes écrivain ? Rejoignez notre réseau.", promo_btn: "Obtenir Premium" }
+        };
+
+        const langsArray = ['en', 'ru', 'es', 'fr'];
+        let currentLang = 'en'; 
+        let globalCatalog = [];
+        let currentBookData = null;
+
+        function updateUITranslations() {
+            const t = i18n[currentLang];
+            document.getElementById('nav_books').innerText = t.nav_books; 
+            document.getElementById('nav_authors').innerText = t.nav_authors; 
+            document.getElementById('nav_genres').innerText = t.nav_genres;
+            document.getElementById('ui_intro').innerText = t.intro; 
+            document.getElementById('ui_back').innerText = t.back;
+            document.getElementById('search-input').placeholder = t.search; 
+            document.getElementById('ui_rights').innerText = t.rights;
+            document.getElementById('ui_toc_btn').innerText = t.toc;
+            document.getElementById('ui_toc_title').innerText = t.toc;
+            document.getElementById('ui_logo_sub').innerText = t.logo_sub;
+            document.getElementById('ui_radio_read').innerText = t.radio_read;
+            document.getElementById('ui_promo_title').innerText = t.promo_title;
+            document.getElementById('ui_promo_readers').innerText = t.promo_readers;
+            document.getElementById('ui_promo_authors').innerText = t.promo_authors;
+            document.getElementById('ui_promo_btn').innerText = t.promo_btn;
+            
+            renderTabs();
+            if (currentBookData) renderBookContent(currentBookData);
+        }
+
+        document.getElementById('lang-btn').addEventListener('click', (e) => {
+            currentLang = langsArray[(langsArray.indexOf(currentLang) + 1) % langsArray.length];
+            e.target.innerText = currentLang.toUpperCase();
+            updateUITranslations();
+        });
+
+        // ВКЛАДКИ
+        document.querySelectorAll('#main-nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                document.querySelectorAll('#main-nav a').forEach(a => a.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                e.target.classList.add('active');
+                document.getElementById(e.target.getAttribute('data-tab')).classList.add('active');
+            });
+        });
+
+        // SYOLANA RADIO
+        const Radio = {
+            playlist: [], currentIndex: -1, audio: new Audio(), isPlaying: false,
+            init: function(catalog) {
+                // Ищем все книги, у которых есть поле theme_song
+                this.playlist = catalog.filter(b => b.theme_song).map(b => ({
+                    src: b.theme_song.src, 
+                    title: b.theme_song.title || b.title_en,
+                    author: b.author_en,
+                    bookId: b.id,
+                    external_url: b.external_url,
+                    bookMeta: b
+                }));
+                
+                if(this.playlist.length > 0) {
+                    document.getElementById('radio-player').classList.remove('hidden');
+                    this.audio.onended = () => this.next();
+                    this.shuffle();
+                    this.loadTrack(0);
+                }
+            },
+            shuffle: function() { this.playlist.sort(() => Math.random() - 0.5); },
+            loadTrack: function(index) {
+                this.currentIndex = index;
+                const track = this.playlist[index];
+                this.audio.src = './audio-library/' + track.src;
+                document.getElementById('radio-title').innerText = track.title;
+                document.getElementById('radio-author').innerText = track.author;
+                
+                const linkBtn = document.getElementById('radio-link');
+                linkBtn.onclick = (e) => {
+                    e.preventDefault();
+                    if(track.external_url) window.location.href = track.external_url;
+                    else { switchView('dirs'); loadAndOpenBook(track.bookMeta); }
+                };
+            },
+            toggle: function() {
+                const btn = document.getElementById('radio-play-btn');
+                const player = document.getElementById('radio-player');
+                if (this.isPlaying) {
+                    this.audio.pause(); this.isPlaying = false;
+                    btn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                    player.classList.add('paused');
+                } else {
+                    AudioEngine.pauseAll(); // Останавливаем фоновый амбиент
+                    this.audio.play(); this.isPlaying = true;
+                    btn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                    player.classList.remove('paused');
+                }
+            },
+            next: function() {
+                let nextIdx = (this.currentIndex + 1) % this.playlist.length;
+                this.loadTrack(nextIdx);
+                if(this.isPlaying) this.audio.play();
+            }
+        };
+
+        document.getElementById('radio-play-btn').addEventListener('click', () => Radio.toggle());
+        document.getElementById('radio-next-btn').addEventListener('click', () => Radio.next());
+
+        const AudioEngine = {
+            basePath: './audio-library/', activeTracks: {}, isAudioEnabled: false, currentSceneAudio: '', fadeStep: 0.005, fadeIntervalMs: 20, 
+            toggleAudio: function() {
+                this.isAudioEnabled = !this.isAudioEnabled;
+                const toggleBtn = document.getElementById('global-audio-toggle');
+                if (this.isAudioEnabled) {
+                    toggleBtn.classList.add('active'); 
+                    toggleBtn.querySelector('i').classList.replace('fa-volume-xmark', 'fa-volume-high');
+                    const silent = new Audio("data:audio/mp3;base64,//OExAAAAANIAAAAAExBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+                    silent.play().catch(e=>{});
+                    if (this.currentSceneAudio) this.executeScenePlay(this.currentSceneAudio);
+                    else if (!document.body.classList.contains('reading-mode') && !Radio.isPlaying) this.playScene('main/ambient_theme.ogg');
+                } else {
+                    toggleBtn.classList.remove('active'); 
+                    toggleBtn.querySelector('i').classList.replace('fa-volume-high', 'fa-volume-xmark');
+                    this.pauseAll(); 
+                }
+            },
+            playScene: function(audioSrcString) { this.currentSceneAudio = audioSrcString; if (this.isAudioEnabled && !Radio.isPlaying) this.executeScenePlay(audioSrcString); },
+            executeScenePlay: function(audioSrcString) {
+                if (!audioSrcString) { this.fadeOutAll(); return; }
+                const newTracks = audioSrcString.split(',').map(s => s.trim()).filter(s => s);
+                for (const track in this.activeTracks) if (!newTracks.includes(track)) this.fadeOut(track);
+                newTracks.forEach(track => {
+                    if (!this.activeTracks[track]) {
+                        const audio = new Audio(this.basePath + track); audio.loop = true; audio.volume = 0; this.activeTracks[track] = audio;
+                        audio.play().then(() => this.fadeIn(track)).catch(e => {});
+                    } else { if (this.activeTracks[track].paused) this.activeTracks[track].play(); this.fadeIn(track); }
+                });
+            },
+            fadeIn: function(track) {
+                const audio = this.activeTracks[track]; if(!audio) return; clearInterval(audio.fadeInterval);
+                audio.fadeInterval = setInterval(() => { if (audio.volume < 0.99) audio.volume = Math.min(1, audio.volume + this.fadeStep); else { audio.volume = 1; clearInterval(audio.fadeInterval); } }, this.fadeIntervalMs);
+            },
+            fadeOut: function(track) {
+                const audio = this.activeTracks[track]; if(!audio) return; clearInterval(audio.fadeInterval);
+                audio.fadeInterval = setInterval(() => { if (audio.volume > 0.01) audio.volume = Math.max(0, audio.volume - this.fadeStep); else { audio.volume = 0; audio.pause(); clearInterval(audio.fadeInterval); delete this.activeTracks[track]; } }, this.fadeIntervalMs);
+            },
+            pauseAll: function() { for (const t in this.activeTracks) if(this.activeTracks[t]) this.activeTracks[t].pause(); },
+            fadeOutAll: function() { for (const t in this.activeTracks) this.fadeOut(t); }
+        };
+
+        async function loadCatalog() {
+            try {
+                const res = await fetch('books/catalog.json');
+                globalCatalog = await res.json();
+                document.getElementById('loading-indicator').style.display = 'none';
+                Radio.init(globalCatalog);
+                renderTabs();
+            } catch (e) {
+                document.getElementById('loading-indicator').innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error loading library.';
+            }
+        }
+
+        // РЕНДЕР 3-х ВКЛАДОК
+        function renderTabs() {
+            renderBooksTab();
+            renderAuthorsTab();
+            renderGenresTab();
+        }
+
+        function createCardHTML(title, meta, views, genre, isPinned, onClickStr) {
+            const pinHtml = isPinned ? `<i class="fa-solid fa-thumbtack pin-icon"></i> ` : '';
+            const genreHtml = genre ? `<span class="genre-tag">${genre}</span>` : '';
+            const viewsHtml = views ? `<div class="theme-stats"><i class="fa-solid fa-eye"></i> ${views}</div>` : '';
+            return `<button class="theme-card ${isPinned?'pinned':''}" onclick="${onClickStr}">
+                        <div><div class="theme-name">${pinHtml}${title}</div><div class="theme-meta">${meta} ${genreHtml}</div></div>
+                        ${viewsHtml}
+                    </button>`;
+        }
+
+        function renderBooksTab() {
+            const container = document.getElementById('tab-books');
+            container.innerHTML = '';
+            
+            // Сортировка: 1. Syolana 2. Dante 3. По дате (предполагаем поле last_updated в timestamp)
+            const sorted = [...globalCatalog].sort((a, b) => {
+                const authA = a.author_en; const authB = b.author_en;
+                if(authA === 'Syolana' && authB !== 'Syolana') return -1;
+                if(authB === 'Syolana' && authA !== 'Syolana') return 1;
+                if(authA === 'Dante Sogliano' && authB !== 'Dante Sogliano') return -1;
+                if(authB === 'Dante Sogliano' && authA !== 'Dante Sogliano') return 1;
+                return (b.last_updated || 0) - (a.last_updated || 0); // По убыванию даты
+            });
+            
+            sorted.forEach((book, idx) => {
+                const isPinned = book.author_en === 'Syolana' || book.author_en === 'Dante Sogliano';
+                const title = book[`title_${currentLang}`] || book.title_en;
+                const author = book[`author_${currentLang}`] || book.author_en;
+                const viewsFormat = book.views ? (book.views > 1000 ? (book.views/1000).toFixed(1)+'k' : book.views) : '';
+                
+                const btn = document.createElement('div');
+                btn.innerHTML = createCardHTML(title, author, viewsFormat, book.genre_en, isPinned, `handleBookClick(${idx})`);
+                container.appendChild(btn.firstChild);
+            });
+        }
+
+        function renderAuthorsTab() {
+            const container = document.getElementById('tab-authors');
+            container.innerHTML = '';
+            
+            // Агрегация авторов
+            const authorsMap = {};
+            globalCatalog.forEach(b => {
+                const name = b.author_en;
+                if(!authorsMap[name]) authorsMap[name] = { name: name, books: 0, views: 0 };
+                authorsMap[name].books += 1;
+                authorsMap[name].views += (b.views || 0);
+            });
+            
+            const sortedAuthors = Object.values(authorsMap).sort((a, b) => {
+                if(a.name === 'Syolana') return -1; if(b.name === 'Syolana') return 1;
+                if(a.name === 'Dante Sogliano') return -1; if(b.name === 'Dante Sogliano') return 1;
+                return b.views - a.views;
+            });
+
+            sortedAuthors.forEach(a => {
+                const isPinned = a.name === 'Syolana' || a.name === 'Dante Sogliano';
+                const viewsFormat = a.views > 1000 ? (a.views/1000).toFixed(1)+'k' : a.views;
+                const btn = document.createElement('div');
+                btn.innerHTML = createCardHTML(a.name, `${a.books} books`, viewsFormat, null, isPinned, `alert('Author page coming soon')`);
+                container.appendChild(btn.firstChild);
+            });
+        }
+
+        function renderGenresTab() {
+            const container = document.getElementById('tab-genres');
+            container.innerHTML = '';
+            
+            const genresMap = {};
+            globalCatalog.forEach(b => {
+                const g = b.genre_en || 'Other';
+                if(!genresMap[g]) genresMap[g] = [];
+                genresMap[g].push(b);
+            });
+
+            for(const [genre, books] of Object.entries(genresMap)) {
+                container.innerHTML += `<h4 class="genre-group-title">${genre}</h4>`;
+                books.forEach(book => {
+                    const idx = globalCatalog.indexOf(book);
+                    const title = book[`title_${currentLang}`] || book.title_en;
+                    const author = book[`author_${currentLang}`] || book.author_en;
+                    const btn = document.createElement('div');
+                    btn.innerHTML = createCardHTML(title, author, '', null, false, `handleBookClick(${idx})`);
+                    container.appendChild(btn.firstChild);
+                });
+            }
+        }
+
+        window.handleBookClick = function(catalogIndex) {
+            const book = globalCatalog[catalogIndex];
+            if (book.external_url) window.location.href = book.external_url;
+            else loadAndOpenBook(book);
+        }
+
+        async function loadAndOpenBook(bookMeta, chapterPath = null) {
+            const path = chapterPath || bookMeta.id; 
+            closeTOC(); 
+            
+            const bookTitle = bookMeta[`title_${currentLang}`] || bookMeta.title_en;
+            document.getElementById('read-title').innerText = bookTitle;
+            document.getElementById('read-author').innerText = bookMeta[`author_${currentLang}`] || bookMeta.author_en;
+            document.getElementById('immersive-content').innerHTML = '<div style="text-align:center; padding: 100px 0;"><i class="fa-solid fa-circle-notch fa-spin"></i></div>';
+            switchView('reader'); window.scrollTo(0, 0); 
+            
+            // PAYWALL LOGIC (UI Level)
+            if(bookMeta.chapters) {
+                const chapIndex = bookMeta.chapters.findIndex(c => c.id === path);
+                const isPremiumUnlocked = localStorage.getItem('syolana_premium') === 'true';
+                if(chapIndex >= 5 && !isPremiumUnlocked) {
+                    renderPaywall();
+                    return;
+                }
+            }
+
+            try {
+                const res = await fetch(`books/${path}.json`);
+                currentBookData = await res.json();
+                currentBookData.meta = bookMeta; 
+                renderBookContent(currentBookData);
+            } catch (e) {
+                document.getElementById('immersive-content').innerHTML = '<p style="text-align:center; color: red;">Error loading chapter.</p>';
+            }
+        }
+
+        function renderPaywall() {
+            const t = i18n[currentLang];
+            const container = document.getElementById('immersive-content');
+            container.innerHTML = `
+                <div class="paywall-container">
+                    <i class="fa-solid fa-lock paywall-icon"></i>
+                    <h2 style="color:var(--accent-white); font-family:'Cormorant Garamond'; font-size:2.5rem;">${t.paywall_title}</h2>
+                    <p style="color:var(--text-dim); margin-top:10px;">${t.paywall_desc}</p>
+                    <input type="password" id="premium-pw" class="paywall-input" placeholder="Enter Key">
+                    <br>
+                    <button class="action-circle-btn" style="width:auto; padding:10px 30px; border-radius:30px; margin:0 auto;" onclick="checkPassword()">${t.paywall_btn}</button>
+                </div>
+            `;
+        }
+
+        window.checkPassword = function() {
+            const pw = document.getElementById('premium-pw').value;
+            // Демо-пароль. В реальности нужна проверка через базу данных
+            if(pw === "magic") {
+                localStorage.setItem('syolana_premium', 'true');
+                alert("Premium Unlocked!");
+                // Перезагружаем главу
+                const path = document.querySelector('.toc-item.active') ? undefined : null; // Упрощенно
+                location.reload(); 
+            } else {
+                alert("Invalid Key");
+            }
+        }
+
+        let observer;
+        function renderBookContent(bookData) {
+            const container = document.getElementById('immersive-content');
+            container.innerHTML = '';
+            container.className = bookData.type === 'prose' ? 'content-prose' : 'content-poetry';
+            
+            const btnToc = document.getElementById('btn-toc');
+            if (bookData.meta.chapters && bookData.meta.chapters.length > 0) {
+                btnToc.style.display = 'flex';
+                btnToc.onclick = () => openTOC(bookData.meta);
+            } else btnToc.style.display = 'none';
+
+            bookData.blocks.forEach(block => {
+                if (block.type === 'spacer') container.innerHTML += `<div class="stanza-spacer"></div>`;
+                else if (block.type === 'break') container.innerHTML += `<div class="chapter-break"><i>&#x2726; &#x2726; &#x2726;</i></div>`;
+                else if (block.type === 'stanza') {
+                    const textArray = block[currentLang] || block['en'] || block['ru'];
+                    const div = document.createElement('div'); div.className = 'stanza';
+                    div.setAttribute('data-bg', block.bg || 'rgba(0,0,0,0.8)'); div.setAttribute('data-glow', block.glow || 'rgba(255,255,255,0.2)'); div.setAttribute('data-color', block.color || '#ffffff'); div.setAttribute('data-audio', block.audio || '');
+                    div.innerHTML = textArray.map(p => `<p class="readable-text">${p}</p>`).join('');
+                    container.appendChild(div);
+                }
+            });
+
+            const navWrapper = document.createElement('div'); navWrapper.style.display = 'flex'; navWrapper.style.justifyContent = 'center'; navWrapper.style.gap = '20px'; navWrapper.style.marginTop = '80px';
+            const t = i18n[currentLang];
+            if (bookData.prev_chapter) {
+                navWrapper.innerHTML += `<button class="action-circle-btn" style="width:auto; padding:12px 25px; border-radius:30px; font-size:1rem; text-transform:uppercase;" onclick="loadAndOpenBook(currentBookData.meta, '${bookData.prev_chapter}')"><i class="fa-solid fa-arrow-left" style="margin-right:10px;"></i> ${t.prev}</button>`;
+            }
+            if (bookData.next_chapter) {
+                navWrapper.innerHTML += `<button class="action-circle-btn" style="width:auto; padding:12px 25px; border-radius:30px; font-size:1rem; text-transform:uppercase;" onclick="loadAndOpenBook(currentBookData.meta, '${bookData.next_chapter}')">${t.next} <i class="fa-solid fa-arrow-right" style="margin-left:10px;"></i></button>`;
+            }
+            if(bookData.prev_chapter || bookData.next_chapter) container.appendChild(navWrapper);
+
+            initImmersiveEngine();
+        }
+
+        function openTOC(bookMeta) {
+            const list = document.getElementById('toc-list'); list.innerHTML = '';
+            bookMeta.chapters.forEach((chap, index) => {
+                const btn = document.createElement('button'); btn.className = 'toc-item';
+                const lockIcon = (index >= 5 && localStorage.getItem('syolana_premium') !== 'true') ? ' <i class="fa-solid fa-lock" style="font-size:0.8rem; color:var(--accent-purple);"></i>' : '';
+                btn.innerHTML = (chap[`title_${currentLang}`] || chap.title_en) + lockIcon;
+                btn.onclick = () => loadAndOpenBook(bookMeta, chap.id);
+                list.appendChild(btn);
+            });
+            document.getElementById('toc-modal').classList.add('active');
+        }
+        function closeTOC() { document.getElementById('toc-modal').classList.remove('active'); }
+        document.getElementById('toc-modal').addEventListener('click', function(e) { if(e.target === this) closeTOC(); });
+
+        const views = { dirs: document.getElementById('view-directories'), reader: document.getElementById('view-immersive-reader') };
+        const zenBtn = document.getElementById('zen-btn'); let isZen = false;
+        zenBtn.addEventListener('click', () => { isZen = !isZen; document.body.classList.toggle('zen-active', isZen); zenBtn.style.color = isZen ? 'var(--accent-white)' : 'var(--accent-purple)'; });
+
+        function switchView(viewName) {
+            Object.values(views).forEach(v => v.classList.remove('active')); views[viewName].classList.add('active');
+            if(viewName === 'reader') { document.body.classList.add('reading-mode'); if(isZen) zenBtn.click(); Radio.audio.pause(); } 
+            else { document.body.classList.remove('reading-mode'); document.documentElement.style.setProperty('--bg-overlay', 'rgba(0,0,0,0)'); if(isZen) zenBtn.click(); AudioEngine.playScene(''); if(Radio.isPlaying) Radio.audio.play(); currentBookData = null; }
+        }
+        document.getElementById('back-to-library').addEventListener('click', () => switchView('dirs'));
+
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        fullscreenBtn.addEventListener('click', () => { if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); fullscreenBtn.querySelector('i').classList.replace('fa-expand', 'fa-compress'); } else { document.exitFullscreen(); fullscreenBtn.querySelector('i').classList.replace('fa-compress', 'fa-expand'); } });
+
+        let currentIntersectionAudio = '';
+        function initImmersiveEngine() {
+            if (observer) observer.disconnect(); const stanzas = document.querySelectorAll('.stanza');
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-focus'); document.documentElement.style.setProperty('--bg-overlay', entry.target.getAttribute('data-bg')); document.documentElement.style.setProperty('--text-glow', entry.target.getAttribute('data-glow')); document.documentElement.style.setProperty('--prose-color', entry.target.getAttribute('data-color'));
+                        const audioSrcList = entry.target.getAttribute('data-audio'); 
+                        if(audioSrcList && audioSrcList !== currentIntersectionAudio) { currentIntersectionAudio = audioSrcList; AudioEngine.playScene(audioSrcList); }
+                    } else { entry.target.classList.remove('in-focus'); }
+                });
+            }, { root: null, rootMargin: '-40% 0px -40% 0px', threshold: 0.1 }); 
+            stanzas.forEach(stanza => observer.observe(stanza));
+        }
+
+        updateUITranslations();
+        document.getElementById('loading-indicator').style.display = 'block';
+        setTimeout(loadCatalog, 500);
+
+        // WEBGL
+        const canvas = document.getElementById('violet-constellations'); const gl = canvas.getContext('webgl', { preserveDrawingBuffer: false, alpha: false });
+        if (gl) { const vertexShader = `attribute vec3 aPosition; attribute float aSize; attribute float aAlpha; attribute vec3 aColor; attribute float aType; uniform mat4 uProjection; uniform mat4 uModelView; uniform float uTime; varying float vAlpha; varying vec3 vColor; varying float vType; void main() { vec3 pos = aPosition; pos.z += uTime * 0.4; pos.z = mod(pos.z, 3000.0) - 3000.0; vec4 mvPosition = uModelView * vec4(pos, 1.0); gl_Position = uProjection * mvPosition; gl_PointSize = aSize * (1000.0 / -mvPosition.z); float zNorm = -mvPosition.z / 3000.0; vAlpha = aAlpha * (1.0 - smoothstep(0.8, 1.0, zNorm)); vColor = aColor; vType = aType; }`; const fragmentShader = `precision highp float; varying float vAlpha; varying vec3 vColor; varying float vType; void main() { vec2 uv = gl_PointCoord * 2.0 - 1.0; float r = length(uv); float a = atan(uv.y, uv.x); float alpha = 0.0; if (vType < 0.5) { float petals = 0.4 + 0.6 * (cos(a * 2.5) * cos(a * 2.5)); if (r < petals) { alpha = smoothstep(petals, petals - 0.2, r) + smoothstep(0.3, 0.0, r) * 0.7; } } else { alpha = smoothstep(1.0, 0.0, r); } if (alpha <= 0.03) discard; gl_FragColor = vec4(vColor, vAlpha * alpha); }`; function compileShader(gl, source, type) { const shader = gl.createShader(type); gl.shaderSource(shader, source); gl.compileShader(shader); return shader; } const program = gl.createProgram(); gl.attachShader(program, compileShader(gl, vertexShader, gl.VERTEX_SHADER)); gl.attachShader(program, compileShader(gl, fragmentShader, gl.FRAGMENT_SHADER)); gl.linkProgram(program); gl.useProgram(program); const FLOWER_COUNT = 2500; const DUST_COUNT = 5000; const PARTICLE_COUNT = FLOWER_COUNT + DUST_COUNT; const positions = new Float32Array(PARTICLE_COUNT * 3), sizes = new Float32Array(PARTICLE_COUNT), alphas = new Float32Array(PARTICLE_COUNT), colors = new Float32Array(PARTICLE_COUNT * 3), types = new Float32Array(PARTICLE_COUNT); function hslToRgb(h, s, l){ let r, g, b; if(s == 0){ r = g = b = l; } else{ const hue2rgb = (p, q, t) => { if(t < 0) t += 1; if(t > 1) t -= 1; if(t < 1/6) return p + (q - p) * 6 * t; if(t < 1/2) return q; if(t < 2/3) return p + (q - p) * (2/3 - t) * 6; return p; }; const q = l < 0.5 ? l * (1 + s) : l + s - l * s; const p = 2 * l - q; r = hue2rgb(p, q, h + 1/3); g = hue2rgb(p, q, h); b = hue2rgb(p, q, h - 1/3); } return [r, g, b]; } for (let i = 0; i < PARTICLE_COUNT; i++) { positions[i*3] = (Math.random() - 0.5) * 2250; positions[i*3+1] = (Math.random() - 0.5) * 2500; positions[i*3+2] = -Math.random() * 3000; if(i < FLOWER_COUNT) { types[i] = 0.0; sizes[i] = 15.0 + Math.random() * 20.0; } else { types[i] = 1.0; sizes[i] = 3.0 + Math.random() * 6.0; } alphas[i] = 0.4 + Math.random() * 0.6; let c = hslToRgb(Math.random(), 0.7 + Math.random()*0.3, 0.5 + Math.random()*0.3); colors[i*3] = c[0]; colors[i*3+1] = c[1]; colors[i*3+2] = c[2]; } const bindBuffer = (data, name, size) => { const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW); const loc = gl.getAttribLocation(program, name); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0); }; bindBuffer(positions, 'aPosition', 3); bindBuffer(sizes, 'aSize', 1); bindBuffer(alphas, 'aAlpha', 1); bindBuffer(colors, 'aColor', 3); bindBuffer(types, 'aType', 1); const uProjection = gl.getUniformLocation(program, 'uProjection'), uModelView = gl.getUniformLocation(program, 'uModelView'), uTime = gl.getUniformLocation(program, 'uTime'); const projection = new Float32Array(16), modelView = new Float32Array(16); function updateMatrix() { const aspect = window.innerWidth / window.innerHeight; const f = 1.0 / Math.tan(75 * Math.PI / 360); projection.fill(0); projection[0] = f / aspect; projection[5] = f; projection[10] = -1.0002; projection[11] = -1; projection[14] = -0.20002; modelView.fill(0); modelView[0] = modelView[5] = modelView[10] = modelView[15] = 1; modelView[14] = -800; } gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE); let time = 0; function renderStars() { time += 6; gl.viewport(0, 0, canvas.width, canvas.height); gl.clearColor(0.015, 0.0, 0.03, 1); gl.clear(gl.COLOR_BUFFER_BIT); modelView[0] = Math.cos(time * 0.002); modelView[2] = Math.sin(time * 0.002); modelView[8] = -Math.sin(time * 0.002); modelView[10] = Math.cos(time * 0.002); gl.uniformMatrix4fv(uProjection, false, projection); gl.uniformMatrix4fv(uModelView, false, modelView); gl.uniform1f(uTime, time); gl.drawArrays(gl.POINTS, 0, PARTICLE_COUNT); requestAnimationFrame(renderStars); } window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; updateMatrix(); }); canvas.width = window.innerWidth; canvas.height = window.innerHeight; updateMatrix(); renderStars(); }
+    </script>
+</body>
+</html>
