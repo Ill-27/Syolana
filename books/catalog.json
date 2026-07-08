@@ -40,5 +40,12 @@
     "title_en": "Breaking sunset",
     "author_en": "Dante Sogliano",
     "external_url": "http://artanat.com/books"
+    },
+    {
+        "id": "poe_the_raven",
+        "title_ru": "Ворон",
+        "author_ru": "Эдгар Аллан По",
+        "title_en": "The Raven",
+        "author_en": "Edgar Allan Poe"
     }
 ]
