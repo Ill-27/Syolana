@@ -1,1 +1,96 @@
-1
+"type": "prose",
+    "next_chapter": "book_from_partner/2",
+  "blocks": [
+    {
+      "type": "stanza",
+      "en": [
+        "Early one morning, Dante Sogliano, the young heir to a ruined noble bloodline, rode across his family's remaining lands.",
+        "He took in the sunrise, forcing himself not to dwell on the mundane matters of the day—the debts to be paid, the endless problems to be solved."
+      ],
+      "bg": "rgba(10, 15, 25, 0.8)",
+      "glow": "rgba(255, 200, 120, 0.15)",
+      "color": "#fdfbf7",
+      "audio": "forest_morning.ogg, horse_walk_dirt.ogg, romantic_melancholy.ogg"
+    },
+    {
+      "type": "stanza",
+      "en": [
+        "In truth, a deep dissatisfaction gnawed at him. His passionate, restless, and creative spirit refused to settle for the simple, hollow act of mere survival.",
+        "He would often catch himself thinking: What is a life lived only from dawn until dusk? Chasing basic needs and fleeting pleasures, and nothing more.",
+        "When was the last time you did something you truly desired? Hah, you cannot even articulate what that is. Pathetic. What separates us from the beasts, then?"
+      ],
+      "bg": "rgba(5, 10, 20, 0.85)",
+      "glow": "rgba(100, 150, 255, 0.1)",
+      "color": "#e6e8f0",
+      "audio": "horse_walk_dirt.ogg, grief_cello.ogg"
+    },
+    {
+      "type": "stanza",
+      "en": [
+        "But such thoughts were useless. What he longed for so desperately would never be his. If only he had the power, he surely would..."
+      ],
+      "bg": "rgba(2, 5, 10, 0.9)",
+      "glow": "rgba(100, 120, 200, 0.05)",
+      "color": "#d0d5e0",
+      "audio": "wind_soft.ogg, grief_cello.ogg"
+    },
+    {
+      "type": "spacer"
+    },
+    {
+      "type": "stanza",
+      "en": [
+        "A sudden noise shattered the morning stillness. It was a distant, heavy hum rather than a sharp sound, yet a violent shudder ran through Dante’s entire body."
+      ],
+      "bg": "rgba(20, 5, 5, 0.85)",
+      "glow": "rgba(255, 50, 50, 0.15)",
+      "color": "#ffffff",
+      "audio": "distant_rumble.ogg, sudden_wind.ogg, heartbeat_slow.ogg"
+    },
+    {
+      "type": "stanza",
+      "en": [
+        "Looking back, he could never quite describe the nature of that hum. It sounded like the very core of the earth vibrating, mingling with the drone of a thousand insects.",
+        "He was certain he had never heard anything like it before.",
+        "The hum rolled over him in waves, and in the wake of one such wave, Dante caught another sound—the distinct pluck of strings. That was it! Not the rumbling of an impending earthquake, but the playing of a colossal stringed instrument!"
+      ],
+      "bg": "rgba(25, 15, 5, 0.9)",
+      "glow": "rgba(255, 150, 50, 0.2)",
+      "color": "#ffe0cc",
+      "audio": "distant_rumble.ogg, synth_mystic_pad.ogg, colossal_string_pluck.ogg"
+    },
+    {
+      "type": "stanza",
+      "en": [
+        "The music blossomed from the hum. At first, the notes were quiet, delicate, and cautious—like a beast crouching in the underbrush, or the gentle, deceptive breeze that precedes a devastating storm.",
+        "Dante froze, scarcely daring to breathe, drinking in the strange melody with greedy ears."
+      ],
+      "bg": "rgba(15, 5, 25, 0.85)",
+      "glow": "rgba(177, 143, 255, 0.25)",
+      "color": "#f0e6ff",
+      "audio": "ethereal_storm_melody.ogg, wind_soft.ogg, heartbeat_slow.ogg"
+    },
+    {
+      "type": "stanza",
+      "en": [
+        "Who on earth could play like that? The more he listened, the tighter an invisible, fiery hand seemed to squeeze his heart.",
+        "This was exactly the way he had always longed to play! The music he had chased in his wildest dreams! How could this be real?"
+      ],
+      "bg": "rgba(25, 0, 10, 0.9)",
+      "glow": "rgba(255, 50, 100, 0.3)",
+      "color": "#ffeaee",
+      "audio": "ethereal_storm_melody.ogg, dark_obsession.ogg, heartbeat_fast.ogg"
+    },
+    {
+      "type": "stanza",
+      "en": [
+        "Desperate to see the unseen musician, he spurred his horse forward, plunging toward the sound."
+      ],
+      "bg": "rgba(0, 0, 0, 0.95)",
+      "glow": "rgba(255, 255, 255, 0.2)",
+      "color": "#ffffff",
+      "audio": "dark_obsession.ogg, horse_gallop_dirt.ogg, sudden_wind.ogg"
+    }
+  ]
+}
+
