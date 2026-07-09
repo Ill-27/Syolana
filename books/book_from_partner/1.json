@@ -1,7 +1,7 @@
 {
-    "type": "prose",
-    "next_chapter": "book_from_partner/2",
-  "blocks": [
+"type": "prose",
+"next_chapter": "book_from_partner/2",
+"blocks": [
     {
       "type": "stanza",
       "en": [
