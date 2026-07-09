@@ -1,0 +1,8 @@
+{
+    "id": "book_from_partner",
+    "title_en": "Breaking sunset",
+    "author_en": "Dante Sogliano",
+    "chapters": [
+        { "id": "book_from_partner/1", "title_en": "Chapter 1" }
+    ]
+}
