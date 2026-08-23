@@ -1,55 +1,11 @@
 [
-    {
-        "id": "turgenev_vorobey",
-        "title_ru": "Воробей",
-        "author_ru": "Иван Тургенев",
-        "title_en": "The Sparrow",
-        "author_en": "Ivan Turgenev"
-    },
-    {
-        "id": "tyutchev_teni",
-        "title_ru": "Тени сизые смесились...",
-        "author_ru": "Фёдор Тютчев",
-        "title_en": "Blue shadows mixed...",
-        "author_en": "Fyodor Tyutchev"
-    },
-    {
-        "id": "chekhov_toska",
-        "title_ru": "Тоска",
-        "author_ru": "Антон Чехов",
-        "title_en": "Misery",
-        "author_en": "Anton Chekhov"
-    },
-    {
-        "id": "pushkin_dama/1",
-        "title_ru": "Пиковая дама",
-        "author_ru": "Александр Пушкин",
-        "title_en": "The Queen of Spades",
-        "author_en": "Alexander Pushkin",
-        "chapters": [
-            { "id": "pushkin_dama/1", "title_ru": "Глава 1", "title_en": "Chapter 1" },
-            { "id": "pushkin_dama/2", "title_ru": "Глава 2", "title_en": "Chapter 2" },
-            { "id": "pushkin_dama/3", "title_ru": "Глава 3", "title_en": "Chapter 3" },
-            { "id": "pushkin_dama/4", "title_ru": "Глава 4", "title_en": "Chapter 4" },
-            { "id": "pushkin_dama/5", "title_ru": "Глава 5", "title_en": "Chapter 5" },
-            { "id": "pushkin_dama/6", "title_ru": "Глава 6 (Финал)", "title_en": "Chapter 6 (Finale)" }
-        ]
-    },
-    {
-    "id": "book_from_partner",
-    "title_en": "Breaking sunset",
-    "author_en": "Dante Sogliano",
-    "external_url": "http://artanat.com/books",
-        "chapters": [
-            { "id": "book_from_partner/1", "title_en": "Chapter 1" },
-            { "id": "book_from_partner/2", "title_en": "Chapter 2" }
-        ]
-    },
-    {
-        "id": "poe_the_raven",
-        "title_ru": "Ворон",
-        "author_ru": "Эдгар Аллан По",
-        "title_en": "The Raven",
-        "author_en": "Edgar Allan Poe"
-    }
+  {
+    "id": "turgenev_sparrow",
+    "title_ru": "Воробей",
+    "author_ru": "Иван Тургенев",
+    "genre_ru": "Классика",
+    "description": "Классический рассказ о силе любви, способной преодолеть даже самый сильный страх. Невероятный иммерсивный опыт.",
+    "cover": "https://images.unsplash.com/photo-1555626906-fcf10d6851b4?q=80&w=800&auto=format&fit=crop",
+    "updated_at": 1724400000
+  }
 ]
