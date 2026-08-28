@@ -30,7 +30,7 @@
             "bg": "rgba(15, 15, 20, 0.90)",
             "glow": "rgba(100, 150, 255, 0.2)",
             "color": "#d5e0eb",
-            "audio": "nature/baby_bird_squeak.ogg, music/suspense_strings.ogg, nature/sudden_wind.ogg"
+            "audio": "nature/baby_bird_squeak.ogg"
         },
         {
             "type": "break"
