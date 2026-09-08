@@ -1,0 +1,563 @@
+<!DOCTYPE html> 
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="color-scheme" content="dark light">
+    <title>Syolana | Иммерсивная Платформа & Языки</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <style>
+        :root {
+            --bg-color: #030008;
+            --text-main: #ffffff; 
+            --text-dim: #c5c5d8;
+            --text-heading: #ffffff;
+            --accent-purple: #b18fff; 
+            --accent-blue: #a3b5ff; 
+            --accent-white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-hover-bg: rgba(177, 143, 255, 0.15);
+            --nav-border: #ffffff;
+            --promo-bg: rgba(20, 10, 40, 0.6);
+            --legal-bg: rgba(20, 10, 40, 0.8);
+            
+            --bg-overlay: rgba(0, 0, 0, 0); 
+            --text-glow: rgba(177, 143, 255, 0.2);
+            --prose-color: #ffffff;
+        }
+
+        body.language-mode {
+            --bg-color: #ffffff;
+            --text-main: #2b2b36;
+            --text-dim: #5c5c70;
+            --text-heading: #1a1a24;
+            --accent-purple: #7b2cbf;
+            --accent-blue: #4a6cff;
+            --accent-white: #1a1a24;
+            --card-bg: #f8f9fa;
+            --card-border: rgba(0, 0, 0, 0.08);
+            --card-hover-bg: #ffffff;
+            --nav-border: #7b2cbf;
+            --promo-bg: rgba(123, 44, 191, 0.03);
+            --legal-bg: rgba(0, 0, 0, 0.02);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        html, body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: 'Nunito', sans-serif; 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+            transition: background-color 1.5s ease, color 1.5s ease;
+        }
+        
+        h1, h2, h3, .poetic-text { font-family: 'Cormorant Garamond', serif; color: var(--text-heading); transition: color 1.5s ease; }
+        .unselectable { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+        .readable-text { text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 25px var(--text-glow); transition: text-shadow 2.5s ease, color 2.5s ease; }
+        body.language-mode .readable-text { text-shadow: none; }
+
+        /* WebGL Background */
+        #violet-constellations { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; background: transparent; }
+        
+        #immersive-bg-layer { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-overlay); z-index: 2; transition: background 2.5s ease-in-out, backdrop-filter 2s ease; pointer-events: none; backdrop-filter: blur(0px); }
+        body.reading-mode #immersive-bg-layer { backdrop-filter: blur(18px); background: rgba(0,0,0,0.9); box-shadow: inset 0 0 200px rgba(0,0,0,1); }
+
+        /* UI Elements */
+        .top-bar { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 30px; display: flex; justify-content: space-between; align-items: flex-start; z-index: 100; transition: opacity 0.5s ease; pointer-events: none; }
+        
+        .brand-logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; pointer-events: auto; transition: transform 0.3s ease; text-decoration: none; }
+        .brand-logo-container:hover { transform: scale(1.05); }
+        .brand-logo { width: 55px; height: 55px; }
+        .brand-logo svg { width: 100%; height: 100%; filter: drop-shadow(0 0 10px var(--accent-purple)); transition: filter 1.5s ease; }
+        
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-text-title { color: var(--accent-white); font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; line-height: 1; transition: color 1.5s ease; }
+        body:not(.language-mode) .brand-text-title { text-shadow: 0 0 10px var(--accent-purple); }
+        .brand-text-sub { color: var(--accent-purple); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; font-weight: 700; }
+
+        .right-controls { display: flex; flex-direction: column; gap: 15px; align-items: center; pointer-events: auto; }
+        .action-circle-btn { background: transparent; border: none; color: var(--accent-white); font-size: 1.4rem; cursor: pointer; transition: all 0.3s ease; outline: none; display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; font-family: 'Nunito', sans-serif; font-weight: 700; }
+        body:not(.language-mode) .action-circle-btn { text-shadow: 0 0 15px var(--accent-purple), 0 2px 5px rgba(0,0,0,0.8); }
+        .action-circle-btn:hover { transform: scale(1.15); color: var(--accent-purple); }
+        
+        .bottom-controls { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 100; transition: opacity 0.5s ease; pointer-events: auto; }
+        
+        .container { max-width: 950px; margin: 100px auto 50px auto; padding: 40px; position: relative; z-index: 10; transition: opacity 1s ease; }
+        
+        body.zen-active .top-bar, body.zen-active .container, body.zen-active .site-footer { opacity: 0; pointer-events: none; }
+        body.zen-active.reading-mode .header-action { opacity: 0; pointer-events: none; }
+        body.zen-active.reading-mode .container { opacity: 1; pointer-events: auto; }
+
+        /* Navigation */
+        header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; text-align: center; }
+        .profile-avatar { width: 140px; height: 140px; border-radius: 50%; margin-bottom: 25px; border: 2px solid var(--card-border); object-fit: cover; box-shadow: 0 0 30px rgba(177, 143, 255, 0.2); transition: border-color 1.5s ease; }
+        
+        .user-title { font-size: 3rem; font-weight: 400; letter-spacing: 4px; color: var(--accent-white); margin-bottom: 25px; text-transform: uppercase; font-family: 'Cormorant Garamond', serif; }
+        
+        nav { display: flex; gap: 40px; justify-content: center; padding-bottom: 20px; width: 100%; border-bottom: 1px solid var(--card-border); transition: border-color 1.5s ease; }
+        nav a { color: var(--text-dim); text-decoration: none; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; position: relative; padding-bottom: 15px; cursor: pointer; transition: color 0.3s ease; }
+        nav a:hover { color: var(--accent-purple); }
+        nav a.active { color: var(--accent-white); }
+        nav a.active::after { content: ''; position: absolute; width: 100%; height: 2px; bottom: -1px; left: 0; background-color: var(--nav-border); box-shadow: 0 0 10px var(--accent-purple); transition: background-color 1.5s ease; }
+        body.language-mode nav a.active::after { box-shadow: none; }
+
+        .view-section { display: none; animation: fadeUp 0.8s ease; }
+        .view-section.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Идеальное пояснение (Hero Section) */
+        .hero-explanation { margin: 30px 0 50px 0; padding: 40px; background: var(--card-bg); border-radius: 20px; border: 1px solid var(--card-border); text-align: center; backdrop-filter: blur(5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .hero-title { font-size: 2.4rem; color: var(--accent-purple); margin-bottom: 15px; font-family: 'Cormorant Garamond', serif; }
+        .hero-subtitle { font-size: 1.1rem; color: var(--text-main); margin-bottom: 30px; line-height: 1.6; }
+        .hero-features { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; text-align: left; }
+        .feature { display: flex; gap: 15px; align-items: flex-start; }
+        .feature i { font-size: 1.8rem; color: var(--accent-blue); margin-top: 5px; }
+        .feature span { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; }
+        .feature strong { color: var(--text-heading); display: block; font-size: 1.1rem; margin-bottom: 5px; font-family: 'Nunito', sans-serif; }
+
+        /* Библиотека */
+        .search-container { width: 100%; max-width: 600px; margin: 40px auto; position: relative; }
+        .search-input { width: 100%; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 30px; padding: 15px 25px 15px 50px; color: var(--text-main); font-family: 'Nunito', sans-serif; font-size: 1rem; outline: none; transition: all 0.4s ease; backdrop-filter: blur(5px); }
+        .search-input:focus { border-color: var(--accent-purple); box-shadow: 0 0 20px rgba(177, 143, 255, 0.15); }
+        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-dim); pointer-events: none; }
+
+        .author-group-header { font-size: 2.2rem; color: var(--accent-purple); margin: 50px 0 20px 0; padding-bottom: 10px; border-bottom: 1px solid var(--card-border); }
+        
+        .book-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 15px; padding: 20px; margin-bottom: 20px; display: flex; gap: 25px; align-items: stretch; transition: all 0.4s ease; cursor: pointer; backdrop-filter: blur(5px); }
+        .book-card:hover { transform: translateY(-5px); border-color: var(--accent-purple); background: var(--card-hover-bg); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        
+        .book-cover-wrapper { width: 280px; flex-shrink: 0; border-radius: 10px; overflow: hidden; aspect-ratio: 16/9; background: #000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .book-cover { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .book-card:hover .book-cover { transform: scale(1.05); }
+        
+        .book-info { display: flex; flex-direction: column; justify-content: center; }
+        .book-title { font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; color: var(--text-heading); margin-bottom: 10px; line-height: 1.2; font-weight: 600; }
+        .book-desc { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+
+        /* Языки */
+        .lang-selector { display: flex; justify-content: center; gap: 15px; margin: 40px 0; flex-wrap: wrap; }
+        .lang-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-dim); padding: 12px 30px; border-radius: 30px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; font-family: 'Nunito', sans-serif; backdrop-filter: blur(5px); }
+        .lang-btn:hover { border-color: var(--accent-purple); color: var(--accent-purple); }
+        .lang-btn.active { background: var(--accent-purple); color: #fff; border-color: var(--accent-purple); box-shadow: 0 5px 20px rgba(123, 44, 191, 0.4); }
+
+        .levels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        
+        .level-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 35px 25px; text-align: center; position: relative; overflow: hidden; transition: all 0.4s ease; backdrop-filter: blur(5px); }
+        .level-card:hover { transform: translateY(-5px); border-color: var(--accent-purple); box-shadow: 0 15px 40px rgba(123, 44, 191, 0.1); }
+        
+        .level-badge { position: absolute; top: 15px; right: -30px; background: #28a745; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 5px 35px; transform: rotate(45deg); text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .level-badge.premium { background: var(--accent-purple); }
+        
+        .level-card h3 { font-size: 2.5rem; color: var(--accent-purple); margin-bottom: 10px; }
+        .level-card .level-desc { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 25px; line-height: 1.5; min-height: 45px; }
+        
+        .level-actions { display: flex; flex-direction: column; gap: 12px; }
+        .action-btn { background: transparent; border: 1px solid var(--card-border); color: var(--text-heading); padding: 12px; border-radius: 12px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .action-btn:hover { background: rgba(123, 44, 191, 0.05); border-color: var(--accent-purple); color: var(--accent-purple); }
+        .action-btn.practice-btn { background: rgba(123, 44, 191, 0.1); border-color: var(--accent-purple); color: var(--accent-purple); }
+        .action-btn.practice-btn:hover { background: var(--accent-purple); color: #fff; }
+
+        /* Промо Блок */
+        .syolana-promo-card { margin-top: 60px; background: var(--promo-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 45px; text-align: center; backdrop-filter: blur(10px); transition: all 0.4s ease; }
+        .syolana-promo-card:hover { border-color: var(--accent-purple); box-shadow: 0 15px 50px rgba(123, 44, 191, 0.1); }
+        .promo-title { font-size: 2.2rem; color: var(--text-heading); margin-bottom: 15px; }
+        .promo-text { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 20px; line-height: 1.6; }
+        .promo-highlight { color: var(--accent-purple); font-weight: 700; }
+        .promo-btn { margin-top: 20px; background: linear-gradient(45deg, #7b2cbf, #b18fff); color: #fff; border: none; padding: 14px 40px; border-radius: 30px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 20px rgba(177, 143, 255, 0.3); font-family: 'Nunito', sans-serif; }
+        .promo-btn:hover { transform: scale(1.05); box-shadow: 0 5px 30px rgba(177, 143, 255, 0.5); }
+
+        /* Legal Disclaimer */
+        .legal-disclaimer { margin-top: 60px; background: var(--legal-bg); backdrop-filter: blur(12px); border: 1px solid rgba(255, 100, 100, 0.2); border-radius: 20px; padding: 40px; color: var(--text-dim); font-size: 0.95rem; text-align: justify; line-height: 1.7; }
+        .legal-disclaimer strong { color: #d65c5c; font-size: 1.3rem; display: block; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; text-align: center; font-family: 'Cormorant Garamond', serif; }
+        .legal-disclaimer p { margin-bottom: 15px; }
+
+        /* Audio */
+        .audio-wrapper { position: fixed; bottom: 40px; right: 30px; z-index: 200; display: block; }
+        #global-audio-toggle { width: 55px; height: 55px; background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-heading); border-radius: 50%; font-size: 1.4rem; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.1); backdrop-filter: blur(5px); transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; outline: none; }
+        #global-audio-toggle:hover, #global-audio-toggle.active { border-color: var(--accent-purple); color: var(--accent-purple); }
+
+        /* ИММЕРСИВНЫЙ РИДЕР */
+        #view-immersive-reader { padding: 20px 0 150px 0; }
+        .book-header { margin-bottom: 80px; text-align: center; }
+        .book-title { font-size: 3.5rem; color: var(--accent-white); margin-bottom: 10px; }
+        .book-author { font-size: 1.2rem; color: var(--accent-blue); letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+        .header-action { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .back-btn { background: none; border: none; color: var(--accent-blue); font-family: inherit; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; font-weight: 700; transition: all 0.3s; outline: none; }
+        .back-btn:hover { color: var(--accent-white); transform: translateY(-2px); }
+
+        @media (max-width: 768px) {
+            .book-card { flex-direction: column; }
+            .book-cover-wrapper { width: 100%; aspect-ratio: 16/9; }
+            nav { gap: 20px; }
+            .container { padding: 20px; }
+            .hero-features { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="unselectable">
+
+    <canvas id="violet-constellations"></canvas>
+    <div id="immersive-bg-layer"></div>
+
+    <div class="top-bar" id="ui-top">
+        <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'})" class="brand-logo-container">
+            <div class="brand-logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs><filter id="logoGlow"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+                    <g stroke="#b18fff" stroke-width="1.5" fill="rgba(177, 143, 255, 0.15)">
+                        <path d="M50,15 C60,28 65,42 50,50 C35,42 40,28 50,15 Z" />
+                        <path d="M50,50 C65,42 85,32 90,47 C80,57 65,57 50,50 Z" />
+                        <path d="M50,50 C35,42 15,32 10,47 C20,57 35,57 50,50 Z" />
+                        <path d="M50,50 C65,60 75,80 60,90 C50,80 50,65 50,50 Z" />
+                        <path d="M50,50 C35,60 25,80 40,90 C50,80 50,65 50,50 Z" />
+                        <circle cx="50" cy="50" r="4" fill="#b18fff" stroke="none" opacity="1"/>
+                    </g>
+                    <text x="50" y="58" font-family="'Cormorant Garamond', serif" font-size="28" fill="currentColor" text-anchor="middle" font-weight="600" letter-spacing="1" style="color: var(--text-heading)">SY</text>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-text-title">Syolana</span>
+                <span class="brand-text-sub">Ecosystem</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="audio-wrapper" id="audio-ui">
+        <button id="global-audio-toggle"><i class="fa-solid fa-volume-xmark"></i></button>
+    </div>
+
+    <div class="container" id="main-container">
+        
+        <header id="main-header">
+            <img src="Screenshot_20260521_151526_Video Player.jpg" class="profile-avatar" alt="Syolana Avatar" onerror="this.src='https://picsum.photos/200'">
+            <h1 class="user-title">Syolana</h1>
+            
+            <nav id="main-nav">
+                <a id="nav-lib" class="active">Библиотека</a>
+                <a id="nav-lang">Изучение Языков</a>
+            </nav>
+        </header>
+
+        <!-- РАЗДЕЛ: БИБЛИОТЕКА -->
+        <div id="view-directories" class="view-section active">
+            
+            <!-- Продающий блок-пояснение -->
+            <div class="hero-explanation">
+                <h2 class="hero-title">Два пути. Одна магия.</h2>
+                <p class="hero-subtitle">Добро пожаловать в Syolana — уникальную экосистему, где тексты обретают голос. Выберите свой путь и откройте для себя новые вселенные:</p>
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="fa-solid fa-headphones-simple"></i>
+                        <span><strong>Аудио-оживление книг</strong><br>Шагните внутрь истории. Читайте под уникальный саунд-дизайн и эффекты, которые идеально адаптируются к вашему темпу чтения.</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fa-solid fa-language"></i>
+                        <span><strong>Языки с нуля до носителя</strong><br>Изучайте английский, испанский или сербский (уровни А1–B2). Слушайте озвученные правила и доводите навыки до идеала через чтение живых книг.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="search-input" placeholder="Поиск по автору, названию...">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+            
+            <div id="tab-books">
+                <!-- Демонстрационный контент -->
+                <h2 class="author-group-header">М. Ю. Лермонтов</h2>
+                <div class="book-card" onclick="alert('Открытие ридера...')">
+                    <div class="book-cover-wrapper"><img src="https://picsum.photos/800/400?1" class="book-cover" alt="Обложка"></div>
+                    <div class="book-info">
+                        <div class="book-title">Демон</div>
+                        <div class="book-desc">Мистическая поэма о падшем духе. Включите звук и наслаждайтесь погружением.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="promo-section" class="syolana-promo-card">
+                <h3 class="promo-title">Для Авторов и Издательств: Иммерсия + Перевод</h3>
+                <p class="promo-text">Превратите ваши тексты в <span class="promo-highlight">Живые Мультиязычные Миры</span>. Мы предлагаем единую услугу: адаптация вашей книги под иммерсивное чтение с саунд-дизайном и профессиональный перевод на <strong>Английский, Испанский и Сербский языки</strong>.</p>
+                <button class="promo-btn" onclick="alert('Свяжитесь с нами: sy@syolana.com')">Стать Партнером</button>
+            </div>
+
+            <footer class="site-footer">
+                <div class="legal-disclaimer">
+                    <strong>Правовая информация (Legal Disclaimer)</strong>
+                    <p>Все произведения, текст и материалы, непосредственно размещенные и хранящиеся на серверах данной платформы, являются либо оригинальными авторскими работами создателей сайта, либо материалами, официально перешедшими в общественное достояние (Public Domain) согласно международному законодательству об авторском праве.</p>
+                    <p>Услуги перевода и создания иммерсивного аудио предоставляются платформой Syolana исключительно как технологическое B2B-решение для авторов и издательств. Все материалы партнеров хранятся на их собственных ресурсах и сайтах.</p>
+                </div>
+                <p style="margin-top: 30px; text-align: center; color: var(--text-dim);">&copy; <span id="current-year"></span> Syolana. Все права защищены.</p>
+            </footer>
+        </div>
+
+        <!-- РАЗДЕЛ: ЯЗЫКИ -->
+        <div id="view-languages" class="view-section">
+            <h2 class="author-group-header" style="text-align:center; border:none; margin-bottom: 0;">С нуля до носителя</h2>
+            <p style="text-align:center; color: var(--text-dim); margin-bottom: 30px; font-size: 1.1rem;">
+                Читайте. Слушайте. Впитывайте. Идеальная система погружения.
+            </p>
+
+            <div class="lang-selector">
+                <button class="lang-btn active">Английский</button>
+                <button class="lang-btn">Испанский</button>
+                <button class="lang-btn">Сербский</button>
+            </div>
+
+            <div class="levels-grid">
+                <div class="level-card">
+                    <div class="level-badge free">Бесплатно</div>
+                    <h3>Уровень A1</h3>
+                    <p class="level-desc">Базовый фундамент. Слушайте озвучку правил каждый день, пока не выучите наизусть.</p>
+                    <div class="level-actions">
+                        <button class="action-btn"><i class="fa-solid fa-book"></i> Правила (Текст + Аудио)</button>
+                        <button class="action-btn"><i class="fa-solid fa-language"></i> Слова (Текст + Аудио)</button>
+                        <button class="action-btn practice-btn"><i class="fa-solid fa-headphones"></i> Практика (Книги A1)</button>
+                    </div>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-badge premium">Premium</div>
+                    <h3>Уровень A2</h3>
+                    <p class="level-desc">Бытовое общение и уверенное чтение простых сюжетов.</p>
+                    <div class="level-actions">
+                        <button class="action-btn"><i class="fa-solid fa-lock"></i> Правила</button>
+                        <button class="action-btn"><i class="fa-solid fa-lock"></i> Слова</button>
+                        <button class="action-btn practice-btn"><i class="fa-solid fa-lock"></i> Практика</button>
+                    </div>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-badge premium">Premium</div>
+                    <h3>Уровень B1</h3>
+                    <p class="level-desc">Свободное понимание контекста. Переход к художественной литературе.</p>
+                    <div class="level-actions">
+                        <button class="action-btn"><i class="fa-solid fa-lock"></i> Правила</button>
+                        <button class="action-btn"><i class="fa-solid fa-lock"></i> Слова</button>
+                        <button class="action-btn practice-btn"><i class="fa-solid fa-lock"></i> Практика</button>
+                    </div>
+                </div>
+
+                <div class="level-card">
+                    <div class="level-badge premium">Premium</div>
+                    <h3>Уровень B2</h3>
+                    <p class="level-desc">Свободное владение. Чтение в оригинале со всеми метафорами.</p>
+                    <div class="level-actions">
+                        <button class="action-btn"><i class="fa-solid fa-lock"></i> Правила</button>
+                        <button class="action-btn"><i class="fa-solid fa-lock"></i> Слова</button>
+                        <button class="action-btn practice-btn"><i class="fa-solid fa-lock"></i> Практика</button>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 100px;"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('current-year').innerText = new Date().getFullYear();
+
+        const navLib = document.getElementById('nav-lib');
+        const navLang = document.getElementById('nav-lang');
+        const viewDirs = document.getElementById('view-directories');
+        const viewLangs = document.getElementById('view-languages');
+
+        navLib.addEventListener('click', () => {
+            navLib.classList.add('active'); navLang.classList.remove('active');
+            viewDirs.classList.add('active'); viewLangs.classList.remove('active');
+            document.body.classList.remove('language-mode');
+        });
+
+        navLang.addEventListener('click', () => {
+            navLang.classList.add('active'); navLib.classList.remove('active');
+            viewLangs.classList.add('active'); viewDirs.classList.remove('active');
+            document.body.classList.add('language-mode');
+        });
+
+        // --- WEBGL ДВИЖОК С УВЕЛИЧЕННЫМ КОЛИЧЕСТВОМ ЦВЕТОЧНЫХ ЧАСТИЦ ---
+        const canvas = document.getElementById('violet-constellations');
+        const gl = canvas.getContext('webgl', { preserveDrawingBuffer: false, alpha: true });
+
+        if (gl) {
+            const vertexShader = `
+                attribute vec3 aPosition; 
+                attribute float aSize; 
+                attribute float aAlpha; 
+                attribute vec3 aColor; 
+                
+                uniform mat4 uProjection; 
+                uniform mat4 uModelView; 
+                uniform float uTime; 
+                uniform float uMode; 
+                
+                varying float vAlpha; 
+                varying vec3 vColor; 
+                varying float vMode;
+                
+                void main() { 
+                    vec3 pos = aPosition; 
+                    if (uMode > 0.5) {
+                        pos.y += uTime * 0.4;
+                        pos.y = mod(pos.y + 1500.0, 3000.0) - 1500.0; 
+                        pos.z = -1500.0 + mod(pos.z, 500.0);
+                    } else {
+                        pos.z += uTime * 0.4; 
+                        pos.z = mod(pos.z, 3000.0) - 3000.0; 
+                    }
+                    vec4 mvPosition = uModelView * vec4(pos, 1.0); 
+                    gl_Position = uProjection * mvPosition; 
+                    
+                    if (uMode > 0.5) {
+                        gl_PointSize = aSize * 0.8 * (1000.0 / -mvPosition.z); 
+                    } else {
+                        gl_PointSize = aSize * (1000.0 / -mvPosition.z); 
+                    }
+                    
+                    float zNorm = -mvPosition.z / 3000.0; 
+                    vAlpha = aAlpha * (1.0 - smoothstep(0.8, 1.0, zNorm)); 
+                    vColor = aColor; 
+                    vMode = uMode;
+                }
+            `;
+            
+            const fragmentShader = `
+                precision highp float; 
+                varying float vAlpha; 
+                varying vec3 vColor; 
+                varying float vMode;
+                
+                void main() { 
+                    vec2 uv = gl_PointCoord * 2.0 - 1.0; 
+                    float r = length(uv); 
+                    
+                    // Формула для создания формы цветка (из скриншота)
+                    float a = atan(uv.y, uv.x);
+                    float petals = 0.4 + 0.6 * (cos(a * 2.5) * cos(a * 2.5)); // 5 лепестков
+                    
+                    float alpha = smoothstep(petals, petals - 0.2, r) + smoothstep(0.3, 0.0, r) * 0.7;
+                    if (alpha <= 0.05) discard; 
+                    
+                    vec3 finalColor = vColor;
+                    if (vMode > 0.5) {
+                        // В светлом режиме делаем цвета плотными, темными и насыщенными
+                        finalColor = mix(vColor, vec3(0.1, 0.0, 0.4), 0.6); 
+                    }
+                    gl_FragColor = vec4(finalColor, vAlpha * alpha); 
+                }
+            `;
+            
+            function compileShader(gl, source, type) { 
+                const shader = gl.createShader(type); 
+                gl.shaderSource(shader, source); gl.compileShader(shader); 
+                return shader; 
+            }
+            
+            const program = gl.createProgram(); 
+            gl.attachShader(program, compileShader(gl, vertexShader, gl.VERTEX_SHADER)); 
+            gl.attachShader(program, compileShader(gl, fragmentShader, gl.FRAGMENT_SHADER)); 
+            gl.linkProgram(program); gl.useProgram(program);
+
+            // УВЕЛИЧЕНО КОЛИЧЕСТВО ЧАСТИЦ ДО 15000
+            const PARTICLE_COUNT = 15000;
+            const positions = new Float32Array(PARTICLE_COUNT * 3);
+            const sizes = new Float32Array(PARTICLE_COUNT);
+            const alphas = new Float32Array(PARTICLE_COUNT);
+            const colors = new Float32Array(PARTICLE_COUNT * 3);
+
+            function hslToRgb(h, s, l){ 
+                let r, g, b; 
+                if(s == 0){ r = g = b = l; } else { 
+                    const hue2rgb = (p, q, t) => { if(t < 0) t += 1; if(t > 1) t -= 1; if(t < 1/6) return p + (q - p) * 6 * t; if(t < 1/2) return q; if(t < 2/3) return p + (q - p) * (2/3 - t) * 6; return p; }; 
+                    const q = l < 0.5 ? l * (1 + s) : l + s - l * s; 
+                    const p = 2 * l - q; 
+                    r = hue2rgb(p, q, h + 1/3); g = hue2rgb(p, q, h); b = hue2rgb(p, q, h - 1/3); 
+                } 
+                return [r, g, b]; 
+            }
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                positions[i*3] = (Math.random() - 0.5) * 3000; 
+                positions[i*3+1] = (Math.random() - 0.5) * 3000; 
+                positions[i*3+2] = -Math.random() * 3000;
+                
+                sizes[i] = 6.0 + Math.random() * 20.0; 
+                alphas[i] = 0.4 + Math.random() * 0.6; 
+                
+                // Цвета (синий, розовый, фиолетовый, золотистый)
+                let hue = Math.random() > 0.8 ? 0.1 + Math.random()*0.1 : 0.5 + Math.random() * 0.4; 
+                let c = hslToRgb(hue, 0.9, 0.6);
+                colors[i*3] = c[0]; colors[i*3+1] = c[1]; colors[i*3+2] = c[2];
+            }
+
+            const bindBuffer = (data, name, size) => { 
+                const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); 
+                gl.bufferData(gl.ARRAY_BUFFER, data, gl.STATIC_DRAW); 
+                const loc = gl.getAttribLocation(program, name); 
+                gl.enableVertexAttribArray(loc); 
+                gl.vertexAttribPointer(loc, size, gl.FLOAT, false, 0, 0); 
+            };
+            
+            bindBuffer(positions, 'aPosition', 3); bindBuffer(sizes, 'aSize', 1); 
+            bindBuffer(alphas, 'aAlpha', 1); bindBuffer(colors, 'aColor', 3);
+
+            const uProjection = gl.getUniformLocation(program, 'uProjection');
+            const uModelView = gl.getUniformLocation(program, 'uModelView');
+            const uTime = gl.getUniformLocation(program, 'uTime');
+            const uMode = gl.getUniformLocation(program, 'uMode');
+            
+            const projection = new Float32Array(16); const modelView = new Float32Array(16);
+
+            function updateMatrix() { 
+                const aspect = window.innerWidth / window.innerHeight; 
+                const f = 1.0 / Math.tan(75 * Math.PI / 360); 
+                projection.fill(0); 
+                projection[0] = f / aspect; projection[5] = f; projection[10] = -1.0002; projection[11] = -1; projection[14] = -0.20002; 
+                modelView.fill(0); modelView[0] = modelView[5] = modelView[10] = modelView[15] = 1; modelView[14] = -800; 
+            }
+
+            let time = 0;
+            function renderStars() {
+                time += 5; gl.viewport(0, 0, canvas.width, canvas.height); 
+                gl.clearColor(0.0, 0.0, 0.0, 0.0); gl.clear(gl.COLOR_BUFFER_BIT);
+                
+                const isLanguageMode = document.body.classList.contains('language-mode');
+                gl.uniform1f(uMode, isLanguageMode ? 1.0 : 0.0);
+
+                gl.enable(gl.BLEND);
+                if (isLanguageMode) {
+                    // Стандартное смешивание (чтобы темные цветы были видны на белом фоне)
+                    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+                } else {
+                    // Аддитивное смешивание для свечения на черном фоне
+                    gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+                }
+
+                if (!isLanguageMode) {
+                    modelView[0] = Math.cos(time * 0.001); modelView[2] = Math.sin(time * 0.001); 
+                    modelView[8] = -Math.sin(time * 0.001); modelView[10] = Math.cos(time * 0.001);
+                } else {
+                    modelView[0] = 1; modelView[2] = 0; modelView[8] = 0; modelView[10] = 1;
+                }
+
+                gl.uniformMatrix4fv(uProjection, false, projection); 
+                gl.uniformMatrix4fv(uModelView, false, modelView); gl.uniform1f(uTime, time);
+                
+                gl.drawArrays(gl.POINTS, 0, PARTICLE_COUNT); requestAnimationFrame(renderStars);
+            }
+            
+            window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; updateMatrix(); });
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight; 
+            updateMatrix(); renderStars();
+        }
+    </script>
+</body>
+                      </html>
