@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Syolana | Испанский язык</title>
+    
+    <!-- Шрифты и иконки от Syolana -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Цвета адаптированы для контраста с белым фоном */
+            --bg-color: #ffffff; 
+            --accent-purple: #7b2cbf; 
+            --accent-light: #b18fff;
+            --accent-blue: #a3b5ff; 
+            --text-dark: #000000;
+            --text-white: #ffffff;
+            --text-dim: #c5c5d8;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        html, body { 
+            background-color: var(--bg-color); 
+            color: var(--text-dark); 
+            font-family: 'Nunito', sans-serif; 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+            width: 100%;
+            height: 100%;
+        }
+
+        h1, h2, h3, .poetic-text { 
+            font-family: 'Cormorant Garamond', serif; 
+        }
+
+        /* Канвас для звезд (оригинальный) */
+        #starCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1; 
+            pointer-events: none;
+        }
+
+        /* Верхняя панель Syolana */
+        .top-bar { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            padding: 25px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            z-index: 100; 
+            pointer-events: none; 
+        }
+        
+        .brand-logo-container { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            cursor: pointer; 
+            pointer-events: auto; 
+            transition: transform 0.3s ease; 
+            text-decoration: none; 
+        }
+        
+        .brand-logo-container:hover { 
+            transform: scale(1.05); 
+        }
+        
+        .brand-logo { 
+            width: 55px; 
+            height: 55px; 
+        }
+        
+        /* Цвета логотипа адаптированы под светлый фон */
+        .brand-logo svg { 
+            width: 100%; 
+            height: 100%; 
+            filter: drop-shadow(0 0 8px rgba(123, 44, 191, 0.4)); 
+        }
+        
+        .brand-text { 
+            display: flex; 
+            flex-direction: column; 
+        }
+        
+        .brand-text-title { 
+            color: var(--text-dark); 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.5rem; 
+            font-weight: 600; 
+            line-height: 1; 
+        }
+        
+        .brand-text-sub { 
+            color: var(--accent-purple); 
+            font-size: 0.75rem; 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            margin-top: 2px; 
+            font-weight: 600;
+        }
+
+        /* Кнопки управления (вверху справа) */
+        .right-controls { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 15px; 
+            align-items: center; 
+            pointer-events: auto; 
+        }
+        
+        .action-circle-btn { 
+            background: rgba(255, 255, 255, 0.9); 
+            border: 1px solid rgba(123, 44, 191, 0.3); 
+            color: var(--accent-purple); 
+            font-size: 1.3rem; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            outline: none; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+        }
+        
+        .action-circle-btn:hover { 
+            transform: scale(1.15); 
+            background: #ffffff;
+            box-shadow: 0 5px 20px rgba(123, 44, 191, 0.3); 
+        }
+
+        /* Основной контейнер */
+        .container { 
+            max-width: 1000px; 
+            margin: 120px auto 50px auto; 
+            padding: 40px 20px; 
+            position: relative; 
+            z-index: 10; 
+        }
+
+        /* Заголовки */
+        .main-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .author-group-header { 
+            font-size: 3.5rem; 
+            font-family: 'Cormorant Garamond', serif; 
+            color: var(--accent-purple); 
+            margin: 0; 
+            padding-bottom: 15px; 
+            border-bottom: 1px solid rgba(123, 44, 191, 0.2); 
+            text-shadow: 0 0 20px rgba(123, 44, 191, 0.15); 
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 15px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Сетка карточек уровней */
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        /* Карточка уровня (Стиль панелей Syolana) */
+        .level-card { 
+            background: rgba(20, 10, 40, 0.75); /* Тёмное стекло для контраста */
+            border: 1px solid rgba(177, 143, 255, 0.4); 
+            border-radius: 20px; 
+            padding: 40px 25px 30px 25px; 
+            text-align: center; 
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15), inset 0 0 30px rgba(177, 143, 255, 0.1); 
+            transition: all 0.4s ease; 
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .level-card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--accent-light); 
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2), inset 0 0 50px rgba(177, 143, 255, 0.2); 
+        }
+
+        .level-title { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 3.5rem; 
+            color: var(--text-white); 
+            margin-bottom: 30px; 
+            text-shadow: 0 0 20px var(--accent-light); 
+            line-height: 1;
+        }
+
+        /* Бейджи (Free/Pro) */
+        .level-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            padding: 6px 18px;
+            border-radius: 30px;
+        }
+
+        .badge-free {
+            background: #ffffff;
+            color: var(--accent-purple);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .badge-pro {
+            background: linear-gradient(45deg, #140a28, #3a1c61);
+            color: var(--accent-light);
+            border: 1px solid rgba(177, 143, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(177,143,255,0.2);
+        }
+
+        /* Кнопки внутри карточек */
+        .media-buttons {
+            display: flex;
+            gap: 12px;
+            flex-direction: column; 
+        }
+
+        .promo-btn { 
+            background: linear-gradient(45deg, #7b2cbf, #b18fff); 
+            color: #fff; 
+            border: none; 
+            padding: 14px 20px; 
+            border-radius: 30px; 
+            font-size: 0.95rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: all 0.3s; 
+            box-shadow: 0 5px 20px rgba(177, 143, 255, 0.4); 
+            font-family: 'Nunito', sans-serif; 
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .promo-btn:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 5px 30px rgba(177, 143, 255, 0.7); 
+            color: #fff;
+        }
+
+        .btn-locked {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(177, 143, 255, 0.3);
+            color: var(--text-dim);
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        
+        .btn-locked:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: rgba(177, 143, 255, 0.5);
+            color: var(--accent-light);
+        }
+
+        @media (max-width: 600px) {
+            .author-group-header { font-size: 2.2rem; }
+            .brand-text { display: none; }
+            .level-grid { grid-template-columns: 1fr; }
+            .container { margin-top: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Канвас для анимации звезд -->
+    <canvas id="starCanvas"></canvas>
+
+    <!-- Верхняя панель (Syolana) -->
+    <div class="top-bar">
+        <a href="#" class="brand-logo-container">
+            <div class="brand-logo">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <filter id="logoGlow">
+                            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <g stroke="#7b2cbf" stroke-width="1.5" fill="rgba(177, 143, 255, 0.15)" filter="url(#logoGlow)">
+                        <path d="M50,15 C60,28 65,42 50,50 C35,42 40,28 50,15 Z" />
+                        <path d="M50,50 C65,42 85,32 90,47 C80,57 65,57 50,50 Z" />
+                        <path d="M50,50 C35,42 15,32 10,47 C20,57 35,57 50,50 Z" />
+                        <path d="M50,50 C65,60 75,80 60,90 C50,80 50,65 50,50 Z" />
+                        <path d="M50,50 C35,60 25,80 40,90 C50,80 50,65 50,50 Z" />
+                        <circle cx="50" cy="50" r="4" fill="#7b2cbf" stroke="none" opacity="1"/>
+                    </g>
+                    <text x="50" y="58" font-family="'Cormorant Garamond', serif" font-size="28" fill="#000000" text-anchor="middle" font-weight="600" letter-spacing="1">SY</text>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <span class="brand-text-title">Syolana</span>
+                <span class="brand-text-sub">Иммерсивная Платформа</span>
+            </div>
+        </a>
+        
+        <div class="right-controls">
+            <button id="fullscreen-btn" class="action-circle-btn">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container">
+        
+        <div class="main-header">
+            <h1 class="author-group-header">Испанский язык (Español)</h1>
+            <p class="subtitle">Системный подход к освоению языков</p>
+        </div>
+
+        <div class="level-grid">
+            
+            <!-- Уровень A1 -->
+            <div class="level-card">
+                <span class="level-badge badge-free">Free</span>
+                <div class="level-title">A1</div>
+                <div class="media-buttons">
+                    <a href="a1-spanish-rules.html" class="promo-btn">Правила А1</a>
+                    <a href="a1-spanish-words.html" class="promo-btn">Слова А1</a>
+                    <a href="a1-spanish-practice.html" class="promo-btn">Практика А1</a>
+                </div>
+            </div>
+
+            <!-- Уровень A2 -->
+            <div class="level-card">
+                <span class="level-badge badge-pro">Pro</span>
+                <div class="level-title">A2</div>
+                <div class="media-buttons">
+                    <button class="promo-btn btn-locked"><i class="fa-solid fa-lock" style="margin-right: 8px;"></i> Доступ закрыт</button>
+                </div>
+            </div>
+
+            <!-- Уровень B1 -->
+            <div class="level-card">
+                <span class="level-badge badge-pro">Pro</span>
+                <div class="level-title">B1</div>
+                <div class="media-buttons">
+                    <button class="promo-btn btn-locked"><i class="fa-solid fa-lock" style="margin-right: 8px;"></i> Доступ закрыт</button>
+                </div>
+            </div>
+
+            <!-- Уровень B2 -->
+            <div class="level-card">
+                <span class="level-badge badge-pro">Pro</span>
+                <div class="level-title">B2</div>
+                <div class="media-buttons">
+                    <button class="promo-btn btn-locked"><i class="fa-solid fa-lock" style="margin-right: 8px;"></i> Доступ закрыт</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Скрипты (Звезды и Полный экран) -->
+    <script>
+        // Скрипт полного экрана (Syolana)
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) { 
+                document.documentElement.requestFullscreen(); 
+                fullscreenBtn.querySelector('i').classList.replace('fa-expand', 'fa-compress'); 
+            } else { 
+                document.exitFullscreen(); 
+                fullscreenBtn.querySelector('i').classList.replace('fa-compress', 'fa-expand'); 
+            }
+        });
+
+        // Скрипт оригинальных звезд на фоне
+        const canvas = document.getElementById('starCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let stars = [];
+
+        const starColors = ['#FF003C', '#0055FF', '#FFB300', '#00C853', '#AA00FF', '#00E5FF'];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Star {
+            constructor() {
+                this.reset(true);
+            }
+
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                this.y = initial ? Math.random() * height : height + 10;
+                
+                this.size = Math.random() * 2.5 + 0.5; 
+                
+                this.speedY = -(Math.random() * 1.5 + 0.5); 
+                this.speedX = (Math.random() - 0.5) * 0.8; 
+                
+                this.color = starColors[Math.floor(Math.random() * starColors.length)];
+                
+                this.angle = Math.random() * Math.PI * 2;
+                this.blinkSpeed = Math.random() * 0.04 + 0.01;
+                this.baseOpacity = Math.random() * 0.6 + 0.2; 
+                this.currentOpacity = this.baseOpacity;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.y < -20) this.reset();
+                if (this.x < -20) this.x = width + 20;
+                if (this.x > width + 20) this.x = -20;
+
+                this.angle += this.blinkSpeed;
+                this.currentOpacity = this.baseOpacity + Math.sin(this.angle) * 0.4;
+                
+                if (this.currentOpacity < 0.1) this.currentOpacity = 0.1; 
+                if (this.currentOpacity > 1) this.currentOpacity = 1;
+            }
+
+            draw() {
+                ctx.globalAlpha = this.currentOpacity;
+                
+                ctx.shadowBlur = this.size * 2;
+                ctx.shadowColor = this.color;
+                
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.shadowBlur = 0; 
+            }
+        }
+
+        function initStars() {
+            stars = [];
+            const numStars = 500; 
+            for (let i = 0; i < numStars; i++) {
+                stars.push(new Star());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            resize();
+            initStars();
+        });
+
+        resize();
+        initStars();
+        animate();
+    </script>
+</body>
+</html>
