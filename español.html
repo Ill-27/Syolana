@@ -1,0 +1,2223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#030309">
+
+    <meta
+        name="description"
+        content="Syolana — системный подход к изучению испанского языка. Правила, слова и практика."
+    >
+
+    <title>Syolana | Испанский язык</title>
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        /* =========================================================
+           ОСНОВНЫЕ НАСТРОЙКИ
+        ========================================================= */
+
+        :root {
+            color-scheme: dark;
+
+            --bg-color: #000000;
+
+            --text-main: #f8f6ff;
+            --text-dim: #d0cadf;
+            --text-soft: #b0a9c1;
+
+            --accent-purple: #c5a8ff;
+            --accent-blue: #a9cdff;
+            --accent-pink: #efb7e0;
+
+            --glass-bg: rgba(12, 12, 25, 0.36);
+            --glass-border: rgba(224, 211, 255, 0.19);
+            --glass-border-hover: rgba(224, 211, 255, 0.36);
+
+            --shadow-soft:
+                0 20px 65px rgba(0, 0, 0, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.09),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.025);
+
+            --shadow-hover:
+                0 26px 75px rgba(0, 0, 0, 0.38),
+                0 0 32px rgba(165, 130, 245, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14);
+
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            min-height: 100%;
+            background: var(--bg-color);
+            scroll-behavior: smooth;
+            scrollbar-color: #615371 #08080e;
+            scrollbar-width: thin;
+        }
+
+        body {
+            min-width: 280px;
+            min-height: 100vh;
+            min-height: 100svh;
+
+            position: relative;
+            isolation: isolate;
+
+            overflow-x: hidden;
+
+            background: var(--bg-color);
+            color: var(--text-main);
+
+            font-family: "Nunito", sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        button,
+        a {
+            touch-action: manipulation;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button:disabled {
+            opacity: 1;
+            -webkit-text-fill-color: currentColor;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #ddccff;
+            outline-offset: 5px;
+        }
+
+        ::selection {
+            color: #ffffff;
+            background: rgba(164, 119, 239, 0.55);
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #08080e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border: 2px solid #08080e;
+            border-radius: 10px;
+            background: #615371;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* =========================================================
+           СЕВЕРНОЕ СИЯНИЕ
+           Цветные слои находятся ниже звёзд.
+           Нижняя часть фона плавно становится чёрной.
+        ========================================================= */
+
+        .aurora-background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+
+            overflow: hidden;
+            pointer-events: none;
+            user-select: none;
+
+            background: #000000;
+        }
+
+        .aurora-layer {
+            position: absolute;
+            inset: -18% -22%;
+
+            transform-origin: 50% 25%;
+
+            filter: blur(48px) saturate(120%);
+            will-change: transform, opacity;
+
+            backface-visibility: hidden;
+        }
+
+        .aurora-layer--one {
+            background:
+                radial-gradient(
+                    ellipse at 18% 17%,
+                    rgba(45, 93, 225, 0.78) 0%,
+                    rgba(24, 56, 151, 0.32) 26%,
+                    transparent 56%
+                ),
+                radial-gradient(
+                    ellipse at 76% 12%,
+                    rgba(137, 57, 207, 0.58) 0%,
+                    rgba(76, 25, 126, 0.24) 28%,
+                    transparent 56%
+                ),
+                radial-gradient(
+                    ellipse at 48% 40%,
+                    rgba(12, 113, 139, 0.36) 0%,
+                    transparent 53%
+                );
+
+            animation: auroraOne 29s ease-in-out infinite alternate;
+        }
+
+        .aurora-layer--two {
+            background:
+                radial-gradient(
+                    ellipse at 82% 17%,
+                    rgba(238, 168, 24, 0.52) 0%,
+                    rgba(135, 85, 9, 0.22) 25%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    ellipse at 15% 30%,
+                    rgba(182, 40, 77, 0.46) 0%,
+                    transparent 48%
+                ),
+                radial-gradient(
+                    ellipse at 54% 9%,
+                    rgba(28, 160, 97, 0.43) 0%,
+                    transparent 48%
+                );
+
+            animation: auroraTwo 35s ease-in-out infinite alternate;
+        }
+
+        .aurora-layer--three {
+            background:
+                radial-gradient(
+                    ellipse at 35% 12%,
+                    rgba(219, 90, 25, 0.40) 0%,
+                    transparent 43%
+                ),
+                radial-gradient(
+                    ellipse at 88% 35%,
+                    rgba(28, 143, 210, 0.42) 0%,
+                    transparent 48%
+                ),
+                radial-gradient(
+                    ellipse at 47% 26%,
+                    rgba(137, 48, 204, 0.40) 0%,
+                    transparent 49%
+                );
+
+            animation: auroraThree 24s ease-in-out infinite alternate;
+        }
+
+        .aurora-background::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.14) 0%,
+                    rgba(0, 0, 0, 0.22) 24%,
+                    rgba(0, 0, 0, 0.48) 46%,
+                    rgba(0, 0, 0, 0.78) 65%,
+                    rgba(0, 0, 0, 0.96) 82%,
+                    #000000 94%
+                ),
+                radial-gradient(
+                    ellipse at 50% 20%,
+                    transparent 25%,
+                    rgba(0, 0, 0, 0.30) 100%
+                );
+        }
+
+        @keyframes auroraOne {
+            0% {
+                opacity: 0.90;
+                transform: translate3d(-4%, -2%, 0) scale(1.03) rotate(-6deg);
+            }
+
+            50% {
+                opacity: 0.60;
+                transform: translate3d(5%, 3%, 0) scale(1.12) rotate(3deg);
+            }
+
+            100% {
+                opacity: 0.95;
+                transform: translate3d(1%, -4%, 0) scale(1.06) rotate(8deg);
+            }
+        }
+
+        @keyframes auroraTwo {
+            0% {
+                opacity: 0.32;
+                transform: translate3d(6%, -4%, 0) scale(1.10) rotate(8deg);
+            }
+
+            50% {
+                opacity: 0.82;
+                transform: translate3d(-5%, 2%, 0) scale(1.02) rotate(-4deg);
+            }
+
+            100% {
+                opacity: 0.48;
+                transform: translate3d(-1%, -1%, 0) scale(1.14) rotate(-10deg);
+            }
+        }
+
+        @keyframes auroraThree {
+            0% {
+                opacity: 0.50;
+                transform: translate3d(-3%, 4%, 0) scale(1.04) rotate(-3deg);
+            }
+
+            100% {
+                opacity: 0.85;
+                transform: translate3d(5%, -3%, 0) scale(1.15) rotate(7deg);
+            }
+        }
+
+        /* =========================================================
+           ЗВЁЗДЫ И НАДПИСИ
+           Над чёрным затемнением, но под интерфейсом.
+        ========================================================= */
+
+        #starCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+
+            display: block;
+            width: 100%;
+            height: 100%;
+
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* =========================================================
+           ОБЩЕЕ МАТОВОЕ СТЕКЛО
+        ========================================================= */
+
+        .glass {
+            border: 1px solid var(--glass-border);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.065),
+                    rgba(255, 255, 255, 0.012) 55%,
+                    rgba(189, 163, 255, 0.035)
+                ),
+                var(--glass-bg);
+
+            -webkit-backdrop-filter: blur(14px) saturate(125%);
+            backdrop-filter: blur(14px) saturate(125%);
+
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* =========================================================
+           ВЕРХНЯЯ ПАНЕЛЬ
+        ========================================================= */
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: 100%;
+
+            padding:
+                calc(20px + env(safe-area-inset-top, 0px))
+                max(28px, env(safe-area-inset-right, 0px))
+                12px
+                max(28px, env(safe-area-inset-left, 0px));
+
+            pointer-events: none;
+        }
+
+        .brand-logo-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+
+            padding: 7px 17px 7px 9px;
+            border-radius: 22px;
+
+            color: var(--text-main);
+            text-decoration: none;
+
+            pointer-events: auto;
+
+            transition:
+                transform 0.35s var(--ease),
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .brand-logo {
+            display: block;
+            flex: 0 0 auto;
+            width: 47px;
+            height: 47px;
+        }
+
+        .brand-logo svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+
+            overflow: visible;
+            filter: drop-shadow(0 0 8px rgba(180, 135, 255, 0.45));
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text-title {
+            color: #fbf8ff;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: 0.4px;
+        }
+
+        .brand-text-sub {
+            margin-top: 4px;
+            color: #d0c2e8;
+            font-size: 0.59rem;
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: 1.25px;
+            text-transform: uppercase;
+        }
+
+        .right-controls {
+            display: flex;
+            align-items: center;
+            pointer-events: auto;
+        }
+
+        .action-circle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 47px;
+            height: 47px;
+            padding: 0;
+            border-radius: 50%;
+
+            color: #f4eeff;
+            cursor: pointer;
+
+            transition:
+                transform 0.35s var(--ease),
+                border-color 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        .action-circle-btn svg {
+            display: block;
+            width: 20px;
+            height: 20px;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .fullscreen-exit {
+            display: none;
+        }
+
+        .action-circle-btn[aria-pressed="true"] .fullscreen-enter {
+            display: none;
+        }
+
+        .action-circle-btn[aria-pressed="true"] .fullscreen-exit {
+            display: block;
+        }
+
+        .action-circle-btn:disabled {
+            cursor: not-allowed;
+            color: var(--text-soft);
+        }
+
+        /* =========================================================
+           ОСНОВНОЙ КОНТЕЙНЕР
+        ========================================================= */
+
+        .container {
+            position: relative;
+            z-index: 10;
+
+            width: 100%;
+            max-width: 960px;
+
+            margin: 0 auto;
+
+            padding:
+                calc(142px + env(safe-area-inset-top, 0px))
+                40px
+                calc(38px + env(safe-area-inset-bottom, 0px));
+        }
+
+        /* =========================================================
+           ЗАГОЛОВОК
+        ========================================================= */
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            margin-bottom: 45px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            position: relative;
+            width: 132px;
+            height: 132px;
+
+            margin-bottom: 27px;
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 30% 20%,
+                    rgba(211, 183, 255, 0.16),
+                    rgba(60, 39, 103, 0.16) 65%
+                );
+
+            border: 1px solid rgba(223, 204, 255, 0.35);
+
+            -webkit-backdrop-filter: blur(9px);
+            backdrop-filter: blur(9px);
+
+            box-shadow:
+                0 0 0 8px rgba(208, 183, 255, 0.025),
+                0 0 42px rgba(165, 115, 244, 0.17),
+                inset 0 1px 0 rgba(255, 255, 255, 0.20);
+        }
+
+        .profile-avatar svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+        }
+
+        .user-title {
+            max-width: 100%;
+
+            margin-bottom: 13px;
+
+            color: #fcfaff;
+            font-size: clamp(2.15rem, 5.4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.12;
+
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-wrap: balance;
+
+            text-shadow:
+                0 2px 18px rgba(0, 0, 0, 0.40),
+                0 0 36px rgba(204, 175, 255, 0.16);
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 0.4px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.70);
+        }
+
+        .language-label {
+            position: relative;
+            display: inline-block;
+
+            margin-top: 27px;
+            padding: 0 8px 12px;
+
+            color: #e1d2fa;
+            font-size: 0.88rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.50);
+        }
+
+        .language-label::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            height: 1px;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(164, 202, 255, 0.70),
+                rgba(216, 170, 255, 0.85),
+                rgba(243, 188, 213, 0.65),
+                transparent
+            );
+
+            box-shadow: 0 0 14px rgba(185, 147, 255, 0.30);
+        }
+
+        /* =========================================================
+           ЯЗЫКОВАЯ ПАНЕЛЬ
+        ========================================================= */
+
+        .language-panel {
+            position: relative;
+
+            padding: 34px;
+            border-radius: 27px;
+
+            animation: fadeUp 0.85s var(--ease) both;
+
+            transition:
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
+        }
+
+        .language-panel::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            left: 10%;
+            right: 10%;
+
+            height: 1px;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(216, 192, 255, 0.70),
+                rgba(177, 213, 255, 0.65),
+                transparent
+            );
+
+            pointer-events: none;
+        }
+
+        .panel-heading {
+            margin-bottom: 27px;
+            text-align: center;
+        }
+
+        .panel-kicker {
+            margin-bottom: 8px;
+
+            color: #d6c5ed;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 2.8px;
+            text-transform: uppercase;
+        }
+
+        .panel-title {
+            color: var(--text-main);
+            font-size: clamp(2rem, 4.5vw, 2.6rem);
+            font-weight: 400;
+            line-height: 1.15;
+            text-wrap: balance;
+        }
+
+        .panel-title em {
+            color: #cfb5ff;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .panel-divider {
+            width: 100%;
+            height: 1px;
+
+            margin: 0 0 32px;
+            border: none;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(220, 209, 255, 0.23),
+                transparent
+            );
+        }
+
+        /* =========================================================
+           КАРТОЧКИ УРОВНЕЙ
+        ========================================================= */
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px 21px;
+        }
+
+        .level-card {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            min-width: 0;
+            min-height: 235px;
+
+            padding: 29px 22px 22px;
+
+            border: 1px solid rgba(221, 208, 249, 0.18);
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.055),
+                    rgba(255, 255, 255, 0.012) 60%
+                ),
+                rgba(13, 12, 28, 0.20);
+
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.14),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+            transition:
+                transform 0.4s var(--ease),
+                border-color 0.4s ease,
+                background-color 0.4s ease,
+                box-shadow 0.4s ease;
+        }
+
+        .level-card--available {
+            border-color: rgba(201, 174, 255, 0.32);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(199, 172, 255, 0.075),
+                    rgba(255, 255, 255, 0.015) 65%
+                ),
+                rgba(16, 12, 31, 0.20);
+        }
+
+        .level-badge {
+            position: absolute;
+            top: -12px;
+            right: 18px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 54px;
+            min-height: 26px;
+            padding: 4px 13px;
+
+            border-radius: 20px;
+
+            font-size: 0.64rem;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.20),
+                inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        .badge-free {
+            color: #f4ebff;
+
+            border: 1px solid rgba(216, 189, 255, 0.39);
+
+            background: linear-gradient(
+                135deg,
+                rgba(124, 81, 191, 0.45),
+                rgba(64, 45, 106, 0.48)
+            );
+        }
+
+        .badge-pro {
+            color: #d2c6e4;
+
+            border: 1px solid rgba(224, 214, 242, 0.22);
+            background: rgba(31, 26, 46, 0.55);
+        }
+
+        .level-title {
+            margin-bottom: 24px;
+
+            color: #f6f0ff;
+            font-size: 2.8rem;
+            font-weight: 500;
+            line-height: 1;
+            text-align: center;
+
+            text-shadow: 0 0 23px rgba(192, 151, 255, 0.18);
+        }
+
+        .locked .level-title {
+            color: #d5cbe3;
+        }
+
+        .media-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* =========================================================
+           КНОПКИ И ССЫЛКИ
+        ========================================================= */
+
+        .btn {
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            width: 100%;
+            min-height: 47px;
+
+            padding: 11px 16px;
+
+            border: 1px solid rgba(222, 204, 255, 0.25);
+            border-radius: 30px;
+
+            color: #eee5ff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(190, 157, 247, 0.11),
+                    rgba(172, 190, 243, 0.035)
+                ),
+                rgba(255, 255, 255, 0.018);
+
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.085),
+                0 4px 12px rgba(0, 0, 0, 0.10);
+
+            font-size: 0.79rem;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: 0.8px;
+
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s var(--ease),
+                color 0.3s ease,
+                border-color 0.3s ease,
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(0) scale(0.985);
+        }
+
+        .btn-locked {
+            color: #b8aec9;
+
+            border-color: rgba(209, 193, 234, 0.15);
+            border-style: dashed;
+
+            background: rgba(255, 255, 255, 0.025);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+            cursor: not-allowed;
+        }
+
+        .lock-icon {
+            flex: 0 0 auto;
+            width: 14px;
+            height: 14px;
+
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* =========================================================
+           ИНФОРМАЦИОННАЯ ПАНЕЛЬ
+        ========================================================= */
+
+        .bottom-note {
+            margin-top: 27px;
+            padding: 19px 23px;
+
+            border: 1px solid rgba(217, 201, 246, 0.14);
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(199, 174, 245, 0.045),
+                    rgba(255, 255, 255, 0.012)
+                ),
+                rgba(10, 10, 22, 0.18);
+
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
+
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+            color: var(--text-dim);
+            font-size: 0.86rem;
+            font-style: italic;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .bottom-note strong {
+            color: #e2d1ff;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        .site-footer {
+            margin-top: 43px;
+            padding: 25px 12px 12px;
+
+            border-top: 1px solid rgba(218, 201, 247, 0.12);
+
+            color: var(--text-soft);
+            font-size: 0.79rem;
+            text-align: center;
+
+            text-shadow: 0 2px 8px #000000;
+        }
+
+        .footer-brand {
+            color: #d4c0f3;
+            text-decoration: none;
+        }
+
+        .footer-brand:hover {
+            color: #f0e5ff;
+        }
+
+        /* =========================================================
+           ЭФФЕКТЫ ПРИ НАВЕДЕНИИ
+        ========================================================= */
+
+        @media (hover: hover) and (pointer: fine) {
+            .brand-logo-container:hover {
+                transform: translateY(-2px);
+                border-color: var(--glass-border-hover);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .action-circle-btn:hover:not(:disabled) {
+                transform: translateY(-2px) scale(1.06);
+                border-color: rgba(224, 204, 255, 0.48);
+
+                box-shadow:
+                    0 8px 28px rgba(0, 0, 0, 0.32),
+                    0 0 22px rgba(183, 144, 255, 0.16),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+            }
+
+            .language-panel:hover {
+                border-color: rgba(224, 211, 255, 0.26);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .level-card:hover {
+                transform: translateY(-5px);
+                border-color: rgba(217, 191, 255, 0.40);
+
+                box-shadow:
+                    0 15px 38px rgba(0, 0, 0, 0.24),
+                    0 0 26px rgba(171, 127, 239, 0.07),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+            }
+
+            .btn:hover:not(:disabled) {
+                transform: translateY(-2px);
+
+                color: #ffffff;
+                border-color: rgba(226, 206, 255, 0.51);
+                background-color: rgba(170, 126, 234, 0.13);
+
+                box-shadow:
+                    0 8px 22px rgba(0, 0, 0, 0.22),
+                    0 0 20px rgba(180, 139, 247, 0.10),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            }
+        }
+
+        /* =========================================================
+           АНИМАЦИЯ ПОЯВЛЕНИЯ
+        ========================================================= */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animations-paused .aurora-layer {
+            animation-play-state: paused;
+        }
+
+        /* =========================================================
+           АДАПТИВНОСТЬ
+        ========================================================= */
+
+        @media (max-width: 700px) {
+            .top-bar {
+                padding:
+                    calc(15px + env(safe-area-inset-top, 0px))
+                    max(17px, env(safe-area-inset-right, 0px))
+                    10px
+                    max(17px, env(safe-area-inset-left, 0px));
+            }
+
+            .brand-logo-container {
+                gap: 0;
+                padding: 5px;
+                border-radius: 18px;
+            }
+
+            .brand-logo {
+                width: 43px;
+                height: 43px;
+            }
+
+            .brand-text {
+                display: none;
+            }
+
+            .action-circle-btn {
+                width: 44px;
+                height: 44px;
+            }
+
+            .container {
+                padding:
+                    calc(114px + env(safe-area-inset-top, 0px))
+                    18px
+                    calc(25px + env(safe-area-inset-bottom, 0px));
+            }
+
+            .hero {
+                margin-bottom: 34px;
+            }
+
+            .profile-avatar {
+                width: 112px;
+                height: 112px;
+                margin-bottom: 25px;
+            }
+
+            .user-title {
+                font-size: clamp(2rem, 7vw, 2.7rem);
+                letter-spacing: 1.7px;
+            }
+
+            .subtitle {
+                max-width: 290px;
+                font-size: 0.89rem;
+            }
+
+            .language-label {
+                margin-top: 23px;
+                font-size: 0.75rem;
+                letter-spacing: 1.4px;
+            }
+
+            .language-panel {
+                padding: 27px 18px 20px;
+                border-radius: 23px;
+
+                -webkit-backdrop-filter: blur(10px) saturate(120%);
+                backdrop-filter: blur(10px) saturate(120%);
+            }
+
+            .panel-heading {
+                margin-bottom: 24px;
+            }
+
+            .panel-title {
+                font-size: 2.1rem;
+            }
+
+            .panel-kicker {
+                font-size: 0.63rem;
+                letter-spacing: 2.2px;
+            }
+
+            .panel-divider {
+                margin-bottom: 29px;
+            }
+
+            .level-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .level-card {
+                min-height: 207px;
+                padding: 28px 21px 21px;
+                border-radius: 18px;
+            }
+
+            .level-card--available {
+                min-height: 268px;
+            }
+
+            .level-title {
+                font-size: 2.7rem;
+            }
+
+            .btn {
+                min-height: 47px;
+            }
+
+            .bottom-note {
+                margin-top: 23px;
+                padding: 17px 15px;
+
+                font-size: 0.81rem;
+                line-height: 1.85;
+            }
+
+            .site-footer {
+                margin-top: 33px;
+                font-size: 0.75rem;
+            }
+
+            .aurora-layer {
+                filter: blur(34px) saturate(115%);
+            }
+        }
+
+        @media (max-width: 380px) {
+            .container {
+                padding-left: 13px;
+                padding-right: 13px;
+            }
+
+            .user-title {
+                font-size: 1.95rem;
+                letter-spacing: 1px;
+            }
+
+            .language-label {
+                font-size: 0.69rem;
+                letter-spacing: 1px;
+            }
+
+            .language-panel {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .panel-title {
+                font-size: 1.9rem;
+            }
+
+            .level-card {
+                padding-left: 17px;
+                padding-right: 17px;
+            }
+        }
+
+        /* Если браузер не поддерживает размытие стекла. */
+        @supports not (
+            (backdrop-filter: blur(1px)) or
+            (-webkit-backdrop-filter: blur(1px))
+        ) {
+            .glass {
+                background-color: rgba(12, 12, 25, 0.69);
+            }
+
+            .level-card {
+                background-color: rgba(17, 15, 31, 0.42);
+            }
+
+            .level-badge {
+                background-color: rgba(35, 27, 54, 0.88);
+            }
+        }
+
+        /* Учитываем системную настройку уменьшения движения. */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .aurora-layer {
+                will-change: auto;
+            }
+
+            .aurora-layer--one {
+                opacity: 0.85;
+            }
+
+            .aurora-layer--two {
+                opacity: 0.50;
+            }
+
+            .aurora-layer--three {
+                opacity: 0.55;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Переливающийся фон -->
+    <div class="aurora-background" aria-hidden="true">
+        <div class="aurora-layer aurora-layer--one"></div>
+        <div class="aurora-layer aurora-layer--two"></div>
+        <div class="aurora-layer aurora-layer--three"></div>
+    </div>
+
+    <!-- Звёзды и декоративные надписи -->
+    <canvas id="starCanvas" aria-hidden="true"></canvas>
+
+    <!-- Верхняя панель -->
+    <div class="top-bar">
+        <a
+            href="https://syolana.com/"
+            class="brand-logo-container glass"
+            aria-label="Перейти на главную страницу Syolana"
+            title="Главная страница Syolana"
+        >
+            <span class="brand-logo">
+                <svg
+                    viewBox="0 0 100 100"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+                    <g
+                        stroke="#c5a4ff"
+                        stroke-width="1.6"
+                        fill="#aa7bea"
+                        fill-opacity="0.15"
+                    >
+                        <path d="M50 15 C60 28 65 42 50 50 C35 42 40 28 50 15 Z"/>
+                        <path d="M50 50 C65 42 85 32 90 47 C80 57 65 57 50 50 Z"/>
+                        <path d="M50 50 C35 42 15 32 10 47 C20 57 35 57 50 50 Z"/>
+                        <path d="M50 50 C65 60 75 80 60 90 C50 80 50 65 50 50 Z"/>
+                        <path d="M50 50 C35 60 25 80 40 90 C50 80 50 65 50 50 Z"/>
+                    </g>
+
+                    <text
+                        x="50"
+                        y="59"
+                        font-family="'Cormorant Garamond', Georgia, serif"
+                        font-size="29"
+                        font-weight="600"
+                        fill="#ffffff"
+                        text-anchor="middle"
+                    >SY</text>
+                </svg>
+            </span>
+
+            <span class="brand-text">
+                <span class="brand-text-title">Syolana</span>
+                <span class="brand-text-sub">Иммерсивная платформа</span>
+            </span>
+        </a>
+
+        <div class="right-controls">
+            <button
+                type="button"
+                id="fullscreen-btn"
+                class="action-circle-btn glass"
+                aria-label="Полноэкранный режим"
+                aria-pressed="false"
+                title="Полноэкранный режим"
+            >
+                <svg
+                    class="fullscreen-enter"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path d="M8 3H3v5 M16 3h5v5 M21 16v5h-5 M3 16v5h5"/>
+                </svg>
+
+                <svg
+                    class="fullscreen-exit"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+                    <path d="M3 8h5V3 M21 8h-5V3 M16 21v-5h5 M8 21v-5H3"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <p id="screen-status" class="sr-only" role="status"></p>
+
+    <!-- Основной контент -->
+    <main class="container">
+        <header class="hero">
+            <div class="profile-avatar">
+                <svg
+                    viewBox="0 0 200 200"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+                    <defs>
+                        <linearGradient
+                            id="avatarGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
+                        >
+                            <stop
+                                offset="0%"
+                                stop-color="#e6d0ff"
+                                stop-opacity="0.24"
+                            />
+
+                            <stop
+                                offset="50%"
+                                stop-color="#aa78ea"
+                                stop-opacity="0.13"
+                            />
+
+                            <stop
+                                offset="100%"
+                                stop-color="#617fd5"
+                                stop-opacity="0.20"
+                            />
+                        </linearGradient>
+
+                        <filter
+                            id="avatarGlow"
+                            x="-50%"
+                            y="-50%"
+                            width="200%"
+                            height="200%"
+                        >
+                            <feGaussianBlur
+                                stdDeviation="2.3"
+                                result="blur"
+                            />
+
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <circle
+                        cx="100"
+                        cy="100"
+                        r="99"
+                        fill="url(#avatarGradient)"
+                    />
+
+                    <g
+                        fill="#b68be9"
+                        fill-opacity="0.07"
+                        stroke="#dac4ff"
+                        stroke-width="1.65"
+                        filter="url(#avatarGlow)"
+                    >
+                        <path d="M100 28 C120 55 130 75 100 100 C70 75 80 55 100 28 Z"/>
+                        <path d="M100 100 C130 75 165 70 176 95 C155 116 130 115 100 100 Z"/>
+                        <path d="M100 100 C70 75 35 70 24 95 C45 116 70 115 100 100 Z"/>
+                        <path d="M100 100 C130 125 140 160 115 177 C100 155 98 130 100 100 Z"/>
+                        <path d="M100 100 C70 125 60 160 85 177 C100 155 102 130 100 100 Z"/>
+                    </g>
+
+                    <text
+                        x="100"
+                        y="115"
+                        font-family="'Cormorant Garamond', Georgia, serif"
+                        font-size="54"
+                        font-weight="500"
+                        fill="#ffffff"
+                        text-anchor="middle"
+                    >SY</text>
+                </svg>
+            </div>
+
+            <h1 class="user-title">Абсолютное погружение</h1>
+
+            <p class="subtitle">
+                Системный подход к освоению языков
+            </p>
+
+            <p class="language-label">
+                Испанский язык · <span lang="es">Español</span>
+            </p>
+        </header>
+
+        <section
+            class="language-panel glass"
+            aria-labelledby="language-title"
+        >
+            <div class="panel-heading">
+                <p class="panel-kicker">Языковой модуль</p>
+
+                <h2 class="panel-title" id="language-title">
+                    Испанский язык <em lang="es">(Español)</em>
+                </h2>
+            </div>
+
+            <hr class="panel-divider">
+
+            <div class="level-grid">
+                <!-- A1 -->
+                <article
+                    class="level-card level-card--available"
+                    aria-labelledby="level-a1"
+                >
+                    <span class="level-badge badge-free">Plus</span>
+
+                    <h3 class="level-title" id="level-a1">A1</h3>
+
+                    <div class="media-buttons">
+                        <a href="a1-spanish-rules.html" class="btn">
+                            Правила A1
+                        </a>
+
+                        <a href="a1-spanish-words.html" class="btn">
+                            Слова A1
+                        </a>
+
+                        <a href="a1-spanish-practice.html" class="btn">
+                            Практика A1
+                        </a>
+                    </div>
+                </article>
+
+                <!-- A2 -->
+                <article
+                    class="level-card locked"
+                    aria-labelledby="level-a2"
+                >
+                    <span class="level-badge badge-pro">Pro</span>
+
+                    <h3 class="level-title" id="level-a2">A2</h3>
+
+                    <div class="media-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-locked"
+                            aria-label="Уровень A2 — доступ закрыт"
+                            disabled
+                        >
+                            <svg
+                                class="lock-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <rect x="5" y="10" width="14" height="11" rx="3"/>
+                                <path d="M8 10V7a4 4 0 0 1 8 0v3 M12 14v3"/>
+                            </svg>
+
+                            Доступ закрыт
+                        </button>
+                    </div>
+                </article>
+
+                <!-- B1 -->
+                <article
+                    class="level-card locked"
+                    aria-labelledby="level-b1"
+                >
+                    <span class="level-badge badge-pro">Pro</span>
+
+                    <h3 class="level-title" id="level-b1">B1</h3>
+
+                    <div class="media-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-locked"
+                            aria-label="Уровень B1 — доступ закрыт"
+                            disabled
+                        >
+                            <svg
+                                class="lock-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <rect x="5" y="10" width="14" height="11" rx="3"/>
+                                <path d="M8 10V7a4 4 0 0 1 8 0v3 M12 14v3"/>
+                            </svg>
+
+                            Доступ закрыт
+                        </button>
+                    </div>
+                </article>
+
+                <!-- B2 -->
+                <article
+                    class="level-card locked"
+                    aria-labelledby="level-b2"
+                >
+                    <span class="level-badge badge-pro">Pro</span>
+
+                    <h3 class="level-title" id="level-b2">B2</h3>
+
+                    <div class="media-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-locked"
+                            aria-label="Уровень B2 — доступ закрыт"
+                            disabled
+                        >
+                            <svg
+                                class="lock-icon"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <rect x="5" y="10" width="14" height="11" rx="3"/>
+                                <path d="M8 10V7a4 4 0 0 1 8 0v3 M12 14v3"/>
+                            </svg>
+
+                            Доступ закрыт
+                        </button>
+                    </div>
+                </article>
+            </div>
+
+            <div class="bottom-note">
+                <strong>A1 открыт бесплатно.</strong>
+                Остальные уровни будут доступны после завершения разработки.
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            © <span id="current-year"></span>
+            <a href="https://syolana.com/" class="footer-brand">Syolana</a>.
+            Все права защищены.
+        </footer>
+    </main>
+
+    <script>
+        (() => {
+            "use strict";
+
+            /* =====================================================
+               ГОД В FOOTER
+            ===================================================== */
+
+            document.getElementById("current-year").textContent =
+                new Date().getFullYear();
+
+            /* =====================================================
+               ПОЛНОЭКРАННЫЙ РЕЖИМ
+            ===================================================== */
+
+            const fullscreenButton =
+                document.getElementById("fullscreen-btn");
+
+            const screenStatus =
+                document.getElementById("screen-status");
+
+            const root = document.documentElement;
+
+            const requestFullscreen =
+                root.requestFullscreen ||
+                root.webkitRequestFullscreen;
+
+            const exitFullscreen =
+                document.exitFullscreen ||
+                document.webkitExitFullscreen;
+
+            function getFullscreenElement() {
+                return (
+                    document.fullscreenElement ||
+                    document.webkitFullscreenElement ||
+                    null
+                );
+            }
+
+            function updateFullscreenButton() {
+                const active = Boolean(getFullscreenElement());
+
+                const label = active
+                    ? "Выйти из полноэкранного режима"
+                    : "Полноэкранный режим";
+
+                fullscreenButton.setAttribute(
+                    "aria-pressed",
+                    String(active)
+                );
+
+                fullscreenButton.setAttribute("aria-label", label);
+                fullscreenButton.title = label;
+            }
+
+            if (requestFullscreen && exitFullscreen) {
+                fullscreenButton.addEventListener("click", async () => {
+                    try {
+                        screenStatus.textContent = "";
+
+                        if (getFullscreenElement()) {
+                            await exitFullscreen.call(document);
+                        } else {
+                            await requestFullscreen.call(root);
+                        }
+                    } catch (error) {
+                        screenStatus.textContent =
+                            "Браузер не разрешил включить полноэкранный режим.";
+
+                        console.warn(
+                            "Полноэкранный режим недоступен:",
+                            error
+                        );
+                    }
+
+                    updateFullscreenButton();
+                });
+
+                document.addEventListener(
+                    "fullscreenchange",
+                    updateFullscreenButton
+                );
+
+                document.addEventListener(
+                    "webkitfullscreenchange",
+                    updateFullscreenButton
+                );
+
+                updateFullscreenButton();
+            } else {
+                fullscreenButton.disabled = true;
+
+                fullscreenButton.title =
+                    "Полноэкранный режим не поддерживается браузером";
+
+                fullscreenButton.setAttribute(
+                    "aria-label",
+                    "Полноэкранный режим не поддерживается браузером"
+                );
+            }
+
+            /* =====================================================
+               ЗВЁЗДЫ И ДЕКОРАТИВНЫЕ НАДПИСИ
+
+               Сохранено 500 разноцветных звёзд.
+               Скорость не зависит от частоты обновления экрана.
+            ===================================================== */
+
+            const canvas = document.getElementById("starCanvas");
+            const ctx = canvas.getContext("2d");
+
+            if (!ctx) {
+                return;
+            }
+
+            const reducedMotion = window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+            const SETTINGS = {
+                starCount: 500,
+
+                // Ограничение плотности пикселей снижает нагрузку.
+                maxPixelRatio: 2,
+
+                watermarkText: "syolana.com",
+
+                // Размер надписей в CSS-пикселях.
+                watermarkMinSize: 14,
+                watermarkMaxSize: 20,
+
+                // Надписи заметны, но не конкурируют с контентом.
+                watermarkMinOpacity: 0.10,
+                watermarkMaxOpacity: 0.21,
+
+                // Скорость подъёма надписей в пикселях в секунду.
+                watermarkMinSpeed: 10,
+                watermarkMaxSpeed: 22
+            };
+
+            const starColors = [
+                "#FF003C",
+                "#0055FF",
+                "#FFB300",
+                "#00C853",
+                "#AA00FF",
+                "#00E5FF"
+            ];
+
+            const watermarkColors = [
+                "#d8c6f4",
+                "#c0d8f4",
+                "#d5c9e7",
+                "#b9ddd5",
+                "#e0c9d8"
+            ];
+
+            let width = 1;
+            let height = 1;
+            let pixelRatio = 1;
+
+            let stars = [];
+            let watermarks = [];
+
+            let animationId = 0;
+            let resizeId = 0;
+            let previousTime = 0;
+
+            function random(min, max) {
+                return min + Math.random() * (max - min);
+            }
+
+            function clamp(value, min, max) {
+                return Math.max(min, Math.min(max, value));
+            }
+
+            /* =====================================================
+               СВЕЧЕНИЕ ЗВЁЗД
+
+               Свечение рисуется один раз на маленьких холстах,
+               затем переиспользуется в каждом кадре.
+            ===================================================== */
+
+            function createStarSprite(color) {
+                const sprite = document.createElement("canvas");
+
+                sprite.width = 64;
+                sprite.height = 64;
+
+                const spriteCtx = sprite.getContext("2d");
+
+                if (!spriteCtx) {
+                    return null;
+                }
+
+                spriteCtx.shadowColor = color;
+                spriteCtx.shadowBlur = 12;
+                spriteCtx.fillStyle = color;
+
+                spriteCtx.beginPath();
+                spriteCtx.arc(32, 32, 6.4, 0, Math.PI * 2);
+                spriteCtx.fill();
+
+                spriteCtx.shadowBlur = 0;
+                spriteCtx.fillStyle = "rgba(255,255,255,0.72)";
+
+                spriteCtx.beginPath();
+                spriteCtx.arc(32, 32, 2.1, 0, Math.PI * 2);
+                spriteCtx.fill();
+
+                return sprite;
+            }
+
+            const starSprites = starColors.map(createStarSprite);
+
+            class Star {
+                constructor() {
+                    this.reset(true);
+                }
+
+                reset(initial = false) {
+                    this.x = Math.random() * width;
+
+                    this.y = initial
+                        ? Math.random() * height
+                        : height + 15;
+
+                    this.size = random(0.5, 3);
+
+                    // Эквивалент исходной скорости при 60 FPS.
+                    this.speedY = random(30, 120);
+                    this.speedX = random(-24, 24);
+
+                    this.colorIndex = Math.floor(
+                        Math.random() * starColors.length
+                    );
+
+                    this.angle = Math.random() * Math.PI * 2;
+                    this.blinkSpeed = random(0.6, 3);
+
+                    this.baseOpacity = random(0.2, 0.8);
+
+                    this.currentOpacity = clamp(
+                        this.baseOpacity + Math.sin(this.angle) * 0.4,
+                        0.1,
+                        1
+                    );
+                }
+
+                update(delta) {
+                    this.x += this.speedX * delta;
+                    this.y -= this.speedY * delta;
+
+                    if (this.y < -25) {
+                        this.reset();
+                    }
+
+                    if (this.x < -25) {
+                        this.x = width + 25;
+                    } else if (this.x > width + 25) {
+                        this.x = -25;
+                    }
+
+                    this.angle += this.blinkSpeed * delta;
+
+                    this.currentOpacity = clamp(
+                        this.baseOpacity + Math.sin(this.angle) * 0.4,
+                        0.1,
+                        1
+                    );
+                }
+
+                draw() {
+                    ctx.globalAlpha = this.currentOpacity;
+
+                    const sprite = starSprites[this.colorIndex];
+
+                    if (sprite) {
+                        const drawSize = this.size * 10;
+
+                        ctx.drawImage(
+                            sprite,
+                            this.x - drawSize / 2,
+                            this.y - drawSize / 2,
+                            drawSize,
+                            drawSize
+                        );
+                    } else {
+                        ctx.fillStyle = starColors[this.colorIndex];
+                        ctx.beginPath();
+
+                        ctx.arc(
+                            this.x,
+                            this.y,
+                            this.size,
+                            0,
+                            Math.PI * 2
+                        );
+
+                        ctx.fill();
+                    }
+                }
+            }
+
+            /* =====================================================
+               ПОДНИМАЮЩИЕСЯ НАДПИСИ SYOLANA.COM
+
+               Распределение по колонкам помогает избежать
+               хаотичного наложения надписей друг на друга.
+            ===================================================== */
+
+            class Watermark {
+                constructor(column, columns, row, rows) {
+                    this.column = column;
+                    this.columns = columns;
+
+                    this.reset();
+
+                    this.y =
+                        ((row + Math.random() * 0.6) / rows) * height;
+                }
+
+                reset() {
+                    const laneWidth = width / this.columns;
+                    const mobile = width <= 700;
+
+                    this.baseX =
+                        laneWidth * (this.column + 0.5) +
+                        random(-laneWidth * 0.12, laneWidth * 0.12);
+
+                    this.y = height + random(30, 110);
+
+                    this.size = random(
+                        SETTINGS.watermarkMinSize,
+                        mobile ? 17 : SETTINGS.watermarkMaxSize
+                    );
+
+                    this.speed = random(
+                        SETTINGS.watermarkMinSpeed,
+                        SETTINGS.watermarkMaxSpeed
+                    );
+
+                    this.opacity = random(
+                        SETTINGS.watermarkMinOpacity,
+                        SETTINGS.watermarkMaxOpacity
+                    );
+
+                    this.phase = Math.random() * Math.PI * 2;
+                    this.drift = random(4, mobile ? 10 : 18);
+
+                    this.color = watermarkColors[
+                        Math.floor(Math.random() * watermarkColors.length)
+                    ];
+                }
+
+                update(delta) {
+                    this.y -= this.speed * delta;
+                    this.phase += delta * 0.23;
+
+                    if (this.y < -45) {
+                        this.reset();
+                    }
+                }
+
+                draw() {
+                    // Мягкое появление снизу и исчезновение сверху.
+                    const topFade = clamp(
+                        (this.y + 20) / 95,
+                        0,
+                        1
+                    );
+
+                    const bottomFade = clamp(
+                        (height + 30 - this.y) / 100,
+                        0,
+                        1
+                    );
+
+                    ctx.globalAlpha =
+                        this.opacity * topFade * bottomFade;
+
+                    ctx.fillStyle = this.color;
+
+                    ctx.font =
+                        `500 ${this.size}px "Nunito", sans-serif`;
+
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+
+                    ctx.fillText(
+                        SETTINGS.watermarkText,
+                        this.baseX + Math.sin(this.phase) * this.drift,
+                        this.y
+                    );
+                }
+            }
+
+            /* =====================================================
+               СОЗДАНИЕ И МАСШТАБИРОВАНИЕ
+            ===================================================== */
+
+            function createParticles() {
+                stars = Array.from(
+                    { length: SETTINGS.starCount },
+                    () => new Star()
+                );
+
+                const columns = clamp(
+                    Math.floor(width / 170),
+                    2,
+                    10
+                );
+
+                const rows = clamp(
+                    Math.ceil(height / 115),
+                    6,
+                    10
+                );
+
+                watermarks = [];
+
+                for (let column = 0; column < columns; column++) {
+                    for (let row = 0; row < rows; row++) {
+                        watermarks.push(
+                            new Watermark(column, columns, row, rows)
+                        );
+                    }
+                }
+            }
+
+            function resizeCanvas() {
+                const rect = canvas.getBoundingClientRect();
+
+                const nextWidth = Math.max(1, rect.width);
+                const nextHeight = Math.max(1, rect.height);
+
+                const nextPixelRatio = Math.min(
+                    window.devicePixelRatio || 1,
+                    SETTINGS.maxPixelRatio
+                );
+
+                if (
+                    stars.length &&
+                    width === nextWidth &&
+                    height === nextHeight &&
+                    pixelRatio === nextPixelRatio
+                ) {
+                    return;
+                }
+
+                width = nextWidth;
+                height = nextHeight;
+                pixelRatio = nextPixelRatio;
+
+                canvas.width = Math.round(width * pixelRatio);
+                canvas.height = Math.round(height * pixelRatio);
+
+                ctx.setTransform(
+                    pixelRatio,
+                    0,
+                    0,
+                    pixelRatio,
+                    0,
+                    0
+                );
+
+                createParticles();
+                render(0);
+            }
+
+            /* =====================================================
+               ОТРИСОВКА
+            ===================================================== */
+
+            function render(delta) {
+                ctx.clearRect(0, 0, width, height);
+
+                // Надписи немного глубже звёзд.
+                for (const watermark of watermarks) {
+                    if (delta > 0) {
+                        watermark.update(delta);
+                    }
+
+                    watermark.draw();
+                }
+
+                // Звёзды остаются яркими поверх фоновых надписей.
+                for (const star of stars) {
+                    if (delta > 0) {
+                        star.update(delta);
+                    }
+
+                    star.draw();
+                }
+
+                ctx.globalAlpha = 1;
+            }
+
+            function animate(time) {
+                animationId = 0;
+
+                if (document.hidden || reducedMotion.matches) {
+                    previousTime = 0;
+                    return;
+                }
+
+                const delta = previousTime
+                    ? Math.min((time - previousTime) / 1000, 0.05)
+                    : 1 / 60;
+
+                previousTime = time;
+
+                render(delta);
+
+                animationId = requestAnimationFrame(animate);
+            }
+
+            function syncAnimation() {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = 0;
+                }
+
+                previousTime = 0;
+
+                document.body.classList.toggle(
+                    "animations-paused",
+                    document.hidden
+                );
+
+                if (document.hidden) {
+                    return;
+                }
+
+                render(0);
+
+                if (!reducedMotion.matches) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+
+            function queueResize() {
+                if (resizeId) {
+                    return;
+                }
+
+                resizeId = requestAnimationFrame(() => {
+                    resizeId = 0;
+                    resizeCanvas();
+                });
+            }
+
+            /* =====================================================
+               СОБЫТИЯ И ЗАПУСК
+            ===================================================== */
+
+            window.addEventListener(
+                "resize",
+                queueResize,
+                { passive: true }
+            );
+
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener(
+                    "resize",
+                    queueResize,
+                    { passive: true }
+                );
+            }
+
+            document.addEventListener(
+                "visibilitychange",
+                syncAnimation
+            );
+
+            window.addEventListener("pagehide", () => {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = 0;
+                }
+
+                if (resizeId) {
+                    cancelAnimationFrame(resizeId);
+                    resizeId = 0;
+                }
+
+                previousTime = 0;
+            });
+
+            window.addEventListener("pageshow", () => {
+                resizeCanvas();
+                syncAnimation();
+            });
+
+            if (typeof reducedMotion.addEventListener === "function") {
+                reducedMotion.addEventListener(
+                    "change",
+                    syncAnimation
+                );
+            } else if (typeof reducedMotion.addListener === "function") {
+                reducedMotion.addListener(syncAnimation);
+            }
+
+            resizeCanvas();
+            syncAnimation();
+
+            // Перерисовка после загрузки веб-шрифта.
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => {
+                    if (!document.hidden) {
+                        render(0);
+                    }
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
