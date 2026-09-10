@@ -1,0 +1,3876 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#030309">
+    <meta
+        id="page-description"
+        name="description"
+        content="Syolana: изучайте испанский через ежедневное прослушивание, чтение и последовательную практику."
+    >
+
+    <title>Syolana | Испанский язык</title>
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg-color: #000000;
+            --text-main: #f8f6ff;
+            --text-dim: #d0cadf;
+            --text-soft: #b0a9c1;
+            --glass-border: rgba(224, 211, 255, 0.19);
+            --glass-border-hover: rgba(224, 211, 255, 0.36);
+            --shadow-soft:
+                0 20px 65px rgba(0, 0, 0, 0.30),
+                inset 0 1px 0 rgba(255, 255, 255, 0.09),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.025);
+            --shadow-hover:
+                0 26px 75px rgba(0, 0, 0, 0.38),
+                0 0 32px rgba(165, 130, 245, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.14);
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        html {
+            min-height: 100%;
+            background: var(--bg-color);
+            scroll-behavior: smooth;
+            scrollbar-color: #615371 #08080e;
+            scrollbar-width: thin;
+        }
+
+        body {
+            min-width: 280px;
+            min-height: 100vh;
+            min-height: 100svh;
+            position: relative;
+            isolation: isolate;
+            overflow-x: hidden;
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-family: "Nunito", sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+        }
+
+        button, a, input {
+            touch-action: manipulation;
+        }
+
+        button, input {
+            font: inherit;
+        }
+
+        a, button {
+            color: inherit;
+        }
+
+        button:disabled {
+            opacity: 1;
+            -webkit-text-fill-color: currentColor;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 2px solid #ddccff;
+            outline-offset: 5px;
+        }
+
+        ::selection {
+            color: #ffffff;
+            background: rgba(164, 119, 239, 0.55);
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #08080e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border: 2px solid #08080e;
+            border-radius: 10px;
+            background: #615371;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .svg-definitions {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .icon {
+            display: block;
+            flex: 0 0 auto;
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Фон. */
+
+        .aurora-background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            user-select: none;
+            background: #000000;
+        }
+
+        .aurora-layer {
+            position: absolute;
+            inset: -18% -22%;
+            transform-origin: 50% 25%;
+            filter: blur(48px) saturate(120%);
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .aurora-layer--one {
+            background:
+                radial-gradient(ellipse at 18% 17%, rgba(45,93,225,.78) 0%, rgba(24,56,151,.32) 26%, transparent 56%),
+                radial-gradient(ellipse at 76% 12%, rgba(137,57,207,.58) 0%, rgba(76,25,126,.24) 28%, transparent 56%),
+                radial-gradient(ellipse at 48% 40%, rgba(12,113,139,.36) 0%, transparent 53%);
+            animation: auroraOne 29s ease-in-out infinite alternate;
+        }
+
+        .aurora-layer--two {
+            background:
+                radial-gradient(ellipse at 82% 17%, rgba(238,168,24,.52) 0%, rgba(135,85,9,.22) 25%, transparent 50%),
+                radial-gradient(ellipse at 15% 30%, rgba(182,40,77,.46) 0%, transparent 48%),
+                radial-gradient(ellipse at 54% 9%, rgba(28,160,97,.43) 0%, transparent 48%);
+            animation: auroraTwo 35s ease-in-out infinite alternate;
+        }
+
+        .aurora-layer--three {
+            background:
+                radial-gradient(ellipse at 35% 12%, rgba(219,90,25,.40) 0%, transparent 43%),
+                radial-gradient(ellipse at 88% 35%, rgba(28,143,210,.42) 0%, transparent 48%),
+                radial-gradient(ellipse at 47% 26%, rgba(137,48,204,.40) 0%, transparent 49%);
+            animation: auroraThree 24s ease-in-out infinite alternate;
+        }
+
+        .aurora-background::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,.14) 0%, rgba(0,0,0,.22) 24%, rgba(0,0,0,.48) 46%, rgba(0,0,0,.78) 65%, rgba(0,0,0,.96) 82%, #000 94%),
+                radial-gradient(ellipse at 50% 20%, transparent 25%, rgba(0,0,0,.30) 100%);
+        }
+
+        @keyframes auroraOne {
+            0% { opacity: .90; transform: translate3d(-4%,-2%,0) scale(1.03) rotate(-6deg); }
+            50% { opacity: .60; transform: translate3d(5%,3%,0) scale(1.12) rotate(3deg); }
+            100% { opacity: .95; transform: translate3d(1%,-4%,0) scale(1.06) rotate(8deg); }
+        }
+
+        @keyframes auroraTwo {
+            0% { opacity: .32; transform: translate3d(6%,-4%,0) scale(1.10) rotate(8deg); }
+            50% { opacity: .82; transform: translate3d(-5%,2%,0) scale(1.02) rotate(-4deg); }
+            100% { opacity: .48; transform: translate3d(-1%,-1%,0) scale(1.14) rotate(-10deg); }
+        }
+
+        @keyframes auroraThree {
+            0% { opacity: .50; transform: translate3d(-3%,4%,0) scale(1.04) rotate(-3deg); }
+            100% { opacity: .85; transform: translate3d(5%,-3%,0) scale(1.15) rotate(7deg); }
+        }
+
+        #starCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .glass {
+            border: 1px solid var(--glass-border);
+            background:
+                linear-gradient(135deg, rgba(255,255,255,.065), rgba(255,255,255,.012) 55%, rgba(189,163,255,.035)),
+                rgba(12,12,25,.36);
+            -webkit-backdrop-filter: blur(14px) saturate(125%);
+            backdrop-filter: blur(14px) saturate(125%);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* Верхняя панель. */
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            padding:
+                calc(20px + env(safe-area-inset-top, 0px))
+                max(28px, env(safe-area-inset-right, 0px))
+                12px
+                max(28px, env(safe-area-inset-left, 0px));
+            pointer-events: none;
+        }
+
+        .brand-logo-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            padding: 7px 17px 7px 9px;
+            border-radius: 22px;
+            text-decoration: none;
+            pointer-events: auto;
+            transition: transform .35s var(--ease), border-color .35s ease, box-shadow .35s ease;
+        }
+
+        .brand-logo {
+            display: block;
+            flex: 0 0 auto;
+            width: 47px;
+            height: 47px;
+        }
+
+        .brand-logo svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            filter: drop-shadow(0 0 8px rgba(180,135,255,.45));
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text-title {
+            color: #fbf8ff;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: .4px;
+        }
+
+        .brand-text-sub {
+            margin-top: 4px;
+            color: #d0c2e8;
+            font-size: .59rem;
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: 1.25px;
+            text-transform: uppercase;
+        }
+
+        .right-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+            pointer-events: auto;
+        }
+
+        .action-circle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 47px;
+            height: 47px;
+            padding: 0;
+            border-radius: 50%;
+            color: #f4eeff;
+            cursor: pointer;
+            transition: transform .35s var(--ease), border-color .35s ease, box-shadow .35s ease;
+        }
+
+        .action-circle-btn:disabled {
+            cursor: not-allowed;
+            color: var(--text-soft);
+        }
+
+        .fullscreen-icon {
+            width: 21px;
+            height: 21px;
+        }
+
+        /* Переключатель языка: под полноэкранной кнопкой. */
+
+        .language-switcher {
+            position: relative;
+        }
+
+        .language-toggle {
+            position: relative;
+            border-color: rgba(211,178,255,.47);
+            background:
+                linear-gradient(145deg, rgba(166,112,238,.28), rgba(88,111,184,.13)),
+                rgba(12,12,25,.80);
+            box-shadow:
+                0 0 21px rgba(167,117,247,.13),
+                inset 0 1px 0 rgba(255,255,255,.15);
+        }
+
+        .language-code {
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: .8px;
+        }
+
+        .language-dot {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 7px;
+            height: 7px;
+            border: 1px solid #34233f;
+            border-radius: 50%;
+            background: #e4c9ff;
+            box-shadow: 0 0 10px rgba(221,182,255,.7);
+        }
+
+        .language-popover {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            width: min(300px, calc(100vw - 34px));
+            padding: 17px;
+            border: 1px solid rgba(219,194,255,.32);
+            border-radius: 20px;
+            background:
+                linear-gradient(135deg, rgba(124,76,171,.17), transparent),
+                rgba(13,11,25,.98);
+            box-shadow: 0 20px 65px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.1);
+            animation: fadeUp .25s var(--ease) both;
+        }
+
+        .language-popover::before {
+            content: "";
+            position: absolute;
+            right: 17px;
+            top: -6px;
+            width: 10px;
+            height: 10px;
+            border-top: 1px solid rgba(219,194,255,.32);
+            border-left: 1px solid rgba(219,194,255,.32);
+            background: #191226;
+            transform: rotate(45deg);
+        }
+
+        .popover-caption {
+            margin-bottom: 10px;
+            color: #bfb0d3;
+            font-size: .69rem;
+            font-weight: 700;
+            letter-spacing: 1.3px;
+            text-transform: uppercase;
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 13px 12px;
+            border: 1px solid rgba(218,191,255,.29);
+            border-radius: 13px;
+            background: rgba(192,154,255,.09);
+            color: #fff8ff;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .language-option:hover {
+            background: rgba(192,154,255,.17);
+        }
+
+        .language-option-code {
+            display: grid;
+            flex: 0 0 auto;
+            place-items: center;
+            width: 35px;
+            height: 35px;
+            border: 1px solid rgba(224,202,255,.22);
+            border-radius: 50%;
+            font-size: .72rem;
+            font-weight: 800;
+        }
+
+        .language-option-text {
+            font-size: .85rem;
+            font-weight: 700;
+            line-height: 1.55;
+        }
+
+        /* Основной контейнер и центральный логотип. */
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding:
+                calc(142px + env(safe-area-inset-top, 0px))
+                40px
+                calc(145px + env(safe-area-inset-bottom, 0px));
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 45px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            position: relative;
+            display: block;
+            flex: 0 0 auto;
+            width: 132px;
+            height: 132px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(223,204,255,.35);
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 20%, rgba(211,183,255,.16), rgba(60,39,103,.16) 65%);
+            -webkit-backdrop-filter: blur(9px);
+            backdrop-filter: blur(9px);
+            box-shadow:
+                0 0 0 8px rgba(208,183,255,.025),
+                0 0 42px rgba(165,115,244,.17),
+                inset 0 1px 0 rgba(255,255,255,.20);
+            isolation: isolate;
+        }
+
+        .profile-avatar::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            border-radius: inherit;
+            background: linear-gradient(145deg, rgba(255,255,255,.10), transparent 42%, rgba(15,4,38,.18));
+            pointer-events: none;
+        }
+
+        .avatar-fallback {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slot-media {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar .slot-media {
+            border-radius: inherit;
+        }
+
+        .video-toggle {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            z-index: 5;
+            display: grid;
+            place-items: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(239,221,255,.39);
+            border-radius: 50%;
+            background: rgba(14,10,25,.83);
+            color: white;
+            cursor: pointer;
+        }
+
+        .video-toggle .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .profile-avatar .video-toggle {
+            right: 12px;
+            bottom: 9px;
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Реклама книг сразу после центрального логотипа. */
+
+        .book-ad {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.18fr .82fr;
+            width: 100%;
+            margin: 0 0 38px;
+            overflow: hidden;
+            border: 1px solid rgba(223,187,255,.36);
+            border-radius: 28px;
+            background:
+                radial-gradient(ellipse at 4% 0%, rgba(140,88,209,.22), transparent 64%),
+                linear-gradient(125deg, rgba(255,255,255,.055), rgba(255,255,255,.012)),
+                rgba(11,9,24,.59);
+            -webkit-backdrop-filter: blur(16px) saturate(130%);
+            backdrop-filter: blur(16px) saturate(130%);
+            box-shadow:
+                0 25px 80px rgba(0,0,0,.28),
+                0 0 45px rgba(185,130,255,.09),
+                inset 0 1px 0 rgba(255,255,255,.15);
+            text-align: left;
+            isolation: isolate;
+        }
+
+        .book-ad::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 7%;
+            right: 7%;
+            height: 1px;
+            z-index: 4;
+            background: linear-gradient(90deg, transparent, #e6c8ff, #b8d9ff, transparent);
+            box-shadow: 0 0 17px rgba(222,191,255,.55);
+            pointer-events: none;
+        }
+
+        .ad-content {
+            position: relative;
+            z-index: 3;
+            min-width: 0;
+            padding: 28px 29px 30px;
+        }
+
+        .ad-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 19px;
+        }
+
+        .ad-brand-logo {
+            display: block;
+            flex: 0 0 auto;
+            width: 47px;
+            height: 47px;
+            overflow: visible;
+            filter: drop-shadow(0 0 8px rgba(180,135,255,.45));
+        }
+
+        .ad-brand-name {
+            display: block;
+            color: #fbf5ff;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 1.65rem;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        .ad-eyebrow {
+            display: block;
+            margin-top: 4px;
+            color: #d0bce8;
+            font-size: .60rem;
+            font-weight: 700;
+            letter-spacing: 1.25px;
+            text-transform: uppercase;
+        }
+
+        .ad-title {
+            margin-bottom: 15px;
+            color: #fff8ff;
+            font-size: clamp(2rem, 4.4vw, 2.8rem);
+            font-weight: 500;
+            line-height: 1.08;
+            text-wrap: balance;
+        }
+
+        .ad-title em {
+            color: #d9bdff;
+            font-weight: 400;
+        }
+
+        .ad-description {
+            max-width: 450px;
+            color: #e5ddee;
+            font-size: .91rem;
+            line-height: 1.8;
+        }
+
+        .ad-description strong {
+            color: #f9eaff;
+            font-weight: 700;
+        }
+
+        .ad-senses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin: 17px 0 22px;
+            list-style: none;
+        }
+
+        .ad-senses li {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 9px;
+            border: 1px solid rgba(224,199,255,.16);
+            border-radius: 999px;
+            background: rgba(219,185,255,.045);
+            color: #e0cfef;
+            font-size: .67rem;
+        }
+
+        .ad-senses .icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        .ad-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            min-height: 50px;
+            max-width: 100%;
+            padding: 12px 19px;
+            border: 1px solid rgba(235,213,255,.48);
+            border-radius: 15px;
+            background: linear-gradient(125deg, rgba(172,124,232,.35), rgba(112,135,213,.19));
+            box-shadow: 0 8px 25px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.16);
+            color: white;
+            font-size: .82rem;
+            font-weight: 800;
+            line-height: 1.5;
+            text-decoration: none;
+            transition: transform .3s var(--ease), background-color .3s ease, border-color .3s ease;
+        }
+
+        .ad-cta:hover {
+            transform: translateY(-2px);
+            border-color: #e3c9ff;
+            background-color: rgba(176,132,232,.17);
+        }
+
+        .ad-domain {
+            display: block;
+            margin-top: 10px;
+            color: #c1accf;
+            font-size: .72rem;
+            letter-spacing: 1.7px;
+        }
+
+        .ad-visual {
+            position: relative;
+            min-width: 0;
+            min-height: 340px;
+            overflow: hidden;
+            border-left: 1px solid rgba(228,201,255,.12);
+            background:
+                radial-gradient(ellipse at 70% 20%, rgba(110,144,235,.22), transparent 57%),
+                radial-gradient(ellipse at 25% 80%, rgba(185,95,193,.24), transparent 65%),
+                rgba(10,8,22,.36);
+        }
+
+        .ad-art {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .ad-art::before,
+        .ad-art::after {
+            content: "";
+            position: absolute;
+            width: 265px;
+            height: 265px;
+            border: 1px solid rgba(218,183,255,.19);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(161,115,223,.09);
+        }
+
+        .ad-art::after {
+            width: 340px;
+            height: 340px;
+            border-style: dashed;
+            border-color: rgba(188,181,255,.10);
+        }
+
+        .book-mockup {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 168px;
+            height: 232px;
+            padding: 20px;
+            border: 1px solid rgba(238,212,255,.43);
+            border-right: 5px solid rgba(216,198,231,.47);
+            border-radius: 5px 13px 13px 5px;
+            background:
+                linear-gradient(90deg, rgba(0,0,0,.25) 0 6px, transparent 7px 12px, rgba(233,205,255,.12) 13px, transparent 14px),
+                radial-gradient(ellipse at 70% 10%, rgba(128,153,224,.26), transparent 68%),
+                linear-gradient(145deg, #382547, #171524 70%);
+            box-shadow:
+                18px 24px 50px rgba(0,0,0,.48),
+                -10px 0 38px rgba(156,103,211,.09),
+                inset 0 1px 0 rgba(255,255,255,.14);
+            transform: rotate(-8deg);
+            animation: bookFloat 7s ease-in-out infinite;
+        }
+
+        .book-mockup svg {
+            width: 110px;
+            height: 110px;
+            filter: drop-shadow(0 0 16px rgba(206,161,255,.35));
+        }
+
+        .book-mockup-name {
+            margin-top: 11px;
+            color: #f2e6ff;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 1.85rem;
+            letter-spacing: 1px;
+        }
+
+        .book-mockup-line {
+            width: 62px;
+            height: 1px;
+            margin-top: 14px;
+            background: linear-gradient(90deg, transparent, #d8b3ff, transparent);
+        }
+
+        @keyframes bookFloat {
+            0%, 100% { transform: translateY(0) rotate(-8deg); }
+            50% { transform: translateY(-9px) rotate(-5deg); }
+        }
+
+        .user-title {
+            max-width: 100%;
+            margin-bottom: 13px;
+            color: #fcfaff;
+            font-size: clamp(2.15rem, 5.4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.12;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-wrap: balance;
+            text-shadow: 0 2px 18px rgba(0,0,0,.40), 0 0 36px rgba(204,175,255,.16);
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: .4px;
+            text-shadow: 0 2px 10px rgba(0,0,0,.70);
+        }
+
+        .language-label {
+            position: relative;
+            display: inline-block;
+            margin-top: 27px;
+            padding: 0 8px 12px;
+            color: #e1d2fa;
+            font-size: .88rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0,0,0,.50);
+        }
+
+        .language-label::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(164,202,255,.70), rgba(216,170,255,.85), rgba(243,188,213,.65), transparent);
+            box-shadow: 0 0 14px rgba(185,147,255,.30);
+        }
+
+        /*
+         * Оформление учебной панели и инструкции сохранено.
+         */
+
+        .language-panel {
+            position: relative;
+            padding: 34px;
+            border-radius: 27px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.010) 55%, rgba(189,163,255,.025)),
+                rgba(12,12,25,.235);
+            -webkit-backdrop-filter: blur(17px) saturate(145%);
+            backdrop-filter: blur(17px) saturate(145%);
+            animation: fadeUp .85s var(--ease) both;
+            transition: border-color .4s ease, box-shadow .4s ease;
+        }
+
+        .language-panel::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            right: 10%;
+            left: 10%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(216,192,255,.70), rgba(177,213,255,.65), transparent);
+            pointer-events: none;
+        }
+
+        .panel-heading {
+            margin-bottom: 27px;
+            text-align: center;
+        }
+
+        .panel-kicker {
+            margin-bottom: 8px;
+            color: #d6c5ed;
+            font-size: .68rem;
+            font-weight: 700;
+            letter-spacing: 2.8px;
+            text-transform: uppercase;
+        }
+
+        .panel-title {
+            color: var(--text-main);
+            font-size: clamp(2rem, 4.5vw, 2.6rem);
+            font-weight: 400;
+            line-height: 1.15;
+            text-wrap: balance;
+        }
+
+        .panel-title em {
+            color: #cfb5ff;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .panel-divider {
+            width: 100%;
+            height: 1px;
+            margin: 0 0 24px;
+            border: none;
+            background: linear-gradient(90deg, transparent, rgba(220,209,255,.23), transparent);
+        }
+
+        .panel-description {
+            max-width: 820px;
+            margin: 0 auto 30px;
+            color: #eee9f8;
+            font-size: .94rem;
+            line-height: 1.85;
+            text-align: center;
+            text-shadow: 0 2px 12px rgba(0,0,0,.68);
+        }
+
+        .panel-description strong {
+            color: #f4eaff;
+            font-weight: 700;
+        }
+
+        .panel-description .attention {
+            color: #ffd7ed;
+            letter-spacing: .4px;
+        }
+
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px 21px;
+        }
+
+        /*
+         * Почти прозрачными сделаны ТОЛЬКО карточки уровней.
+         * Не используем opacity: кнопки и текст не становятся бледнее.
+         */
+
+        .level-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-width: 0;
+            min-height: 235px;
+            padding: 29px 22px 22px;
+            border: 1px solid rgba(221,208,249,.18);
+            border-radius: 20px;
+            background:
+                linear-gradient(145deg, rgba(255,255,255,.007), transparent 65%),
+                rgba(13,12,28,.012);
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+            transition: transform .4s var(--ease), border-color .4s ease, box-shadow .4s ease;
+        }
+
+        .level-card--available {
+            border-color: rgba(201,174,255,.32);
+            background:
+                linear-gradient(145deg, rgba(199,172,255,.010), transparent 65%),
+                rgba(16,12,31,.012);
+        }
+
+        .level-badge {
+            position: absolute;
+            top: -12px;
+            right: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 54px;
+            min-height: 26px;
+            padding: 4px 13px;
+            border-radius: 20px;
+            font-size: .64rem;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 14px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.12);
+        }
+
+        .badge-free {
+            color: #f4ebff;
+            border: 1px solid rgba(216,189,255,.39);
+            background: linear-gradient(135deg, rgba(124,81,191,.45), rgba(64,45,106,.48));
+        }
+
+        .badge-pro {
+            color: #d2c6e4;
+            border: 1px solid rgba(224,214,242,.22);
+            background: rgba(31,26,46,.55);
+        }
+
+        .level-title {
+            margin-bottom: 24px;
+            color: #f6f0ff;
+            font-size: 2.8rem;
+            font-weight: 500;
+            line-height: 1;
+            text-align: center;
+            text-shadow: 0 0 23px rgba(192,151,255,.18);
+        }
+
+        .locked .level-title {
+            color: #d5cbe3;
+        }
+
+        .media-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Исходное оформление учебных кнопок сохранено. */
+
+        .btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            width: 100%;
+            min-height: 47px;
+            padding: 11px 16px;
+            border: 1px solid rgba(222,204,255,.25);
+            border-radius: 30px;
+            color: #eee5ff;
+            background:
+                linear-gradient(135deg, rgba(190,157,247,.11), rgba(172,190,243,.035)),
+                rgba(255,255,255,.018);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.085), 0 4px 12px rgba(0,0,0,.10);
+            font-size: .79rem;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: .8px;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition:
+                transform .3s var(--ease),
+                color .3s ease,
+                border-color .3s ease,
+                background-color .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .btn:active:not(:disabled) {
+            transform: translateY(0) scale(.985);
+        }
+
+        .btn-locked {
+            color: #b8aec9;
+            border-color: rgba(209,193,234,.15);
+            border-style: dashed;
+            background: rgba(255,255,255,.025);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.025);
+            cursor: not-allowed;
+        }
+
+        .lock-icon {
+            width: 14px;
+            height: 14px;
+            stroke-width: 1.6;
+        }
+
+        .bottom-note {
+            margin-top: 27px;
+            padding: 19px 23px;
+            border: 1px solid rgba(217,201,246,.14);
+            border-radius: 17px;
+            background:
+                linear-gradient(120deg, rgba(199,174,245,.045), rgba(255,255,255,.012)),
+                rgba(10,10,22,.14);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+            color: var(--text-dim);
+            font-size: .86rem;
+            font-style: italic;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .bottom-note strong {
+            color: #e2d1ff;
+            font-weight: 700;
+        }
+
+        .site-footer {
+            margin-top: 43px;
+            padding: 25px 12px 12px;
+            border-top: 1px solid rgba(218,201,247,.12);
+            color: var(--text-soft);
+            font-size: .79rem;
+            text-align: center;
+            text-shadow: 0 2px 8px #000;
+        }
+
+        .footer-brand {
+            color: #d4c0f3;
+            text-decoration: none;
+        }
+
+        .footer-brand:hover {
+            color: #f0e5ff;
+        }
+
+        .footer-motion {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 14px;
+            padding: 8px 12px;
+            border: 1px solid rgba(219,195,255,.17);
+            border-radius: 999px;
+            background: rgba(180,142,233,.045);
+            color: #cbb9df;
+            font-size: .72rem;
+            cursor: pointer;
+        }
+
+        .footer-motion .icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        .noscript-note {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid rgba(220,192,255,.3);
+            border-radius: 15px;
+            background: rgba(22,15,35,.85);
+            color: #eadcf6;
+            font-size: .84rem;
+            text-align: center;
+        }
+
+        /* Плеер. */
+
+        .music-dock {
+            position: fixed;
+            right: max(24px, env(safe-area-inset-right, 0px));
+            bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+            z-index: 120;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            max-width: calc(100vw - 28px);
+            pointer-events: none;
+        }
+
+        .music-launcher {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            max-width: min(340px, calc(100vw - 28px));
+            min-height: 62px;
+            padding: 12px 19px 12px 14px;
+            border: 1px solid rgba(222,191,255,.43);
+            border-radius: 22px;
+            background:
+                linear-gradient(125deg, rgba(138,87,199,.25), rgba(86,111,190,.13)),
+                rgba(13,10,24,.95);
+            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+            box-shadow:
+                0 13px 42px rgba(0,0,0,.43),
+                0 0 25px rgba(166,115,233,.10),
+                inset 0 1px 0 rgba(255,255,255,.16);
+            color: #f9efff;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: transform .3s var(--ease), border-color .3s ease;
+        }
+
+        .music-launcher:hover {
+            transform: translateY(-2px);
+            border-color: rgba(233,209,255,.7);
+        }
+
+        .headphones-orb {
+            display: grid;
+            flex: 0 0 auto;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(227,203,255,.19);
+            border-radius: 50%;
+            background: rgba(210,169,255,.075);
+        }
+
+        .music-launcher-text {
+            max-width: 230px;
+            font-size: .78rem;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .equalizer {
+            display: none;
+            flex: 0 0 auto;
+            align-items: center;
+            gap: 3px;
+            height: 20px;
+        }
+
+        .equalizer span {
+            width: 3px;
+            height: 15px;
+            border-radius: 3px;
+            background: #d7b4ff;
+            animation: equalizer .9s ease-in-out infinite alternate;
+        }
+
+        .equalizer span:nth-child(2) { animation-delay: -.35s; }
+        .equalizer span:nth-child(3) { animation-delay: -.65s; }
+        .music-launcher.is-playing .equalizer { display: flex; }
+
+        @keyframes equalizer {
+            from { transform: scaleY(.3); }
+            to { transform: scaleY(1); }
+        }
+
+        .music-panel {
+            width: min(390px, calc(100vw - 28px));
+            max-height: calc(100vh - 155px);
+            max-height: calc(100dvh - 155px - env(safe-area-inset-bottom, 0px));
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding: 22px;
+            border: 1px solid rgba(223,193,255,.34);
+            border-radius: 25px;
+            background:
+                radial-gradient(ellipse at 0% 0%, rgba(135,78,182,.17), transparent 65%),
+                rgba(12,10,22,.985);
+            box-shadow: 0 25px 85px rgba(0,0,0,.64), inset 0 1px 0 rgba(255,255,255,.10);
+            pointer-events: auto;
+            animation: fadeUp .3s var(--ease) both;
+        }
+
+        .player-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+
+        .player-eyebrow {
+            margin-bottom: 3px;
+            color: #c4acd9;
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: 1.65px;
+            text-transform: uppercase;
+        }
+
+        .player-title {
+            color: #fbf3ff;
+            font-size: 1.75rem;
+            font-weight: 500;
+            line-height: 1.15;
+        }
+
+        .player-close {
+            display: grid;
+            flex: 0 0 auto;
+            place-items: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(220,194,255,.18);
+            border-radius: 50%;
+            background: rgba(221,192,255,.035);
+            cursor: pointer;
+        }
+
+        .player-close .icon {
+            width: 17px;
+            height: 17px;
+        }
+
+        .player-intro {
+            margin-bottom: 17px;
+            color: #c8bad7;
+            font-size: .77rem;
+            line-height: 1.7;
+        }
+
+        .now-playing-card {
+            padding: 16px;
+            border: 1px solid rgba(223,195,255,.18);
+            border-radius: 17px;
+            background: linear-gradient(120deg, rgba(190,143,246,.075), rgba(151,181,238,.025));
+        }
+
+        .now-playing-label {
+            margin-bottom: 5px;
+            color: #bda8d2;
+            font-size: .61rem;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .track-title {
+            color: #fbf1ff;
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.55;
+            overflow-wrap: anywhere;
+        }
+
+        .track-book {
+            margin-top: 7px;
+            color: #cabbda;
+            font-size: .74rem;
+            line-height: 1.65;
+            overflow-wrap: anywhere;
+        }
+
+        .read-book-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 9px 12px;
+            border: 1px solid rgba(226,196,255,.29);
+            border-radius: 11px;
+            background: rgba(190,139,255,.10);
+            color: #f2e1ff;
+            font-size: .75rem;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .read-book-link:hover {
+            background: rgba(190,139,255,.19);
+        }
+
+        .read-book-link .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .player-status {
+            min-height: 24px;
+            margin-top: 11px;
+            color: #c8b7d9;
+            font-size: .71rem;
+            line-height: 1.6;
+        }
+
+        .player-status.is-error {
+            color: #ffd0df;
+        }
+
+        .seek-wrap {
+            margin-top: 8px;
+        }
+
+        .seek-slider {
+            display: block;
+            width: 100%;
+            height: 30px;
+            accent-color: #cba4fa;
+            cursor: pointer;
+        }
+
+        .seek-slider:disabled {
+            cursor: default;
+            opacity: .4;
+        }
+
+        .time-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #bdaace;
+            font-size: .66rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .transport {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .play-button,
+        .next-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 47px;
+            border: 1px solid rgba(229,204,255,.36);
+            border-radius: 14px;
+            background: linear-gradient(125deg, rgba(172,122,236,.27), rgba(112,139,214,.14));
+            color: #fff4ff;
+            font-size: .8rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .play-button {
+            flex: 1;
+            padding: 10px 15px;
+        }
+
+        .next-button {
+            flex: 0 0 48px;
+            padding: 10px;
+            background: rgba(201,164,252,.065);
+        }
+
+        .play-button:disabled,
+        .next-button:disabled,
+        .mode-button:disabled {
+            color: #8f819f;
+            border-color: rgba(207,183,235,.12);
+            background: rgba(220,200,245,.025);
+            cursor: not-allowed;
+        }
+
+        .mode-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .mode-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            min-height: 44px;
+            padding: 8px;
+            border: 1px solid rgba(222,192,255,.15);
+            border-radius: 12px;
+            background: rgba(201,164,252,.025);
+            color: #c7b4d9;
+            font-size: .67rem;
+            font-weight: 700;
+            line-height: 1.4;
+            cursor: pointer;
+        }
+
+        .mode-button .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .mode-button[aria-pressed="true"]:not(:disabled) {
+            border-color: rgba(224,188,255,.47);
+            background: rgba(175,120,237,.17);
+            color: #f5e7ff;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.075);
+        }
+
+        .mode-hint {
+            margin-top: 9px;
+            color: #b8a7c9;
+            font-size: .68rem;
+            line-height: 1.65;
+        }
+
+        .playlist-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 18px 0 9px;
+            color: #cdb9e0;
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .playlist-count {
+            color: #a993be;
+            font-size: .65rem;
+        }
+
+        .playlist {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding: 4px;
+            list-style: none;
+        }
+
+        .playlist-track {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px 11px;
+            border: 1px solid transparent;
+            border-radius: 11px;
+            background: rgba(213,184,251,.025);
+            color: #d4c3e1;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .playlist-track:hover {
+            background: rgba(213,184,251,.07);
+        }
+
+        .playlist-track[aria-current="true"] {
+            border-color: rgba(217,179,255,.28);
+            background: rgba(182,129,241,.095);
+            color: #f2e1ff;
+        }
+
+        .playlist-number {
+            flex: 0 0 21px;
+            color: #a88dc0;
+            font-size: .67rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .playlist-track-text {
+            min-width: 0;
+        }
+
+        .playlist-track-title {
+            display: block;
+            font-size: .76rem;
+            font-weight: 700;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .playlist-track-book {
+            display: block;
+            margin-top: 3px;
+            color: #ae98c1;
+            font-size: .65rem;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .player-footnote {
+            margin-top: 14px;
+            color: #ad98bf;
+            font-size: .65rem;
+            line-height: 1.65;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animations-paused .aurora-layer,
+        .animations-paused .book-mockup,
+        .animations-paused .equalizer span {
+            animation-play-state: paused;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .brand-logo-container:hover {
+                transform: translateY(-2px);
+                border-color: var(--glass-border-hover);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .action-circle-btn:hover:not(:disabled) {
+                transform: translateY(-2px) scale(1.06);
+                border-color: rgba(224,204,255,.48);
+                box-shadow:
+                    0 8px 28px rgba(0,0,0,.32),
+                    0 0 22px rgba(183,144,255,.16),
+                    inset 0 1px 0 rgba(255,255,255,.16);
+            }
+
+            .language-panel:hover {
+                border-color: rgba(224,211,255,.26);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .level-card:hover {
+                transform: translateY(-5px);
+                border-color: rgba(217,191,255,.40);
+                box-shadow: 0 0 22px rgba(171,127,239,.025), inset 0 1px 0 rgba(255,255,255,.035);
+            }
+
+            .btn:hover:not(:disabled) {
+                transform: translateY(-2px);
+                color: #ffffff;
+                border-color: rgba(226,206,255,.51);
+                background-color: rgba(170,126,234,.13);
+                box-shadow:
+                    0 8px 22px rgba(0,0,0,.22),
+                    0 0 20px rgba(180,139,247,.10),
+                    inset 0 1px 0 rgba(255,255,255,.15);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .top-bar {
+                padding:
+                    calc(15px + env(safe-area-inset-top, 0px))
+                    max(17px, env(safe-area-inset-right, 0px))
+                    10px
+                    max(17px, env(safe-area-inset-left, 0px));
+            }
+
+            .brand-logo-container {
+                gap: 0;
+                padding: 5px;
+                border-radius: 18px;
+            }
+
+            .brand-logo { width: 43px; height: 43px; }
+            .brand-text { display: none; }
+            .action-circle-btn { width: 44px; height: 44px; }
+            .right-controls { gap: 9px; }
+
+            .container {
+                padding:
+                    calc(114px + env(safe-area-inset-top, 0px))
+                    18px
+                    calc(140px + env(safe-area-inset-bottom, 0px));
+            }
+
+            .hero { margin-bottom: 34px; }
+
+            .profile-avatar {
+                width: 112px;
+                height: 112px;
+                margin-bottom: 27px;
+            }
+
+            .book-ad {
+                grid-template-columns: 1fr;
+                margin-bottom: 30px;
+                border-radius: 23px;
+            }
+
+            .ad-content { padding: 24px 23px; }
+            .ad-title { font-size: clamp(2rem, 7vw, 2.6rem); }
+            .ad-description { max-width: none; font-size: .86rem; }
+
+            .ad-visual {
+                min-height: 0;
+                height: 240px;
+                border-top: 1px solid rgba(228,201,255,.12);
+                border-left: 0;
+            }
+
+            .book-mockup { width: 135px; height: 180px; }
+            .book-mockup svg { width: 82px; height: 82px; }
+            .book-mockup-name { margin-top: 4px; font-size: 1.5rem; }
+            .book-mockup-line { margin-top: 9px; }
+            .ad-cta { width: 100%; }
+
+            .user-title {
+                font-size: clamp(2rem, 7vw, 2.7rem);
+                letter-spacing: 1.7px;
+            }
+
+            .subtitle { max-width: 330px; font-size: .89rem; }
+            .language-label { margin-top: 23px; font-size: .75rem; letter-spacing: 1.4px; }
+
+            .language-panel {
+                padding: 27px 18px 20px;
+                border-radius: 23px;
+                -webkit-backdrop-filter: blur(13px) saturate(135%);
+                backdrop-filter: blur(13px) saturate(135%);
+            }
+
+            .panel-heading { margin-bottom: 24px; }
+            .panel-title { font-size: 2.1rem; }
+            .panel-kicker { font-size: .63rem; letter-spacing: 2.2px; }
+            .panel-description { margin-bottom: 28px; font-size: .84rem; line-height: 1.82; }
+            .level-grid { grid-template-columns: 1fr; gap: 24px; }
+
+            .level-card {
+                min-height: 207px;
+                padding: 28px 21px 21px;
+                border-radius: 18px;
+            }
+
+            .level-card--available { min-height: 268px; }
+            .level-title { font-size: 2.7rem; }
+            .btn { min-height: 47px; }
+            .bottom-note { margin-top: 23px; padding: 17px 15px; font-size: .81rem; line-height: 1.85; }
+            .site-footer { margin-top: 33px; font-size: .75rem; }
+            .aurora-layer { filter: blur(34px) saturate(115%); }
+
+            .music-dock {
+                right: max(14px, env(safe-area-inset-right, 0px));
+                bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+            }
+
+            .music-launcher {
+                min-height: 59px;
+                max-width: min(310px, calc(100vw - 28px));
+                padding: 10px 14px 10px 11px;
+                gap: 10px;
+                border-radius: 20px;
+            }
+
+            .music-launcher-text { max-width: 215px; font-size: .72rem; }
+            .headphones-orb { width: 35px; height: 35px; }
+            .music-panel { padding: 19px; border-radius: 22px; }
+        }
+
+        @media (max-width: 380px) {
+            .container { padding-left: 13px; padding-right: 13px; }
+            .user-title { font-size: 1.95rem; letter-spacing: 1px; }
+            .language-label { font-size: .69rem; letter-spacing: 1px; }
+            .language-panel { padding-left: 14px; padding-right: 14px; }
+            .panel-title { font-size: 1.9rem; }
+            .level-card { padding-left: 17px; padding-right: 17px; }
+            .ad-content { padding: 21px 18px; }
+            .ad-title { font-size: 2rem; }
+            .music-panel { padding: 16px; }
+            .mode-controls { grid-template-columns: 1fr; }
+        }
+
+        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+            .glass, .language-panel { background-color: rgba(12,12,25,.69); }
+            .level-card { background-color: rgba(17,15,31,.012); }
+            .level-badge { background-color: rgba(35,27,54,.88); }
+            .book-ad { background-color: rgba(12,10,25,.88); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .aurora-layer { will-change: auto; }
+            .aurora-layer--one { opacity: .85; }
+            .aurora-layer--two { opacity: .50; }
+            .aurora-layer--three { opacity: .55; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Общие SVG. Один и тот же логотип в шапке и рекламе. -->
+    <svg
+        class="svg-definitions"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        focusable="false"
+    >
+        <defs>
+            <symbol id="syolana-mark" viewBox="0 0 100 100">
+                <g stroke="#c5a4ff" stroke-width="1.6" fill="#aa7bea" fill-opacity="0.15">
+                    <path d="M50 15 C60 28 65 42 50 50 C35 42 40 28 50 15 Z"/>
+                    <path d="M50 50 C65 42 85 32 90 47 C80 57 65 57 50 50 Z"/>
+                    <path d="M50 50 C35 42 15 32 10 47 C20 57 35 57 50 50 Z"/>
+                    <path d="M50 50 C65 60 75 80 60 90 C50 80 50 65 50 50 Z"/>
+                    <path d="M50 50 C35 60 25 80 40 90 C50 80 50 65 50 50 Z"/>
+                </g>
+                <text
+                    x="50" y="59"
+                    font-family="'Cormorant Garamond', Georgia, serif"
+                    font-size="29" font-weight="600"
+                    fill="#ffffff" text-anchor="middle"
+                >SY</text>
+            </symbol>
+
+            <symbol id="i-headphones" viewBox="0 0 24 24">
+                <path d="M4 14v-3a8 8 0 0 1 16 0v3"/>
+                <rect x="3" y="12" width="4" height="8" rx="2"/>
+                <rect x="17" y="12" width="4" height="8" rx="2"/>
+            </symbol>
+
+            <symbol id="i-book" viewBox="0 0 24 24">
+                <path d="M12 5v15"/>
+                <path d="M12 5C8 2 4 3 2 4v15c3-1 6-1 10 1 4-2 7-2 10-1V4c-2-1-6-2-10 1Z"/>
+            </symbol>
+
+            <symbol id="i-arrow" viewBox="0 0 24 24">
+                <path d="M4 12h15M13 5l7 7-7 7"/>
+            </symbol>
+
+            <symbol id="i-close" viewBox="0 0 24 24">
+                <path d="m6 6 12 12M18 6 6 18"/>
+            </symbol>
+
+            <symbol id="i-play" viewBox="0 0 24 24">
+                <path d="m8 4 12 8-12 8Z" fill="currentColor" stroke="none"/>
+            </symbol>
+
+            <symbol id="i-pause" viewBox="0 0 24 24">
+                <path d="M8 5v14M16 5v14" stroke-width="3.4"/>
+            </symbol>
+
+            <symbol id="i-next" viewBox="0 0 24 24">
+                <path d="m5 5 10 7-10 7Z" fill="currentColor" stroke="none"/>
+                <path d="M19 5v14" stroke-width="2.3"/>
+            </symbol>
+
+            <symbol id="i-shuffle" viewBox="0 0 24 24">
+                <path d="M3 6h2c5 0 9 12 14 12h2M17 14l4 4-4 4"/>
+                <path d="M3 18h2c2 0 4-2 6-5M13 9c2-2 4-3 6-3h2M17 2l4 4-4 4"/>
+            </symbol>
+
+            <symbol id="i-repeat" viewBox="0 0 24 24">
+                <path d="m17 2 4 4-4 4M3 10V8a2 2 0 0 1 2-2h16"/>
+                <path d="m7 22-4-4 4-4M21 14v2a2 2 0 0 1-2 2H3"/>
+            </symbol>
+
+            <symbol id="i-music" viewBox="0 0 24 24">
+                <path d="M9 18V5l11-2v13M9 9l11-2"/>
+                <ellipse cx="6" cy="18" rx="3" ry="2.5"/>
+                <ellipse cx="17" cy="16" rx="3" ry="2.5"/>
+            </symbol>
+
+            <symbol id="i-sound" viewBox="0 0 24 24">
+                <path d="M3 10v4h4l5 4V6l-5 4H3Z"/>
+                <path d="M16 8a6 6 0 0 1 0 8M19 5a10 10 0 0 1 0 14"/>
+            </symbol>
+
+            <symbol id="i-color" viewBox="0 0 24 24">
+                <path d="M12 3c4 5 7 8 7 12a7 7 0 0 1-14 0c0-4 3-7 7-12Z"/>
+                <path d="M8 15a4 4 0 0 0 4 4"/>
+            </symbol>
+
+            <symbol id="i-lock" viewBox="0 0 24 24">
+                <rect x="5" y="10" width="14" height="11" rx="3"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="aurora-background" aria-hidden="true">
+        <div class="aurora-layer aurora-layer--one"></div>
+        <div class="aurora-layer aurora-layer--two"></div>
+        <div class="aurora-layer aurora-layer--three"></div>
+    </div>
+
+    <canvas id="starCanvas" aria-hidden="true"></canvas>
+
+    <div class="top-bar">
+        <a
+            href="https://syolana.com/"
+            class="brand-logo-container glass"
+            data-i18n-label="home"
+            aria-label="Перейти на главную страницу Syolana"
+            title="Перейти на главную страницу Syolana"
+        >
+            <span class="brand-logo">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                    <use href="#syolana-mark"></use>
+                </svg>
+            </span>
+
+            <span class="brand-text">
+                <span class="brand-text-title">Syolana</span>
+                <span class="brand-text-sub" data-i18n="brandSubtitle">
+                    Иммерсивная платформа
+                </span>
+            </span>
+        </a>
+
+        <div class="right-controls">
+            <button
+                type="button"
+                id="fullscreen-btn"
+                class="action-circle-btn glass"
+                aria-label="На весь экран"
+                aria-pressed="false"
+                title="На весь экран"
+            >
+                <svg class="icon fullscreen-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"/>
+                </svg>
+            </button>
+
+            <div class="language-switcher" id="language-switcher">
+                <button
+                    type="button"
+                    id="language-toggle"
+                    class="action-circle-btn glass language-toggle"
+                    aria-expanded="false"
+                    aria-controls="language-popover"
+                    aria-label="Выбрать язык страницы"
+                    title="Выбрать язык страницы"
+                    data-i18n-label="chooseLanguage"
+                >
+                    <span id="language-code" class="language-code">RU</span>
+                    <span class="language-dot" aria-hidden="true"></span>
+                </button>
+
+                <div id="language-popover" class="language-popover" hidden>
+                    <p class="popover-caption" data-i18n="pageLanguage">
+                        Язык всей страницы
+                    </p>
+
+                    <button type="button" id="language-option" class="language-option">
+                        <span
+                            id="language-target-code"
+                            class="language-option-code"
+                            aria-hidden="true"
+                        >ES</span>
+                        <span class="language-option-text" data-i18n="switchLanguage">
+                            Прочитать всю страницу на испанском
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p id="screen-status" class="sr-only" role="status" aria-live="polite"></p>
+
+    <main class="container">
+        <noscript>
+            <p class="noscript-note">
+                Для переключения языка, видео и музыки включите JavaScript.
+                <br>
+                <span lang="es">
+                    Activa JavaScript para cambiar de idioma y utilizar los vídeos y la música.
+                </span>
+            </p>
+        </noscript>
+
+        <header class="hero">
+            <!--
+                Это НЕ кнопка загрузки.
+                Фото/видео задаёт владелец в SITE_CONFIG.avatar.
+            -->
+            <div id="profile-avatar" class="profile-avatar">
+                <svg
+                    id="avatar-fallback"
+                    class="avatar-fallback"
+                    viewBox="0 0 200 200"
+                    role="img"
+                    data-i18n-label="avatarFallback"
+                    aria-label="Логотип Syolana"
+                >
+                    <defs>
+                        <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#e6d0ff" stop-opacity=".24"/>
+                            <stop offset="50%" stop-color="#aa78ea" stop-opacity=".13"/>
+                            <stop offset="100%" stop-color="#617fd5" stop-opacity=".20"/>
+                        </linearGradient>
+
+                        <filter id="avatarGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="2.3" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <circle cx="100" cy="100" r="99" fill="url(#avatarGradient)"/>
+
+                    <g
+                        fill="#b68be9"
+                        fill-opacity=".07"
+                        stroke="#dac4ff"
+                        stroke-width="1.65"
+                        filter="url(#avatarGlow)"
+                    >
+                        <path d="M100 28 C120 55 130 75 100 100 C70 75 80 55 100 28 Z"/>
+                        <path d="M100 100 C130 75 165 70 176 95 C155 116 130 115 100 100 Z"/>
+                        <path d="M100 100 C70 75 35 70 24 95 C45 116 70 115 100 100 Z"/>
+                        <path d="M100 100 C130 125 140 160 115 177 C100 155 98 130 100 100 Z"/>
+                        <path d="M100 100 C70 125 60 160 85 177 C100 155 102 130 100 100 Z"/>
+                    </g>
+
+                    <text
+                        x="100" y="115"
+                        font-family="'Cormorant Garamond', Georgia, serif"
+                        font-size="54" font-weight="500"
+                        fill="#ffffff" text-anchor="middle"
+                    >SY</text>
+                </svg>
+            </div>
+
+            <aside class="book-ad" aria-labelledby="ad-title">
+                <div class="ad-content">
+                    <div class="ad-brand">
+                        <svg class="ad-brand-logo" viewBox="0 0 100 100" aria-hidden="true">
+                            <use href="#syolana-mark"></use>
+                        </svg>
+
+                        <div>
+                            <span class="ad-brand-name">Syolana</span>
+                            <span class="ad-eyebrow" data-i18n="adEyebrow">
+                                Иммерсивная библиотека
+                            </span>
+                        </div>
+                    </div>
+
+                    <h2 class="ad-title" id="ad-title" data-i18n-html="adTitle">
+                        Читайте иммерсивные книги <em>на всех языках</em>
+                    </h2>
+
+                    <p class="ad-description" data-i18n-html="adDescription">
+                        Полное погружение в чтение через <strong>музыку, звуки и цвет</strong>.
+                        Откройте книги на нашем сайте <strong>syolana.com</strong>.
+                    </p>
+
+                    <ul class="ad-senses">
+                        <li>
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <use href="#i-music"></use>
+                            </svg>
+                            <span data-i18n="music">Музыка</span>
+                        </li>
+                        <li>
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <use href="#i-sound"></use>
+                            </svg>
+                            <span data-i18n="sounds">Звуки</span>
+                        </li>
+                        <li>
+                            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <use href="#i-color"></use>
+                            </svg>
+                            <span data-i18n="color">Цвет</span>
+                        </li>
+                    </ul>
+
+                    <a
+                        id="ad-link"
+                        href="https://syolana.com/"
+                        class="ad-cta"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <span data-i18n="adCta">Открыть мир книг</span>
+                        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <use href="#i-arrow"></use>
+                        </svg>
+                    </a>
+
+                    <span class="ad-domain">syolana.com</span>
+                </div>
+
+                <div id="banner-slot" class="ad-visual">
+                    <div id="banner-fallback" class="ad-art" aria-hidden="true">
+                        <div class="book-mockup">
+                            <svg viewBox="0 0 100 100">
+                                <use href="#syolana-mark"></use>
+                            </svg>
+                            <span class="book-mockup-name">Syolana</span>
+                            <span class="book-mockup-line"></span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <h1 class="user-title" data-i18n="heroTitle">Полное погружение</h1>
+
+            <p class="subtitle" data-i18n="heroSubtitle">
+                Через ежедневное прослушивание и чтение испанской литературы.
+            </p>
+
+            <p class="language-label">
+                <span data-i18n="spanishLanguage">Испанский язык</span>
+                · <span lang="es">Español</span>
+            </p>
+        </header>
+
+        <section class="language-panel glass" aria-labelledby="language-title">
+            <div class="panel-heading">
+                <p class="panel-kicker" data-i18n="module">Языковой модуль</p>
+
+                <h2 class="panel-title" id="language-title">
+                    <span data-i18n="spanishLanguage">Испанский язык</span>
+                    <em lang="es">(Español)</em>
+                </h2>
+            </div>
+
+            <hr class="panel-divider">
+
+            <p class="panel-description" data-i18n-html="instructions">
+                Как выучить язык с нуля и научиться говорить как носитель?
+                Каждый день слушайте <strong>«Правила»</strong> и <strong>«Слова»</strong>,
+                а также читайте книги из раздела <strong>«Практика»</strong>.
+                <strong class="attention">ВНИМАНИЕ:</strong> самое главное — заниматься каждый день.
+                Не ложитесь спать, не послушав хотя бы <strong>«Правила»</strong>
+                и <strong>«Слова»</strong>!
+                Это действительно работает на 100 %: я проверила это лично и на других учениках.
+                Вам больше не нужно искать лучший секретный метод изучения испанского —
+                он перед вами.
+                Весь материал уже собран; вам остаётся только слушать его каждый день — и всё!
+                Как только всё станет для вас лёгким и понятным,
+                переходите на уровень A2 и делайте то же самое.
+                Удачи, друзья!
+            </p>
+
+            <div class="level-grid">
+                <article class="level-card level-card--available" aria-labelledby="level-a1">
+                    <span class="level-badge badge-free" data-i18n="free">Бесплатно</span>
+                    <h3 class="level-title" id="level-a1">A1</h3>
+
+                    <div class="media-buttons">
+                        <a href="a1-spanish-rules.html" class="btn" data-i18n="rulesA1">
+                            Правила A1
+                        </a>
+                        <a href="a1-spanish-words.html" class="btn" data-i18n="wordsA1">
+                            Слова A1
+                        </a>
+                        <a href="a1-spanish-practice.html" class="btn" data-i18n="practiceA1">
+                            Практика A1
+                        </a>
+                    </div>
+                </article>
+
+                <article class="level-card locked" aria-labelledby="level-a2">
+                    <span class="level-badge badge-pro">Pro</span>
+                    <h3 class="level-title" id="level-a2">A2</h3>
+
+                    <div class="media-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-locked"
+                            data-locked-level="A2"
+                            aria-label="Уровень A2: доступ закрыт"
+                            disabled
+                        >
+                            <svg class="icon lock-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <use href="#i-lock"></use>
+                            </svg>
+                            <span data-i18n="locked">Доступ закрыт</span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="level-card locked" aria-labelledby="level-b1">
+                    <span class="level-badge badge-pro">Pro</span>
+                    <h3 class="level-title" id="level-b1">B1</h3>
+
+                    <div class="media-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-locked"
+                            data-locked-level="B1"
+                            aria-label="Уровень B1: доступ закрыт"
+                            disabled
+                        >
+                            <svg class="icon lock-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <use href="#i-lock"></use>
+                            </svg>
+                            <span data-i18n="locked">Доступ закрыт</span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="level-card locked" aria-labelledby="level-b2">
+                    <span class="level-badge badge-pro">Pro</span>
+                    <h3 class="level-title" id="level-b2">B2</h3>
+
+                    <div class="media-buttons">
+                        <button
+                            type="button"
+                            class="btn btn-locked"
+                            data-locked-level="B2"
+                            aria-label="Уровень B2: доступ закрыт"
+                            disabled
+                        >
+                            <svg class="icon lock-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                <use href="#i-lock"></use>
+                            </svg>
+                            <span data-i18n="locked">Доступ закрыт</span>
+                        </button>
+                    </div>
+                </article>
+            </div>
+
+            <div class="bottom-note" data-i18n-html="bottomNote">
+                <strong>A1 доступен бесплатно.</strong>
+                Остальные уровни появятся, когда мы закончим их разработку.
+            </div>
+        </section>
+
+        <footer class="site-footer">
+            <p>
+                © <span id="current-year"></span>
+                <a href="https://syolana.com/" class="footer-brand">Syolana</a>.
+                <span data-i18n="rights">Все права защищены.</span>
+            </p>
+
+            <button type="button" id="motion-button" class="footer-motion">
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <use id="motion-icon" href="#i-pause"></use>
+                </svg>
+                <span id="motion-text">Остановить анимацию</span>
+            </button>
+        </footer>
+    </main>
+
+    <!-- Плеер находится вне main и не изменяет оформление учебных блоков. -->
+    <div class="music-dock" id="music-dock">
+        <section
+            id="music-panel"
+            class="music-panel"
+            aria-labelledby="player-title"
+            hidden
+        >
+            <div class="player-header">
+                <div>
+                    <p class="player-eyebrow" data-i18n="playerEyebrow">
+                        Музыкальная библиотека
+                    </p>
+                    <h2 class="player-title" id="player-title" data-i18n="playerTitle">
+                        Истории, ставшие песнями
+                    </h2>
+                </div>
+
+                <button
+                    type="button"
+                    id="player-close"
+                    class="player-close"
+                    data-i18n-label="closePlayer"
+                    aria-label="Свернуть плеер"
+                    title="Свернуть плеер"
+                >
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="#i-close"></use>
+                    </svg>
+                </button>
+            </div>
+
+            <p class="player-intro" data-i18n="playerIntro">
+                Авторские песни на испанском по нашим книгам.
+                Слушайте историю — и откройте книгу, которая её вдохновила.
+            </p>
+
+            <div class="now-playing-card">
+                <p id="now-playing-label" class="now-playing-label">
+                    Выбрана песня
+                </p>
+
+                <p id="track-title" class="track-title" aria-live="polite">
+                    Песни скоро появятся
+                </p>
+
+                <p id="track-book" class="track-book" hidden></p>
+
+                <a
+                    id="read-book-link"
+                    class="read-book-link"
+                    href="https://syolana.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                >
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="#i-book"></use>
+                    </svg>
+                    <span data-i18n="readBook">Читать книгу</span>
+                </a>
+            </div>
+
+            <p
+                id="player-status"
+                class="player-status"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+            <div class="seek-wrap">
+                <input
+                    type="range"
+                    id="seek-slider"
+                    class="seek-slider"
+                    min="0"
+                    max="1000"
+                    step="1"
+                    value="0"
+                    data-i18n-label="seek"
+                    aria-label="Позиция воспроизведения"
+                    disabled
+                >
+                <div class="time-row" aria-hidden="true">
+                    <span id="current-time">0:00</span>
+                    <span id="duration">0:00</span>
+                </div>
+            </div>
+
+            <div class="transport">
+                <button type="button" id="play-button" class="play-button" disabled>
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <use id="play-icon" href="#i-play"></use>
+                    </svg>
+                    <span id="play-text">Слушать</span>
+                </button>
+
+                <button
+                    type="button"
+                    id="next-button"
+                    class="next-button"
+                    data-i18n-label="nextTrack"
+                    aria-label="Следующая случайная песня"
+                    title="Следующая случайная песня"
+                    disabled
+                >
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="#i-next"></use>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mode-controls">
+                <button
+                    type="button"
+                    id="shuffle-button"
+                    class="mode-button"
+                    aria-pressed="true"
+                    disabled
+                >
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="#i-shuffle"></use>
+                    </svg>
+                    <span data-i18n="shuffle">Все вперемешку</span>
+                </button>
+
+                <button
+                    type="button"
+                    id="repeat-button"
+                    class="mode-button"
+                    aria-pressed="false"
+                    disabled
+                >
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="#i-repeat"></use>
+                    </svg>
+                    <span data-i18n="repeatOne">Повтор одной</span>
+                </button>
+            </div>
+
+            <p id="mode-hint" class="mode-hint"></p>
+
+            <div id="playlist-section" hidden>
+                <div class="playlist-heading">
+                    <span data-i18n="playlist">Все песни</span>
+                    <span id="playlist-count" class="playlist-count"></span>
+                </div>
+                <ol id="playlist" class="playlist"></ol>
+            </div>
+
+            <p class="player-footnote" data-i18n="playerFootnote">
+                Музыка включается только по вашему нажатию.
+                Сверните плеер — и продолжайте читать под музыку.
+            </p>
+        </section>
+
+        <button
+            type="button"
+            id="music-launcher"
+            class="music-launcher"
+            aria-expanded="false"
+            aria-controls="music-panel"
+        >
+            <span class="headphones-orb" aria-hidden="true">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <use href="#i-headphones"></use>
+                </svg>
+            </span>
+
+            <span class="music-launcher-text" data-i18n="musicLauncher">
+                Наслаждайтесь песнями на испанском!
+            </span>
+
+            <span class="equalizer" aria-hidden="true">
+                <span></span><span></span><span></span>
+            </span>
+        </button>
+    </div>
+
+    <audio id="music-audio" preload="none"></audio>
+
+    <script>
+    (() => {
+        "use strict";
+
+        /* =========================================================
+           НАСТРОЙКИ ВЛАДЕЛЬЦА — МЕНЯЙТЕ ЭТОТ БЛОК ЧЕРЕЗ GITHUB
+           =========================================================
+
+           1. Загрузите свои файлы в репозиторий, например:
+
+              assets/avatar.jpg
+              assets/avatar.mp4
+              assets/banner.jpg
+              assets/banner.mp4
+              assets/music/song-1.mp3
+              assets/music/song-2.mp3
+
+           2. Укажите пути ниже. Регистр букв в именах важен.
+
+           3. type: "image" — картинка.
+              type: "video" — видео, лучше MP4 с H.264.
+              src: "" — показывается стандартное оформление.
+
+           4. Видео аватара и рекламы воспроизводится БЕЗ ЗВУКА.
+              Музыка запускается отдельно, по нажатию посетителя.
+
+           5. Никогда не помещайте сюда пароли или GitHub-токены.
+              Этот HTML публичный. Изменение опубликованных файлов
+              регулируется правами доступа к вашему репозиторию.
+
+           6. Для баннера можно задать разные файлы по языкам:
+              src: {
+                  ru: "assets/banner-ru.jpg",
+                  es: "assets/banner-es.jpg"
+              }
+
+              Это полезно, если текст встроен прямо в картинку.
+              Встроенный в фото/видео текст сам не переводится.
+
+           ========================================================= */
+
+        const SITE_CONFIG = {
+            avatar: {
+                type: "image",
+                src: "",
+                poster: "",
+                fit: "cover",
+                position: "50% 50%",
+                alt: {
+                    ru: "Фото автора Syolana",
+                    es: "Foto de la autora de Syolana"
+                }
+            },
+
+            banner: {
+                type: "image",
+                src: "",
+                poster: "",
+                fit: "cover",
+                position: "50% 50%",
+                alt: {
+                    ru: "Иммерсивные книги Syolana",
+                    es: "Libros inmersivos de Syolana"
+                }
+            },
+
+            libraryUrl: {
+                ru: "https://syolana.com/",
+                es: "https://syolana.com/"
+            },
+
+            /*
+             * Добавляйте песни внутрь массива songs.
+             * Примеры ниже закомментированы, чтобы сайт не пытался
+             * проигрывать файлы, которых ещё нет.
+             *
+             * После загрузки своих файлов уберите /* и * /
+             * вокруг примеров и измените названия и ссылки.
+             *
+             * title — название песни на двух языках.
+             * book — название книги на двух языках.
+             * bookUrl — ссылка именно на эту книгу.
+             * src — путь к аудиофайлу.
+             */
+
+            songs: [
+                /*
+                {
+                    src: "assets/music/song-1.mp3",
+                    title: {
+                        ru: "Среди звёзд",
+                        es: "Entre las estrellas"
+                    },
+                    book: {
+                        ru: "Книга о звёздах",
+                        es: "El libro de las estrellas"
+                    },
+                    bookUrl: {
+                        ru: "https://syolana.com/books/stars/",
+                        es: "https://syolana.com/books/stars/"
+                    }
+                },
+                {
+                    src: "assets/music/song-2.mp3",
+                    title: {
+                        ru: "Голос моря",
+                        es: "La voz del mar"
+                    },
+                    book: {
+                        ru: "История у моря",
+                        es: "Una historia junto al mar"
+                    },
+                    bookUrl: {
+                        ru: "https://syolana.com/books/sea/",
+                        es: "https://syolana.com/books/sea/"
+                    }
+                }
+                */
+            ]
+        };
+
+        /* =========================================================
+           ПОЛНЫЙ СЛОВАРЬ РУССКОГО И ИСПАНСКОГО ИНТЕРФЕЙСА
+           ========================================================= */
+
+        const TRANSLATIONS = {
+            ru: {
+                pageTitle: "Syolana | Испанский язык",
+                description: "Syolana: изучайте испанский через ежедневное прослушивание, чтение и последовательную практику.",
+                home: "Перейти на главную страницу Syolana",
+                brandSubtitle: "Иммерсивная платформа",
+                avatarFallback: "Логотип Syolana",
+                chooseLanguage: "Выбрать язык страницы",
+                pageLanguage: "Язык всей страницы",
+                switchLanguage: "Прочитать всю страницу на испанском",
+                languageChanged: "Страница переведена на русский язык.",
+                fullscreenEnter: "На весь экран",
+                fullscreenExit: "Выйти из полноэкранного режима",
+                fullscreenUnavailable: "Этот браузер не поддерживает полноэкранный режим",
+                fullscreenError: "Браузер не разрешил изменить полноэкранный режим.",
+                adEyebrow: "Иммерсивная библиотека",
+                adTitle: "Читайте иммерсивные книги <em>на всех языках</em>",
+                adDescription: "Полное погружение в чтение через <strong>музыку, звуки и цвет</strong>. Откройте книги на нашем сайте <strong>syolana.com</strong>.",
+                adCta: "Открыть мир книг",
+                music: "Музыка",
+                sounds: "Звуки",
+                color: "Цвет",
+                heroTitle: "Полное погружение",
+                heroSubtitle: "Через ежедневное прослушивание и чтение испанской литературы.",
+                spanishLanguage: "Испанский язык",
+                module: "Языковой модуль",
+                instructions: `
+                    Как выучить язык с нуля и научиться говорить как носитель?
+                    Каждый день слушайте <strong>«Правила»</strong> и <strong>«Слова»</strong>,
+                    а также читайте книги из раздела <strong>«Практика»</strong>.
+                    <strong class="attention">ВНИМАНИЕ:</strong> самое главное —
+                    заниматься каждый день.
+                    Не ложитесь спать, не послушав хотя бы <strong>«Правила»</strong>
+                    и <strong>«Слова»</strong>!
+                    Это действительно работает на 100 %: я проверила это лично
+                    и на других учениках.
+                    Вам больше не нужно искать лучший секретный метод изучения
+                    испанского — он перед вами.
+                    Весь материал уже собран; вам остаётся только слушать его
+                    каждый день — и всё!
+                    Как только всё станет для вас лёгким и понятным,
+                    переходите на уровень A2 и делайте то же самое.
+                    Удачи, друзья!
+                `,
+                free: "Бесплатно",
+                rulesA1: "Правила A1",
+                wordsA1: "Слова A1",
+                practiceA1: "Практика A1",
+                locked: "Доступ закрыт",
+                lockedLevel: "Уровень {level}: доступ закрыт",
+                bottomNote: "<strong>A1 доступен бесплатно.</strong> Остальные уровни появятся, когда мы закончим их разработку.",
+                rights: "Все права защищены.",
+                pauseMotion: "Остановить анимацию",
+                resumeMotion: "Включить анимацию",
+                pauseVideo: "Приостановить видео",
+                playVideo: "Воспроизвести видео",
+                musicLauncher: "Наслаждайтесь песнями на испанском!",
+                playerEyebrow: "Музыкальная библиотека",
+                playerTitle: "Истории, ставшие песнями",
+                playerIntro: "Авторские песни на испанском по нашим книгам. Слушайте историю — и откройте книгу, которая её вдохновила.",
+                closePlayer: "Свернуть плеер",
+                readBook: "Читать книгу",
+                readSpecificBook: "Читать книгу «{book}»",
+                basedOnBook: "Песня по книге «{book}»",
+                basedOnOurBook: "Песня по нашей книге",
+                nowPlaying: "Сейчас играет",
+                selectedTrack: "Выбрана песня",
+                noSongs: "Песни скоро появятся",
+                emptyStatus: "Здесь будут авторские песни по книгам Syolana.",
+                readyStatus: "Нажмите «Слушать», чтобы включить музыку.",
+                playingStatus: "Приятного прослушивания!",
+                pausedStatus: "Воспроизведение приостановлено.",
+                loadingStatus: "Загружаем песню…",
+                errorStatus: "Не удалось воспроизвести песню. Попробуйте ещё раз или выберите другую.",
+                blockedStatus: "Браузер остановил запуск музыки. Нажмите «Слушать».",
+                listen: "Слушать",
+                pause: "Пауза",
+                nextTrack: "Следующая случайная песня",
+                seek: "Позиция воспроизведения",
+                shuffle: "Все вперемешку",
+                repeatOne: "Повтор одной",
+                shuffleHint: "Все песни в случайном порядке — без конца. Каждый новый круг перемешивается заново.",
+                repeatHint: "Выбранная песня повторяется бесконечно.",
+                playlist: "Все песни",
+                playNamed: "Слушать: {title}",
+                unnamedTrack: "Песня {number}",
+                playerFootnote: "Музыка включается только по вашему нажатию. Сверните плеер — и продолжайте читать под музыку."
+            },
+
+            es: {
+                pageTitle: "Syolana | Español",
+                description: "Syolana: aprende español mediante la escucha diaria, la lectura y una práctica progresiva.",
+                home: "Ir a la página de inicio de Syolana",
+                brandSubtitle: "Plataforma inmersiva",
+                avatarFallback: "Logotipo de Syolana",
+                chooseLanguage: "Elegir el idioma de la página",
+                pageLanguage: "Idioma de toda la página",
+                switchLanguage: "Volver al ruso",
+                languageChanged: "La página se ha traducido al español.",
+                fullscreenEnter: "Activar pantalla completa",
+                fullscreenExit: "Salir de la pantalla completa",
+                fullscreenUnavailable: "Este navegador no admite el modo de pantalla completa",
+                fullscreenError: "El navegador no ha permitido cambiar el modo de pantalla completa.",
+                adEyebrow: "Biblioteca inmersiva",
+                adTitle: "Lee libros inmersivos <em>en todos los idiomas</em>",
+                adDescription: "Sumérgete por completo en la lectura a través de <strong>la música, los sonidos y el color</strong>. Descubre los libros en nuestro sitio web <strong>syolana.com</strong>.",
+                adCta: "Descubrir el mundo de los libros",
+                music: "Música",
+                sounds: "Sonidos",
+                color: "Color",
+                heroTitle: "Inmersión absoluta",
+                heroSubtitle: "A través de la escucha diaria y la lectura de literatura española.",
+                spanishLanguage: "Idioma español",
+                module: "Módulo de idiomas",
+                instructions: `
+                    ¿Cómo aprender un idioma desde cero hasta hablar como un nativo?
+                    Escuchad cada día las <strong>«Reglas»</strong> y las <strong>«Palabras»</strong>,
+                    y leed los libros de <strong>«Práctica»</strong>.
+                    <strong class="attention">ATENCIÓN:</strong> lo más importante
+                    es que lo hagáis todos los días.
+                    ¡No os vayáis a dormir sin haber escuchado al menos las
+                    <strong>«Reglas»</strong> y las <strong>«Palabras»</strong>!
+                    De verdad funciona, al 100 %: lo he comprobado personalmente
+                    y con otros alumnos.
+                    Ya no necesitáis buscar el mejor método secreto para aprender
+                    español: lo tenéis delante.
+                    Todo el material está reunido; solo tenéis que escucharlo
+                    cada día, ¡y listo!
+                    En cuanto todo os resulte fácil y claro, pasad al nivel A2
+                    y haced lo mismo.
+                    ¡Suerte, amigos!
+                `,
+                free: "Gratis",
+                rulesA1: "Reglas A1",
+                wordsA1: "Palabras A1",
+                practiceA1: "Práctica A1",
+                locked: "Acceso cerrado",
+                lockedLevel: "Nivel {level}: acceso cerrado",
+                bottomNote: "<strong>A1 está disponible gratis.</strong> Los demás niveles estarán disponibles cuando terminemos de desarrollarlos.",
+                rights: "Todos los derechos reservados.",
+                pauseMotion: "Pausar las animaciones",
+                resumeMotion: "Activar las animaciones",
+                pauseVideo: "Pausar el vídeo",
+                playVideo: "Reproducir el vídeo",
+                musicLauncher: "¡Disfruta de las canciones en español!",
+                playerEyebrow: "Biblioteca musical",
+                playerTitle: "Historias hechas canción",
+                playerIntro: "Canciones originales en español basadas en nuestros libros. Escucha la historia y descubre el libro que la inspiró.",
+                closePlayer: "Minimizar el reproductor",
+                readBook: "Leer el libro",
+                readSpecificBook: "Leer el libro «{book}»",
+                basedOnBook: "Canción basada en el libro «{book}»",
+                basedOnOurBook: "Canción basada en uno de nuestros libros",
+                nowPlaying: "Sonando ahora",
+                selectedTrack: "Canción seleccionada",
+                noSongs: "Próximamente habrá canciones",
+                emptyStatus: "Aquí encontrarás canciones originales basadas en los libros de Syolana.",
+                readyStatus: "Pulsa «Escuchar» para poner la música.",
+                playingStatus: "¡Disfruta de la música!",
+                pausedStatus: "Reproducción en pausa.",
+                loadingStatus: "Cargando la canción…",
+                errorStatus: "No se ha podido reproducir la canción. Inténtalo de nuevo o elige otra.",
+                blockedStatus: "El navegador ha detenido el inicio de la música. Pulsa «Escuchar».",
+                listen: "Escuchar",
+                pause: "Pausa",
+                nextTrack: "Siguiente canción aleatoria",
+                seek: "Posición de reproducción",
+                shuffle: "Todas al azar",
+                repeatOne: "Repetir una",
+                shuffleHint: "Todas las canciones en orden aleatorio, sin fin. El orden cambia en cada nueva vuelta.",
+                repeatHint: "La canción seleccionada se repite sin fin.",
+                playlist: "Todas las canciones",
+                playNamed: "Escuchar: {title}",
+                unnamedTrack: "Canción {number}",
+                playerFootnote: "La música solo empieza cuando tú la activas. Minimiza el reproductor y sigue leyendo con música."
+            }
+        };
+
+        const $ = id => document.getElementById(id);
+        const root = document.documentElement;
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+        let language = "ru";
+
+        try {
+            const saved = localStorage.getItem("syolana-language");
+            if (saved === "ru" || saved === "es") language = saved;
+        } catch (_) {}
+
+        function t(key, values = {}) {
+            let text = TRANSLATIONS[language][key] || TRANSLATIONS.ru[key] || key;
+
+            Object.entries(values).forEach(([name, value]) => {
+                text = text.replaceAll("{" + name + "}", String(value));
+            });
+
+            return text;
+        }
+
+        function localized(value, fallback = "") {
+            if (typeof value === "string") return value;
+
+            if (value && typeof value === "object") {
+                return value[language] || value.ru || value.es || fallback;
+            }
+
+            return fallback;
+        }
+
+        function safeUrl(value) {
+            if (typeof value !== "string" || !value.trim()) return "";
+
+            try {
+                const url = new URL(value.trim(), document.baseURI);
+                return ["https:", "http:"].includes(url.protocol) ? url.href : "";
+            } catch (_) {
+                return "";
+            }
+        }
+
+        function setLabel(element, label) {
+            element.setAttribute("aria-label", label);
+            element.title = label;
+        }
+
+        function makeIcon(id) {
+            const ns = "http://www.w3.org/2000/svg";
+            const svg = document.createElementNS(ns, "svg");
+            const use = document.createElementNS(ns, "use");
+
+            svg.setAttribute("viewBox", "0 0 24 24");
+            svg.setAttribute("aria-hidden", "true");
+            svg.classList.add("icon");
+            use.setAttribute("href", id);
+            svg.appendChild(use);
+
+            return svg;
+        }
+
+        $("current-year").textContent = String(new Date().getFullYear());
+
+        /* =========================================================
+           ПОЛНОЭКРАННЫЙ РЕЖИМ
+           ========================================================= */
+
+        const fullscreenButton = $("fullscreen-btn");
+
+        function fullscreenElement() {
+            return document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                null;
+        }
+
+        function fullscreenSupported() {
+            const request = root.requestFullscreen || root.webkitRequestFullscreen;
+            const exit = document.exitFullscreen || document.webkitExitFullscreen;
+
+            return Boolean(request && exit) &&
+                document.fullscreenEnabled !== false &&
+                document.webkitFullscreenEnabled !== false;
+        }
+
+        function updateFullscreen() {
+            const supported = fullscreenSupported();
+            const active = Boolean(fullscreenElement());
+
+            fullscreenButton.disabled = !supported;
+            fullscreenButton.setAttribute("aria-pressed", String(active));
+
+            setLabel(
+                fullscreenButton,
+                t(!supported ? "fullscreenUnavailable" :
+                    active ? "fullscreenExit" : "fullscreenEnter")
+            );
+        }
+
+        fullscreenButton.addEventListener("click", async () => {
+            try {
+                if (fullscreenElement()) {
+                    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+                    await exit.call(document);
+                } else {
+                    const request = root.requestFullscreen || root.webkitRequestFullscreen;
+                    await request.call(root);
+                }
+            } catch (_) {
+                $("screen-status").textContent = t("fullscreenError");
+            }
+
+            updateFullscreen();
+        });
+
+        document.addEventListener("fullscreenchange", updateFullscreen);
+        document.addEventListener("webkitfullscreenchange", updateFullscreen);
+
+        /* =========================================================
+           АНИМАЦИЯ И МЕДИА ВЛАДЕЛЬЦА
+           ========================================================= */
+
+        let motionPaused = reducedMotion.matches;
+        let syncCanvas = () => {};
+
+        const mediaSlots = [
+            {
+                host: $("profile-avatar"),
+                fallback: $("avatar-fallback"),
+                config: SITE_CONFIG.avatar,
+                element: null,
+                button: null,
+                signature: null,
+                wantsPlay: true,
+                failed: false
+            },
+            {
+                host: $("banner-slot"),
+                fallback: $("banner-fallback"),
+                config: SITE_CONFIG.banner,
+                element: null,
+                button: null,
+                signature: null,
+                wantsPlay: true,
+                failed: false
+            }
+        ];
+
+        function updateVideoButton(slot) {
+            if (!slot.button || !slot.element) return;
+
+            const playing = !slot.element.paused;
+            setLabel(slot.button, t(playing ? "pauseVideo" : "playVideo"));
+
+            slot.button.querySelector("use").setAttribute(
+                "href",
+                playing ? "#i-pause" : "#i-play"
+            );
+        }
+
+        function syncVideos() {
+            mediaSlots.forEach(slot => {
+                const video = slot.element;
+
+                if (!video || video.tagName !== "VIDEO" || slot.failed) return;
+
+                if (document.hidden || motionPaused || !slot.wantsPlay) {
+                    video.pause();
+                } else {
+                    video.play().catch(() => {
+                        updateVideoButton(slot);
+                    });
+                }
+
+                updateVideoButton(slot);
+            });
+        }
+
+        function syncMotion() {
+            document.body.classList.toggle(
+                "animations-paused",
+                motionPaused || document.hidden
+            );
+
+            $("motion-text").textContent = t(
+                motionPaused ? "resumeMotion" : "pauseMotion"
+            );
+
+            $("motion-icon").setAttribute(
+                "href",
+                motionPaused ? "#i-play" : "#i-pause"
+            );
+
+            setLabel(
+                $("motion-button"),
+                t(motionPaused ? "resumeMotion" : "pauseMotion")
+            );
+
+            syncVideos();
+            syncCanvas();
+        }
+
+        $("motion-button").addEventListener("click", () => {
+            motionPaused = !motionPaused;
+            syncMotion();
+        });
+
+        function updateMediaSlot(slot) {
+            const config = slot.config;
+            const src = safeUrl(localized(config.src));
+            const poster = safeUrl(localized(config.poster));
+            const type = config.type === "video" ? "video" : "image";
+            const signature = type + "|" + src + "|" + poster;
+            const alt = localized(config.alt, "Syolana");
+
+            if (slot.signature === signature) {
+                if (slot.element) {
+                    if (type === "image") slot.element.alt = alt;
+                    else slot.element.setAttribute("aria-label", alt);
+                }
+
+                updateVideoButton(slot);
+                return;
+            }
+
+            slot.signature = signature;
+            slot.failed = false;
+
+            if (slot.element) {
+                if (slot.element.tagName === "VIDEO") {
+                    slot.element.pause();
+                    slot.element.removeAttribute("src");
+                    slot.element.load();
+                }
+
+                slot.element.remove();
+                slot.element = null;
+            }
+
+            if (slot.button) {
+                slot.button.remove();
+                slot.button = null;
+            }
+
+            slot.fallback.hidden = false;
+
+            if (!src) return;
+
+            const element = document.createElement(type === "video" ? "video" : "img");
+            element.className = "slot-media";
+            element.hidden = true;
+            element.style.objectFit = config.fit === "contain" ? "contain" : "cover";
+            element.style.objectPosition = config.position || "50% 50%";
+            slot.element = element;
+
+            const reveal = () => {
+                if (slot.element !== element || slot.failed) return;
+                element.hidden = false;
+                slot.fallback.hidden = true;
+            };
+
+            const fail = () => {
+                if (slot.element !== element) return;
+                slot.failed = true;
+                element.hidden = true;
+                slot.fallback.hidden = false;
+                if (slot.button) slot.button.hidden = true;
+            };
+
+            element.addEventListener("error", fail);
+
+            if (type === "video") {
+                element.muted = true;
+                element.defaultMuted = true;
+                element.loop = true;
+                element.playsInline = true;
+                element.preload = "metadata";
+                element.setAttribute("muted", "");
+                element.setAttribute("playsinline", "");
+                element.setAttribute("aria-label", alt);
+
+                if (poster) element.poster = poster;
+
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "video-toggle";
+                button.appendChild(makeIcon("#i-play"));
+                slot.button = button;
+                slot.wantsPlay = true;
+
+                button.addEventListener("click", () => {
+                    if (element.paused) {
+                        slot.wantsPlay = true;
+                        motionPaused = false;
+                        syncMotion();
+                    } else {
+                        slot.wantsPlay = false;
+                        element.pause();
+                    }
+
+                    updateVideoButton(slot);
+                });
+
+                element.addEventListener("loadeddata", reveal);
+
+                if (poster) {
+                    element.addEventListener("loadedmetadata", reveal);
+                }
+
+                element.addEventListener("play", () => updateVideoButton(slot));
+                element.addEventListener("pause", () => updateVideoButton(slot));
+
+                slot.host.append(element, button);
+                element.src = src;
+                updateVideoButton(slot);
+            } else {
+                element.alt = alt;
+                element.decoding = "async";
+                element.addEventListener("load", reveal);
+                slot.host.appendChild(element);
+                element.src = src;
+            }
+        }
+
+        function updateOwnerMedia() {
+            mediaSlots.forEach(updateMediaSlot);
+
+            $("ad-link").href =
+                safeUrl(localized(SITE_CONFIG.libraryUrl)) ||
+                "https://syolana.com/";
+
+            syncVideos();
+        }
+
+        /* =========================================================
+           МУЗЫКА
+           ========================================================= */
+
+        const audio = $("music-audio");
+        const songs = SITE_CONFIG.songs.filter(song =>
+            song && safeUrl(song.src)
+        );
+
+        const playlistElements = [];
+        let currentIndex = -1;
+        let shuffleBag = [];
+        let repeatOne = false;
+        let statusKey = songs.length ? "readyStatus" : "emptyStatus";
+        let playbackRequest = 0;
+        let changingTrack = false;
+
+        function songTitle(song, index) {
+            return localized(
+                song.title,
+                t("unnamedTrack", { number: index + 1 })
+            );
+        }
+
+        function formatTime(seconds) {
+            if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
+
+            const whole = Math.floor(seconds);
+            const minutes = Math.floor(whole / 60);
+            return minutes + ":" + String(whole % 60).padStart(2, "0");
+        }
+
+        function setStatus(key) {
+            statusKey = key;
+            $("player-status").textContent = t(key);
+            $("player-status").classList.toggle(
+                "is-error",
+                key === "errorStatus" || key === "blockedStatus"
+            );
+        }
+
+        /*
+         * Перемешивание без повторений внутри одного круга.
+         * На стыке кругов избегаем той же песни подряд, если песен > 1.
+         */
+        function nextRandomIndex() {
+            if (!songs.length) return -1;
+
+            if (!shuffleBag.length) {
+                shuffleBag = songs.map((_, index) => index);
+
+                for (let i = shuffleBag.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffleBag[i], shuffleBag[j]] = [shuffleBag[j], shuffleBag[i]];
+                }
+
+                const last = shuffleBag.length - 1;
+
+                if (shuffleBag.length > 1 && shuffleBag[last] === currentIndex) {
+                    [shuffleBag[0], shuffleBag[last]] =
+                        [shuffleBag[last], shuffleBag[0]];
+                }
+            }
+
+            return shuffleBag.pop();
+        }
+
+        function updateProgress() {
+            const duration = audio.duration;
+            const validDuration = Number.isFinite(duration) && duration > 0;
+            const time = Number.isFinite(audio.currentTime) ? audio.currentTime : 0;
+            const slider = $("seek-slider");
+
+            slider.disabled = !validDuration;
+            slider.value = validDuration
+                ? String(Math.round((time / duration) * 1000))
+                : "0";
+
+            $("current-time").textContent = formatTime(time);
+            $("duration").textContent = formatTime(duration);
+
+            slider.setAttribute(
+                "aria-valuetext",
+                formatTime(time) + " / " + formatTime(duration)
+            );
+        }
+
+        function updateMediaSession() {
+            if (!("mediaSession" in navigator) || currentIndex < 0) return;
+
+            const song = songs[currentIndex];
+
+            try {
+                if ("MediaMetadata" in window) {
+                    navigator.mediaSession.metadata = new MediaMetadata({
+                        title: songTitle(song, currentIndex),
+                        artist: "Syolana",
+                        album: localized(song.book, "Syolana")
+                    });
+                }
+
+                navigator.mediaSession.playbackState =
+                    audio.paused ? "paused" : "playing";
+            } catch (_) {}
+        }
+
+        function updatePlaylist() {
+            playlistElements.forEach((elements, index) => {
+                const song = songs[index];
+                const title = songTitle(song, index);
+                const book = localized(song.book);
+
+                elements.title.textContent = title;
+                elements.book.textContent = book
+                    ? t("basedOnBook", { book })
+                    : t("basedOnOurBook");
+
+                elements.button.setAttribute(
+                    "aria-current",
+                    String(index === currentIndex)
+                );
+
+                setLabel(elements.button, t("playNamed", { title }));
+            });
+        }
+
+        function updatePlayer() {
+            const hasSongs = songs.length > 0;
+            const playing = hasSongs && !audio.paused && !audio.ended;
+
+            $("play-button").disabled = !hasSongs;
+            $("next-button").disabled = !hasSongs;
+            $("shuffle-button").disabled = !hasSongs;
+            $("repeat-button").disabled = !hasSongs;
+
+            $("play-text").textContent = t(playing ? "pause" : "listen");
+            $("play-icon").setAttribute("href", playing ? "#i-pause" : "#i-play");
+            setLabel($("play-button"), t(playing ? "pause" : "listen"));
+
+            $("music-launcher").classList.toggle("is-playing", playing);
+            $("now-playing-label").textContent = t(
+                playing ? "nowPlaying" : "selectedTrack"
+            );
+
+            $("shuffle-button").setAttribute("aria-pressed", String(!repeatOne));
+            $("repeat-button").setAttribute("aria-pressed", String(repeatOne));
+            $("mode-hint").textContent = t(repeatOne ? "repeatHint" : "shuffleHint");
+
+            $("playlist-section").hidden = !hasSongs;
+            $("playlist-count").textContent = String(songs.length);
+
+            if (currentIndex >= 0) {
+                const song = songs[currentIndex];
+                const title = songTitle(song, currentIndex);
+                const book = localized(song.book);
+                const bookUrl = safeUrl(localized(song.bookUrl));
+
+                $("track-title").textContent = title;
+                $("track-book").hidden = false;
+                $("track-book").textContent = book
+                    ? t("basedOnBook", { book })
+                    : t("basedOnOurBook");
+
+                $("read-book-link").hidden = !bookUrl;
+
+                if (bookUrl) {
+                    $("read-book-link").href = bookUrl;
+                    setLabel(
+                        $("read-book-link"),
+                        book ? t("readSpecificBook", { book }) : t("readBook")
+                    );
+                }
+            } else {
+                $("track-title").textContent = t("noSongs");
+                $("track-book").hidden = true;
+                $("read-book-link").hidden = true;
+            }
+
+            setStatus(statusKey);
+            updatePlaylist();
+            updateMediaSession();
+        }
+
+        async function playCurrent() {
+            if (currentIndex < 0) return;
+
+            const request = ++playbackRequest;
+
+            if (audio.error) {
+                audio.load();
+            }
+
+            if (audio.ended) {
+                audio.currentTime = 0;
+            }
+
+            setStatus("loadingStatus");
+
+            try {
+                await audio.play();
+
+                if (request !== playbackRequest) return;
+
+                setStatus("playingStatus");
+            } catch (error) {
+                if (request !== playbackRequest || error.name === "AbortError") return;
+
+                setStatus(
+                    error.name === "NotAllowedError"
+                        ? "blockedStatus"
+                        : "errorStatus"
+                );
+            }
+
+            updatePlayer();
+        }
+
+        function pauseCurrent() {
+            playbackRequest++;
+            audio.pause();
+            if (currentIndex >= 0) setStatus("pausedStatus");
+            updatePlayer();
+        }
+
+        function selectTrack(index, autoplay) {
+            if (index < 0 || index >= songs.length) return;
+
+            playbackRequest++;
+            changingTrack = true;
+            audio.pause();
+
+            currentIndex = index;
+            audio.src = safeUrl(songs[index].src);
+            audio.loop = repeatOne;
+            audio.load();
+
+            changingTrack = false;
+            setStatus("readyStatus");
+            updateProgress();
+            updatePlayer();
+
+            if (autoplay) playCurrent();
+        }
+
+        function playNext() {
+            const index = nextRandomIndex();
+            if (index >= 0) selectTrack(index, true);
+        }
+
+        function setMode(shouldRepeat) {
+            repeatOne = shouldRepeat;
+            audio.loop = repeatOne;
+            updatePlayer();
+        }
+
+        songs.forEach((song, index) => {
+            const li = document.createElement("li");
+            const button = document.createElement("button");
+            const number = document.createElement("span");
+            const text = document.createElement("span");
+            const title = document.createElement("span");
+            const book = document.createElement("span");
+
+            button.type = "button";
+            button.className = "playlist-track";
+            number.className = "playlist-number";
+            text.className = "playlist-track-text";
+            title.className = "playlist-track-title";
+            book.className = "playlist-track-book";
+
+            number.textContent = String(index + 1).padStart(2, "0");
+            number.setAttribute("aria-hidden", "true");
+
+            text.append(title, book);
+            button.append(number, text);
+            li.appendChild(button);
+            $("playlist").appendChild(li);
+
+            playlistElements.push({ button, title, book });
+
+            button.addEventListener("click", () => {
+                /*
+                 * После ручного выбора продолжаем случайный круг
+                 * с остальных песен, без немедленного повтора выбранной.
+                 */
+                shuffleBag = songs
+                    .map((_, i) => i)
+                    .filter(i => i !== index);
+
+                for (let i = shuffleBag.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [shuffleBag[i], shuffleBag[j]] = [shuffleBag[j], shuffleBag[i]];
+                }
+
+                selectTrack(index, true);
+            });
+        });
+
+        $("play-button").addEventListener("click", () => {
+            if (audio.paused || audio.ended) playCurrent();
+            else pauseCurrent();
+        });
+
+        $("next-button").addEventListener("click", playNext);
+        $("shuffle-button").addEventListener("click", () => setMode(false));
+        $("repeat-button").addEventListener("click", () => setMode(true));
+
+        $("seek-slider").addEventListener("input", event => {
+            if (Number.isFinite(audio.duration) && audio.duration > 0) {
+                audio.currentTime = Number(event.target.value) / 1000 * audio.duration;
+                updateProgress();
+            }
+        });
+
+        audio.addEventListener("playing", () => {
+            setStatus("playingStatus");
+            updatePlayer();
+        });
+
+        audio.addEventListener("play", updatePlayer);
+
+        audio.addEventListener("pause", () => {
+            if (!changingTrack &&
+                !audio.ended &&
+                currentIndex >= 0 &&
+                statusKey !== "errorStatus" &&
+                statusKey !== "blockedStatus" &&
+                statusKey !== "readyStatus") {
+                setStatus("pausedStatus");
+            }
+
+            updatePlayer();
+        });
+
+        audio.addEventListener("waiting", () => {
+            if (!audio.paused) setStatus("loadingStatus");
+        });
+
+        audio.addEventListener("error", () => {
+            if (currentIndex < 0) return;
+
+            /*
+             * При повреждённом/отсутствующем файле останавливаемся,
+             * а не создаём бесконечную цепочку неудачных запросов.
+             */
+            playbackRequest++;
+            setStatus("errorStatus");
+            audio.pause();
+            updatePlayer();
+        });
+
+        audio.addEventListener("ended", () => {
+            if (repeatOne) {
+                audio.currentTime = 0;
+                playCurrent();
+            } else {
+                playNext();
+            }
+        });
+
+        audio.addEventListener("loadedmetadata", updateProgress);
+        audio.addEventListener("durationchange", updateProgress);
+        audio.addEventListener("timeupdate", updateProgress);
+        audio.addEventListener("emptied", updateProgress);
+
+        if ("mediaSession" in navigator) {
+            const actions = {
+                play: playCurrent,
+                pause: pauseCurrent,
+                nexttrack: playNext,
+                seekto: details => {
+                    if (Number.isFinite(details.seekTime) &&
+                        Number.isFinite(audio.duration)) {
+                        audio.currentTime = Math.max(
+                            0,
+                            Math.min(audio.duration, details.seekTime)
+                        );
+                    }
+                }
+            };
+
+            Object.entries(actions).forEach(([action, handler]) => {
+                try {
+                    navigator.mediaSession.setActionHandler(action, handler);
+                } catch (_) {}
+            });
+        }
+
+        if (songs.length) {
+            selectTrack(nextRandomIndex(), false);
+        }
+
+        /* =========================================================
+           РАСКРЫВАЮЩИЕСЯ ПАНЕЛИ
+           ========================================================= */
+
+        function setLanguageMenu(open, focus = false) {
+            $("language-popover").hidden = !open;
+            $("language-toggle").setAttribute("aria-expanded", String(open));
+
+            if (focus) {
+                (open ? $("language-option") : $("language-toggle")).focus();
+            }
+        }
+
+        function setPlayerPanel(open, focus = false) {
+            $("music-panel").hidden = !open;
+            $("music-launcher").setAttribute("aria-expanded", String(open));
+
+            if (open) setLanguageMenu(false);
+
+            if (focus) {
+                (open ? $("player-close") : $("music-launcher")).focus();
+            }
+        }
+
+        $("language-toggle").addEventListener("click", () => {
+            setLanguageMenu($("language-popover").hidden, true);
+        });
+
+        $("music-launcher").addEventListener("click", () => {
+            setPlayerPanel($("music-panel").hidden, true);
+        });
+
+        $("player-close").addEventListener("click", () => {
+            setPlayerPanel(false, true);
+        });
+
+        document.addEventListener("click", event => {
+            if (!$("language-switcher").contains(event.target)) {
+                setLanguageMenu(false);
+            }
+        });
+
+        document.addEventListener("focusin", event => {
+            if (!$("language-switcher").contains(event.target)) {
+                setLanguageMenu(false);
+            }
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key !== "Escape") return;
+
+            if (!$("language-popover").hidden) {
+                setLanguageMenu(false, true);
+            } else if (!$("music-panel").hidden) {
+                setPlayerPanel(false, true);
+            }
+        });
+
+        /* =========================================================
+           ПЕРЕВОД ВСЕЙ ЭТОЙ СТРАНИЦЫ
+           ========================================================= */
+
+        function applyLanguage(nextLanguage, announce = false) {
+            language = nextLanguage === "es" ? "es" : "ru";
+            root.lang = language;
+
+            document.title = t("pageTitle");
+            $("page-description").content = t("description");
+
+            document.querySelectorAll("[data-i18n]").forEach(element => {
+                element.textContent = t(element.dataset.i18n);
+            });
+
+            /*
+             * HTML берётся только из нашего постоянного словаря,
+             * а не из пользовательского ввода.
+             */
+            document.querySelectorAll("[data-i18n-html]").forEach(element => {
+                element.innerHTML = t(element.dataset.i18nHtml);
+            });
+
+            document.querySelectorAll("[data-i18n-label]").forEach(element => {
+                setLabel(element, t(element.dataset.i18nLabel));
+            });
+
+            document.querySelectorAll("[data-locked-level]").forEach(element => {
+                setLabel(
+                    element,
+                    t("lockedLevel", { level: element.dataset.lockedLevel })
+                );
+            });
+
+            $("language-code").textContent = language.toUpperCase();
+            $("language-target-code").textContent = language === "ru" ? "ES" : "RU";
+
+            updateFullscreen();
+            updateOwnerMedia();
+            updatePlayer();
+            updateProgress();
+            syncMotion();
+
+            try {
+                localStorage.setItem("syolana-language", language);
+            } catch (_) {}
+
+            if (announce) {
+                $("screen-status").textContent = t("languageChanged");
+            }
+        }
+
+        $("language-option").addEventListener("click", () => {
+            applyLanguage(language === "ru" ? "es" : "ru", true);
+            setLanguageMenu(false, true);
+        });
+
+        /* =========================================================
+           ЗВЁЗДЫ И ПЛАВАЮЩИЕ ВОДЯНЫЕ ЗНАКИ
+           ========================================================= */
+
+        function initializeCanvas() {
+            const canvas = $("starCanvas");
+            const ctx = canvas.getContext("2d");
+
+            if (!ctx) return;
+
+            const colors = [
+                "#FF003C", "#0055FF", "#FFB300",
+                "#00C853", "#AA00FF", "#00E5FF"
+            ];
+
+            let width = 1;
+            let height = 1;
+            let ratio = 1;
+            let stars = [];
+            let watermarks = [];
+            let frameId = 0;
+            let resizeId = 0;
+            let previousTime = 0;
+
+            const random = (min, max) => min + Math.random() * (max - min);
+            const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+            function createSprite(color) {
+                const sprite = document.createElement("canvas");
+                sprite.width = 64;
+                sprite.height = 64;
+
+                const context = sprite.getContext("2d");
+                if (!context) return null;
+
+                context.shadowColor = color;
+                context.shadowBlur = 12;
+                context.fillStyle = color;
+                context.beginPath();
+                context.arc(32, 32, 6.4, 0, Math.PI * 2);
+                context.fill();
+
+                context.shadowBlur = 0;
+                context.fillStyle = "rgba(255,255,255,.72)";
+                context.beginPath();
+                context.arc(32, 32, 2.1, 0, Math.PI * 2);
+                context.fill();
+
+                return sprite;
+            }
+
+            const sprites = colors.map(createSprite);
+
+            function createStar(initial = true) {
+                return {
+                    x: random(0, width),
+                    y: initial ? random(0, height) : height + 15,
+                    size: random(.5, 3),
+                    speedY: random(30, 120),
+                    speedX: random(-24, 24),
+                    colorIndex: Math.floor(random(0, colors.length)),
+                    phase: random(0, Math.PI * 2),
+                    blink: random(.6, 3),
+                    opacity: random(.2, .8)
+                };
+            }
+
+            function createWatermark(column, columns, row, rows) {
+                const lane = width / columns;
+
+                return {
+                    x: lane * (column + .5) + random(-lane * .12, lane * .12),
+                    y: ((row + random(0, .6)) / rows) * height,
+                    size: random(14, width <= 700 ? 17 : 20),
+                    speed: random(10, 22),
+                    opacity: random(.16, .29),
+                    phase: random(0, Math.PI * 2),
+                    drift: random(4, width <= 700 ? 10 : 18),
+                    hue: random(155, 330),
+                    hueSpeed: random(3.5, 9.5)
+                };
+            }
+
+            function render(delta) {
+                ctx.clearRect(0, 0, width, height);
+
+                for (const watermark of watermarks) {
+                    if (delta > 0) {
+                        watermark.y -= watermark.speed * delta;
+                        watermark.phase += delta * .23;
+                        watermark.hue = (watermark.hue + watermark.hueSpeed * delta) % 360;
+
+                        if (watermark.y < -45) {
+                            watermark.y = height + random(30, 110);
+                        }
+                    }
+
+                    const topFade = clamp((watermark.y + 20) / 95, 0, 1);
+                    const bottomFade = clamp((height + 30 - watermark.y) / 100, 0, 1);
+                    const x = watermark.x + Math.sin(watermark.phase) * watermark.drift;
+                    const hue = (watermark.hue + Math.sin(watermark.phase * .7) * 42 + 360) % 360;
+
+                    ctx.font = `600 ${watermark.size}px "Nunito", sans-serif`;
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+
+                    const textWidth = ctx.measureText("syolana.com").width;
+                    const gradient = ctx.createLinearGradient(
+                        x - textWidth / 2,
+                        watermark.y,
+                        x + textWidth / 2,
+                        watermark.y
+                    );
+
+                    gradient.addColorStop(0, `hsl(${hue}, 76%, 75%)`);
+                    gradient.addColorStop(.48, `hsl(${(hue + 58) % 360}, 82%, 80%)`);
+                    gradient.addColorStop(1, `hsl(${(hue + 116) % 360}, 76%, 73%)`);
+
+                    ctx.globalAlpha = watermark.opacity * topFade * bottomFade;
+                    ctx.fillStyle = gradient;
+                    ctx.shadowColor = `hsla(${hue}, 84%, 74%, .42)`;
+                    ctx.shadowBlur = 9;
+                    ctx.fillText("syolana.com", x, watermark.y);
+                    ctx.shadowBlur = 0;
+                }
+
+                for (let i = 0; i < stars.length; i++) {
+                    let star = stars[i];
+
+                    if (delta > 0) {
+                        star.x += star.speedX * delta;
+                        star.y -= star.speedY * delta;
+                        star.phase += star.blink * delta;
+
+                        if (star.y < -25) {
+                            star = stars[i] = createStar(false);
+                        }
+
+                        if (star.x < -25) star.x = width + 25;
+                        else if (star.x > width + 25) star.x = -25;
+                    }
+
+                    ctx.globalAlpha = clamp(
+                        star.opacity + Math.sin(star.phase) * .4,
+                        .1,
+                        1
+                    );
+
+                    const sprite = sprites[star.colorIndex];
+
+                    if (sprite) {
+                        const size = star.size * 10;
+                        ctx.drawImage(
+                            sprite,
+                            star.x - size / 2,
+                            star.y - size / 2,
+                            size,
+                            size
+                        );
+                    } else {
+                        ctx.fillStyle = colors[star.colorIndex];
+                        ctx.beginPath();
+                        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                ctx.globalAlpha = 1;
+                ctx.shadowBlur = 0;
+                ctx.shadowColor = "transparent";
+            }
+
+            function resize() {
+                const bounds = canvas.getBoundingClientRect();
+                const nextWidth = Math.max(1, bounds.width);
+                const nextHeight = Math.max(1, bounds.height);
+                const nextRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+                if (
+                    stars.length &&
+                    nextWidth === width &&
+                    nextHeight === height &&
+                    nextRatio === ratio
+                ) {
+                    return;
+                }
+
+                width = nextWidth;
+                height = nextHeight;
+                ratio = nextRatio;
+
+                canvas.width = Math.round(width * ratio);
+                canvas.height = Math.round(height * ratio);
+                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+                stars = Array.from(
+                    { length: width <= 700 ? 260 : 500 },
+                    () => createStar(true)
+                );
+
+                const columns = clamp(Math.floor(width / 170), 2, 10);
+                const rows = clamp(Math.ceil(height / 115), 6, 10);
+                watermarks = [];
+
+                for (let column = 0; column < columns; column++) {
+                    for (let row = 0; row < rows; row++) {
+                        watermarks.push(createWatermark(column, columns, row, rows));
+                    }
+                }
+
+                render(0);
+            }
+
+            function animate(time) {
+                frameId = 0;
+
+                if (document.hidden || motionPaused || reducedMotion.matches) {
+                    previousTime = 0;
+                    return;
+                }
+
+                const delta = previousTime
+                    ? Math.min((time - previousTime) / 1000, .05)
+                    : 1 / 60;
+
+                previousTime = time;
+                render(delta);
+                frameId = requestAnimationFrame(animate);
+            }
+
+            syncCanvas = () => {
+                if (frameId) {
+                    cancelAnimationFrame(frameId);
+                    frameId = 0;
+                }
+
+                previousTime = 0;
+
+                if (document.hidden) return;
+
+                render(0);
+
+                if (!motionPaused && !reducedMotion.matches) {
+                    frameId = requestAnimationFrame(animate);
+                }
+            };
+
+            function queueResize() {
+                if (resizeId) return;
+
+                resizeId = requestAnimationFrame(() => {
+                    resizeId = 0;
+                    resize();
+                });
+            }
+
+            window.addEventListener("resize", queueResize, { passive: true });
+
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener(
+                    "resize",
+                    queueResize,
+                    { passive: true }
+                );
+            }
+
+            window.addEventListener("pagehide", () => {
+                if (frameId) cancelAnimationFrame(frameId);
+                if (resizeId) cancelAnimationFrame(resizeId);
+                frameId = 0;
+                resizeId = 0;
+                previousTime = 0;
+            });
+
+            window.addEventListener("pageshow", () => {
+                resize();
+                syncCanvas();
+            });
+
+            resize();
+            syncCanvas();
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => {
+                    if (!document.hidden) render(0);
+                });
+            }
+        }
+
+        document.addEventListener("visibilitychange", syncMotion);
+        window.addEventListener("pageshow", syncMotion);
+
+        window.addEventListener("pagehide", () => {
+            mediaSlots.forEach(slot => {
+                if (slot.element && slot.element.tagName === "VIDEO") {
+                    slot.element.pause();
+                }
+            });
+        });
+
+        const onReducedMotionChange = () => {
+            motionPaused = reducedMotion.matches;
+            syncMotion();
+        };
+
+        if (typeof reducedMotion.addEventListener === "function") {
+            reducedMotion.addEventListener("change", onReducedMotionChange);
+        } else if (typeof reducedMotion.addListener === "function") {
+            reducedMotion.addListener(onReducedMotionChange);
+        }
+
+        initializeCanvas();
+        applyLanguage(language);
+    })();
+    </script>
+</body>
+</html>
