@@ -1,0 +1,2740 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#030309">
+
+    <title>Español A1 | Reglas</title>
+
+    <link
+        rel="icon"
+        type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E"
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        :root {
+            color-scheme: dark;
+
+            --bg-color: #000000;
+            --text-main: #f8f6ff;
+            --text-dim: #e4deee;
+            --text-muted: #c3b9d3;
+            --text-soft: #b0a9c1;
+
+            --border-color: rgba(224, 211, 255, .17);
+            --glass-border: rgba(224, 211, 255, .22);
+            --glass-border-hover: rgba(224, 211, 255, .40);
+
+            --accent-color: #dcc5ff;
+            --accent-blue: #bedcff;
+
+            --shadow-soft:
+                0 20px 65px rgba(0, 0, 0, .30),
+                inset 0 1px 0 rgba(255, 255, 255, .09),
+                inset 0 -1px 0 rgba(255, 255, 255, .025);
+
+            --shadow-hover:
+                0 26px 75px rgba(0, 0, 0, .38),
+                0 0 32px rgba(165, 130, 245, .08),
+                inset 0 1px 0 rgba(255, 255, 255, .14);
+
+            --ease: cubic-bezier(.22, 1, .36, 1);
+
+            /*
+             * Настройки матового стекла.
+             * Небольшое размытие сохраняет звёзды видимыми,
+             * а тёмная подложка обеспечивает читаемость.
+             */
+            --reading-glass: rgba(10, 9, 23, .65);
+            --reading-blur: 3px;
+
+            --audio-top: calc(98px + env(safe-area-inset-top, 0px));
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
+        html {
+            min-height: 100%;
+            background: var(--bg-color);
+            scroll-behavior: smooth;
+            scrollbar-color: #615371 #08080e;
+            scrollbar-width: thin;
+        }
+
+        body {
+            min-width: 280px;
+            min-height: 100vh;
+            min-height: 100svh;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            isolation: isolate;
+            overflow-x: hidden;
+
+            background: var(--bg-color);
+            color: var(--text-main);
+
+            font-family: "Nunito", sans-serif;
+            font-size: 16px;
+            line-height: 1.85;
+
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3 {
+            font-family: "Cormorant Garamond", Georgia, serif;
+        }
+
+        button, a, input {
+            touch-action: manipulation;
+        }
+
+        button, input {
+            font: inherit;
+        }
+
+        a, button {
+            color: inherit;
+        }
+
+        button:disabled {
+            -webkit-text-fill-color: currentColor;
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        .table-scroll:focus-visible {
+            outline: 2px solid #ddccff;
+            outline-offset: 5px;
+        }
+
+        ::selection {
+            color: #ffffff;
+            background: rgba(164, 119, 239, .55);
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #08080e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border: 2px solid #08080e;
+            border-radius: 10px;
+            background: #615371;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .svg-definitions {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .icon {
+            display: block;
+            flex: 0 0 auto;
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.7;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ======================================================
+           ФОН ИЗ INDEX.HTML
+           ====================================================== */
+
+        .aurora-background {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+            user-select: none;
+            background: #000000;
+        }
+
+        .aurora-layer {
+            position: absolute;
+            inset: -18% -22%;
+            transform-origin: 50% 25%;
+            filter: blur(48px) saturate(120%);
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .aurora-layer--one {
+            background:
+                radial-gradient(
+                    ellipse at 18% 17%,
+                    rgba(45,93,225,.78) 0%,
+                    rgba(24,56,151,.32) 26%,
+                    transparent 56%
+                ),
+                radial-gradient(
+                    ellipse at 76% 12%,
+                    rgba(137,57,207,.58) 0%,
+                    rgba(76,25,126,.24) 28%,
+                    transparent 56%
+                ),
+                radial-gradient(
+                    ellipse at 48% 40%,
+                    rgba(12,113,139,.36) 0%,
+                    transparent 53%
+                );
+            animation: auroraOne 29s ease-in-out infinite alternate;
+        }
+
+        .aurora-layer--two {
+            background:
+                radial-gradient(
+                    ellipse at 82% 17%,
+                    rgba(238,168,24,.52) 0%,
+                    rgba(135,85,9,.22) 25%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    ellipse at 15% 30%,
+                    rgba(182,40,77,.46) 0%,
+                    transparent 48%
+                ),
+                radial-gradient(
+                    ellipse at 54% 9%,
+                    rgba(28,160,97,.43) 0%,
+                    transparent 48%
+                );
+            animation: auroraTwo 35s ease-in-out infinite alternate;
+        }
+
+        .aurora-layer--three {
+            background:
+                radial-gradient(
+                    ellipse at 35% 12%,
+                    rgba(219,90,25,.40) 0%,
+                    transparent 43%
+                ),
+                radial-gradient(
+                    ellipse at 88% 35%,
+                    rgba(28,143,210,.42) 0%,
+                    transparent 48%
+                ),
+                radial-gradient(
+                    ellipse at 47% 26%,
+                    rgba(137,48,204,.40) 0%,
+                    transparent 49%
+                );
+            animation: auroraThree 24s ease-in-out infinite alternate;
+        }
+
+        .aurora-background::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(0,0,0,.14) 0%,
+                    rgba(0,0,0,.22) 24%,
+                    rgba(0,0,0,.48) 46%,
+                    rgba(0,0,0,.78) 65%,
+                    rgba(0,0,0,.96) 82%,
+                    #000 94%
+                ),
+                radial-gradient(
+                    ellipse at 50% 20%,
+                    transparent 25%,
+                    rgba(0,0,0,.30) 100%
+                );
+        }
+
+        @keyframes auroraOne {
+            0% {
+                opacity: .90;
+                transform: translate3d(-4%,-2%,0) scale(1.03) rotate(-6deg);
+            }
+            50% {
+                opacity: .60;
+                transform: translate3d(5%,3%,0) scale(1.12) rotate(3deg);
+            }
+            100% {
+                opacity: .95;
+                transform: translate3d(1%,-4%,0) scale(1.06) rotate(8deg);
+            }
+        }
+
+        @keyframes auroraTwo {
+            0% {
+                opacity: .32;
+                transform: translate3d(6%,-4%,0) scale(1.10) rotate(8deg);
+            }
+            50% {
+                opacity: .82;
+                transform: translate3d(-5%,2%,0) scale(1.02) rotate(-4deg);
+            }
+            100% {
+                opacity: .48;
+                transform: translate3d(-1%,-1%,0) scale(1.14) rotate(-10deg);
+            }
+        }
+
+        @keyframes auroraThree {
+            0% {
+                opacity: .50;
+                transform: translate3d(-3%,4%,0) scale(1.04) rotate(-3deg);
+            }
+            100% {
+                opacity: .85;
+                transform: translate3d(5%,-3%,0) scale(1.15) rotate(7deg);
+            }
+        }
+
+        #starCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .glass {
+            border: 1px solid var(--glass-border);
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.065),
+                    rgba(255,255,255,.012) 55%,
+                    rgba(189,163,255,.035)
+                ),
+                rgba(12,12,25,.36);
+            -webkit-backdrop-filter: blur(14px) saturate(125%);
+            backdrop-filter: blur(14px) saturate(125%);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* ======================================================
+           ЛОГОТИП И ПОЛНОЭКРАННЫЙ РЕЖИМ
+           ====================================================== */
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            padding:
+                calc(20px + env(safe-area-inset-top, 0px))
+                max(28px, env(safe-area-inset-right, 0px))
+                12px
+                max(28px, env(safe-area-inset-left, 0px));
+            pointer-events: none;
+        }
+
+        .brand-logo-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            padding: 7px 17px 7px 9px;
+            border-radius: 22px;
+            text-decoration: none;
+            pointer-events: auto;
+            transition:
+                transform .35s var(--ease),
+                border-color .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .brand-logo {
+            display: block;
+            flex: 0 0 auto;
+            width: 47px;
+            height: 47px;
+        }
+
+        .brand-logo svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            filter: drop-shadow(0 0 8px rgba(180,135,255,.45));
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-text-title {
+            color: #fbf8ff;
+            font-family: "Cormorant Garamond", Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: .4px;
+        }
+
+        .brand-text-sub {
+            margin-top: 4px;
+            color: #d0c2e8;
+            font-size: .59rem;
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: 1.25px;
+            text-transform: uppercase;
+        }
+
+        .action-circle-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            width: 47px;
+            height: 47px;
+            padding: 0;
+            border-radius: 50%;
+            color: #f4eeff;
+            cursor: pointer;
+            pointer-events: auto;
+            transition:
+                transform .35s var(--ease),
+                border-color .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .action-circle-btn:disabled {
+            color: var(--text-soft);
+            cursor: not-allowed;
+        }
+
+        .fullscreen-icon {
+            width: 21px;
+            height: 21px;
+        }
+
+        /* ======================================================
+           КОНТЕЙНЕР И МАТОВОЕ СТЕКЛО
+           ====================================================== */
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding:
+                calc(124px + env(safe-area-inset-top, 0px))
+                34px
+                calc(45px + env(safe-area-inset-bottom, 0px));
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 47px;
+            max-width: 100%;
+            margin-bottom: 25px;
+            padding: 11px 21px;
+
+            border: 1px solid rgba(222,204,255,.30);
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(190,157,247,.16),
+                    rgba(172,190,243,.055)
+                ),
+                rgba(12,10,24,.50);
+
+            -webkit-backdrop-filter: blur(9px);
+            backdrop-filter: blur(9px);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.10),
+                0 8px 24px rgba(0,0,0,.18);
+
+            color: #f1e7ff;
+            font-size: .82rem;
+            font-weight: 800;
+            line-height: 1.5;
+            letter-spacing: .45px;
+            text-decoration: none;
+
+            transition:
+                transform .3s var(--ease),
+                border-color .3s ease,
+                background-color .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .rules-panel {
+            position: relative;
+            padding: clamp(23px, 4.2vw, 48px);
+            border: 1px solid var(--glass-border);
+            border-radius: 29px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.055),
+                    rgba(255,255,255,.008) 52%,
+                    rgba(189,163,255,.032)
+                ),
+                var(--reading-glass);
+
+            -webkit-backdrop-filter:
+                blur(var(--reading-blur)) saturate(125%);
+            backdrop-filter:
+                blur(var(--reading-blur)) saturate(125%);
+
+            box-shadow:
+                0 24px 80px rgba(0,0,0,.33),
+                inset 0 1px 0 rgba(255,255,255,.11),
+                inset 0 -1px 0 rgba(255,255,255,.025);
+
+            /*
+             * Не устанавливаем overflow: hidden:
+             * он мешал бы липкой аудиопанели.
+             */
+        }
+
+        .rules-panel::before {
+            content: "";
+            position: absolute;
+            top: -1px;
+            right: 8%;
+            left: 8%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(216,192,255,.80),
+                rgba(177,213,255,.72),
+                transparent
+            );
+            box-shadow: 0 0 16px rgba(203,169,255,.28);
+            pointer-events: none;
+        }
+
+        /* ======================================================
+           ИНСТРУКЦИЯ
+           ====================================================== */
+
+        .instruction-box {
+            margin-bottom: 29px;
+            padding: 25px 27px;
+            border: 1px solid rgba(224,202,255,.22);
+            border-left: 3px solid #cfacff;
+            border-radius: 19px;
+
+            background:
+                radial-gradient(
+                    ellipse at 0% 0%,
+                    rgba(168,112,227,.12),
+                    transparent 72%
+                ),
+                rgba(194,164,243,.035);
+
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.055);
+        }
+
+        .instruction-box h2 {
+            margin: 0 0 14px;
+            color: #f7efff;
+            font-size: clamp(1.6rem, 3.6vw, 2rem);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: .2px;
+        }
+
+        .instruction-box p {
+            margin: 0 0 15px;
+            color: var(--text-dim);
+        }
+
+        .bilingual-list {
+            list-style: none;
+            padding: 0;
+            margin: 19px 0;
+        }
+
+        .bilingual-list li {
+            margin-bottom: 13px;
+            color: #f4edff;
+            font-weight: 800;
+        }
+
+        .bilingual-list li span {
+            display: block;
+            margin-top: 2px;
+            color: var(--text-muted);
+            font-size: .91rem;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .warning-text {
+            margin-top: 21px;
+            padding-top: 17px;
+            border-top: 1px solid rgba(237,197,224,.17);
+            color: #ffdaeb;
+            font-weight: 800;
+        }
+
+        .warning-text span {
+            display: block;
+            margin-top: 7px;
+            color: #ddc4d8;
+            font-size: .9rem;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        /* ======================================================
+           АУДИОПАНЕЛЬ
+           ====================================================== */
+
+        .audio-wrapper {
+            position: sticky;
+            top: var(--audio-top);
+            z-index: 30;
+
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px 20px;
+
+            margin-bottom: 39px;
+            padding: 17px 20px;
+            border: 1px solid rgba(224,194,255,.36);
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    125deg,
+                    rgba(138,87,199,.20),
+                    rgba(86,111,190,.09)
+                ),
+                rgba(15,12,29,.93);
+
+            -webkit-backdrop-filter: blur(16px) saturate(130%);
+            backdrop-filter: blur(16px) saturate(130%);
+
+            box-shadow:
+                0 12px 32px rgba(0,0,0,.34),
+                0 0 22px rgba(166,115,233,.075),
+                inset 0 1px 0 rgba(255,255,255,.13);
+        }
+
+        .audio-copy {
+            flex: 1 1 190px;
+            min-width: 0;
+        }
+
+        .audio-copy strong {
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .audio-subtitle {
+            margin-top: 3px;
+            color: var(--text-muted);
+            font-size: .8rem;
+            line-height: 1.6;
+        }
+
+        .audio-btn {
+            display: inline-flex;
+            flex: 0 0 auto;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            min-width: 143px;
+            min-height: 47px;
+            padding: 11px 21px;
+
+            border: 1px solid rgba(233,206,255,.42);
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    125deg,
+                    rgba(172,122,236,.30),
+                    rgba(112,139,214,.16)
+                );
+
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.13),
+                0 5px 18px rgba(0,0,0,.17);
+
+            color: #fff5ff;
+            font-family: inherit;
+            font-size: .8rem;
+            font-weight: 800;
+            line-height: 1.5;
+            letter-spacing: .65px;
+            text-transform: uppercase;
+            cursor: pointer;
+
+            transition:
+                transform .3s var(--ease),
+                border-color .3s ease,
+                background-color .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .audio-btn .icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .audio-btn[aria-pressed="true"] {
+            border-color: rgba(233,206,255,.68);
+            background-color: rgba(181,133,242,.16);
+            box-shadow:
+                0 0 22px rgba(191,142,255,.12),
+                inset 0 1px 0 rgba(255,255,255,.16);
+        }
+
+        .audio-status {
+            flex: 1 1 100%;
+            margin: 0;
+            color: #ffd3e4;
+            font-size: .8rem;
+            line-height: 1.6;
+        }
+
+        .audio-status:empty {
+            display: none;
+        }
+
+        .audio-noscript {
+            flex: 1 1 100%;
+            width: 100%;
+        }
+
+        .audio-noscript audio {
+            display: block;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        /* ======================================================
+           ЗАГОЛОВКИ И ТЕКСТ ПРАВИЛ
+           ====================================================== */
+
+        h2.section-title {
+            position: relative;
+            margin: 55px 0 24px;
+            padding-bottom: 17px;
+
+            color: #fcf6ff;
+            font-size: clamp(1.8rem, 3.8vw, 2.4rem);
+            font-weight: 600;
+            line-height: 1.23;
+            letter-spacing: .1px;
+            text-wrap: balance;
+
+            border-bottom: 1px solid rgba(220,200,251,.22);
+            text-shadow: 0 2px 15px rgba(0,0,0,.34);
+
+            scroll-margin-top:
+                calc(var(--audio-top) + 155px);
+        }
+
+        h2.section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: min(170px, 45%);
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                #d6b4ff,
+                rgba(178,211,255,.75),
+                transparent
+            );
+            box-shadow: 0 0 12px rgba(196,155,255,.23);
+        }
+
+        .audio-wrapper + h2.section-title {
+            margin-top: 12px;
+        }
+
+        h3 {
+            margin: 31px 0 15px;
+            color: #e9d8ff;
+            font-size: clamp(1.4rem, 3vw, 1.7rem);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h4 {
+            display: inline-block;
+            margin: 19px 0 6px;
+            padding: 5px 14px;
+
+            border: 1px solid rgba(221,195,255,.22);
+            border-radius: 11px;
+            background: rgba(194,153,255,.065);
+
+            color: #e6d4ff;
+            font-size: .94rem;
+            font-weight: 800;
+            letter-spacing: .7px;
+        }
+
+        .rules-panel p {
+            margin-top: 0;
+            margin-bottom: 19px;
+        }
+
+        .rules-panel ul,
+        .rules-panel ol {
+            margin-top: 13px;
+            margin-bottom: 23px;
+            padding-left: 23px;
+        }
+
+        .rules-panel li {
+            margin-bottom: 13px;
+            padding-left: 3px;
+        }
+
+        .rules-panel li::marker {
+            color: #c3a1f0;
+        }
+
+        .rules-panel .bilingual-list {
+            padding-left: 0;
+        }
+
+        .rules-panel .bilingual-list li {
+            padding-left: 0;
+        }
+
+        .rules-panel > p,
+        .rules-panel > ul,
+        .rules-panel > ol {
+            color: var(--text-dim);
+        }
+
+        strong {
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .es-text {
+            color: var(--accent-blue);
+            font-weight: 800;
+        }
+
+        .ru-text {
+            color: var(--text-muted);
+            font-size: .95em;
+        }
+
+        .note {
+            margin: 17px 0 24px;
+            padding: 15px 18px;
+
+            border: 1px solid rgba(231,197,156,.16);
+            border-left: 3px solid #dcc09d;
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(226,189,133,.065),
+                    rgba(213,170,247,.025)
+                );
+
+            color: #e6d9d0;
+            font-size: .9rem;
+            line-height: 1.8;
+
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+        }
+
+        /* ======================================================
+           ТАБЛИЦЫ
+           ====================================================== */
+
+        .table-scroll {
+            width: 100%;
+            max-width: 100%;
+            margin: 20px 0 25px;
+            overflow-x: auto;
+
+            border: 1px solid rgba(222,200,255,.20);
+            border-radius: 17px;
+
+            background: rgba(14,12,27,.16);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.045);
+
+            scrollbar-width: thin;
+            scrollbar-color: #76608e rgba(10,8,19,.5);
+        }
+
+        table {
+            width: 100%;
+            margin: 0;
+            border: 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: transparent;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border: 0;
+            border-right: 1px solid rgba(220,201,246,.12);
+            border-bottom: 1px solid rgba(220,201,246,.12);
+
+            color: var(--text-dim);
+            font-size: .95rem;
+            line-height: 1.7;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th:last-child,
+        td:last-child {
+            border-right: 0;
+        }
+
+        tr:last-child > th,
+        tr:last-child > td {
+            border-bottom: 0;
+        }
+
+        th {
+            background:
+                linear-gradient(
+                    125deg,
+                    rgba(192,146,255,.115),
+                    rgba(160,182,239,.05)
+                );
+            color: #f3e8ff;
+            font-weight: 800;
+        }
+
+        tr:nth-child(even) td {
+            background: rgba(208,185,242,.025);
+        }
+
+        td strong {
+            color: #f3e7ff;
+        }
+
+        .numbers-table,
+        .verbs-table {
+            min-width: 640px;
+        }
+
+        .articles-table {
+            min-width: 590px;
+        }
+
+        .pronouns-table {
+            min-width: 630px;
+        }
+
+        /* ======================================================
+           ФУТЕР
+           ====================================================== */
+
+        .site-footer {
+            margin-top: 37px;
+            padding: 26px 12px 12px;
+
+            border-top: 1px solid rgba(218,201,247,.15);
+
+            color: var(--text-soft);
+            font-size: .79rem;
+            text-align: center;
+            text-shadow: 0 2px 8px #000;
+        }
+
+        .site-footer p {
+            margin: 0;
+        }
+
+        .footer-brand {
+            color: #d4c0f3;
+            text-decoration: none;
+            transition: color .25s ease;
+        }
+
+        .footer-brand:hover {
+            color: #f0e5ff;
+        }
+
+        .footer-motion {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            min-height: 42px;
+            margin-top: 15px;
+            padding: 9px 15px;
+
+            border: 1px solid rgba(219,195,255,.21);
+            border-radius: 999px;
+
+            background: rgba(180,142,233,.06);
+            color: #d8c7eb;
+            font-size: .73rem;
+            cursor: pointer;
+
+            transition:
+                border-color .25s ease,
+                background-color .25s ease;
+        }
+
+        .footer-motion .icon {
+            width: 15px;
+            height: 15px;
+        }
+
+        .animations-paused .aurora-layer {
+            animation-play-state: paused;
+        }
+
+        /* ======================================================
+           СОСТОЯНИЯ КНОПОК
+           ====================================================== */
+
+        .back-btn:active,
+        .audio-btn:active {
+            transform: scale(.985);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .brand-logo-container:hover {
+                transform: translateY(-2px);
+                border-color: var(--glass-border-hover);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .action-circle-btn:hover:not(:disabled) {
+                transform: translateY(-2px) scale(1.06);
+                border-color: rgba(224,204,255,.48);
+                box-shadow:
+                    0 8px 28px rgba(0,0,0,.32),
+                    0 0 22px rgba(183,144,255,.16),
+                    inset 0 1px 0 rgba(255,255,255,.16);
+            }
+
+            .back-btn:hover,
+            .audio-btn:hover {
+                transform: translateY(-2px);
+                border-color: rgba(226,206,255,.60);
+                background-color: rgba(170,126,234,.15);
+                box-shadow:
+                    0 8px 22px rgba(0,0,0,.22),
+                    0 0 20px rgba(180,139,247,.10),
+                    inset 0 1px 0 rgba(255,255,255,.15);
+            }
+
+            .footer-motion:hover {
+                border-color: rgba(226,206,255,.42);
+                background-color: rgba(170,126,234,.13);
+            }
+
+            tr:hover td {
+                background-color: rgba(207,178,247,.055);
+            }
+        }
+
+        /* ======================================================
+           МОБИЛЬНАЯ ВЕРСИЯ
+           ====================================================== */
+
+        @media (max-width: 700px) {
+            :root {
+                --audio-top:
+                    calc(83px + env(safe-area-inset-top, 0px));
+                --reading-glass: rgba(10,9,23,.68);
+                --reading-blur: 2px;
+            }
+
+            body {
+                font-size: 15px;
+                line-height: 1.85;
+            }
+
+            .top-bar {
+                padding:
+                    calc(15px + env(safe-area-inset-top, 0px))
+                    max(17px, env(safe-area-inset-right, 0px))
+                    10px
+                    max(17px, env(safe-area-inset-left, 0px));
+            }
+
+            .brand-logo-container {
+                gap: 0;
+                padding: 5px;
+                border-radius: 18px;
+            }
+
+            .brand-logo {
+                width: 43px;
+                height: 43px;
+            }
+
+            .brand-text {
+                display: none;
+            }
+
+            .action-circle-btn {
+                width: 44px;
+                height: 44px;
+            }
+
+            .container {
+                padding:
+                    calc(103px + env(safe-area-inset-top, 0px))
+                    16px
+                    calc(30px + env(safe-area-inset-bottom, 0px));
+            }
+
+            .back-btn {
+                min-height: 44px;
+                margin-bottom: 20px;
+                padding: 10px 18px;
+                font-size: .76rem;
+            }
+
+            .rules-panel {
+                padding: 24px 20px;
+                border-radius: 23px;
+            }
+
+            .instruction-box {
+                margin-bottom: 23px;
+                padding: 20px 18px;
+                border-radius: 16px;
+            }
+
+            .instruction-box h2 {
+                font-size: 1.6rem;
+            }
+
+            .bilingual-list li span,
+            .warning-text span {
+                font-size: .85rem;
+            }
+
+            .audio-wrapper {
+                gap: 12px;
+                margin-bottom: 30px;
+                padding: 15px;
+                border-radius: 17px;
+            }
+
+            .audio-copy {
+                flex-basis: 160px;
+            }
+
+            .audio-copy strong {
+                font-size: .92rem;
+            }
+
+            .audio-subtitle {
+                font-size: .74rem;
+            }
+
+            .audio-btn {
+                min-width: 126px;
+                min-height: 44px;
+                padding: 10px 16px;
+                font-size: .73rem;
+            }
+
+            h2.section-title {
+                margin-top: 43px;
+                font-size: 1.85rem;
+                line-height: 1.2;
+            }
+
+            h3 {
+                margin-top: 26px;
+                font-size: 1.5rem;
+            }
+
+            .rules-panel ul,
+            .rules-panel ol {
+                padding-left: 20px;
+            }
+
+            .rules-panel li {
+                padding-left: 1px;
+            }
+
+            .table-scroll {
+                border-radius: 13px;
+            }
+
+            th, td {
+                padding: 12px 13px;
+                font-size: .87rem;
+            }
+
+            .note {
+                padding: 13px 14px;
+                font-size: .84rem;
+            }
+
+            .site-footer {
+                margin-top: 29px;
+                font-size: .74rem;
+            }
+
+            .aurora-layer {
+                filter: blur(34px) saturate(115%);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .rules-panel {
+                padding: 21px 15px;
+                border-radius: 20px;
+            }
+
+            .instruction-box {
+                padding: 18px 15px;
+            }
+
+            .audio-copy {
+                flex-basis: 100%;
+            }
+
+            .audio-btn {
+                width: 100%;
+            }
+
+            h2.section-title {
+                font-size: 1.65rem;
+                overflow-wrap: anywhere;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* На низких экранах плеер не перекрывает текст. */
+        @media (max-height: 520px) {
+            .audio-wrapper {
+                position: relative;
+                top: auto;
+            }
+        }
+
+        @supports not (
+            (backdrop-filter: blur(1px)) or
+            (-webkit-backdrop-filter: blur(1px))
+        ) {
+            .glass {
+                background-color: rgba(12,12,25,.83);
+            }
+
+            .rules-panel {
+                background-color: rgba(10,9,23,.82);
+            }
+
+            .audio-wrapper {
+                background-color: rgba(15,12,29,.97);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .aurora-layer {
+                will-change: auto;
+            }
+
+            .aurora-layer--one {
+                opacity: .85;
+            }
+
+            .aurora-layer--two {
+                opacity: .50;
+            }
+
+            .aurora-layer--three {
+                opacity: .55;
+            }
+        }
+
+        @media print {
+            html, body {
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            .aurora-background,
+            #starCanvas,
+            .top-bar,
+            .back-btn,
+            .audio-wrapper,
+            .footer-motion {
+                display: none !important;
+            }
+
+            .container {
+                max-width: none;
+                padding: 0;
+            }
+
+            .rules-panel,
+            .instruction-box,
+            .note,
+            .table-scroll {
+                background: transparent !important;
+                color: #000 !important;
+                box-shadow: none !important;
+                -webkit-backdrop-filter: none !important;
+                backdrop-filter: none !important;
+            }
+
+            .rules-panel {
+                padding: 0;
+                border: 0;
+            }
+
+            .rules-panel::before,
+            h2.section-title::after {
+                display: none;
+            }
+
+            .rules-panel *,
+            .site-footer,
+            .footer-brand {
+                color: #000 !important;
+                text-shadow: none !important;
+            }
+
+            h2, h3, h4 {
+                break-after: avoid;
+            }
+
+            tr {
+                break-inside: avoid;
+            }
+
+            .table-scroll {
+                overflow: visible;
+            }
+
+            table {
+                min-width: 0 !important;
+            }
+
+            th, td {
+                padding: 8px;
+                border-color: #ccc;
+                background: transparent !important;
+                font-size: 10pt;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Логотип и иконки. -->
+    <svg
+        class="svg-definitions"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        focusable="false"
+    >
+        <defs>
+            <symbol id="syolana-mark" viewBox="0 0 100 100">
+                <g
+                    stroke="#c5a4ff"
+                    stroke-width="1.6"
+                    fill="#aa7bea"
+                    fill-opacity="0.15"
+                >
+                    <path d="M50 15 C60 28 65 42 50 50 C35 42 40 28 50 15 Z"/>
+                    <path d="M50 50 C65 42 85 32 90 47 C80 57 65 57 50 50 Z"/>
+                    <path d="M50 50 C35 42 15 32 10 47 C20 57 35 57 50 50 Z"/>
+                    <path d="M50 50 C65 60 75 80 60 90 C50 80 50 65 50 50 Z"/>
+                    <path d="M50 50 C35 60 25 80 40 90 C50 80 50 65 50 50 Z"/>
+                </g>
+                <text
+                    x="50"
+                    y="59"
+                    font-family="'Cormorant Garamond', Georgia, serif"
+                    font-size="29"
+                    font-weight="600"
+                    fill="#ffffff"
+                    text-anchor="middle"
+                >SY</text>
+            </symbol>
+
+            <symbol id="i-play" viewBox="0 0 24 24">
+                <path
+                    d="m8 4 12 8-12 8Z"
+                    fill="currentColor"
+                    stroke="none"
+                />
+            </symbol>
+
+            <symbol id="i-pause" viewBox="0 0 24 24">
+                <path d="M8 5v14M16 5v14" stroke-width="3.4"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <!-- Фон. -->
+    <div class="aurora-background" aria-hidden="true">
+        <div class="aurora-layer aurora-layer--one"></div>
+        <div class="aurora-layer aurora-layer--two"></div>
+        <div class="aurora-layer aurora-layer--three"></div>
+    </div>
+
+    <canvas id="starCanvas" aria-hidden="true"></canvas>
+
+    <!-- Верхняя панель. -->
+    <header class="top-bar">
+        <a
+            href="https://syolana.com/"
+            class="brand-logo-container glass"
+            aria-label="Перейти на главную страницу Syolana"
+            title="Перейти на главную страницу Syolana"
+        >
+            <span class="brand-logo">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                    <use href="#syolana-mark"></use>
+                </svg>
+            </span>
+
+            <span class="brand-text">
+                <span class="brand-text-title">Syolana</span>
+                <span class="brand-text-sub">
+                    Иммерсивная платформа
+                </span>
+            </span>
+        </a>
+
+        <button
+            type="button"
+            id="fullscreen-btn"
+            class="action-circle-btn glass"
+            aria-label="На весь экран"
+            aria-pressed="false"
+            title="На весь экран"
+            hidden
+        >
+            <svg
+                class="icon fullscreen-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <path
+                    id="fullscreen-path"
+                    d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"
+                />
+            </svg>
+        </button>
+    </header>
+
+    <p
+        id="screen-status"
+        class="sr-only"
+        role="status"
+        aria-live="polite"
+    ></p>
+
+    <main class="container">
+        <a href="index.html" class="back-btn">&lt;- Назад к уровням</a>
+
+        <article class="rules-panel" aria-label="Правила А1">
+
+            <div class="instruction-box">
+                <h2>/> Инструкция на каждый день</h2>
+                <p>То, что тебе нужно делать каждый день: <em>(Lo que tienes que hacer cada día:)</em></p>
+                <ul class="bilingual-list">
+                    <li>1. Все правила А1. <span>(Todas las reglas de A1.)</span></li>
+                    <li>2. Все слова А1. <span>(Todas las palabras de A1.)</span></li>
+                    <li>3. Практика. <span>(Práctica.)</span></li>
+                </ul>
+                <div class="warning-text">
+                    Когда нет времени делать практику, то слушай пункты 1 и 2! Обязательно, каждый день!
+                    <span>¡Cuando no tengas tiempo para hacer la práctica, escucha los puntos 1 y 2! ¡Obligatoriamente, cada día!</span>
+                </div>
+            </div>
+
+            <div class="audio-wrapper">
+                <div class="audio-copy">
+                    <strong>Аудио: Правила А1</strong>
+                    <div class="audio-subtitle">Слушай и читай текст ниже</div>
+                </div>
+
+                <button
+                    type="button"
+                    id="audio-btn"
+                    class="audio-btn"
+                    aria-label="Слушать правила А1"
+                    aria-controls="a1-audio"
+                    aria-pressed="false"
+                    hidden
+                >
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <use id="audio-icon" href="#i-play"></use>
+                    </svg>
+                    <span id="audio-text">Слушать</span>
+                </button>
+
+                <!--
+                    Замените src на путь к своему аудиофайлу.
+                    Например: assets/audio/a1-spanish-rules.mp3
+                -->
+                <audio
+                    id="a1-audio"
+                    src="ССЫЛКА_НА_ВАШ_АУДИОФАЙЛ.mp3"
+                    preload="none"
+                    hidden
+                ></audio>
+
+                <p
+                    id="audio-status"
+                    class="audio-status"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+
+                <noscript class="audio-noscript">
+                    <audio
+                        controls
+                        preload="none"
+                        src="ССЫЛКА_НА_ВАШ_АУДИОФАЙЛ.mp3"
+                        aria-label="Аудио: Правила А1"
+                    ></audio>
+                </noscript>
+            </div>
+
+            <h2 class="section-title">0. Алфавит (El Alfabeto)</h2>
+            <p>
+                <strong>A</strong> (a), <strong>B</strong> (be), <strong>C</strong> (ce), <strong>D</strong> (de), <strong>E</strong> (e), <strong>F</strong> (efe), <strong>G</strong> (ge), <strong>H</strong> (hache), <strong>I</strong> (i), <strong>J</strong> (jota), <strong>K</strong> (ka), <strong>L</strong> (ele), <strong>M</strong> (eme), <strong>N</strong> (ene), <strong>Ñ</strong> (eñe), <strong>O</strong> (o), <strong>P</strong> (pe), <strong>Q</strong> (cu), <strong>R</strong> (erre), <strong>S</strong> (ese), <strong>T</strong> (te), <strong>U</strong> (u), <strong>V</strong> (uve), <strong>W</strong> (uve doble), <strong>X</strong> (equis), <strong>Y</strong> (i griega / ye), <strong>Z</strong> (zeta).
+            </p>
+
+            <h2 class="section-title">1. Фонетика и орфография (Fonética y ortografía)</h2>
+            <h3>Правила чтения согласных:</h3>
+            <ul>
+                <li><strong>b / v:</strong> Читаются одинаково (звук между [б] и [в]). В начале слова или после паузы всегда как [б]. <br><span class="es-text">Ejemplo:</span> vaca <span class="ru-text">(бака - корова)</span>, bueno <span class="ru-text">(хороший)</span>.</li>
+                <li><strong>h:</strong> Никогда не читается. <br><span class="es-text">Ejemplo:</span> hola <span class="ru-text">(ола - привет)</span>, ahora <span class="ru-text">(аора - сейчас)</span>.</li>
+                <li><strong>c:</strong>
+                    <br>- Перед <strong>a, o, u</strong> читается как [к]: casa <span class="ru-text">(дом)</span>, cosa <span class="ru-text">(вещь)</span>, cubo <span class="ru-text">(ведро)</span>.
+                    <br>- Перед <strong>e, i</strong> читается как межзубный [с]: cena <span class="ru-text">(ужин)</span>, cine <span class="ru-text">(кино)</span>. <em>(В Латинской Америке читается как обычное русское [с] - это явление называется seseo).</em>
+                </li>
+                <li><strong>z:</strong> Всегда читается как межзубный [с]. <br><span class="es-text">Ejemplo:</span> zapato <span class="ru-text">(ботинок)</span>, zumo <span class="ru-text">(сок)</span>. <em>(В Лат. Америке - как обычное [с]).</em></li>
+                <li><strong>g:</strong>
+                    <br>- Перед <strong>a, o, u</strong> читается как [г]: gato <span class="ru-text">(кот)</span>, goma <span class="ru-text">(ластик)</span>.
+                    <br>- Перед <strong>e, i</strong> читается как [х]: gente <span class="ru-text">(люди)</span>, gimnasio <span class="ru-text">(спортзал)</span>.
+                </li>
+                <li><strong>gue, gui:</strong> Читаются как [ге], [ги] (буква 'u' не читается). <br><span class="es-text">Ejemplo:</span> guerra <span class="ru-text">(война)</span>, guitarra <span class="ru-text">(гитара)</span>.</li>
+                <li><strong>que, qui:</strong> Читаются как [ке], [ки] (буква 'u' не читается). <br><span class="es-text">Ejemplo:</span> queso <span class="ru-text">(сыр)</span>, aquí <span class="ru-text">(здесь)</span>.</li>
+                <li><strong>ll:</strong> Читается как [й] (или мягкое [дж]). <br><span class="es-text">Ejemplo:</span> llave <span class="ru-text">(йаве - ключ)</span>, calle <span class="ru-text">(улица)</span>.</li>
+                <li><strong>ñ:</strong> Читается как мягкий [нь]. <br><span class="es-text">Ejemplo:</span> España <span class="ru-text">(Испания)</span>, niño <span class="ru-text">(мальчик)</span>.</li>
+                <li><strong>ch:</strong> Читается как [ч]. <br><span class="es-text">Ejemplo:</span> chica <span class="ru-text">(девушка)</span>, noche <span class="ru-text">(ночь)</span>.</li>
+            </ul>
+
+            <h3>Ударение (Acentuación):</h3>
+            <ol>
+                <li>Если слово оканчивается на гласную, <strong>-n</strong> или <strong>-s</strong>, ударение падает на предпоследний слог: c<strong>a</strong>sa <span class="ru-text">(дом)</span>, trab<strong>a</strong>jan <span class="ru-text">(они работают)</span>, ch<strong>i</strong>cos <span class="ru-text">(парни)</span>.</li>
+                <li>Если слово оканчивается на любую другую согласную, ударение падает на последний слог: ciud<strong>a</strong>d <span class="ru-text">(город)</span>, trabaj<strong>a</strong>r <span class="ru-text">(работать)</span>, pap<strong>e</strong>l <span class="ru-text">(бумага)</span>.</li>
+                <li>Если правило нарушается, ставится графическое ударение (tilde): est<strong>á</strong>s, m<strong>é</strong>dico, caf<strong>é</strong>, f<strong>á</strong>cil. Также используется для различения смысла: tú <span class="ru-text">(ты)</span> / tu <span class="ru-text">(твой)</span>, él <span class="ru-text">(он)</span> / el <span class="ru-text">(артикль)</span>.</li>
+            </ol>
+
+            <h2 class="section-title">2. Числительные (Números)</h2>
+
+            <div
+                class="table-scroll"
+                tabindex="0"
+                role="region"
+                aria-label="Числительные — таблица с горизонтальной прокруткой"
+            >
+                <table class="numbers-table">
+                    <tr>
+                        <td><strong>0</strong> - cero</td>
+                        <td><strong>11</strong> - once</td>
+                        <td><strong>21</strong> - veintiuno</td>
+                        <td><strong>31</strong> - treinta y uno</td>
+                    </tr>
+                    <tr>
+                        <td><strong>1</strong> - uno</td>
+                        <td><strong>12</strong> - doce</td>
+                        <td><strong>22</strong> - veintidós</td>
+                        <td><strong>40</strong> - cuarenta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2</strong> - dos</td>
+                        <td><strong>13</strong> - trece</td>
+                        <td><strong>23</strong> - veintitrés</td>
+                        <td><strong>50</strong> - cincuenta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3</strong> - tres</td>
+                        <td><strong>14</strong> - catorce</td>
+                        <td><strong>24</strong> - veinticuatro</td>
+                        <td><strong>60</strong> - sesenta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4</strong> - cuatro</td>
+                        <td><strong>15</strong> - quince</td>
+                        <td><strong>25</strong> - veinticinco</td>
+                        <td><strong>70</strong> - setenta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>5</strong> - cinco</td>
+                        <td><strong>16</strong> - dieciséis</td>
+                        <td><strong>26</strong> - veintiséis</td>
+                        <td><strong>80</strong> - ochenta</td>
+                    </tr>
+                    <tr>
+                        <td><strong>6</strong> - seis</td>
+                        <td><strong>17</strong> - diecisiete</td>
+                        <td><strong>27</strong> - veintisiete</td>
+                        <td><strong>90</strong> - noventa</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7</strong> - siete</td>
+                        <td><strong>18</strong> - dieciocho</td>
+                        <td><strong>28</strong> - veintiocho</td>
+                        <td><strong>100</strong> - cien (ciento)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8</strong> - ocho</td>
+                        <td><strong>19</strong> - diecinueve</td>
+                        <td><strong>29</strong> - veintinueve</td>
+                        <td><strong>200</strong> - doscientos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>9</strong> - nueve</td>
+                        <td><strong>20</strong> - veinte</td>
+                        <td><strong>30</strong> - treinta</td>
+                        <td><strong>500</strong> - quinientos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>10</strong> - diez</td>
+                        <td></td>
+                        <td></td>
+                        <td><strong>700</strong> - setecientos<br><strong>900</strong> - novecientos</td>
+                    </tr>
+                </table>
+            </div>
+
+            <ul>
+                <li><strong>1 000</strong> - mil <span class="ru-text">(тысяча)</span></li>
+                <li><strong>1 000 000</strong> - un millón <span class="ru-text">(один миллион)</span></li>
+                <li><strong>1 000 000 000</strong> - mil millones <span class="ru-text">(миллиард. Примечание: в испанском "un billón" — это триллион / миллион миллионов, поэтому миллиард говорят как "тысяча миллионов")</span>.</li>
+            </ul>
+
+            <h2 class="section-title">3. Существительные и прилагательные (Sustantivos y adjetivos)</h2>
+            <h3>Род (Género):</h3>
+            <ul>
+                <li><strong>Мужской (-o, -or, -aje):</strong> el libro <span class="ru-text">(книга)</span>, el ordenador <span class="ru-text">(компьютер)</span>, el viaje <span class="ru-text">(путешествие)</span>.</li>
+                <li><strong>Женский (-a, -ción, -dad):</strong> la mesa <span class="ru-text">(стол)</span>, la canción <span class="ru-text">(песня)</span>, la ciudad <span class="ru-text">(город)</span>.</li>
+                <li><strong>Исключения (нужно выучить):</strong> el mapa <span class="ru-text">(карта)</span>, el día <span class="ru-text">(день)</span>, el problema <span class="ru-text">(проблема)</span>, el planeta <span class="ru-text">(планета)</span>, el idioma <span class="ru-text">(язык, например, el idioma español)</span>, la mano <span class="ru-text">(рука от кисти до пальцев)</span>, la foto [fotografía] <span class="ru-text">(фотография)</span>, la moto [motocicleta] <span class="ru-text">(мотоцикл)</span>.</li>
+            </ul>
+
+            <h3>Число (Número) и согласование:</h3>
+            <ul>
+                <li>Оканчивается на <strong>гласную + -s</strong>: el gato negro -> los gatos negros <span class="ru-text">(черные коты)</span>.</li>
+                <li>Оканчивается на <strong>согласную + -es</strong>: la flor azul -> las flores azules <span class="ru-text">(синие цветы)</span>.</li>
+                <li>Замена <strong>z на c</strong>: el lápiz -> los lápices <span class="ru-text">(карандаши)</span>.</li>
+            </ul>
+
+            <h2 class="section-title">4. Артикли (Artículos)</h2>
+
+            <div
+                class="table-scroll"
+                tabindex="0"
+                role="region"
+                aria-label="Артикли — таблица с горизонтальной прокруткой"
+            >
+                <table class="articles-table">
+                    <tr>
+                        <th></th>
+                        <th>Определенные<br><span class="ru-text">(Конкретный предмет)</span></th>
+                        <th>Неопределенные<br><span class="ru-text">(Один из многих / впервые)</span></th>
+                    </tr>
+                    <tr>
+                        <td><strong>Мужской род</strong></td>
+                        <td>el chico <span class="ru-text">(парень)</span>, los chicos</td>
+                        <td>un chico, unos chicos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Женский род</strong></td>
+                        <td>la chica <span class="ru-text">(девушка)</span>, las chicas</td>
+                        <td>una chica, unas chicas</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Слияние:</h3>
+            <ul>
+                <li><strong>a + el = al</strong> (Voy al cine - <span class="ru-text">Я иду в кино</span>).</li>
+                <li><strong>de + el = del</strong> (El perro del vecino - <span class="ru-text">Собака соседа</span>).</li>
+            </ul>
+            <h3>Без артикля:</h3>
+            <ul>
+                <li>Профессии: Soy estudiante <span class="ru-text">(Я студент)</span>.</li>
+                <li>Языки после глаголов hablar, aprender: Hablo español <span class="ru-text">(Я говорю по-испански)</span>.</li>
+            </ul>
+
+            <h2 class="section-title">5. Местоимения (Pronombres)</h2>
+
+            <div
+                class="table-scroll"
+                tabindex="0"
+                role="region"
+                aria-label="Местоимения — таблица с горизонтальной прокруткой"
+            >
+                <table class="pronouns-table">
+                    <tr>
+                        <th>Личные (Кто?)</th>
+                        <th>Возвратные (Кого? Себя)</th>
+                        <th>Пример (Ejemplo)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Yo</strong> <span class="ru-text">(Я)</span></td>
+                        <td><strong>me</strong></td>
+                        <td>Yo me llamo <span class="ru-text">(Я меня называю / Меня зовут)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tú</strong> <span class="ru-text">(Ты)</span></td>
+                        <td><strong>te</strong></td>
+                        <td>Tú te levantas <span class="ru-text">(Ты просыпаешься)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Él / Ella / Usted</strong> <span class="ru-text">(Он, Она, Вы вежл.)</span></td>
+                        <td><strong>se</strong></td>
+                        <td>Él se ducha <span class="ru-text">(Он принимает душ)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Nosotros / Nosotras</strong> <span class="ru-text">(Мы)</span></td>
+                        <td><strong>nos</strong></td>
+                        <td>Nosotros nos lavamos <span class="ru-text">(Мы умываемся)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vosotros / Vosotras</strong> <span class="ru-text">(Вы - группа)</span></td>
+                        <td><strong>os</strong></td>
+                        <td>Vosotros os acostáis <span class="ru-text">(Вы ложитесь спать)</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ellos / Ellas / Ustedes</strong> <span class="ru-text">(Они, Вы - мн.ч.)</span></td>
+                        <td><strong>se</strong></td>
+                        <td>Ellos se llaman <span class="ru-text">(Их зовут)</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="note">
+                В Латинской Америке форма <strong>Vosotros</strong> (и возвратное <strong>os</strong>) не используется. Вместо этого для обращения к группе людей всегда используют <strong>Ustedes</strong> (и возвратное <strong>se</strong>).
+            </div>
+
+            <h3>Указательные (Demostrativos):</h3>
+            <ul>
+                <li><strong>Близко (этот):</strong> este libro <span class="ru-text">(эта книга)</span>, esta mesa <span class="ru-text">(этот стол)</span>, estos libros, estas mesas.</li>
+                <li><strong>Дальше (тот):</strong> ese libro, esa mesa.</li>
+                <li><strong>Далеко (вооон тот):</strong> aquel libro, aquella mesa.</li>
+                <li><strong>Нейтральные (для абстрактных вещей/ситуаций):</strong> ¿Qué es esto? <span class="ru-text">(Что это такое?)</span>, Eso es verdad <span class="ru-text">(Это правда)</span>.</li>
+            </ul>
+
+            <h3>Прямое и косвенное дополнение (CD y CI):</h3>
+            <ul>
+                <li><strong>CD (Кого? Что?):</strong> lo, la, los, las. <br>¿Tienes la llave? - Sí, la tengo. <span class="ru-text">(У тебя есть ключ? - Да, я его/ее имею).</span></li>
+                <li><strong>CI (Кому?):</strong> me, te, le, nos, os, les. <br>Используется с глаголом gustar: A mí me gusta el café <span class="ru-text">(Мне нравится кофе)</span>. A él le gusta leer <span class="ru-text">(Ему нравится читать)</span>.</li>
+            </ul>
+
+            <h2 class="section-title">6. Глаголы. Настоящее время (Verbos - Presente)</h2>
+            <h3>Правильные глаголы (Verbos regulares):</h3>
+
+            <div
+                class="table-scroll"
+                tabindex="0"
+                role="region"
+                aria-label="Правильные глаголы — таблица с горизонтальной прокруткой"
+            >
+                <table class="verbs-table">
+                    <tr>
+                        <th>Лицо</th>
+                        <th>-AR (hablar - говорить)</th>
+                        <th>-ER (comer - кушать)</th>
+                        <th>-IR (vivir - жить)</th>
+                    </tr>
+                    <tr><td>Yo</td><td>habl<strong>o</strong></td><td>com<strong>o</strong></td><td>viv<strong>o</strong></td></tr>
+                    <tr><td>Tú</td><td>habl<strong>as</strong></td><td>com<strong>es</strong></td><td>viv<strong>es</strong></td></tr>
+                    <tr><td>Él/Ella/Usted</td><td>habl<strong>a</strong></td><td>com<strong>e</strong></td><td>viv<strong>e</strong></td></tr>
+                    <tr><td>Nosotros</td><td>habl<strong>amos</strong></td><td>com<strong>emos</strong></td><td>viv<strong>imos</strong></td></tr>
+                    <tr><td>Vosotros</td><td>habl<strong>áis</strong></td><td>com<strong>éis</strong></td><td>viv<strong>ís</strong></td></tr>
+                    <tr><td>Ellos/Ustedes</td><td>habl<strong>an</strong></td><td>com<strong>en</strong></td><td>viv<strong>en</strong></td></tr>
+                </table>
+            </div>
+
+            <h3>Отклоняющиеся глаголы (Cambio vocálico):</h3>
+            <p>Изменение гласной в корне происходит во всех формах, <strong>КРОМЕ nosotros и vosotros</strong>.</p>
+
+            <h4>e > ie</h4>
+            <ul>
+                <li><strong>querer</strong> <span class="ru-text">(хотеть, любить)</span>: quiero, quieres, quiere, queremos, queréis, quieren.</li>
+                <li><strong>pensar</strong> <span class="ru-text">(думать)</span>: pienso, piensas, piensa, pensamos, pensáis, piensan.</li>
+                <li><strong>empezar</strong> <span class="ru-text">(начинать)</span>: empiezo, empiezas, empieza, empezamos, empezáis, empiezan.</li>
+                <li><strong>entender</strong> <span class="ru-text">(понимать)</span>: entiendo, entiendes, entiende, entendemos, entendéis, entienden.</li>
+                <li><strong>preferir</strong> <span class="ru-text">(предпочитать)</span>: prefiero, prefieres, prefiere, preferimos, preferís, prefieren.</li>
+            </ul>
+
+            <h4>o > ue</h4>
+            <ul>
+                <li><strong>dormir</strong> <span class="ru-text">(спать)</span>: duermo, duermes, duerme, dormimos, dormís, duermen.</li>
+                <li><strong>poder</strong> <span class="ru-text">(мочь)</span>: puedo, puedes, puede, podemos, podéis, pueden.</li>
+                <li><strong>volver</strong> <span class="ru-text">(возвращаться)</span>: vuelvo, vuelves, vuelve, volvemos, volvéis, vuelven.</li>
+                <li><strong>costar</strong> <span class="ru-text">(стоить)</span>: cuesto, cuestas, cuesta, costamos, costáis, cuestan.</li>
+                <li><strong>almorzar</strong> <span class="ru-text">(обедать)</span>: almuerzo, almuerzas, almuerza, almorzamos, almorzáis, almuerzan.</li>
+            </ul>
+
+            <h4>e > i</h4>
+            <ul>
+                <li><strong>pedir</strong> <span class="ru-text">(просить, заказывать)</span>: pido, pides, pide, pedimos, pedís, piden.</li>
+            </ul>
+
+            <h3>Неправильные в форме "Yo" (Irregulares en "Yo"):</h3>
+            <ul>
+                <li><strong>Hacer</strong> <span class="ru-text">(делать)</span>: hago, haces, hace, hacemos, hacéis, hacen.</li>
+                <li><strong>Salir</strong> <span class="ru-text">(выходить)</span>: salgo, sales, sale, salimos, salís, salen.</li>
+                <li><strong>Conocer</strong> <span class="ru-text">(знать кого-то, быть знакомым)</span>: conozco, conoces, conoce, conocemos, conocéis, conocen.</li>
+                <li><strong>Dar</strong> <span class="ru-text">(давать)</span>: doy, das, da, damos, dais, dan.</li>
+                <li><strong>Saber</strong> <span class="ru-text">(знать факты, уметь)</span>: sé, sabes, sabe, sabemos, sabéis, saben.</li>
+            </ul>
+
+            <h3>Главные неправильные глаголы:</h3>
+            <ul>
+                <li><strong>Ser</strong> <span class="ru-text">(быть - постоянный признак, суть)</span>: soy, eres, es, somos, sois, son. <br><em>Soy de Rusia. Soy alto. <span class="ru-text">(Я из России. Я высокий).</span></em></li>
+                <li><strong>Estar</strong> <span class="ru-text">(находиться, временное состояние)</span>: estoy, estás, está, estamos, estáis, están. <br><em>Estoy en casa. Estoy cansado. <span class="ru-text">(Я дома. Я уставший).</span></em></li>
+                <li><strong>Ir</strong> <span class="ru-text">(идти, ехать)</span>: voy, vas, va, vamos, vais, van. <br><em>Voy al trabajo. <span class="ru-text">(Я иду на работу).</span></em></li>
+                <li><strong>Tener</strong> <span class="ru-text">(иметь)</span>: tengo, tienes, tiene, tenemos, tenéis, tienen. <br><em>Tengo 20 años. <span class="ru-text">(Мне 20 лет - досл. имею 20 лет).</span></em></li>
+            </ul>
+
+            <h3>Разница Ser, Estar и Hay:</h3>
+            <ul>
+                <li><strong>Hay</strong> <span class="ru-text">(безличная форма глагола haber)</span> = "Имеется", "Есть где-то". Всегда используется с неопределенными артиклями, без них или с числами. <br><em>¿Hay una farmacia cerca? <span class="ru-text">(Здесь есть/существует аптека?).</span></em></li>
+                <li><strong>Estar</strong> = "Находится". Используется, когда мы знаем, о каком конкретно предмете идет речь (определенный артикль). <br><em>¿Dónde está la farmacia? <span class="ru-text">(Где находится эта конкретная аптека?).</span></em></li>
+            </ul>
+
+            <h3>Estar + Gerundio (Действие прямо сейчас):</h3>
+            <ul>
+                <li><strong>estar + основа + -ando (для -ar)</strong>: Estoy hablando <span class="ru-text">(Я говорю прямо сейчас)</span>.</li>
+                <li><strong>estar + основа + -iendo (для -er, -ir)</strong>: Estás comiendo <span class="ru-text">(Ты кушаешь прямо сейчас)</span>.</li>
+                <li><strong>Неправильные герундии:</strong> leer -> leyendo, dormir -> durmiendo.</li>
+            </ul>
+
+            <h3>Глаголы типа Gustar (Нравиться):</h3>
+            <ul>
+                <li>Единственное число предмета / инфинитив: Me gusta el libro. / Me gusta leer. <span class="ru-text">(Мне нравится книга / Мне нравится читать)</span>.</li>
+                <li>Множественное число: Me gustan los libros. <span class="ru-text">(Мне нравятся книги)</span>.</li>
+            </ul>
+
+            <h3>Перифразы (Конструкции):</h3>
+            <ul>
+                <li><strong>Ir a + infinitivo</strong> (Планы/Будущее): Voy a comprar pan. <span class="ru-text">(Я собираюсь/иду купить хлеб).</span></li>
+                <li><strong>Tener que + infinitivo</strong> (Личный долг/обязанность): Tengo que trabajar. <span class="ru-text">(Я должен работать).</span></li>
+                <li><strong>Hay que + infinitivo</strong> (Общее безличное правило): Hay que beber agua. <span class="ru-text">(Нужно пить воду - всем, вообще).</span></li>
+            </ul>
+
+            <h2 class="section-title">7. Прошедшее время (Pretérito Perfecto)</h2>
+            <p>Используется для действий в прошлом, которые имеют связь с настоящим (маркеры: hoy <span class="ru-text">(сегодня)</span>, esta semana <span class="ru-text">(на этой неделе)</span>, este año <span class="ru-text">(в этом году)</span>, ya <span class="ru-text">(уже)</span>, todavía no <span class="ru-text">(еще не)</span>, nunca <span class="ru-text">(никогда)</span>).</p>
+            <div class="note">В Испании это время используется постоянно для недавнего прошлого. В Латинской Америке вместо него чаще используют простое прошедшее (Pretérito Indefinido, изучается на А2), даже со словом "сегодня".</div>
+
+            <h3>Образование: Haber (в настоящем) + Participio (Причастие)</h3>
+            <ul>
+                <li><strong>Haber</strong>: he, has, ha, hemos, habéis, han.</li>
+                <li><strong>Participio</strong>: глаголы на -ar -> <strong>-ado</strong> (hablado), на -er/-ir -> <strong>-ido</strong> (comido, vivido).</li>
+                <li><strong>Пример:</strong> Hoy he trabajado mucho. <span class="ru-text">(Сегодня я много работал).</span></li>
+            </ul>
+
+            <h3>Неправильные причастия (надо выучить):</h3>
+            <ul>
+                <li><strong>abrir</strong> -> abierto <span class="ru-text">(открыто)</span></li>
+                <li><strong>decir</strong> -> dicho <span class="ru-text">(сказано)</span></li>
+                <li><strong>escribir</strong> -> escrito <span class="ru-text">(написано)</span></li>
+                <li><strong>hacer</strong> -> hecho <span class="ru-text">(сделано)</span></li>
+                <li><strong>poner</strong> -> puesto <span class="ru-text">(положено, надето)</span></li>
+                <li><strong>romper</strong> -> roto <span class="ru-text">(сломано)</span></li>
+                <li><strong>ver</strong> -> visto <span class="ru-text">(увидено)</span></li>
+                <li><strong>volver</strong> -> vuelto <span class="ru-text">(возвращено, вернулся)</span></li>
+            </ul>
+
+            <h2 class="section-title">8. Предлоги и Наречия (Preposiciones y Adverbios)</h2>
+            <h3>Предлоги местоположения:</h3>
+            <ul>
+                <li><strong>en:</strong> в / на. El libro está en la mesa. <span class="ru-text">(Книга на столе / в столе).</span></li>
+                <li><strong>debajo de:</strong> под. El gato está debajo de la silla. <span class="ru-text">(Кот под стулом).</span></li>
+                <li><strong>encima de:</strong> на (поверхности). Las llaves están encima de la mesa. <span class="ru-text">(Ключи на столе).</span></li>
+                <li><strong>al lado de:</strong> рядом с. El banco está al lado del cine. <span class="ru-text">(Банк рядом с кинотеатром).</span></li>
+                <li><strong>cerca de / lejos de:</strong> близко от / далеко от. Vivo cerca de aquí. <span class="ru-text">(Я живу близко отсюда).</span></li>
+                <li><strong>a la derecha / a la izquierda de:</strong> справа / слева от. Gira a la derecha. <span class="ru-text">(Поверни направо).</span></li>
+            </ul>
+
+            <h3>Muy vs Mucho:</h3>
+            <ul>
+                <li><strong>Muy</strong> <span class="ru-text">(очень)</span> + Прилагательное / Наречие: Es muy alto. Habla muy bien. <span class="ru-text">(Он очень высокий. Он говорит очень хорошо).</span></li>
+                <li><strong>Mucho/a/os/as</strong> <span class="ru-text">(много)</span> + Существительное: Tengo mucho trabajo. Hay muchas casas. <span class="ru-text">(У меня много работы. Есть много домов).</span></li>
+                <li><strong>Глагол + mucho</strong> <span class="ru-text">(много делает)</span>: Trabajo mucho. <span class="ru-text">(Я много работаю).</span></li>
+            </ul>
+
+            <h2 class="section-title">9. Время и Даты (La hora y Las fechas)</h2>
+            <h3>Время (La hora):</h3>
+            <ul>
+                <li><strong>¿Qué hora es?</strong> <span class="ru-text">(Который час?)</span></li>
+                <li><strong>1:00</strong> - Es la una.</li>
+                <li><strong>2:00 - 12:00</strong> - Son las dos / tres / diez.</li>
+                <li>Минуты до половины добавляем через <strong>"y"</strong>: 3:15 -> Son las tres y cuarto <span class="ru-text">(Три и четверть)</span>. 3:30 -> Son las tres y media <span class="ru-text">(Три и половина)</span>.</li>
+                <li>Минуты после половины отнимаем через <strong>"menos"</strong>: 3:45 -> Son las cuatro menos cuarto <span class="ru-text">(Без четверти четыре)</span>.</li>
+            </ul>
+
+            <h3>Дни недели (Los días de la semana):</h3>
+            <p>
+                lunes <span class="ru-text">(пн)</span>, martes <span class="ru-text">(вт)</span>, miércoles <span class="ru-text">(ср)</span>, jueves <span class="ru-text">(чт)</span>, viernes <span class="ru-text">(пт)</span>, sábado <span class="ru-text">(сб)</span>, domingo <span class="ru-text">(вс)</span>.
+                <br><em>Всегда используются с мужским артиклем: el lunes <span class="ru-text">(в понедельник)</span>, los lunes <span class="ru-text">(по понедельникам)</span>.</em>
+            </p>
+
+            <h2 class="section-title">10. Коммуникация (Pragmática)</h2>
+            <h3>Согласие с утверждением:</h3>
+            <ul>
+                <li>Me gusta la pizza. -> <strong>A mí también.</strong> <span class="ru-text">(Мне тоже).</span></li>
+                <li>No me gusta el frío. -> <strong>A mí tampoco.</strong> <span class="ru-text">(Мне тоже нет).</span></li>
+                <li>Yo soy ruso. -> <strong>Yo también.</strong> <span class="ru-text">(Я тоже).</span></li>
+                <li>Yo no hablo chino. -> <strong>Yo tampoco.</strong> <span class="ru-text">(Я тоже нет).</span></li>
+            </ul>
+
+            <h3>Несогласие:</h3>
+            <ul>
+                <li>Me gusta la pizza. -> <strong>A mí no.</strong> <span class="ru-text">(А мне нет).</span></li>
+                <li>No me gusta el frío. -> <strong>A mí sí.</strong> <span class="ru-text">(А мне да).</span></li>
+            </ul>
+
+            <h3>В ресторане / баре:</h3>
+            <ul>
+                <li><strong>Para mí, un café.</strong> <span class="ru-text">(Мне кофе).</span></li>
+                <li><strong>¿Qué va a tomar?</strong> <span class="ru-text">(Что будете пить/есть?).</span></li>
+                <li><strong>La cuenta, por favor.</strong> <span class="ru-text">(Счет, пожалуйста).</span></li>
+            </ul>
+
+            <h3>В магазине:</h3>
+            <ul>
+                <li><strong>¿Cuánto cuesta? / ¿Cuánto vale?</strong> <span class="ru-text">(Сколько стоит?).</span></li>
+                <li><strong>¿Tienen una talla más grande?</strong> <span class="ru-text">(У вас есть размер побольше?).</span></li>
+                <li><strong>Quería... / Me gustaría...</strong> <span class="ru-text">(Я бы хотел...).</span></li>
+            </ul>
+
+        </article>
+
+        <footer class="site-footer">
+            <p>
+                © 2026
+                <a href="https://syolana.com/" class="footer-brand">Syolana</a>.
+                Все права защищены.
+            </p>
+
+            <button
+                type="button"
+                id="motion-button"
+                class="footer-motion"
+                hidden
+            >
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <use id="motion-icon" href="#i-pause"></use>
+                </svg>
+                <span id="motion-text">Остановить анимацию</span>
+            </button>
+        </footer>
+    </main>
+
+    <script>
+    (() => {
+        "use strict";
+
+        const $ = id => document.getElementById(id);
+        const root = document.documentElement;
+        const reducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        );
+
+        function setLabel(element, label) {
+            element.setAttribute("aria-label", label);
+            element.title = label;
+        }
+
+        /* ======================================================
+           ПОЛНОЭКРАННЫЙ РЕЖИМ
+           ====================================================== */
+
+        const fullscreenButton = $("fullscreen-btn");
+        const fullscreenPath = $("fullscreen-path");
+
+        const enterPath =
+            "M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5";
+
+        const exitPath =
+            "M3 8h5V3M16 3v5h5M21 16h-5v5M8 21v-5H3";
+
+        function fullscreenElement() {
+            return document.fullscreenElement ||
+                document.webkitFullscreenElement ||
+                null;
+        }
+
+        function fullscreenSupported() {
+            const request =
+                root.requestFullscreen ||
+                root.webkitRequestFullscreen;
+
+            const exit =
+                document.exitFullscreen ||
+                document.webkitExitFullscreen;
+
+            return Boolean(request && exit) &&
+                document.fullscreenEnabled !== false &&
+                document.webkitFullscreenEnabled !== false;
+        }
+
+        function updateFullscreen() {
+            const supported = fullscreenSupported();
+            const active = Boolean(fullscreenElement());
+
+            fullscreenButton.disabled = !supported;
+            fullscreenButton.setAttribute(
+                "aria-pressed",
+                String(active)
+            );
+
+            fullscreenPath.setAttribute(
+                "d",
+                active ? exitPath : enterPath
+            );
+
+            setLabel(
+                fullscreenButton,
+                !supported
+                    ? "Этот браузер не поддерживает полноэкранный режим"
+                    : active
+                        ? "Выйти из полноэкранного режима"
+                        : "На весь экран"
+            );
+        }
+
+        fullscreenButton.hidden = false;
+        updateFullscreen();
+
+        fullscreenButton.addEventListener("click", async () => {
+            if (!fullscreenSupported()) return;
+
+            $("screen-status").textContent = "";
+
+            try {
+                if (fullscreenElement()) {
+                    const exit =
+                        document.exitFullscreen ||
+                        document.webkitExitFullscreen;
+
+                    await exit.call(document);
+                } else {
+                    const request =
+                        root.requestFullscreen ||
+                        root.webkitRequestFullscreen;
+
+                    await request.call(root);
+                }
+            } catch (_) {
+                $("screen-status").textContent =
+                    "Браузер не разрешил изменить полноэкранный режим.";
+            }
+
+            updateFullscreen();
+        });
+
+        document.addEventListener(
+            "fullscreenchange",
+            updateFullscreen
+        );
+
+        document.addEventListener(
+            "webkitfullscreenchange",
+            updateFullscreen
+        );
+
+        /* ======================================================
+           АУДИО ПРАВИЛ
+           ====================================================== */
+
+        const audio = $("a1-audio");
+        const audioButton = $("audio-btn");
+        const audioText = $("audio-text");
+        const audioIcon = $("audio-icon");
+        const audioStatus = $("audio-status");
+
+        let audioRequest = 0;
+        let wantsAudio = false;
+
+        audioButton.hidden = false;
+
+        function updateAudio() {
+            const active = wantsAudio ||
+                (!audio.paused && !audio.ended);
+
+            audioButton.setAttribute(
+                "aria-pressed",
+                String(active)
+            );
+
+            audioText.textContent = active ? "Пауза" : "Слушать";
+            audioIcon.setAttribute(
+                "href",
+                active ? "#i-pause" : "#i-play"
+            );
+
+            setLabel(
+                audioButton,
+                active
+                    ? "Приостановить аудио правил А1"
+                    : "Слушать правила А1"
+            );
+        }
+
+        audioButton.addEventListener("click", async () => {
+            if (wantsAudio || !audio.paused) {
+                audioRequest++;
+                wantsAudio = false;
+                audio.pause();
+                audioStatus.textContent = "";
+                updateAudio();
+                return;
+            }
+
+            const source = audio.getAttribute("src") || "";
+
+            if (
+                !source.trim() ||
+                source.includes("ССЫЛКА_НА_ВАШ_АУДИОФАЙЛ")
+            ) {
+                audioStatus.textContent =
+                    "Аудиофайл пока не добавлен.";
+                return;
+            }
+
+            const request = ++audioRequest;
+            wantsAudio = true;
+            audioStatus.textContent = "";
+            updateAudio();
+
+            try {
+                if (audio.error) {
+                    audio.load();
+                }
+
+                if (audio.ended) {
+                    audio.currentTime = 0;
+                }
+
+                await audio.play();
+
+                if (request !== audioRequest) return;
+
+                wantsAudio = false;
+                updateAudio();
+            } catch (error) {
+                if (request !== audioRequest) return;
+
+                wantsAudio = false;
+
+                if (error.name !== "AbortError") {
+                    audioStatus.textContent =
+                        error.name === "NotAllowedError"
+                            ? "Браузер остановил запуск аудио. Нажмите «Слушать» ещё раз."
+                            : "Не удалось воспроизвести аудио. Проверьте доступность файла и попробуйте ещё раз.";
+                }
+
+                updateAudio();
+            }
+        });
+
+        audio.addEventListener("play", updateAudio);
+
+        audio.addEventListener("playing", () => {
+            wantsAudio = false;
+            audioStatus.textContent = "";
+            updateAudio();
+        });
+
+        audio.addEventListener("pause", () => {
+            wantsAudio = false;
+            updateAudio();
+        });
+
+        audio.addEventListener("ended", () => {
+            wantsAudio = false;
+            updateAudio();
+        });
+
+        audio.addEventListener("error", () => {
+            audioRequest++;
+            wantsAudio = false;
+            audioStatus.textContent =
+                "Не удалось загрузить аудио. Проверьте ссылку на файл.";
+            updateAudio();
+        });
+
+        /* ======================================================
+           УПРАВЛЕНИЕ АНИМАЦИЕЙ
+           ====================================================== */
+
+        let motionPaused = reducedMotion.matches;
+        let syncCanvas = () => {};
+
+        const motionButton = $("motion-button");
+
+        motionButton.hidden = false;
+
+        function syncMotion() {
+            document.body.classList.toggle(
+                "animations-paused",
+                motionPaused || document.hidden
+            );
+
+            $("motion-text").textContent = motionPaused
+                ? "Включить анимацию"
+                : "Остановить анимацию";
+
+            $("motion-icon").setAttribute(
+                "href",
+                motionPaused ? "#i-play" : "#i-pause"
+            );
+
+            setLabel(
+                motionButton,
+                motionPaused
+                    ? "Включить анимацию"
+                    : "Остановить анимацию"
+            );
+
+            syncCanvas();
+        }
+
+        motionButton.addEventListener("click", () => {
+            motionPaused = !motionPaused;
+            syncMotion();
+        });
+
+        document.addEventListener(
+            "visibilitychange",
+            syncMotion
+        );
+
+        const onReducedMotionChange = () => {
+            motionPaused = reducedMotion.matches;
+            syncMotion();
+        };
+
+        if (typeof reducedMotion.addEventListener === "function") {
+            reducedMotion.addEventListener(
+                "change",
+                onReducedMotionChange
+            );
+        } else if (typeof reducedMotion.addListener === "function") {
+            reducedMotion.addListener(onReducedMotionChange);
+        }
+
+        /* ======================================================
+           ЗВЁЗДЫ И ВОДЯНЫЕ ЗНАКИ SYOLANA.COM
+           ====================================================== */
+
+        function initializeCanvas() {
+            const canvas = $("starCanvas");
+            const ctx = canvas.getContext("2d");
+
+            if (!ctx) return;
+
+            const colors = [
+                "#FF003C",
+                "#0055FF",
+                "#FFB300",
+                "#00C853",
+                "#AA00FF",
+                "#00E5FF"
+            ];
+
+            let width = 1;
+            let height = 1;
+            let ratio = 1;
+
+            let stars = [];
+            let watermarks = [];
+
+            let frameId = 0;
+            let resizeId = 0;
+            let previousTime = 0;
+
+            const random = (min, max) =>
+                min + Math.random() * (max - min);
+
+            const clamp = (value, min, max) =>
+                Math.max(min, Math.min(max, value));
+
+            function createSprite(color) {
+                const sprite = document.createElement("canvas");
+                sprite.width = 64;
+                sprite.height = 64;
+
+                const context = sprite.getContext("2d");
+
+                if (!context) return null;
+
+                context.shadowColor = color;
+                context.shadowBlur = 12;
+                context.fillStyle = color;
+
+                context.beginPath();
+                context.arc(32, 32, 6.4, 0, Math.PI * 2);
+                context.fill();
+
+                context.shadowBlur = 0;
+                context.fillStyle = "rgba(255,255,255,.72)";
+
+                context.beginPath();
+                context.arc(32, 32, 2.1, 0, Math.PI * 2);
+                context.fill();
+
+                return sprite;
+            }
+
+            const sprites = colors.map(createSprite);
+
+            function createStar(initial = true) {
+                return {
+                    x: random(0, width),
+                    y: initial
+                        ? random(0, height)
+                        : height + 15,
+
+                    size: random(.5, 3),
+                    speedY: random(30, 120),
+                    speedX: random(-24, 24),
+
+                    colorIndex: Math.floor(
+                        random(0, colors.length)
+                    ),
+
+                    phase: random(0, Math.PI * 2),
+                    blink: random(.6, 3),
+                    opacity: random(.2, .8)
+                };
+            }
+
+            function createWatermark(column, columns, row, rows) {
+                const lane = width / columns;
+
+                return {
+                    x:
+                        lane * (column + .5) +
+                        random(-lane * .12, lane * .12),
+
+                    y:
+                        ((row + random(0, .6)) / rows) *
+                        height,
+
+                    size: random(14, width <= 700 ? 17 : 20),
+                    speed: random(10, 22),
+                    opacity: random(.16, .29),
+                    phase: random(0, Math.PI * 2),
+                    drift: random(4, width <= 700 ? 10 : 18),
+                    hue: random(155, 330),
+                    hueSpeed: random(3.5, 9.5)
+                };
+            }
+
+            function render(delta) {
+                ctx.clearRect(0, 0, width, height);
+
+                for (const watermark of watermarks) {
+                    if (delta > 0) {
+                        watermark.y -= watermark.speed * delta;
+                        watermark.phase += delta * .23;
+
+                        watermark.hue =
+                            (
+                                watermark.hue +
+                                watermark.hueSpeed * delta
+                            ) % 360;
+
+                        if (watermark.y < -45) {
+                            watermark.y =
+                                height + random(30, 110);
+                        }
+                    }
+
+                    const topFade = clamp(
+                        (watermark.y + 20) / 95,
+                        0,
+                        1
+                    );
+
+                    const bottomFade = clamp(
+                        (height + 30 - watermark.y) / 100,
+                        0,
+                        1
+                    );
+
+                    const x =
+                        watermark.x +
+                        Math.sin(watermark.phase) *
+                        watermark.drift;
+
+                    const hue =
+                        (
+                            watermark.hue +
+                            Math.sin(watermark.phase * .7) * 42 +
+                            360
+                        ) % 360;
+
+                    ctx.font =
+                        `600 ${watermark.size}px "Nunito", sans-serif`;
+
+                    ctx.textAlign = "center";
+                    ctx.textBaseline = "middle";
+
+                    const textWidth =
+                        ctx.measureText("syolana.com").width;
+
+                    const gradient = ctx.createLinearGradient(
+                        x - textWidth / 2,
+                        watermark.y,
+                        x + textWidth / 2,
+                        watermark.y
+                    );
+
+                    gradient.addColorStop(
+                        0,
+                        `hsl(${hue}, 76%, 75%)`
+                    );
+
+                    gradient.addColorStop(
+                        .48,
+                        `hsl(${(hue + 58) % 360}, 82%, 80%)`
+                    );
+
+                    gradient.addColorStop(
+                        1,
+                        `hsl(${(hue + 116) % 360}, 76%, 73%)`
+                    );
+
+                    ctx.globalAlpha =
+                        watermark.opacity *
+                        topFade *
+                        bottomFade;
+
+                    ctx.fillStyle = gradient;
+                    ctx.shadowColor =
+                        `hsla(${hue}, 84%, 74%, .42)`;
+                    ctx.shadowBlur = 9;
+
+                    ctx.fillText(
+                        "syolana.com",
+                        x,
+                        watermark.y
+                    );
+
+                    ctx.shadowBlur = 0;
+                }
+
+                for (let i = 0; i < stars.length; i++) {
+                    let star = stars[i];
+
+                    if (delta > 0) {
+                        star.x += star.speedX * delta;
+                        star.y -= star.speedY * delta;
+                        star.phase += star.blink * delta;
+
+                        if (star.y < -25) {
+                            star = stars[i] = createStar(false);
+                        }
+
+                        if (star.x < -25) {
+                            star.x = width + 25;
+                        } else if (star.x > width + 25) {
+                            star.x = -25;
+                        }
+                    }
+
+                    ctx.globalAlpha = clamp(
+                        star.opacity +
+                        Math.sin(star.phase) * .4,
+                        .1,
+                        1
+                    );
+
+                    const sprite = sprites[star.colorIndex];
+
+                    if (sprite) {
+                        const size = star.size * 10;
+
+                        ctx.drawImage(
+                            sprite,
+                            star.x - size / 2,
+                            star.y - size / 2,
+                            size,
+                            size
+                        );
+                    } else {
+                        ctx.fillStyle = colors[star.colorIndex];
+
+                        ctx.beginPath();
+                        ctx.arc(
+                            star.x,
+                            star.y,
+                            star.size,
+                            0,
+                            Math.PI * 2
+                        );
+                        ctx.fill();
+                    }
+                }
+
+                ctx.globalAlpha = 1;
+                ctx.shadowBlur = 0;
+                ctx.shadowColor = "transparent";
+            }
+
+            function resize() {
+                const bounds = canvas.getBoundingClientRect();
+
+                const nextWidth = Math.max(1, bounds.width);
+                const nextHeight = Math.max(1, bounds.height);
+                const nextRatio = Math.min(
+                    window.devicePixelRatio || 1,
+                    2
+                );
+
+                if (
+                    stars.length &&
+                    nextWidth === width &&
+                    nextHeight === height &&
+                    nextRatio === ratio
+                ) {
+                    return;
+                }
+
+                width = nextWidth;
+                height = nextHeight;
+                ratio = nextRatio;
+
+                canvas.width = Math.round(width * ratio);
+                canvas.height = Math.round(height * ratio);
+
+                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+                stars = Array.from(
+                    { length: width <= 700 ? 260 : 500 },
+                    () => createStar(true)
+                );
+
+                const columns = clamp(
+                    Math.floor(width / 170),
+                    2,
+                    10
+                );
+
+                const rows = clamp(
+                    Math.ceil(height / 115),
+                    6,
+                    10
+                );
+
+                watermarks = [];
+
+                for (let column = 0; column < columns; column++) {
+                    for (let row = 0; row < rows; row++) {
+                        watermarks.push(
+                            createWatermark(
+                                column,
+                                columns,
+                                row,
+                                rows
+                            )
+                        );
+                    }
+                }
+
+                render(0);
+            }
+
+            function animate(time) {
+                frameId = 0;
+
+                if (document.hidden || motionPaused) {
+                    previousTime = 0;
+                    return;
+                }
+
+                const delta = previousTime
+                    ? Math.min(
+                        (time - previousTime) / 1000,
+                        .05
+                    )
+                    : 1 / 60;
+
+                previousTime = time;
+
+                render(delta);
+
+                frameId = requestAnimationFrame(animate);
+            }
+
+            syncCanvas = () => {
+                if (frameId) {
+                    cancelAnimationFrame(frameId);
+                    frameId = 0;
+                }
+
+                previousTime = 0;
+
+                if (document.hidden) return;
+
+                render(0);
+
+                if (!motionPaused) {
+                    frameId = requestAnimationFrame(animate);
+                }
+            };
+
+            function queueResize() {
+                if (resizeId) return;
+
+                resizeId = requestAnimationFrame(() => {
+                    resizeId = 0;
+                    resize();
+                });
+            }
+
+            window.addEventListener(
+                "resize",
+                queueResize,
+                { passive: true }
+            );
+
+            if (window.visualViewport) {
+                window.visualViewport.addEventListener(
+                    "resize",
+                    queueResize,
+                    { passive: true }
+                );
+            }
+
+            window.addEventListener("pagehide", () => {
+                if (frameId) {
+                    cancelAnimationFrame(frameId);
+                }
+
+                if (resizeId) {
+                    cancelAnimationFrame(resizeId);
+                }
+
+                frameId = 0;
+                resizeId = 0;
+                previousTime = 0;
+            });
+
+            window.addEventListener("pageshow", () => {
+                resize();
+                syncMotion();
+            });
+
+            resize();
+            syncCanvas();
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => {
+                    if (!document.hidden) {
+                        render(0);
+                    }
+                });
+            }
+        }
+
+        initializeCanvas();
+        syncMotion();
+        updateAudio();
+    })();
+    </script>
+</body>
+                                                                                                                                                                                                                            </html>
