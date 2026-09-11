@@ -500,7 +500,7 @@
 
             box-shadow:
                 inset 0 1px 0 rgba(255,255,255,.10),
-                0 8px 24px rgba(0,0,0,.18);
+                0 8px 24px rgba(0,0,0,0);
 
             color: #f1e7ff;
             font-size: .82rem;
@@ -1109,7 +1109,7 @@
                 --audio-top:
                     calc(83px + env(safe-area-inset-top, 0px));
                 --reading-glass: rgba(10,9,23,.68);
-                --reading-blur: 2px;
+                --reading-blur: 8px;
             }
 
             body {
@@ -1167,7 +1167,7 @@
             .instruction-box {
                 margin-bottom: 23px;
                 padding: 20px 18px;
-                border-radius: 16px;
+                border-radius: 0px;
             }
 
             .instruction-box h2 {
@@ -1467,7 +1467,7 @@
     <!-- Верхняя панель. -->
     <header class="top-bar">
         <a
-            href="https://syolana.com/"
+            href="https://syolana.com/español"
             class="brand-logo-container glass"
             aria-label="Перейти на главную страницу Syolana"
             title="Перейти на главную страницу Syolana"
@@ -1521,7 +1521,7 @@
         <article class="rules-panel" aria-label="Правила А1">
 
             <div class="instruction-box">
-                <h2>/> Инструкция на каждый день</h2>
+                <h2>Инструкция на каждый день</h2>
                 <p>То, что тебе нужно делать каждый день: <em>(Lo que tienes que hacer cada día:)</em></p>
                 <ul class="bilingual-list">
                     <li>1. Все правила А1. <span>(Todas las reglas de A1.)</span></li>
