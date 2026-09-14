@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#030309">
+<meta name="description" content="Практика испанского A1: читайте Беккера, Марти и Саманьего с переводом, словарями и пояснениями. Слушайте, повторяйте и возвращайтесь к текстам каждый день.">
+<title>Español A1 | Práctica</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌸%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg-color:#000;--text-main:#f8f6ff;--text-dim:#e4deee;--text-muted:#c3b9d3;--text-soft:#b0a9c1;--border-color:rgba(224,211,255,.17);--glass-border:rgba(224,211,255,.22);--glass-border-hover:rgba(224,211,255,.40);--accent-color:#dcc5ff;--accent-blue:#bedcff;--shadow-soft:0 20px 65px rgba(0,0,0,.30),inset 0 1px 0 rgba(255,255,255,.09),inset 0 -1px 0 rgba(255,255,255,.025);--shadow-hover:0 26px 75px rgba(0,0,0,.38),0 0 32px rgba(165,130,245,.08),inset 0 1px 0 rgba(255,255,255,.14);--ease:cubic-bezier(.22,1,.36,1);--reading-glass:rgba(10,9,23,.65);--reading-blur:8px;--audio-top:calc(98px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}[hidden]{display:none!important}html{min-height:100%;background:var(--bg-color);scroll-behavior:smooth;scrollbar-color:#615371 #08080e;scrollbar-width:thin}body{min-width:280px;min-height:100vh;min-height:100svh;margin:0;position:relative;isolation:isolate;overflow-x:hidden;background:var(--bg-color);color:var(--text-main);font:16px/1.85 "Nunito",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif}button,a,input,summary{touch-action:manipulation}button,input{font:inherit}a,button{color:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;-webkit-text-fill-color:currentColor}a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:2px solid #ddccff;outline-offset:5px}::selection{color:#fff;background:rgba(164,119,239,.55)}::-webkit-scrollbar{width:7px;height:7px}::-webkit-scrollbar-track{background:#08080e}::-webkit-scrollbar-thumb{border:2px solid #08080e;border-radius:10px;background:#615371}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip-link{position:fixed;top:10px;left:15px;z-index:200;transform:translateY(-200%);background:#21152f;padding:10px 20px;border-radius:15px}.skip-link:focus{transform:none}.svg-definitions{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}.icon{display:block;flex:0 0 auto;width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* Фон, палитра и движения из a1-spanish-rules.html. */
+.aurora-background{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;user-select:none;background:#000}.aurora-layer{position:absolute;inset:-18% -22%;transform-origin:50% 25%;filter:blur(48px) saturate(120%);will-change:transform,opacity;backface-visibility:hidden}.aurora-layer--one{background:radial-gradient(ellipse at 18% 17%,rgba(45,93,225,.78) 0%,rgba(24,56,151,.32) 26%,transparent 56%),radial-gradient(ellipse at 76% 12%,rgba(137,57,207,.58) 0%,rgba(76,25,126,.24) 28%,transparent 56%),radial-gradient(ellipse at 48% 40%,rgba(12,113,139,.36) 0%,transparent 53%);animation:auroraOne 29s ease-in-out infinite alternate}.aurora-layer--two{background:radial-gradient(ellipse at 82% 17%,rgba(238,168,24,.52) 0%,rgba(135,85,9,.22) 25%,transparent 50%),radial-gradient(ellipse at 15% 30%,rgba(182,40,77,.46) 0%,transparent 48%),radial-gradient(ellipse at 54% 9%,rgba(28,160,97,.43) 0%,transparent 48%);animation:auroraTwo 35s ease-in-out infinite alternate}.aurora-layer--three{background:radial-gradient(ellipse at 35% 12%,rgba(219,90,25,.40) 0%,transparent 43%),radial-gradient(ellipse at 88% 35%,rgba(28,143,210,.42) 0%,transparent 48%),radial-gradient(ellipse at 47% 26%,rgba(137,48,204,.40) 0%,transparent 49%);animation:auroraThree 24s ease-in-out infinite alternate}.aurora-background::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.14) 0%,rgba(0,0,0,.22) 24%,rgba(0,0,0,.48) 46%,rgba(0,0,0,.78) 65%,rgba(0,0,0,.96) 82%,#000 94%),radial-gradient(ellipse at 50% 20%,transparent 25%,rgba(0,0,0,.30) 100%)}
+@keyframes auroraOne{0%{opacity:.90;transform:translate3d(-4%,-2%,0) scale(1.03) rotate(-6deg)}50%{opacity:.60;transform:translate3d(5%,3%,0) scale(1.12) rotate(3deg)}100%{opacity:.95;transform:translate3d(1%,-4%,0) scale(1.06) rotate(8deg)}}@keyframes auroraTwo{0%{opacity:.32;transform:translate3d(6%,-4%,0) scale(1.10) rotate(8deg)}50%{opacity:.82;transform:translate3d(-5%,2%,0) scale(1.02) rotate(-4deg)}100%{opacity:.48;transform:translate3d(-1%,-1%,0) scale(1.14) rotate(-10deg)}}@keyframes auroraThree{0%{opacity:.50;transform:translate3d(-3%,4%,0) scale(1.04) rotate(-3deg)}100%{opacity:.85;transform:translate3d(5%,-3%,0) scale(1.15) rotate(7deg)}}#starCanvas{position:fixed;inset:0;z-index:1;display:block;width:100%;height:100%;pointer-events:none;user-select:none}.glass{border:1px solid var(--glass-border);background:linear-gradient(135deg,rgba(255,255,255,.065),rgba(255,255,255,.012) 55%,rgba(189,163,255,.035)),rgba(12,12,25,.36);-webkit-backdrop-filter:blur(14px) saturate(125%);backdrop-filter:blur(14px) saturate(125%);box-shadow:var(--shadow-soft)}
+.top-bar{position:fixed;top:0;left:0;z-index:100;display:flex;align-items:flex-start;justify-content:space-between;width:100%;padding:calc(20px + env(safe-area-inset-top,0px)) max(28px,env(safe-area-inset-right,0px)) 12px max(28px,env(safe-area-inset-left,0px));pointer-events:none}.brand-logo-container{display:inline-flex;align-items:center;gap:11px;padding:7px 17px 7px 9px;border-radius:22px;text-decoration:none;pointer-events:auto;transition:transform .35s var(--ease),border-color .35s ease,box-shadow .35s ease}.brand-logo{display:block;flex:0 0 auto;width:47px;height:47px}.brand-logo svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 0 8px rgba(180,135,255,.45))}.brand-text{display:flex;flex-direction:column}.brand-text-title{color:#fbf8ff;font:600 1.5rem/1.1 "Cormorant Garamond",Georgia,serif;letter-spacing:.4px}.brand-text-sub{margin-top:4px;color:#d0c2e8;font-size:.59rem;font-weight:600;line-height:1.4;letter-spacing:1.25px;text-transform:uppercase}.action-circle-btn{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:47px;height:47px;padding:0;border-radius:50%;color:#f4eeff;pointer-events:auto;transition:transform .35s var(--ease),border-color .35s ease}.action-circle-btn:disabled{color:var(--text-soft)}
+.container{position:relative;z-index:10;width:100%;max-width:1080px;margin:0 auto;padding:calc(124px + env(safe-area-inset-top,0px)) max(34px,env(safe-area-inset-right,0px)) calc(45px + env(safe-area-inset-bottom,0px)) max(34px,env(safe-area-inset-left,0px))}.back-btn,.pill,.audio-btn,.immersion-link{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:47px;max-width:100%;padding:11px 21px;border:1px solid rgba(222,204,255,.30);border-radius:30px;background:linear-gradient(135deg,rgba(190,157,247,.16),rgba(172,190,243,.055)),rgba(12,10,24,.50);color:#f1e7ff;font-size:.82rem;font-weight:800;line-height:1.5;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 24px rgba(0,0,0,.18);transition:transform .3s var(--ease),border-color .3s ease,background-color .3s ease}.back-btn{margin-bottom:25px;-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px)}.rules-panel{position:relative;margin-bottom:28px;padding:clamp(23px,4.2vw,48px);border:1px solid var(--glass-border);border-radius:29px;background:linear-gradient(135deg,rgba(255,255,255,.055),rgba(255,255,255,.008) 52%,rgba(189,163,255,.032)),var(--reading-glass);-webkit-backdrop-filter:blur(var(--reading-blur)) saturate(125%);backdrop-filter:blur(var(--reading-blur)) saturate(125%);box-shadow:0 24px 80px rgba(0,0,0,.33),inset 0 1px 0 rgba(255,255,255,.11),inset 0 -1px 0 rgba(255,255,255,.025)}.rules-panel::before{content:"";position:absolute;top:-1px;right:8%;left:8%;height:1px;background:linear-gradient(90deg,transparent,rgba(216,192,255,.80),rgba(177,213,255,.72),transparent);box-shadow:0 0 16px rgba(203,169,255,.28);pointer-events:none}
+h1{margin:8px 0 15px;font-size:clamp(2.5rem,6vw,4rem);font-weight:600;line-height:1.08;letter-spacing:-.5px}h2{margin:0 0 14px;font-size:clamp(1.9rem,4vw,2.6rem);font-weight:600;line-height:1.2;text-wrap:balance}h3{margin:29px 0 14px;color:#e9d8ff;font-size:1.65rem;font-weight:600;line-height:1.3}p{margin:0 0 17px;color:var(--text-dim)}strong{color:var(--text-main);font-weight:800}.eyebrow{color:#d4b8f6;font-size:.72rem;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}.lead{max-width:710px}.es-translation{margin-top:-8px;color:var(--text-muted);font-size:.92em;font-style:italic}.instruction-box{margin:27px 0;padding:25px 27px;border:1px solid rgba(224,202,255,.22);border-left:3px solid #cfacff;border-radius:0;background:radial-gradient(ellipse at 0% 0%,rgba(168,112,227,.12),transparent 72%),rgba(194,164,243,.035);box-shadow:inset 0 1px 0 rgba(255,255,255,.055)}.instruction-box h2{font-size:2rem}.daily-steps{margin:18px 0;padding-left:23px}.daily-steps li{padding-left:4px;margin:0 0 18px}.daily-steps li::marker{color:#d6b4ff;font-weight:800}.daily-steps p{margin-bottom:8px}.daily-steps .es-translation{margin:0}.note{margin:19px 0 24px;padding:15px 18px;border:1px solid rgba(231,197,156,.16);border-left:3px solid #dcc09d;border-radius:13px;background:linear-gradient(120deg,rgba(226,189,133,.065),rgba(213,170,247,.025));color:#e6d9d0;font-size:.9rem;line-height:1.8}.note p:last-child,.instruction-box>p:last-child{margin-bottom:0}.book-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0 0}.book-nav a{display:flex;flex-direction:column;gap:6px;padding:18px;border:1px solid var(--glass-border);border-radius:17px;background:rgba(194,153,255,.055);text-decoration:none;line-height:1.5}.book-nav b{color:#f3e7ff;font-size:.98rem}.book-nav span{color:var(--text-muted);font-size:.78rem}.work{scroll-margin-top:calc(var(--audio-top) + 15px)}.author{color:#c8badc;font-size:.88rem;margin:0 0 18px}.author span{display:inline-block;margin-right:10px}.work-intro{max-width:780px}.work-head{padding-bottom:13px;border-bottom:1px solid rgba(220,200,251,.22);margin-bottom:23px}
+.audio-wrapper{position:sticky;top:var(--audio-top);z-index:30;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin:25px 0 29px;padding:17px 20px;border:1px solid rgba(224,194,255,.36);border-radius:20px;background:linear-gradient(125deg,rgba(138,87,199,.20),rgba(86,111,190,.09)),rgba(15,12,29,.93);-webkit-backdrop-filter:blur(16px) saturate(130%);backdrop-filter:blur(16px) saturate(130%);box-shadow:0 12px 32px rgba(0,0,0,.34),0 0 22px rgba(166,115,233,.075),inset 0 1px 0 rgba(255,255,255,.13)}.audio-copy{flex:1 1 180px;min-width:0}.audio-copy strong{font-size:.94rem}.audio-subtitle{color:var(--text-muted);font-size:.77rem;line-height:1.55}.audio-btn{min-width:140px;background:linear-gradient(125deg,rgba(172,122,236,.30),rgba(112,139,214,.16));border-color:rgba(233,206,255,.42);text-transform:uppercase;letter-spacing:.6px}.audio-btn .icon{width:18px;height:18px}.audio-btn[aria-pressed="true"]{border-color:rgba(233,206,255,.68);background-color:rgba(181,133,242,.16)}.audio-status{flex:1 1 100%;margin:0;color:#ffd3e4;font-size:.8rem;line-height:1.6}.audio-status:empty{display:none}.audio-timeline{display:flex;align-items:center;gap:12px;flex:1 1 100%;min-width:0}.audio-timeline input{flex:1;min-width:0;accent-color:#d1b1ff;height:24px}.audio-time{font-size:.72rem;color:#d7cae8;font-variant-numeric:tabular-nums;white-space:nowrap}
+.vocabulary{margin:25px 0;border:1px solid var(--glass-border);border-radius:17px;background:rgba(14,12,27,.16)}summary{cursor:pointer;padding:17px 19px;color:#f3e8ff;font-weight:800;line-height:1.5}summary::marker{color:#cfacff}.vocabulary-body{padding:0 20px 20px}.vocabulary-body>p{font-size:.85rem}.lexicon{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;margin:0}.lexicon>div{padding:12px 0;border-top:1px solid rgba(220,201,246,.12);break-inside:avoid}.lexicon dt{color:#bedcff;font-weight:800;line-height:1.6}.lexicon dd{margin:3px 0 0;color:var(--text-muted);font-size:.87rem;line-height:1.7}.grammar-note{margin-top:17px;font-size:.85rem}.reader-controls{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 14px}.reader-controls .pill{font-size:.75rem;min-height:44px;padding:9px 15px}.pill[aria-pressed="true"]{background-color:rgba(181,133,242,.19);border-color:#bda1df}.reading-hint{font-size:.82rem;color:var(--text-muted)}.verse-list{list-style:none;padding:0;margin:22px 0;counter-reset:verse}.verse{position:relative;padding:24px 0 24px 39px;border-top:1px solid rgba(220,201,246,.14);counter-increment:verse;scroll-margin-top:calc(var(--audio-top) + 165px)}.verse::before{content:counter(verse,decimal-leading-zero);position:absolute;top:29px;left:0;color:#ac96c4;font-size:.69rem;letter-spacing:.6px}.verse.stanza-start{margin-top:28px;border-top-color:rgba(220,201,246,.33)}.original{margin:0 0 8px;color:#fbf5ff;font-family:"Cormorant Garamond",Georgia,serif;font-size:clamp(1.55rem,3.3vw,2rem);font-weight:500;line-height:1.4;overflow-wrap:break-word}.translation{margin:0 0 13px;color:#d3c2e7;font-size:.92rem;line-height:1.7}.analysis{font-size:.9rem;line-height:1.85;color:var(--text-dim)}.analysis p{margin:0 0 10px}.analysis p:last-child{margin-bottom:0}.analysis [lang="es"]{color:#bedcff}.hide-translations .translation,.hide-analysis .analysis{display:none}.meaning{padding:19px 21px;border-left:3px solid #b9d7ff;background:rgba(134,177,246,.05);border-radius:0 14px 14px 0}.meaning p:last-child{margin-bottom:0}.practice-task{margin-top:23px;padding:18px 21px;border:1px dashed rgba(211,187,244,.35);border-radius:15px}.practice-task h3{margin:0 0 12px;font-size:1.5rem}.practice-task details{margin-top:10px}.practice-task summary{padding:10px 0;font-size:.85rem}.sample-answer{padding:12px 15px;background:rgba(195,153,255,.07);border-radius:10px}.repeat-note{margin:22px 0}.repeat-note summary{border:1px solid var(--glass-border);border-radius:13px}.repeat-text{padding:18px 21px;color:#eadff7;font-family:"Cormorant Garamond",Georgia,serif;font-size:1.55rem;line-height:1.65}.repeat-text p{color:inherit}
+.immersion-card{position:relative;margin-top:32px;padding:clamp(22px,4vw,32px);border:1px solid rgba(221,186,255,.45);border-radius:21px;background:radial-gradient(ellipse at 100% 0%,rgba(109,155,245,.17),transparent 65%),linear-gradient(125deg,rgba(160,95,216,.20),rgba(27,24,50,.6));box-shadow:0 12px 40px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.12)}.immersion-card h3{margin:8px 0 14px;font-size:clamp(1.8rem,4vw,2.3rem);color:#fff3ff}.immersion-card p{font-size:.9rem}.immersion-link{margin-top:7px;min-height:54px;padding:14px 24px;border-color:rgba(235,206,255,.65);background:linear-gradient(120deg,rgba(177,114,246,.42),rgba(106,149,232,.29));font-size:.87rem;flex-wrap:wrap;text-align:center}.immersion-status{margin:12px 0 0;color:#ffd3e4;font-size:.8rem}.immersion-status:empty{display:none}.final-panel{text-align:left}.checklist{padding-left:22px;color:var(--text-dim)}.checklist li{margin-bottom:16px}.checklist .es-translation{display:block;margin:4px 0 0}.good-luck{font-family:"Cormorant Garamond",Georgia,serif;font-size:1.8rem;color:#f6eaff;margin-top:23px}.site-footer{margin-top:37px;padding:26px 12px 12px;border-top:1px solid rgba(218,201,247,.15);color:var(--text-soft);font-size:.79rem;text-align:center;text-shadow:0 2px 8px #000}.site-footer p{margin:0;color:inherit}.footer-brand{color:#d4c0f3;text-decoration:none}.footer-brand:hover{color:#f0e5ff}.footer-motion{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;margin-top:15px;padding:9px 15px;border:1px solid rgba(219,195,255,.21);border-radius:999px;background:rgba(180,142,233,.06);color:#d8c7eb;font-size:.73rem}.footer-motion .icon{width:15px;height:15px}.animations-paused .aurora-layer{animation-play-state:paused}.back-btn:active,.audio-btn:active,.immersion-link:active{transform:scale(.985)}
+@media(hover:hover) and (pointer:fine){.brand-logo-container:hover{transform:translateY(-2px);border-color:var(--glass-border-hover);box-shadow:var(--shadow-hover)}.action-circle-btn:hover:not(:disabled){transform:translateY(-2px) scale(1.06);border-color:rgba(224,204,255,.48)}.back-btn:hover,.audio-btn:hover,.pill:hover,.immersion-link:hover{transform:translateY(-2px);border-color:rgba(226,206,255,.60);background-color:rgba(170,126,234,.15)}.book-nav a:hover{border-color:rgba(224,211,255,.45);background:rgba(194,153,255,.11)}.footer-motion:hover{border-color:rgba(226,206,255,.42);background-color:rgba(170,126,234,.13)}}
+@media(max-width:700px){:root{--audio-top:calc(83px + env(safe-area-inset-top,0px));--reading-glass:rgba(10,9,23,.68)}body{font-size:15px}.top-bar{padding:calc(15px + env(safe-area-inset-top,0px)) max(17px,env(safe-area-inset-right,0px)) 10px max(17px,env(safe-area-inset-left,0px))}.brand-logo-container{gap:0;padding:5px;border-radius:18px}.brand-logo{width:43px;height:43px}.brand-text{display:none}.action-circle-btn{width:44px;height:44px}.container{padding:calc(103px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(30px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}.back-btn{min-height:44px;margin-bottom:20px;padding:10px 18px;font-size:.76rem}.rules-panel{padding:24px 20px;border-radius:23px}.instruction-box{margin:23px 0;padding:20px 18px}.instruction-box h2{font-size:1.65rem}.audio-wrapper{gap:10px;margin:23px 0;padding:15px;border-radius:17px}.audio-copy strong{font-size:.88rem}.audio-btn{min-width:126px;min-height:44px;padding:10px 16px;font-size:.73rem}.book-nav{grid-template-columns:1fr}.book-nav a{padding:14px 17px}.lexicon{grid-template-columns:1fr}.vocabulary-body{padding:0 16px 16px}.verse{padding-left:29px}.verse::before{top:28px;font-size:.62rem}.analysis{font-size:.87rem}.translation{font-size:.87rem}.site-footer{margin-top:29px;font-size:.74rem}.aurora-layer{filter:blur(34px) saturate(115%)}}
+@media(max-width:420px){.container{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}.rules-panel{padding:21px 15px;border-radius:20px}.instruction-box{padding:18px 15px}.audio-copy{flex-basis:100%}.audio-btn{width:100%}.reader-controls .pill{flex:1 1 100%}.immersion-link{width:100%;padding:13px}.immersion-card{padding:20px 16px}h2{overflow-wrap:anywhere}.verse{padding-left:25px}.original{font-size:1.55rem}}
+@media(max-height:520px){.audio-wrapper{position:relative;top:auto}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background-color:rgba(12,12,25,.83)}.rules-panel{background-color:rgba(10,9,23,.88)}.audio-wrapper{background-color:rgba(15,12,29,.97)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.aurora-layer{will-change:auto}.aurora-layer--one{opacity:.85}.aurora-layer--two{opacity:.50}.aurora-layer--three{opacity:.55}}
+@media print{html,body{background:#fff!important;color:#000!important}.aurora-background,#starCanvas,.top-bar,.back-btn,.audio-wrapper,.footer-motion,.reader-controls,.book-nav,.immersion-link,.skip-link{display:none!important}.container{max-width:none;padding:0}.rules-panel,.instruction-box,.note,.vocabulary,.immersion-card,.meaning,.practice-task{background:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-color:#aaa}.rules-panel{padding:0;border:0}.rules-panel::before{display:none}.rules-panel *,.site-footer,.footer-brand{color:#000!important;text-shadow:none!important}h1,h2,h3,summary{break-after:avoid}.verse,.lexicon>div{break-inside:avoid}.translation,.analysis{display:block!important}.original{font-size:16pt}.analysis,.translation{font-size:10pt}.lexicon{grid-template-columns:1fr 1fr}.audio-status,.immersion-status{display:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к практике</a>
+<svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><symbol id="syolana-mark" viewBox="0 0 100 100"><g stroke="#c5a4ff" stroke-width="1.6" fill="#aa7bea" fill-opacity="0.15"><path d="M50 15 C60 28 65 42 50 50 C35 42 40 28 50 15 Z"/><path d="M50 50 C65 42 85 32 90 47 C80 57 65 57 50 50 Z"/><path d="M50 50 C35 42 15 32 10 47 C20 57 35 57 50 50 Z"/><path d="M50 50 C65 60 75 80 60 90 C50 80 50 65 50 50 Z"/><path d="M50 50 C35 60 25 80 40 90 C50 80 50 65 50 50 Z"/></g><text x="50" y="59" font-family="'Cormorant Garamond',Georgia,serif" font-size="29" font-weight="600" fill="#ffffff" text-anchor="middle">SY</text></symbol><symbol id="i-play" viewBox="0 0 24 24"><path d="m8 4 12 8-12 8Z" fill="currentColor" stroke="none"/></symbol><symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" stroke-width="3.4"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol></defs></svg>
+<div class="aurora-background" aria-hidden="true"><div class="aurora-layer aurora-layer--one"></div><div class="aurora-layer aurora-layer--two"></div><div class="aurora-layer aurora-layer--three"></div></div>
+<canvas id="starCanvas" aria-hidden="true"></canvas>
+<header class="top-bar"><a href="https://syolana.com/" class="brand-logo-container glass" aria-label="Перейти на главную страницу Syolana" title="Перейти на главную страницу Syolana"><span class="brand-logo"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#syolana-mark"></use></svg></span><span class="brand-text"><span class="brand-text-title">Syolana</span><span class="brand-text-sub">Иммерсивная платформа</span></span></a><button type="button" id="fullscreen-btn" class="action-circle-btn glass" aria-label="На весь экран" aria-pressed="false" title="На весь экран" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path id="fullscreen-path" d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5"/></svg></button></header>
+<p id="screen-status" class="sr-only" role="status" aria-live="polite"></p>
+<main class="container" id="main" tabindex="-1">
+<a href="https://syolana.com/español" class="back-btn">Назад к уровням</a>
+<section class="rules-panel" aria-labelledby="page-title">
+<div class="eyebrow" lang="es">Español · A1 · Práctica diaria</div>
+<h1 id="page-title">Читай. Слушай. Понимай.</h1>
+<p class="es-translation" lang="es">Lee. Escucha. Comprende.</p>
+<p class="lead">Три произведения, к которым хочется возвращаться. Открой красоту испанского через поэзию, дружбу и маленькую историю о большой помощи.</p>
+<p class="es-translation" lang="es">Tres textos para leer muchas veces. Descubre la belleza del español con la poesía, la amistad y una pequeña historia sobre una gran ayuda.</p>
+<div class="instruction-box">
+<h2>Твоя практика на каждый день</h2><p class="es-translation" lang="es">Tu práctica de cada día</p>
+<p>Каждый день повторяй правила A1, слова A1 и возвращайся к этим трём произведениям. Главная практика здесь — слушать песню на испанском и одновременно читать испанский текст. У каждого произведения своя кнопка аудио.</p>
+<p class="es-translation" lang="es">Cada día, repasa las reglas de A1, las palabras de A1 y estos tres textos. La práctica principal es escuchar la canción en español y leer el texto en español al mismo tiempo. Cada texto tiene su propio botón de audio.</p>
+<ol class="daily-steps">
+<li><p><strong>Сначала познакомься со словами.</strong> Перед каждым произведением есть словарь сложной лексики. Прочитай его, затем прочитай строки с переводом и разбором. Если мысль продолжается на следующей строке, соединяй их по смыслу.</p><p class="es-translation" lang="es"><strong>Primero, mira las palabras.</strong> Antes de cada texto hay un vocabulario con palabras difíciles. Léelo. Después, lee los versos con la traducción y las explicaciones. A veces una frase continúa en el verso siguiente: lee los dos versos juntos.</p></li>
+<li><p><strong>Включи песню и следи за текстом.</strong> Слушай и читай одновременно. Если теряешь строку, поставь аудио на паузу, найди нужное место и продолжай. В песне строки могут повторяться: возвращайся к ним в тексте.</p><p class="es-translation" lang="es"><strong>Escucha la canción y sigue el texto.</strong> Escucha y lee al mismo tiempo. Si no encuentras el verso, pon el audio en pausa, busca la frase y continúa. En la canción puede haber versos repetidos: vuelve a leerlos.</p></li>
+<li><p><strong>Повторяй вслух и постепенно убирай подсказки.</strong> После прослушивания прочитай несколько строк вслух. Когда почувствуешь себя увереннее, скрой сначала разбор, затем перевод и снова послушай песню. Открывай подсказки, когда они нужны.</p><p class="es-translation" lang="es"><strong>Repite en voz alta y usa menos ayuda poco a poco.</strong> Después de escuchar, lee algunos versos en voz alta. Cuando comprendas mejor el texto, oculta primero las explicaciones y después la traducción. Escucha otra vez. Puedes volver a ver la ayuda cuando la necesitas.</p></li>
+<li><p><strong>Возвращайся каждый день, пока читать и понимать не станет легко.</strong> В начале можно внимательно разобрать одно произведение, затем добавить остальные. Постепенно включи все три в ежедневную практику. Даже в занятый день найди несколько минут для аудио и текста, а также послушай материалы с правилами и словами A1.</p><p class="es-translation" lang="es"><strong>Practica cada día hasta leer y comprender con facilidad.</strong> Al principio, puedes estudiar un texto y después añadir los otros. Poco a poco, practica con los tres cada día. Incluso en un día ocupado, dedica unos minutos al audio y al texto. Escucha también los materiales con las reglas y las palabras de A1.</p></li>
+</ol>
+<p><strong>Твоя цель — понимать, а не просто запоминать звук.</strong> Старайся объяснить смысл своими словами и составить несколько простых испанских предложений о прочитанном.</p><p class="es-translation" lang="es"><strong>Tu objetivo es comprender, no solo recordar los sonidos.</strong> Explica la idea con tus palabras y escribe unas frases sencillas en español sobre el texto.</p>
+</div>
+<div class="note"><p><strong>Это оригинальная литература с поддержкой для A1.</strong> В стихах встречаются слова и грамматика выше начального уровня. В словарях собраны такие слова и выражения, а в разборе объяснены сложные формы. Точная граница словарных уровней зависит от курса. Сейчас достаточно понимать сложные обороты в контексте; свободно использовать их не требуется.</p><p class="es-translation" lang="es"><strong>Estos son textos originales con ayuda para A1.</strong> Hay palabras y formas gramaticales de niveles más altos. Tienes vocabulario y explicaciones para comprenderlas. El nivel de una palabra puede cambiar según el curso. Ahora basta con comprender las expresiones difíciles en el texto; no necesitas usarlas todas.</p></div>
+<p>Иди от короткого стихотворения к более длинной басне. Переводы здесь учебные: они передают смысл, не сохраняя рифму.</p><p class="es-translation" lang="es">Empieza con el poema corto y continúa hasta la fábula, que es más larga. Las traducciones ayudan a comprender el significado; no mantienen la rima.</p>
+<nav class="book-nav" aria-label="Три произведения для практики"><a href="#becquer"><span>01 · Густаво Адольфо Беккер</span><b lang="es">¿Qué es poesía?</b><span>4 строки · Поэзия и чувство</span></a><a href="#marti"><span>02 · Хосе Марти</span><b lang="es">Cultivo una rosa blanca</b><span>8 строк · Дружба и доброта</span></a><a href="#samaniego"><span>03 · Феликс Мария де Саманьего</span><b lang="es">El león y el ratón</b><span>22 строки · Милосердие и помощь</span></a></nav>
+</section>
+<article class="rules-panel work" id="becquer" aria-labelledby="becquer-title">
+<header class="work-head"><div class="eyebrow">01 · Поэзия и чувство</div><h2 id="becquer-title" lang="es">¿Qué es poesía?</h2><p class="author"><span lang="es">Gustavo Adolfo Bécquer</span> · Густаво Адольфо Беккер · <span lang="es">Rima XXI</span></p></header>
+<p class="work-intro">Короткое стихотворение о чувстве, которое нельзя объяснить одним определением. Первые две строки составляют одну фразу: читай их вместе.</p><p class="es-translation" lang="es">Un poema corto sobre un sentimiento que no es fácil de explicar. Los dos primeros versos forman una sola frase: léelos juntos.</p>
+<details class="vocabulary" open><summary>Перед чтением: словарь · <span lang="es">Vocabulario</span></summary><div class="vocabulary-body"><p>Слова и образные выражения, которые могут выходить за базовый словарь A1. Формы из стихотворения указаны рядом с начальной формой.</p><p class="es-translation" lang="es">Palabras y expresiones que pueden ser nuevas en A1. Junto al infinitivo puedes ver la forma que aparece en el poema.</p><dl class="lexicon">
+<div><dt lang="es">la poesía</dt><dd>Поэзия как искусство или переживание. Отдельное стихотворение — <span lang="es">un poema</span>.</dd></div>
+<div><dt lang="es">mientras</dt><dd>Пока; в то время как. Связывает одновременные действия.</dd></div>
+<div><dt lang="es">clavar → clavas</dt><dd>Вонзать, вбивать → ты вонзаешь. Здесь употреблено образно.</dd></div>
+<div><dt lang="es">la pupila</dt><dd>Зрачок; в стихотворении — поэтический образ глаза и взгляда.</dd></div>
+<div><dt lang="es">clavar la mirada / los ojos en…</dt><dd>Устремить взгляд / впиться глазами в… В стихе авторский вариант: <span lang="es">clavar tu pupila en mi pupila</span>.</dd></div>
+<div><dt lang="es">¿Y tú me lo preguntas?</dt><dd>И это ты меня спрашиваешь? Полезно понять как целую реплику; <span lang="es">me lo</span> — два местоимения перед глаголом.</dd></div>
+</dl><p class="grammar-note"><strong>Повтори основу A1:</strong> <span lang="es">es / eres</span> — формы <span lang="es">ser</span>; <span lang="es">decir → dices</span> — говорить → ты говоришь; <span lang="es">preguntar → preguntas</span> — спрашивать → ты спрашиваешь; <span lang="es">mi / tu</span> — мой / твой; <span lang="es">azul</span> — синий или голубой. Поэтический порядок слов и сочетание <span lang="es">me lo</span> разбираем ниже.</p></div></details>
+<div class="audio-wrapper" data-player="becquer"><div class="audio-copy"><strong>Песня: <span lang="es">¿Qué es poesía?</span></strong><div class="audio-subtitle">Слушай и читай · <span lang="es">Escucha y lee</span></div></div><button type="button" class="audio-btn" aria-controls="becquer-audio" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#i-play"></use></svg><span>Слушать</span></button><audio id="becquer-audio" preload="none"></audio><div class="audio-timeline" hidden><input type="range" min="0" max="100" step="0.1" value="0" aria-label="Позиция аудио: ¿Qué es poesía?" disabled><span class="audio-time">0:00 / 0:00</span></div><p class="audio-status" role="status" aria-live="polite"></p><noscript><p class="audio-status">Для аудиоплеера включи JavaScript. / <span lang="es">Activa JavaScript para escuchar el audio.</span></p></noscript></div>
+<div class="reader-controls" hidden><button type="button" class="pill" data-toggle="translations" aria-pressed="false" aria-controls="becquer-verses">Скрыть перевод</button><button type="button" class="pill" data-toggle="analysis" aria-pressed="false" aria-controls="becquer-verses">Скрыть разбор</button></div>
+<p class="reading-hint">Читай строки 1–2 вместе. · <span lang="es">Lee los versos 1 y 2 juntos.</span></p>
+<ol class="verse-list" id="becquer-verses">
+<li class="verse"><p class="original" lang="es">¿Qué es poesía?, dices mientras clavas</p><p class="translation">(«Что такое поэзия?» — говоришь ты, устремляя…)</p><div class="analysis"><p><span lang="es">¿Qué es poesía?</span> — «Что такое поэзия?» <span lang="es">Qué</span> в вопросе пишется с ударением; <span lang="es">es</span> — форма <span lang="es">ser</span>, «быть». В русском связку обычно опускаем. <span lang="es">Poesía</span> обозначает поэзию вообще, поэтому здесь нет артикля. Знаки <span lang="es">¿…?</span> обрамляют только сам вопрос.</p><p><span lang="es">Dices</span> — «ты говоришь», от <span lang="es">decir</span>. Местоимение <span lang="es">tú</span> можно опустить: лицо понятно по глаголу. По смыслу возможен перевод «спрашиваешь ты». <span lang="es">Mientras</span> — «в то время как»: речь и взгляд одновременны. <span lang="es">Clavas</span> — «ты вонзаешь», от <span lang="es">clavar</span>; «устремляя» — естественная передача образа, а не буквальная грамматическая форма.</p><p>Строка не закончена: что именно собеседник устремляет и куда, сказано дальше.</p></div></li>
+<li class="verse"><p class="original" lang="es">En mi pupila tu pupila azul;</p><p class="translation">(…в мои глаза свой голубой взгляд.)</p><div class="analysis"><p>Это смысловой перевод. Буквально: «в мой зрачок свой голубой зрачок». <span lang="es">En</span> здесь — «в»; <span lang="es">mi pupila</span> — «мой зрачок», <span lang="es">tu pupila</span> — «твой зрачок». По-русски в этой фразе естественнее «свой», потому что человек направляет собственный взгляд.</p><p><span lang="es">Mi</span> и <span lang="es">tu</span> не меняются по роду: <span lang="es">mi libro</span> — «моя книга», <span lang="es">mi casa</span> — «мой дом». Во множественном числе появляются <span lang="es">mis / tus</span>. Слово <span lang="es">pupila</span> женского рода, хотя русский «зрачок» мужского. <span lang="es">Azul</span> — синий или голубой; прилагательное цвета обычно идёт после существительного.</p><p>Зрачок сам по себе чёрный: поэт использует <span lang="es">pupila</span> как образ глаза целиком. Обычный порядок слов: <span lang="es">Clavas tu pupila azul en mi pupila</span> — «Ты впиваешься своими голубыми глазами в мои». Заглавная <span lang="es">En</span> оформляет стихотворную строку, не начинает новое предложение.</p></div></li>
+<li class="verse"><p class="original" lang="es">¿Qué es poesía? ¿Y tú me lo preguntas?</p><p class="translation">(Что такое поэзия? И это ты меня спрашиваешь?)</p><div class="analysis"><p><span lang="es">Y</span> — «и», здесь с оттенком удивления. <span lang="es">Tú</span> подчёркивает: именно ты? <span lang="es">Preguntas</span> — «ты спрашиваешь», от <span lang="es">preguntar</span>.</p><p><span lang="es">Me</span> обозначает того, кому задан вопрос: по-русски «меня». <span lang="es">Lo</span> заменяет содержание вопроса — «это», «об этом»; оно не заменяет существительное <span lang="es">poesía</span> женского рода. В сочетании <span lang="es">me lo preguntas</span> оба местоимения стоят перед личной формой глагола: сначала <span lang="es">me</span>, затем <span lang="es">lo</span>.</p><p>Это риторический вопрос: поэт выражает нежное удивление. Ответ уже заключён в человеке, который спрашивает.</p></div></li>
+<li class="verse"><p class="original" lang="es">Poesía… eres tú.</p><p class="translation">(Поэзия… — это ты.)</p><div class="analysis"><p><span lang="es">Eres</span> — «ты есть / являешься», форма <span lang="es">ser</span>. Сравни: <span lang="es">es</span> — «он / она / это есть», <span lang="es">eres</span> — «ты есть». Более обычный порядок: <span lang="es">Tú eres poesía</span> — «Ты — поэзия».</p><p>Поэт начинает с темы вопроса — <span lang="es">poesía</span> — и оставляет главное слово <span lang="es">tú</span> напоследок. Многоточие передаёт паузу. Русское «это» добавлено для естественности: отдельного слова с таким значением в этой строке нет.</p><p><strong>Не путай:</strong> <span lang="es">tu</span> без ударения — «твой» (<span lang="es">tu pupila</span>), <span lang="es">tú</span> с ударением — «ты» (<span lang="es">eres tú</span>).</p></div></li>
+</ol>
+<div class="meaning"><p><strong>Смысл:</strong> поэзия для автора — красота и чувство, воплощённые в человеке перед ним.</p><p class="es-translation" lang="es"><strong>La idea:</strong> para el poeta, la poesía es la belleza y el sentimiento que encuentra en la otra persona.</p></div>
+<div class="practice-task"><h3>Скажи по-испански · <span lang="es">Habla en español</span></h3><p>Назови цвет глаз: «Мои глаза…» Затем закончи: «Для меня поэзия — это…» Выбери простое знакомое слово.</p><p class="es-translation" lang="es">Di el color de tus ojos: «Mis ojos son…». Después, completa: «Para mí, la poesía es…». Usa una palabra sencilla que conoces.</p><details><summary>Примеры ответов · <span lang="es">Ejemplos</span></summary><div class="sample-answer"><p lang="es">Mis ojos son marrones. Para mí, la poesía es amor.</p><p class="translation">(Мои глаза карие. Для меня поэзия — это любовь.)</p></div></details></div>
+<aside class="immersion-card" aria-label="Иммерсивное чтение стихотворения Беккера"><div class="eyebrow">Syolana · Иммерсивные книги</div><h3>А теперь почувствуй эти четыре строки.</h3><p class="es-translation" lang="es">Ahora, siente estos cuatro versos.</p><p>Ты уже понимаешь слова. Открой стихотворение только на испанском: во время чтения меняются музыка, звуки и цвет букв. Переживи паузу перед <span lang="es">«eres tú»</span> — и позволь тексту прозвучать по-новому.</p><p class="es-translation" lang="es">Ya comprendes las palabras. Abre el poema solo en español: la música, los sonidos y el color de las letras cambian durante la lectura. Siente la pausa antes de «eres tú» y disfruta del poema de otra manera.</p><a class="immersion-link" data-immersion="becquer" href="#becquer-immersion-status"><span>Читать только на испанском · <span lang="es">Leer en inmersión</span></span><svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a><p class="immersion-status" id="becquer-immersion-status" role="status" aria-live="polite"></p></aside>
+</article>
+<article class="rules-panel work" id="marti" aria-labelledby="marti-title">
+<header class="work-head"><div class="eyebrow">02 · Дружба и доброта</div><h2 id="marti-title" lang="es">Cultivo una rosa blanca</h2><p class="author"><span lang="es">José Martí</span> · Хосе Марти · <span lang="es">Versos sencillos, XXXIX</span></p></header>
+<p>Белая роза — образ искренней дружбы и доброты. Поэт сохраняет добро даже по отношению к тому, кто причиняет ему боль. Чертополох и крапива противопоставлены розе: они символизируют враждебность и желание ранить.</p><p class="es-translation" lang="es">La rosa blanca representa la amistad sincera y la bondad. El poeta ofrece bondad incluso a quien le hace daño. El cardo y la ortiga representan lo contrario: el deseo de hacer daño.</p>
+<details class="vocabulary" open><summary>Перед чтением: словарь · <span lang="es">Vocabulario</span></summary><div class="vocabulary-body"><p>Выучи значение в контексте. Названия растений и образные выражения не нужно сразу использовать в собственной речи.</p><p class="es-translation" lang="es">Aprende el significado en el texto. Por ahora, basta con comprender los nombres de las plantas y las expresiones poéticas.</p><dl class="lexicon">
+<div><dt lang="es">cultivar → cultivo</dt><dd>Выращивать → я выращиваю.</dd></div><div><dt lang="es">la rosa</dt><dd>Роза; <span lang="es">una rosa blanca</span> — белая роза.</dd></div>
+<div><dt lang="es">sincero / sincera</dt><dd>Искренний / искренняя, честный в чувствах.</dd></div><div><dt lang="es">franco / franca</dt><dd>Открытый, искренний, без притворства. Здесь <span lang="es">mano franca</span> — образ честно протянутой руки.</dd></div>
+<div><dt lang="es">dar la mano</dt><dd>Подать руку, пожать руку. В стихе: <span lang="es">me da su mano</span> — протягивает мне свою руку.</dd></div><div><dt lang="es">cruel; el cruel</dt><dd>Жестокий; жестокий человек. Артикль позволяет использовать прилагательное как существительное.</dd></div>
+<div><dt lang="es">arrancar → arranca</dt><dd>Вырывать, выдёргивать → он / она вырывает.</dd></div><div><dt lang="es">el corazón; arrancar el corazón</dt><dd>Сердце; вырвать сердце. В стихе — причинить глубокую душевную боль.</dd></div>
+<div><dt lang="es">el cardo</dt><dd>Чертополох, колючее растение.</dd></div><div><dt lang="es">la ortiga</dt><dd>Крапива, растение с жгучими волосками.</dd></div>
+<div><dt lang="es">en julio como enero</dt><dd>В июле, как и в январе; здесь — всегда. Поэтическое сокращение <span lang="es">en julio como en enero</span>.</dd></div><div><dt lang="es">con que vivo</dt><dd>С которым я живу; здесь о сердце: «благодаря которому я живу». Предлог и относительное <span lang="es">que</span> связывают две части фразы.</dd></div>
+<div><dt lang="es">ni… ni…</dt><dd>Ни… ни… Обычный вариант: <span lang="es">No cultivo ni cardos ni ortigas</span>. В стихе отрицание выражено необычно.</dd></div>
+</dl><p class="grammar-note"><strong>Основа A1:</strong> <span lang="es">julio / enero</span> — июль / январь; <span lang="es">para</span> — для; <span lang="es">dar → da</span> — давать → даёт; <span lang="es">vivir → vivo</span> — жить → я живу; <span lang="es">la mano</span> — рука, слово женского рода. Относительные обороты и поэтическое отрицание достаточно понимать по разбору.</p></div></details>
+<div class="audio-wrapper" data-player="marti"><div class="audio-copy"><strong>Песня: <span lang="es">Cultivo una rosa blanca</span></strong><div class="audio-subtitle">Слушай и читай · <span lang="es">Escucha y lee</span></div></div><button type="button" class="audio-btn" aria-controls="marti-audio" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#i-play"></use></svg><span>Слушать</span></button><audio id="marti-audio" preload="none"></audio><div class="audio-timeline" hidden><input type="range" min="0" max="100" step="0.1" value="0" aria-label="Позиция аудио: Cultivo una rosa blanca" disabled><span class="audio-time">0:00 / 0:00</span></div><p class="audio-status" role="status" aria-live="polite"></p><noscript><p class="audio-status">Для аудиоплеера включи JavaScript. / <span lang="es">Activa JavaScript para escuchar el audio.</span></p></noscript></div>
+<div class="reader-controls" hidden><button type="button" class="pill" data-toggle="translations" aria-pressed="false" aria-controls="marti-verses">Скрыть перевод</button><button type="button" class="pill" data-toggle="analysis" aria-pressed="false" aria-controls="marti-verses">Скрыть разбор</button></div>
+<p class="reading-hint">Восемь строк, две строфы. · <span lang="es">Ocho versos, dos estrofas.</span></p>
+<ol class="verse-list" id="marti-verses">
+<li class="verse"><p class="original" lang="es">Cultivo una rosa blanca</p><p class="translation">(Я выращиваю белую розу.)</p><div class="analysis"><p><span lang="es">Cultivo</span> — «я выращиваю», от <span lang="es">cultivar</span>. Настоящее время описывает постоянное отношение к людям, а не только действие сейчас. <span lang="es">Yo</span> не обязательно: лицо видно по окончанию.</p><p><span lang="es">Una</span> — неопределённый артикль женского рода: роза впервые появляется в тексте. Переводить его как «одну» здесь не требуется. <span lang="es">Rosa blanca</span> — «белая роза»: прилагательное следует за существительным и согласуется с ним в женском роде.</p></div></li>
+<li class="verse"><p class="original" lang="es">En julio como enero</p><p class="translation">(И в июле, и в январе.)</p><div class="analysis"><p>Буквально: «В июле, как и в январе». <span lang="es">En</span> перед месяцем — «в»; <span lang="es">julio</span> — июль, <span lang="es">enero</span> — январь. Названия месяцев пишутся со строчной буквы.</p><p><span lang="es">Como</span> здесь — «как, так же как», а не форма «я ем» глагола <span lang="es">comer</span>. Повторный предлог опущен: в обычной речи <span lang="es">en julio como en enero</span>. Образ означает постоянство: в любое время года.</p></div></li>
+<li class="verse"><p class="original" lang="es">Para el amigo sincero</p><p class="translation">(Для искреннего друга…)</p><div class="analysis"><p><span lang="es">Para</span> — «для», указывает, кому предназначена роза. <span lang="es">El amigo</span> — друг, которого дальше описывает поэт. Это может быть образ любого настоящего друга, не обязательно одного конкретного человека.</p><p><span lang="es">Sincero</span> — «искренний»; прилагательное и <span lang="es">amigo</span> мужского рода. В русском после «для» меняется форма «друг → друга». В испанском отношение выражает предлог, а у <span lang="es">amigo</span> не появляется падежное окончание.</p></div></li>
+<li class="verse"><p class="original" lang="es">Que me da su mano franca.</p><p class="translation">(…который протягивает мне руку с открытым сердцем.)</p><div class="analysis"><p><span lang="es">Que</span> — «который», относится к другу. <span lang="es">Me</span> — «мне», стоит перед глаголом. <span lang="es">Da</span> — «даёт», форма <span lang="es">dar</span>. <span lang="es">Su mano</span> — «его рука»; здесь по-русски «своя рука», поскольку друг протягивает собственную.</p><p><span lang="es">Dar la mano</span> — «подать / пожать руку». <span lang="es">Franca</span> — «открытая, искренняя»: образ дружеского жеста без притворства. <strong><span lang="es">Mano</span> женского рода</strong>, несмотря на <span lang="es">-o</span>, поэтому <span lang="es">franca</span>, а не <span lang="es">franco</span>.</p></div></li>
+<li class="verse stanza-start"><p class="original" lang="es">Y para el cruel que me arranca</p><p class="translation">(И для жестокого человека, который вырывает у меня…)</p><div class="analysis"><p><span lang="es">Y</span> — «и»; <span lang="es">para</span> — «для». <span lang="es">Cruel</span> — «жестокий», а <span lang="es">el cruel</span> — «жестокий человек»: прилагательное употреблено как существительное.</p><p><span lang="es">Que</span> — «который»; <span lang="es">arranca</span> — «вырывает», от <span lang="es">arrancar</span>. <span lang="es">Me</span> здесь естественно переводится «у меня». Строка продолжается: что вырывает этот человек, узнаём дальше.</p></div></li>
+<li class="verse"><p class="original" lang="es">El corazón con que vivo,</p><p class="translation">(…сердце, благодаря которому я живу…)</p><div class="analysis"><p><span lang="es">El corazón</span> — сердце, слово мужского рода. В <span lang="es">me arranca el corazón</span> уже понятно, чьё оно: в испанском с частями тела часто используют определённый артикль и местоимение вместо притяжательного слова.</p><p><span lang="es">Con que vivo</span> буквально — «с которым я живу». <span lang="es">Con</span> — «с», <span lang="es">que</span> после предлога — «которым», <span lang="es">vivo</span> — «я живу», от <span lang="es">vivir</span>. Перевод «благодаря которому» поясняет роль сердца. Вместе со строкой 5 это образ глубокой душевной боли.</p></div></li>
+<li class="verse"><p class="original" lang="es">Cardo ni ortiga cultivo;</p><p class="translation">(…ни чертополоха, ни крапивы я не выращиваю.)</p><div class="analysis"><p><span lang="es">Cardo</span> — чертополох, <span lang="es">ortiga</span> — крапива. Они колют или обжигают и символизируют ответную враждебность. <span lang="es">Ni</span> — «ни». Растения названы в начале, а глагол <span lang="es">cultivo</span> поставлен в конец.</p><p>Отрицание здесь литературное и необычное для современной повседневной речи. Запомни нейтральный вариант: <span lang="es">No cultivo cardos ni ortigas</span> или <span lang="es">No cultivo ni cardos ni ortigas</span>. По стиху нельзя делать вывод, что <span lang="es">no</span> можно свободно убирать из обычных предложений.</p></div></li>
+<li class="verse"><p class="original" lang="es">Cultivo la rosa blanca.</p><p class="translation">(Я выращиваю белую розу.)</p><div class="analysis"><p><span lang="es">Cultivo</span> снова — «я выращиваю». Теперь <span lang="es">la rosa</span>, а не <span lang="es">una rosa</span>: роза уже знакома нам из первой строки. Русский перевод почти не меняется, потому что артиклей в русском нет.</p><p>Возвращение к белой розе подчёркивает выбор поэта: даже тому, кто причиняет боль, он предлагает добро.</p></div></li>
+</ol>
+<div class="note"><p><strong>Если в песне звучит повтор, прочитай эти же восемь строк ещё раз.</strong> В исходном учебном материале они повторены без изменений; это повтор для закрепления, а не новая часть стихотворения.</p><p class="es-translation" lang="es"><strong>Si la canción repite el poema, vuelve a leer los mismos ocho versos.</strong> En el material de práctica aparecen dos veces, sin cambios. Es una repetición para repasar, no una parte nueva del poema.</p></div>
+<details class="repeat-note"><summary>Повтор целиком — только испанский · <span lang="es">Repetición</span></summary><div class="repeat-text" lang="es"><p>Cultivo una rosa blanca<br>En julio como enero<br>Para el amigo sincero<br>Que me da su mano franca.</p><p>Y para el cruel que me arranca<br>El corazón con que vivo,<br>Cardo ni ortiga cultivo;<br>Cultivo la rosa blanca.</p></div></details>
+<div class="meaning"><p><strong>Смысл:</strong> доброта поэта не зависит от чужой жестокости. И другу, и недоброму человеку он предлагает белую розу.</p><p class="es-translation" lang="es"><strong>La idea:</strong> el poeta elige la bondad. Ofrece una rosa blanca al amigo y también a la persona cruel.</p></div>
+<div class="practice-task"><h3>Проверь понимание · <span lang="es">Comprueba lo que comprendes</span></h3><p>Ответь простыми фразами: «Какого цвета роза?» и «Для кого поэт её выращивает?»</p><p class="es-translation" lang="es">Responde con frases sencillas: «¿De qué color es la rosa?» y «¿Para quién cultiva la rosa el poeta?»</p><details><summary>Пример ответа · <span lang="es">Ejemplo</span></summary><div class="sample-answer"><p lang="es">La rosa es blanca. El poeta cultiva la rosa para el amigo y para la persona cruel.</p><p class="translation">(Роза белая. Поэт выращивает розу для друга и для жестокого человека.)</p></div></details></div>
+<aside class="immersion-card" aria-label="Иммерсивное чтение стихотворения Марти"><div class="eyebrow">Syolana · Иммерсивные книги</div><h3>Пусть белая роза оживёт в твоём воображении.</h3><p class="es-translation" lang="es">Imagina la rosa blanca.</p><p>Прочитай стихотворение только на испанском, с меняющимися музыкой, звуками и цветом букв. Ты уже знаешь смысл — теперь почувствуй, как повтор последней строки превращается в тихое обещание добра.</p><p class="es-translation" lang="es">Lee el poema solo en español, con música, sonidos y colores que cambian durante la lectura. Ya conoces la idea. Ahora siente la última frase como una promesa de bondad.</p><a class="immersion-link" data-immersion="marti" href="#marti-immersion-status"><span>Читать только на испанском · <span lang="es">Leer en inmersión</span></span><svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a><p class="immersion-status" id="marti-immersion-status" role="status" aria-live="polite"></p></aside>
+</article>
+<article class="rules-panel work" id="samaniego" aria-labelledby="samaniego-title">
+<header class="work-head"><div class="eyebrow">03 · Милосердие и помощь</div><h2 id="samaniego-title" lang="es">El león y el ratón</h2><p class="author"><span lang="es">Félix María de Samaniego</span> · Феликс Мария де Саманьего · «Лев и мышь»</p></header>
+<p>Даже самому сильному однажды может понадобиться помощь самого маленького. Эта стихотворная басня сложнее первых двух текстов: двигайся небольшими отрывками и читай связанные строки вместе.</p><p class="es-translation" lang="es">Incluso el más fuerte puede necesitar la ayuda del más pequeño. Esta fábula en verso es más difícil que los otros dos textos. Lee poco a poco y une los versos que forman una frase.</p>
+<div class="note"><p><strong>Твоя задача на A1 — понять историю и её смысл.</strong> Формы <span lang="es">estaba, molestaba, descansaba, fue, rompió</span> и особенно <span lang="es">dijera</span> не нужно сейчас самостоятельно образовывать. В разборе есть их перевод и объяснение. Повествование переходит из прошлого в настоящее и обратно — это особенность авторского рассказа.</p><p class="es-translation" lang="es"><strong>En A1, tu objetivo es comprender la historia y su idea.</strong> No necesitas formar por tu cuenta «estaba», «molestaba», «descansaba», «fue», «rompió» ni «dijera». Tienes su traducción y una explicación. El autor usa el pasado y también el presente para contar la historia.</p></div>
+<details class="vocabulary" open><summary>Перед чтением: полный словарь сложной лексики · <span lang="es">Vocabulario</span></summary><div class="vocabulary-body"><p>Здесь собраны литературные, менее частотные и потенциально новые для A1 слова, а также выражения, смысл которых нельзя надёжно получить переводом каждого слова по отдельности. Базовые слова поясняются в строках.</p><p class="es-translation" lang="es">Aquí tienes palabras literarias, palabras menos frecuentes y expresiones que pueden ser nuevas en A1. Algunas expresiones tienen un significado especial. Las explicaciones de los versos también te ayudan con las palabras básicas.</p>
+<dl class="lexicon">
+<div><dt lang="es">el león; el ratón; el ratoncillo</dt><dd>Лев; мышь; маленький мышонок. <span lang="es">-illo</span> — уменьшительный суффикс.</dd></div>
+<div><dt lang="es">aprisionar; aprisionado</dt><dd>Заключать в плен; пленённый, пойманный. <span lang="es">Estar aprisionado</span> — находиться в плену.</dd></div>
+<div><dt lang="es">la garra; las garras</dt><dd>Коготь, когтистая лапа; когти / лапы хищника.</dd></div>
+<div><dt lang="es">desdichado; el desdichado</dt><dd>Несчастный; бедняга. В начале басни — мышонок.</dd></div>
+<div><dt lang="es">la ratonera; la tal ratonera</dt><dd>Мышеловка; эта самая мышеловка. <span lang="es">Tal</span> отсылает к уже упомянутой ловушке.</dd></div>
+<div><dt lang="es">preso; fue preso</dt><dd>Пойманный, пленённый; был пойман. Литературный оборот с <span lang="es">ser</span>.</dd></div>
+<div><dt lang="es">el ladrón; por ladrón de…</dt><dd>Вор; за то, что крал… / был вором…</dd></div>
+<div><dt lang="es">el tocino</dt><dd>Сало; свиной жир с возможными прослойками мяса.</dd></div>
+<div><dt lang="es">no… sino porque…</dt><dd>Не… а потому, что… Исправляет отвергнутую причину; <span lang="es">sino</span> не равно обычному «но» во всех контекстах.</dd></div>
+<div><dt lang="es">molestar → molestaba</dt><dd>Мешать, беспокоить → мешал / беспокоил.</dd></div>
+<div><dt lang="es">el retiro; en su retiro</dt><dd>Уединённое место, убежище; в своём уединении. Здесь не «выход на пенсию».</dd></div>
+<div><dt lang="es">pedir perdón → pide perdón</dt><dd>Просить прощения → просит прощения.</dd></div>
+<div><dt lang="es">llorar → llorando</dt><dd>Плакать → плача.</dd></div>
+<div><dt lang="es">la insolencia; llorar su insolencia</dt><dd>Дерзость; оплакивать свою дерзость, со слезами сожалеть о ней.</dd></div>
+<div><dt lang="es">oír; al oír</dt><dd>Слышать; услышав / когда услышал. Конструкция <span lang="es">al + infinitivo</span>.</dd></div>
+<div><dt lang="es">implorar</dt><dd>Умолять, горячо просить.</dd></div>
+<div><dt lang="es">la clemencia; implorar clemencia</dt><dd>Милосердие, снисхождение; молить о милости.</dd></div>
+<div><dt lang="es">real; la real clemencia</dt><dd>Царский, королевский; царская милость. Здесь <span lang="es">real</span> не означает «реальный».</dd></div>
+<div><dt lang="es">responder → responde; el rey</dt><dd>Отвечать → отвечает; царь / король. Так автор называет льва.</dd></div>
+<div><dt lang="es">majestuoso; en majestuoso tono</dt><dd>Величественный; величественным тоном. <span lang="es">El tono</span> — тон.</dd></div>
+<div><dt lang="es">no dijera más Tito</dt><dd>Даже Тит не сказал бы большего. Литературная отсылка к милосердию римского императора Тита.</dd></div>
+<div><dt lang="es">perdonar → te perdono</dt><dd>Прощать → я тебя прощаю.</dd></div>
+<div><dt lang="es">poco después</dt><dd>Вскоре после этого, немного позже.</dd></div>
+<div><dt lang="es">cazar → cazando</dt><dd>Охотиться → охотясь.</dd></div>
+<div><dt lang="es">tropezar → tropieza</dt><dd>Спотыкаться, натыкаться → натыкается. В сюжете — попадает в ловушку.</dd></div>
+<div><dt lang="es">la red</dt><dd>Сеть; слово женского рода.</dd></div>
+<div><dt lang="es">oculto / oculta</dt><dd>Скрытый / скрытая; <span lang="es">una red oculta</span> — спрятанная сеть.</dd></div>
+<div><dt lang="es">la maleza</dt><dd>Заросли, густая дикая растительность.</dd></div>
+<div><dt lang="es">mas</dt><dd>Книжное «но», без ударения. <span lang="es">Más</span> с ударением — «больше».</dd></div>
+<div><dt lang="es">quedar prisionero</dt><dd>Остаться / оказаться пленником. <span lang="es">Prisionero</span> — пленник, пленный.</dd></div>
+<div><dt lang="es">atronar → atronando</dt><dd>Оглушать громовым шумом → оглушая, оглашая грохотом.</dd></div>
+<div><dt lang="es">la selva</dt><dd>Лес, обычно густой; часто тропический лес.</dd></div>
+<div><dt lang="es">rugir → ruge</dt><dd>Рычать → рычит.</dd></div>
+<div><dt lang="es">fiero / fiera</dt><dd>Свирепый / свирепая.</dd></div>
+<div><dt lang="es">libre</dt><dd>Свободный, находящийся на свободе.</dd></div>
+<div><dt lang="es">sentir → siente</dt><dd>Чувствовать, воспринимать → чувствует / воспринимает. Здесь — слышит.</dd></div>
+<div><dt lang="es">llegar corriendo</dt><dd>Прибежать; буквально «прийти бегом». В стихе: <span lang="es">corriendo llega</span>.</dd></div>
+<div><dt lang="es">roer → roe</dt><dd>Грызть → грызёт.</dd></div>
+<div><dt lang="es">diligente</dt><dd>Усердный, старательный. Здесь описывает мышонка за работой.</dd></div>
+<div><dt lang="es">el nudo; los nudos de la red</dt><dd>Узел; узлы сети.</dd></div>
+<div><dt lang="es">de tal manera que…</dt><dd>Таким образом, что… / так, что… Вводит результат.</dd></div>
+<div><dt lang="es">al fin</dt><dd>Наконец, в конце концов.</dd></div>
+<div><dt lang="es">romper → rompió</dt><dd>Ломать, рвать → разорвал / сломал.</dd></div>
+<div><dt lang="es">los grillos</dt><dd>Оковы, кандалы. В этом контексте не «сверчки».</dd></div>
+<div><dt lang="es">la fiera</dt><dd>Дикий зверь; существительное женского рода. Здесь — лев.</dd></div>
+<div><dt lang="es">convenir → conviene</dt><dd>Быть полезным, целесообразным → полезно / следует.</dd></div>
+<div><dt lang="es">poderoso; el poderoso</dt><dd>Могущественный; тот, у кого есть сила или власть.</dd></div>
+<div><dt lang="es">infeliz; los infelices</dt><dd>Несчастный; несчастные, обездоленные люди.</dd></div>
+<div><dt lang="es">piadoso; ser piadoso con…</dt><dd>Милосердный; быть милосердным к… Здесь не «набожный».</dd></div>
+<div><dt lang="es">tal vez</dt><dd>Возможно, быть может.</dd></div>
+<div><dt lang="es">verse necesitado de…</dt><dd>Оказаться нуждающимся в… <span lang="es">Se puede ver necesitado</span> — может оказаться нуждающимся.</dd></div>
+<div><dt lang="es">el auxilio; el auxilio de alguien</dt><dd>Помощь; чья-либо помощь. Более книжное слово, чем <span lang="es">la ayuda</span>.</dd></div>
+</dl><p class="grammar-note"><strong>Сложные формы для узнавания:</strong> <span lang="es">estar → estaba</span> — находился; <span lang="es">descansar → descansaba</span> — отдыхал; <span lang="es">ser → fue</span> — был; <span lang="es">decir → dijera</span> — здесь «сказал бы». <span lang="es">Imperfecto</span> описывает фон, <span lang="es">indefinido</span> — отдельные события; литературное употребление <span lang="es">dijera</span> достаточно понять целиком.</p></div></details>
+<div class="audio-wrapper" data-player="samaniego"><div class="audio-copy"><strong>Песня: <span lang="es">El león y el ratón</span></strong><div class="audio-subtitle">Слушай и читай · <span lang="es">Escucha y lee</span></div></div><button type="button" class="audio-btn" aria-controls="samaniego-audio" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#i-play"></use></svg><span>Слушать</span></button><audio id="samaniego-audio" preload="none"></audio><div class="audio-timeline" hidden><input type="range" min="0" max="100" step="0.1" value="0" aria-label="Позиция аудио: El león y el ratón" disabled><span class="audio-time">0:00 / 0:00</span></div><p class="audio-status" role="status" aria-live="polite"></p><noscript><p class="audio-status">Для аудиоплеера включи JavaScript. / <span lang="es">Activa JavaScript para escuchar el audio.</span></p></noscript></div>
+<div class="reader-controls" hidden><button type="button" class="pill" data-toggle="translations" aria-pressed="false" aria-controls="samaniego-verses">Скрыть перевод</button><button type="button" class="pill" data-toggle="analysis" aria-pressed="false" aria-controls="samaniego-verses">Скрыть разбор</button></div>
+<p class="reading-hint">Сначала мышонок нуждается в помощи, затем — лев. · <span lang="es">Primero el ratón necesita ayuda; después, el león.</span></p>
+<ol class="verse-list" id="samaniego-verses">
+<li class="verse"><p class="original" lang="es">Estaba un ratoncillo aprisionado</p><p class="translation">(Маленький мышонок находился в плену…)</p><div class="analysis"><p><span lang="es">Un ratoncillo</span> — «маленький мышонок»: <span lang="es">ratón</span> — мышь, <span lang="es">-illo</span> — уменьшительный суффикс. Артикль <span lang="es">un</span> впервые вводит героя. <span lang="es">Estaba</span> — форма <span lang="es">estar</span> в прошедшем времени <span lang="es">imperfecto</span>: описывается состояние, не момент поимки. <span lang="es">Aprisionado</span> — пленённый, пойманный.</p><p>Обычный порядок: <span lang="es">Un ratoncillo estaba aprisionado</span>. Где именно — сказано в следующей строке.</p></div></li>
+<li class="verse"><p class="original" lang="es">en las garras de un león; el desdichado</p><p class="translation">(…в когтях льва; этот несчастный…)</p><div class="analysis"><p><span lang="es">En</span> — «в», <span lang="es">las garras</span> — когти или когтистые лапы, <span lang="es">de un león</span> — «льва». <span lang="es">De</span> показывает принадлежность: когти кого?</p><p><span lang="es">El desdichado</span> — «бедняга», то есть мышонок. Прилагательное с артиклем употреблено вместо существительного. После точки с запятой начинается новая мысль, которая продолжится ниже.</p></div></li>
+<li class="verse"><p class="original" lang="es">en la tal ratonera no fue preso</p><p class="translation">(…попал в эту мышеловку не…)</p><div class="analysis"><p><span lang="es">Ratonera</span> — мышеловка: так образно названы львиные когти. <span lang="es">La tal ratonera</span> — «эта самая мышеловка». <span lang="es">Fue preso</span> — литературное «был пойман»: <span lang="es">fue</span> здесь от <span lang="es">ser</span>, а не от <span lang="es">ir</span>; <span lang="es">preso</span> — пойманный. Современнее: <span lang="es">fue atrapado</span>.</p><p>Отрицание отвергает причину из следующей строки, а не факт поимки: мышонка поймали не за воровство.</p></div></li>
+<li class="verse"><p class="original" lang="es">por ladrón de tocino ni de queso,</p><p class="translation">(…за кражу сала или сыра…)</p><div class="analysis"><p><span lang="es">Por</span> вводит причину: «за, из-за». <span lang="es">Ladrón</span> — вор, <span lang="es">tocino</span> — сало, <span lang="es">queso</span> — сыр. В <span lang="es">por ladrón</span> подразумевается <span lang="es">por ser ladrón</span> — «за то, что был вором».</p><p><span lang="es">Ni</span> после отрицания — «ни / и не»; в русском здесь естественно «или». Перед названиями продуктов нет артиклей: речь не о конкретном куске.</p></div></li>
+<li class="verse"><p class="original" lang="es">sino porque con otros molestaba</p><p class="translation">(…а потому, что вместе с другими мышами мешал…)</p><div class="analysis"><p><span lang="es">No…, sino…</span> — «не…, а…»; <span lang="es">sino porque</span> — «а потому, что». <span lang="es">Pero</span> обычно означает «но», а <span lang="es">sino</span> заменяет отвергнутый вариант правильным.</p><p><span lang="es">Con otros</span> — «с другими»: слово «мышами» восстановлено по контексту. <span lang="es">Molestaba</span> — «мешал, беспокоил», от <span lang="es">molestar</span>, в <span lang="es">imperfecto</span>. Кому он мешал, узнаём дальше.</p></div></li>
+<li class="verse"><p class="original" lang="es">al león, que en su retiro descansaba.</p><p class="translation">(…льву, который отдыхал в своём уединённом убежище.)</p><div class="analysis"><p><span lang="es">Al = a + el</span>. <span lang="es">Molestar al león</span> — «беспокоить льва». Перед животным, представленным как одушевлённый герой, здесь стоит личное <span lang="es">a</span>; это не означает, что оно всегда обязательно перед любым названием животного.</p><p><span lang="es">Que</span> — «который», относится ко льву; <span lang="es">su retiro</span> — его уединённое место, не пенсия. <span lang="es">Descansaba</span> — «отдыхал». Обычный порядок: <span lang="es">que descansaba en su retiro</span>.</p></div></li>
+<li class="verse stanza-start"><p class="original" lang="es">Pide perdón, llorando su insolencia.</p><p class="translation">(Мышонок просит прощения, со слезами раскаиваясь в своей дерзости.)</p><div class="analysis"><p><span lang="es">Pide</span> — «просит», от <span lang="es">pedir</span>, с изменением <span lang="es">e → i</span>. <span lang="es">Pedir perdón</span> — «просить прощения». Кто просит, понятно без <span lang="es">él</span>.</p><p><span lang="es">Llorando</span> — «плача», герундий <span lang="es">llorar</span>. <span lang="es">Su insolencia</span> — «своя дерзость». «Раскаиваясь» передаёт контекст сожаления, не отдельный глагол оригинала. Автор переходит к историческому настоящему, чтобы оживить рассказ.</p></div></li>
+<li class="verse"><p class="original" lang="es">Al oír implorar la real clemencia,</p><p class="translation">(Услышав мольбу о царской милости…)</p><div class="analysis"><p><span lang="es">Al + infinitivo</span> часто обозначает время: <span lang="es">al oír</span> — «услышав / когда услышал». <span lang="es">Oír</span> — слышать, <span lang="es">implorar</span> — умолять. Лев слышит, как мышонок просит о милости.</p><p><span lang="es">Clemencia</span> — милосердие, снисхождение. <span lang="es">Real</span> здесь — «царский», не «реальный»: лев представлен царём зверей.</p></div></li>
+<li class="verse"><p class="original" lang="es">responde el rey en majestuoso tono</p><p class="translation">(…царь отвечает величественным тоном…)</p><div class="analysis"><p><span lang="es">Responde</span> — отвечает; <span lang="es">el rey</span> — царь, то есть лев. Подлежащее поставлено после глагола; обычнее <span lang="es">el rey responde</span>.</p><p><span lang="es">En… tono</span> — «… тоном», <span lang="es">majestuoso</span> — величественный. В нейтральной речи: <span lang="es">en un tono majestuoso</span>. В стихе нет артикля, а прилагательное предшествует существительному.</p></div></li>
+<li class="verse"><p class="original" lang="es">(no dijera más Tito): «¡Te perdono!»</p><p class="translation">(…даже Тит не сказал бы большего: «Я тебя прощаю!»)</p><div class="analysis"><p><span lang="es">Tito</span> — римский император Тит, известный в литературной традиции милосердием. <span lang="es">No dijera más</span> — «не сказал бы большего». <span lang="es">Dijera</span> — форма <span lang="es">decir</span> в <span lang="es">imperfecto de subjuntivo</span>; здесь литературное употребление со значением, которое проще выразить как <span lang="es">no diría más</span>. На A1 достаточно понять всю вставку.</p><p><span lang="es">Te</span> — «тебя», <span lang="es">perdono</span> — «я прощаю», от <span lang="es">perdonar</span>. <span lang="es">Yo</span> не требуется: лицо видно по форме глагола. Знаки <span lang="es">¡…!</span> обрамляют восклицание.</p></div></li>
+<li class="verse stanza-start"><p class="original" lang="es">Poco después cazando el león, tropieza</p><p class="translation">(Вскоре после этого лев, охотясь, попадает…)</p><div class="analysis"><p><span lang="es">Poco después</span> — «немного позже, вскоре после этого». <span lang="es">Cazando</span> — «охотясь», от <span lang="es">cazar</span>. Охотится лев.</p><p><span lang="es">Tropieza</span> — «натыкается, спотыкается», от <span lang="es">tropezar</span>, с изменением <span lang="es">e → ie</span>. По сюжету — попадает в ловушку. Простой пересказ: <span lang="es">Poco después, el león está cazando y tropieza…</span></p></div></li>
+<li class="verse"><p class="original" lang="es">en una red oculta en la maleza.</p><p class="translation">(…в сеть, скрытую в зарослях.)</p><div class="analysis"><p><span lang="es">Una red</span> — сеть, слово женского рода. <span lang="es">Oculta</span> — скрытая: окончание <span lang="es">-a</span> согласуется с <span lang="es">red</span>. <span lang="es">En la maleza</span> — «в зарослях».</p><p>Вместе с предыдущей строкой: лев наткнулся на спрятанную сеть и запутался в ней.</p></div></li>
+<li class="verse"><p class="original" lang="es">Quiere salir; mas queda prisionero.</p><p class="translation">(Он хочет выбраться, но остаётся пленником.)</p><div class="analysis"><p><span lang="es">Quiere</span> — «хочет», от <span lang="es">querer</span>. После него инфинитив: <span lang="es">quiere salir</span> — хочет выйти, выбраться.</p><p><span lang="es">Mas</span> без ударения — книжное «но», как <span lang="es">pero</span>. <span lang="es">Más</span> с ударением — «больше». <span lang="es">Queda prisionero</span> — «остаётся пленником»: попытка освободиться не удалась.</p></div></li>
+<li class="verse"><p class="original" lang="es">Atronando la selva ruge fiero.</p><p class="translation">(Он свирепо рычит, оглашая лес громовым рёвом.)</p><div class="analysis"><p><span lang="es">Ruge</span> — рычит, от <span lang="es">rugir</span>. <span lang="es">Fiero</span> — «свирепый»: описывает льва во время рёва; по-русски естественно наречие «свирепо».</p><p><span lang="es">Atronando</span> — «оглушая, наполняя громовым шумом», от <span lang="es">atronar</span>. <span lang="es">La selva</span> — лес, обычно густой; не обязательно представлять именно тропические джунгли. Более привычный порядок: <span lang="es">Ruge fiero, atronando la selva</span>.</p></div></li>
+<li class="verse stanza-start"><p class="original" lang="es">El libre ratoncillo, que lo siente,</p><p class="translation">(Мышонок, уже оказавшийся на свободе, слышит этот рёв…)</p><div class="analysis"><p><span lang="es">Libre</span> — «свободный»: лев отпустил мышонка. Слово «уже» добавлено для связи событий; <span lang="es">ya</span> в оригинале нет. <span lang="es">Que</span> — «который».</p><p><span lang="es">Lo</span> здесь можно понять как слышимое происходящее или как самого льва, которого мышонок слышит. <span lang="es">Siente</span> — от <span lang="es">sentir</span>, «чувствовать, воспринимать органами чувств». В контексте естественный перевод — «слышит».</p></div></li>
+<li class="verse"><p class="original" lang="es">corriendo llega, roe diligente</p><p class="translation">(…прибегает и старательно перегрызает…)</p><div class="analysis"><p><span lang="es">Corriendo</span> — «бегом», от <span lang="es">correr</span>; <span lang="es">llega</span> — приходит, от <span lang="es">llegar</span>. Обычнее <span lang="es">llega corriendo</span> — прибегает.</p><p><span lang="es">Roe</span> — грызёт, от <span lang="es">roer</span>. <span lang="es">Diligente</span> — «усердный, старательный», характеризует мышонка. По-русски «старательно». Нейтральный пересказ: <span lang="es">Llega corriendo y roe con cuidado</span> — «Прибегает и тщательно грызёт».</p></div></li>
+<li class="verse"><p class="original" lang="es">los nudos de la red, de tal manera,</p><p class="translation">(…узлы сети так…)</p><div class="analysis"><p><span lang="es">Los nudos</span> — узлы, <span lang="es">de la red</span> — сети: <span lang="es">de</span> передаёт связь, для которой русский использует родительный падеж.</p><p><span lang="es">De tal manera que…</span> — единое выражение «так, что… / таким образом, что…». Оно разделено между строками. Читай дальше, чтобы узнать результат.</p></div></li>
+<li class="verse"><p class="original" lang="es">que al fin rompió los grillos de la fiera.</p><p class="translation">(…что наконец разорвал оковы зверя.)</p><div class="analysis"><p><span lang="es">Que</span> завершает <span lang="es">de tal manera que</span>. <span lang="es">Al fin</span> — наконец. <span lang="es">Rompió</span> — «разорвал», от <span lang="es">romper</span>, прошедшее <span lang="es">pretérito indefinido</span>: завершённое действие с результатом. Автор снова переходит от настоящего к прошлому.</p><p><span lang="es">Los grillos</span> здесь — «оковы, кандалы», не «сверчки»: это образ сети. <span lang="es">La fiera</span> — дикий зверь, то есть лев. Существительное грамматически женского рода независимо от пола животного.</p></div></li>
+<li class="verse stanza-start"><p class="original" lang="es">Conviene al poderoso</p><p class="translation">(Могущественному следует…)</p><div class="analysis"><p><span lang="es">Conviene</span> — от <span lang="es">convenir</span>: «полезно, разумно, следует». <span lang="es">Al poderoso</span> — «могущественному», тому, у кого есть сила или власть; <span lang="es">al = a + el</span>.</p><p>Прилагательное <span lang="es">poderoso</span> употреблено как существительное. Предлог <span lang="es">a</span> показывает, кому полезно так поступать. Что делать, сказано дальше.</p></div></li>
+<li class="verse"><p class="original" lang="es">para los infelices ser piadoso;</p><p class="translation">(…быть милосердным к несчастным.)</p><div class="analysis"><p><span lang="es">Ser</span> — быть; <span lang="es">piadoso</span> — милосердный, сострадательный. Здесь это не другое возможное значение «набожный». <span lang="es">Los infelices</span> — несчастные, обездоленные, не просто грустные люди.</p><p><span lang="es">Para</span> здесь — «по отношению к». Современный порядок двух строк: <span lang="es">Al poderoso le conviene ser piadoso con los infelices</span>. В оригинале слова переставлены ради ритма и рифмы <span lang="es">poderoso — piadoso</span>.</p></div></li>
+<li class="verse"><p class="original" lang="es">tal vez se puede ver necesitado</p><p class="translation">(…ведь, возможно, он сам окажется нуждающимся…)</p><div class="analysis"><p><span lang="es">Tal vez</span> — возможно, <span lang="es">puede</span> — может, от <span lang="es">poder</span>. <span lang="es">Verse necesitado de algo</span> — «оказаться нуждающимся в чём-либо»; это не буквальное «увидеть себя».</p><p><span lang="es">Se puede ver</span> и <span lang="es">puede verse</span> — два допустимых положения местоимения <span lang="es">se</span>. «Ведь» и «сам» добавлены в переводе для естественной передачи смысла.</p></div></li>
+<li class="verse"><p class="original" lang="es">del auxilio de aquel más desdichado.</p><p class="translation">(…в помощи того, кто ещё несчастнее его.)</p><div class="analysis"><p><span lang="es">Del = de + el</span>. Первый <span lang="es">de</span> нужен выражению <span lang="es">necesitado de</span> — «нуждающийся в». <span lang="es">Auxilio</span> — помощь, более книжное слово, чем <span lang="es">ayuda</span>.</p><p>Второй <span lang="es">de</span> показывает, чья помощь: <span lang="es">el auxilio de aquel</span> — «помощь того». <span lang="es">Aquel</span> — тот; <span lang="es">más desdichado</span> — более несчастный. «Его» отдельно в оригинале не написано: перевод раскрывает подразумеваемое сравнение.</p></div></li>
+</ol>
+<div class="meaning"><p><strong>Мораль:</strong> сильному стоит быть добрым к слабому: однажды именно слабый может его спасти.</p><p class="es-translation" lang="es"><strong>La moraleja:</strong> el fuerte debe ayudar al débil. Un día, el débil puede salvar al fuerte.</p></div>
+<div class="practice-task"><h3>Расскажи историю · <span lang="es">Cuenta la historia</span></h3><p>Ответь: «Кто сначала отпускает мышонка?» и «Кто затем помогает льву?» После этого перескажи басню тремя простыми предложениями в настоящем времени.</p><p class="es-translation" lang="es">Responde: «¿Quién deja libre al ratón?» y «¿Quién ayuda después al león?». Luego cuenta la historia con tres frases sencillas en presente.</p><details><summary>Пример пересказа · <span lang="es">Ejemplo</span></summary><div class="sample-answer"><p lang="es">El león deja libre al ratón. Después, el león está en una red. El ratón ayuda al león.</p><p class="translation">(Лев отпускает мышонка. Потом лев оказывается в сети. Мышонок помогает льву.)</p></div></details></div>
+<aside class="immersion-card" aria-label="Иммерсивное чтение басни Лев и мышь"><div class="eyebrow">Syolana · Иммерсивные книги</div><h3>Войди в историю льва и мышонка.</h3><p class="es-translation" lang="es">Entra en la historia del león y el ratón.</p><p>Оставь перевод позади на одно чтение. В иммерсивной версии музыка, звуки и цвет букв меняются вместе с чтением, помогая почувствовать напряжение и радость освобождения. Открой знакомую историю только на испанском — и проверь, сколько ты уже понимаешь.</p><p class="es-translation" lang="es">Prueba una lectura sin traducción. En la versión inmersiva, la música, los sonidos y el color de las letras cambian durante la lectura. Siente la tensión y la alegría de la libertad. Abre la historia solo en español y descubre cuánto comprendes ya.</p><a class="immersion-link" data-immersion="samaniego" href="#samaniego-immersion-status"><span>Читать только на испанском · <span lang="es">Leer en inmersión</span></span><svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></a><p class="immersion-status" id="samaniego-immersion-status" role="status" aria-live="polite"></p></aside>
+</article>
+<section class="rules-panel final-panel" aria-labelledby="next-title"><div class="eyebrow">Твой следующий шаг · <span lang="es">Tu próximo paso</span></div><h2 id="next-title">Когда можно переходить к A2?</h2><p class="es-translation" lang="es">¿Cuándo puedes pasar a A2?</p>
+<p>Слушай эти песни и одновременно читай произведения каждый день, пока текст не станет знакомым, лёгким и понятным. Затем проверь себя:</p><p class="es-translation" lang="es">Escucha estas canciones y lee los textos al mismo tiempo cada día, hasta comprenderlos con facilidad. Después, comprueba lo siguiente:</p>
+<ul class="checklist"><li>Я понимаю основной смысл каждого произведения без постоянного обращения к переводу.<span class="es-translation" lang="es">Comprendo la idea principal de cada texto sin mirar la traducción todo el tiempo.</span></li><li>Я могу следить за испанскими строками во время песни и узнаю знакомые слова и выражения.<span class="es-translation" lang="es">Puedo seguir los versos durante la canción y reconocer palabras y expresiones conocidas.</span></li><li>Я могу сказать несколько простых фраз о каждом тексте и использовать базовые правила A1 в своих предложениях.<span class="es-translation" lang="es">Puedo decir unas frases sencillas sobre cada texto y usar las reglas básicas de A1 en mis propias frases.</span></li></ul>
+<p><strong>Если это получается легко и основа A1 уверенно освоена, можно переходить к A2.</strong> Эти тексты — часть практики, а не полный экзамен на уровень. Продолжай также тренировать повседневную речь, понимание обычных диалогов и письмо. Возвращаться к любимым стихам можно на любом уровне.</p><p class="es-translation" lang="es"><strong>Si esto ya es fácil para ti y conoces bien la base de A1, puedes pasar a A2.</strong> Estos textos son una parte de la práctica, no un examen completo. Sigue practicando también las conversaciones de cada día, la comprensión de diálogos y la escritura. Puedes volver a tus poemas favoritos en cualquier nivel.</p>
+<p class="good-luck">Удачи! Пусть каждый день испанский становится ближе.</p><p class="es-translation" lang="es">¡Buena suerte! Cada día puedes comprender y disfrutar un poco más del español.</p><a class="back-btn" href="https://syolana.com/español">К уровням испанского · <span lang="es">Ver los niveles</span></a></section>
+<footer class="site-footer"><p>© 2026 <a href="https://syolana.com/" class="footer-brand">Syolana</a>. Все права защищены.</p><button type="button" id="motion-button" class="footer-motion" hidden><svg class="icon" aria-hidden="true"><use id="motion-icon" href="#i-pause"></use></svg><span id="motion-text">Остановить анимацию</span></button></footer>
+</main>
+<script>
+(() => {
+    "use strict";
+    /* ==========================================================
+       НАСТРОЙКИ: вставьте свои 3 аудиоссылки и 3 ссылки на книги.
+       Можно использовать https://... или относительные пути.
+       Пустые значения безопасны: страница объяснит, что материал
+       пока недоступен. Ссылки на несуществующие страницы не выдуманы.
+       Пример audio: "assets/audio/becquer-poesia.mp3"
+       Пример immersion: "ВАШ_ПУТЬ_К_ИММЕРСИВНОЙ_КНИГЕ.html"
+       ========================================================== */
+    const MEDIA = {
+        becquer:   { audio: "", immersion: "" },
+        marti:     { audio: "", immersion: "" },
+        samaniego: { audio: "", immersion: "" }
+    };
+    const $ = id => document.getElementById(id);
+    const root = document.documentElement;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const setLabel = (element, label) => {
+        element.setAttribute("aria-label", label);
+        element.title = label;
+    };
+    function validURL(value) {
+        if (!value || !value.trim()) return "";
+        try {
+            const url = new URL(value.trim(), document.baseURI);
+            return ["https:", "http:", "file:"].includes(url.protocol) ? value.trim() : "";
+        } catch (_) { return ""; }
+    }
+    /* Полноэкранный режим. */
+    const fullscreenButton = $("fullscreen-btn");
+    const fullscreenPath = $("fullscreen-path");
+    const fullscreenElement = () => document.fullscreenElement || document.webkitFullscreenElement || null;
+    const fullscreenSupported = () => Boolean(root.requestFullscreen || root.webkitRequestFullscreen) &&
+        Boolean(document.exitFullscreen || document.webkitExitFullscreen) &&
+        document.fullscreenEnabled !== false && document.webkitFullscreenEnabled !== false;
+    function updateFullscreen() {
+        const active = Boolean(fullscreenElement());
+        const supported = fullscreenSupported();
+        fullscreenButton.disabled = !supported;
+        fullscreenButton.setAttribute("aria-pressed", String(active));
+        fullscreenPath.setAttribute("d", active ? "M3 8h5V3M16 3v5h5M21 16h-5v5M8 21v-5H3" : "M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5");
+        setLabel(fullscreenButton, !supported ? "Этот браузер не поддерживает полноэкранный режим" : active ? "Выйти из полноэкранного режима" : "На весь экран");
+    }
+    fullscreenButton.hidden = false;
+    updateFullscreen();
+    fullscreenButton.addEventListener("click", async () => {
+        if (!fullscreenSupported()) return;
+        $("screen-status").textContent = "";
+        try {
+            if (fullscreenElement()) await (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+            else await (root.requestFullscreen || root.webkitRequestFullscreen).call(root);
+        } catch (_) { $("screen-status").textContent = "Браузер не разрешил изменить полноэкранный режим."; }
+        updateFullscreen();
+    });
+    document.addEventListener("fullscreenchange", updateFullscreen);
+    document.addEventListener("webkitfullscreenchange", updateFullscreen);
+    /* Подсказки переключаются отдельно для каждого произведения. */
+    document.querySelectorAll(".work").forEach(work => {
+        const controls = work.querySelector(".reader-controls");
+        controls.hidden = false;
+        controls.querySelectorAll("[data-toggle]").forEach(button => {
+            button.addEventListener("click", () => {
+                const isTranslation = button.dataset.toggle === "translations";
+                const hidden = work.classList.toggle(isTranslation ? "hide-translations" : "hide-analysis");
+                button.setAttribute("aria-pressed", String(hidden));
+                button.textContent = (hidden ? "Показать " : "Скрыть ") + (isTranslation ? "перевод" : "разбор");
+            });
+        });
+    });
+    /* Иммерсивные книги: реальные URL задаются в MEDIA. */
+    document.querySelectorAll("[data-immersion]").forEach(link => {
+        const key = link.dataset.immersion;
+        const target = validURL(MEDIA[key].immersion);
+        if (target) link.href = target;
+        else link.addEventListener("click", event => {
+            event.preventDefault();
+            $(key + "-immersion-status").textContent = "Иммерсивная версия скоро появится. / La versión inmersiva estará disponible pronto.";
+        });
+    });
+    /* Три независимых плеера. Одновременно играет только один. */
+    const players = [];
+    const timeText = seconds => {
+        if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
+        const whole = Math.floor(seconds);
+        return Math.floor(whole / 60) + ":" + String(whole % 60).padStart(2, "0");
+    };
+    document.querySelectorAll("[data-player]").forEach(wrapper => {
+        const key = wrapper.dataset.player;
+        const audio = wrapper.querySelector("audio");
+        const button = wrapper.querySelector(".audio-btn");
+        const text = button.querySelector("span");
+        const icon = button.querySelector("use");
+        const status = wrapper.querySelector(".audio-status");
+        const timeline = wrapper.querySelector(".audio-timeline");
+        const slider = timeline.querySelector("input");
+        const clock = timeline.querySelector(".audio-time");
+        const title = $(key + "-title").textContent;
+        const source = validURL(MEDIA[key].audio);
+        let request = 0;
+        let wantsAudio = false;
+        let scrubbing = false;
+        if (source) audio.src = source;
+        button.hidden = false;
+        timeline.hidden = !source;
+        function update() {
+            const active = wantsAudio || (!audio.paused && !audio.ended && !audio.error);
+            button.setAttribute("aria-pressed", String(active));
+            text.textContent = active ? "Пауза" : "Слушать";
+            icon.setAttribute("href", active ? "#i-pause" : "#i-play");
+            setLabel(button, (active ? "Приостановить песню: " : "Слушать песню: ") + title);
+        }
+        function updateTime() {
+            const ready = Number.isFinite(audio.duration) && audio.duration > 0;
+            slider.disabled = !ready;
+            if (ready) {
+                slider.max = String(audio.duration);
+                if (!scrubbing) slider.value = String(audio.currentTime);
+            }
+            clock.textContent = timeText(audio.currentTime) + " / " + timeText(audio.duration);
+            slider.setAttribute("aria-valuetext", timeText(audio.currentTime) + " из " + timeText(audio.duration));
+        }
+        function stop() {
+            request++;
+            wantsAudio = false;
+            audio.pause();
+            status.textContent = "";
+            update();
+        }
+        const player = { audio, stop };
+        players.push(player);
+        button.addEventListener("click", async () => {
+            if (wantsAudio || !audio.paused) { stop(); return; }
+            if (!source) {
+                status.textContent = "Песня скоро появится. Пока читай текст вслух. / La canción estará disponible pronto. Por ahora, lee el texto en voz alta.";
+                return;
+            }
+            players.forEach(other => { if (other !== player) other.stop(); });
+            const current = ++request;
+            if (audio.error) audio.load();
+            if (audio.ended) audio.currentTime = 0;
+            wantsAudio = true;
+            status.textContent = "";
+            update();
+            try {
+                await audio.play();
+                if (current !== request) return;
+                wantsAudio = false;
+                update();
+            } catch (error) {
+                if (current !== request) return;
+                wantsAudio = false;
+                if (error.name !== "AbortError") status.textContent = error.name === "NotAllowedError"
+                    ? "Нажми «Слушать» ещё раз. / Pulsa «Слушать» otra vez."
+                    : "Не удалось воспроизвести песню. Попробуй ещё раз. / No se puede reproducir la canción. Inténtalo otra vez.";
+                update();
+            }
+        });
+        audio.addEventListener("play", update);
+        audio.addEventListener("playing", () => { wantsAudio = false; status.textContent = ""; update(); });
+        audio.addEventListener("waiting", () => {
+            if (!audio.paused || wantsAudio) status.textContent = "Загрузка аудио… / Cargando el audio…";
+        });
+        audio.addEventListener("pause", () => { wantsAudio = false; update(); });
+        audio.addEventListener("ended", () => { wantsAudio = false; status.textContent = "Послушай ещё раз и прочитай вместе с песней. / Escucha otra vez y lee con la canción."; update(); });
+        audio.addEventListener("error", () => {
+            request++; wantsAudio = false;
+            status.textContent = "Не удалось загрузить песню. Попробуй позже. / No se puede cargar la canción. Inténtalo más tarde.";
+            update();
+        });
+        ["loadedmetadata", "durationchange", "timeupdate", "emptied"].forEach(event => audio.addEventListener(event, updateTime));
+        slider.addEventListener("input", () => {
+            scrubbing = true;
+            clock.textContent = timeText(Number(slider.value)) + " / " + timeText(audio.duration);
+            slider.setAttribute("aria-valuetext", timeText(Number(slider.value)) + " из " + timeText(audio.duration));
+        });
+        slider.addEventListener("change", () => {
+            scrubbing = false;
+            if (Number.isFinite(audio.duration) && audio.duration > 0) {
+                audio.currentTime = Math.min(audio.duration, Math.max(0, Number(slider.value)));
+            }
+            updateTime();
+        });
+        slider.addEventListener("blur", () => { scrubbing = false; updateTime(); });
+        update();
+    });
+    window.addEventListener("pagehide", () => players.forEach(player => player.stop()));
+    /* Анимация: пауза, reduced motion и остановка в скрытой вкладке. */
+    let motionPaused = reducedMotion.matches;
+    let syncCanvas = () => {};
+    const motionButton = $("motion-button");
+    motionButton.hidden = false;
+    function syncMotion() {
+        document.body.classList.toggle("animations-paused", motionPaused || document.hidden);
+        $("motion-text").textContent = motionPaused ? "Включить анимацию" : "Остановить анимацию";
+        $("motion-icon").setAttribute("href", motionPaused ? "#i-play" : "#i-pause");
+        setLabel(motionButton, motionPaused ? "Включить анимацию" : "Остановить анимацию");
+        syncCanvas();
+    }
+    motionButton.addEventListener("click", () => { motionPaused = !motionPaused; syncMotion(); });
+    document.addEventListener("visibilitychange", syncMotion);
+    const onReducedMotionChange = () => { motionPaused = reducedMotion.matches; syncMotion(); };
+    if (typeof reducedMotion.addEventListener === "function") reducedMotion.addEventListener("change", onReducedMotionChange);
+    else if (typeof reducedMotion.addListener === "function") reducedMotion.addListener(onReducedMotionChange);
+    /* Звёзды и градиентные водяные знаки исходной страницы. */
+    function initializeCanvas() {
+        const canvas = $("starCanvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+        const colors = ["#FF003C", "#0055FF", "#FFB300", "#00C853", "#AA00FF", "#00E5FF"];
+        let width = 1, height = 1, ratio = 1;
+        let stars = [], watermarks = [];
+        let frameId = 0, resizeId = 0, previousTime = 0;
+        const random = (min, max) => min + Math.random() * (max - min);
+        const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+        function createSprite(color) {
+            const sprite = document.createElement("canvas");
+            sprite.width = 64; sprite.height = 64;
+            const context = sprite.getContext("2d");
+            if (!context) return null;
+            context.shadowColor = color; context.shadowBlur = 12; context.fillStyle = color;
+            context.beginPath(); context.arc(32,32,6.4,0,Math.PI*2); context.fill();
+            context.shadowBlur = 0; context.fillStyle = "rgba(255,255,255,.72)";
+            context.beginPath(); context.arc(32,32,2.1,0,Math.PI*2); context.fill();
+            return sprite;
+        }
+        const sprites = colors.map(createSprite);
+        function createStar(initial = true) {
+            return {x:random(0,width),y:initial?random(0,height):height+15,size:random(.5,3),speedY:random(30,120),speedX:random(-24,24),colorIndex:Math.floor(random(0,colors.length)),phase:random(0,Math.PI*2),blink:random(.6,3),opacity:random(.2,.8)};
+        }
+        function createWatermark(column, columns, row, rows) {
+            const lane = width / columns;
+            return {x:lane*(column+.5)+random(-lane*.12,lane*.12),y:((row+random(0,.6))/rows)*height,size:random(14,width<=700?17:20),speed:random(10,22),opacity:random(.16,.29),phase:random(0,Math.PI*2),drift:random(4,width<=700?10:18),hue:random(155,330),hueSpeed:random(3.5,9.5)};
+        }
+        function render(delta) {
+            ctx.clearRect(0,0,width,height);
+            for (const watermark of watermarks) {
+                if (delta > 0) {
+                    watermark.y -= watermark.speed*delta;
+                    watermark.phase += delta*.23;
+                    watermark.hue = (watermark.hue+watermark.hueSpeed*delta)%360;
+                    if (watermark.y < -45) watermark.y = height+random(30,110);
+                }
+                const topFade = clamp((watermark.y+20)/95,0,1);
+                const bottomFade = clamp((height+30-watermark.y)/100,0,1);
+                const x = watermark.x+Math.sin(watermark.phase)*watermark.drift;
+                const hue = (watermark.hue+Math.sin(watermark.phase*.7)*42+360)%360;
+                ctx.font = `600 ${watermark.size}px "Nunito", sans-serif`;
+                ctx.textAlign = "center"; ctx.textBaseline = "middle";
+                const textWidth = ctx.measureText("syolana.com").width;
+                const gradient = ctx.createLinearGradient(x-textWidth/2,watermark.y,x+textWidth/2,watermark.y);
+                gradient.addColorStop(0,`hsl(${hue}, 76%, 75%)`);
+                gradient.addColorStop(.48,`hsl(${(hue+58)%360}, 82%, 80%)`);
+                gradient.addColorStop(1,`hsl(${(hue+116)%360}, 76%, 73%)`);
+                ctx.globalAlpha = watermark.opacity*topFade*bottomFade;
+                ctx.fillStyle = gradient; ctx.shadowColor = `hsla(${hue}, 84%, 74%, .42)`; ctx.shadowBlur = 9;
+                ctx.fillText("syolana.com",x,watermark.y); ctx.shadowBlur = 0;
+            }
+            for (let i=0;i<stars.length;i++) {
+                let star = stars[i];
+                if (delta > 0) {
+                    star.x += star.speedX*delta; star.y -= star.speedY*delta; star.phase += star.blink*delta;
+                    if (star.y < -25) star = stars[i] = createStar(false);
+                    if (star.x < -25) star.x = width+25;
+                    else if (star.x > width+25) star.x = -25;
+                }
+                ctx.globalAlpha = clamp(star.opacity+Math.sin(star.phase)*.4,.1,1);
+                const sprite = sprites[star.colorIndex];
+                if (sprite) { const size=star.size*10; ctx.drawImage(sprite,star.x-size/2,star.y-size/2,size,size); }
+                else { ctx.fillStyle=colors[star.colorIndex];ctx.beginPath();ctx.arc(star.x,star.y,star.size,0,Math.PI*2);ctx.fill(); }
+            }
+            ctx.globalAlpha = 1; ctx.shadowBlur = 0; ctx.shadowColor = "transparent";
+        }
+        function resize() {
+            const bounds = canvas.getBoundingClientRect();
+            const nextWidth=Math.max(1,bounds.width), nextHeight=Math.max(1,bounds.height), nextRatio=Math.min(window.devicePixelRatio||1,2);
+            if (stars.length && nextWidth===width && nextHeight===height && nextRatio===ratio) return;
+            width=nextWidth;height=nextHeight;ratio=nextRatio;
+            canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);
+            ctx.setTransform(ratio,0,0,ratio,0,0);
+            stars=Array.from({length:width<=700?260:500},()=>createStar(true));
+            const columns=clamp(Math.floor(width/170),2,10), rows=clamp(Math.ceil(height/115),6,10);
+            watermarks=[];
+            for(let column=0;column<columns;column++) for(let row=0;row<rows;row++) watermarks.push(createWatermark(column,columns,row,rows));
+            render(0);
+        }
+        function animate(time) {
+            frameId=0;
+            if(document.hidden || motionPaused){previousTime=0;return;}
+            const delta=previousTime?Math.min((time-previousTime)/1000,.05):1/60;
+            previousTime=time;render(delta);frameId=requestAnimationFrame(animate);
+        }
+        syncCanvas=()=>{
+            if(frameId){cancelAnimationFrame(frameId);frameId=0;}
+            previousTime=0;
+            if(document.hidden)return;
+            render(0);
+            if(!motionPaused)frameId=requestAnimationFrame(animate);
+        };
+        function queueResize(){if(resizeId)return;resizeId=requestAnimationFrame(()=>{resizeId=0;resize();});}
+        window.addEventListener("resize",queueResize,{passive:true});
+        if(window.visualViewport)window.visualViewport.addEventListener("resize",queueResize,{passive:true});
+        window.addEventListener("pagehide",()=>{if(frameId)cancelAnimationFrame(frameId);if(resizeId)cancelAnimationFrame(resizeId);frameId=0;resizeId=0;previousTime=0;});
+        window.addEventListener("pageshow",()=>{resize();syncMotion();});
+        resize();syncCanvas();
+        if(document.fonts && document.fonts.ready)document.fonts.ready.then(()=>{if(!document.hidden)render(0);});
+    }
+    initializeCanvas();
+    syncMotion();
+    /* При печати раскрываем словари и ответы, затем восстанавливаем. */
+    let closedDetails = [];
+    window.addEventListener("beforeprint", () => {
+        closedDetails = Array.from(document.querySelectorAll("details:not([open])"));
+        closedDetails.forEach(details => { details.open = true; });
+    });
+    window.addEventListener("afterprint", () => {
+        closedDetails.forEach(details => { details.open = false; });
+        closedDetails = [];
+    });
+})();
+</script>
+</body>
+</html>
